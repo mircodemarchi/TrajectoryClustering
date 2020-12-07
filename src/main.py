@@ -16,6 +16,7 @@ args : object
 import os
 import argparse
 import logging
+import configparser
 
 # Script arguments
 parser = argparse.ArgumentParser(description="Machine Learning and Deep Learning curses project", epilog="MDM project")
@@ -35,8 +36,14 @@ args = parser.parse_args()
 
 
 def main():
+    # Handle args
     log_lvl = getattr(logging, args.log_lvl.upper(), logging.DEBUG)
     config_file = os.path.join(os.path.dirname(__file__), args.config_file)
+
+    # Handle config
+    config = configparser.ConfigParser()
+    config.read(config_file)
+
 
 
 if __name__ == '__main__':
