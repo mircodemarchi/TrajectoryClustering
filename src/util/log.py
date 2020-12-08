@@ -22,9 +22,10 @@ test()
 """
 
 import logging
+import sys
 
 # Constants for log formatting
-LOG_FMT = "%(asctime)s - %(name)s - %(levelname)s: %(message)s"
+LOG_FMT = "[%(asctime)s] %(name)s - %(levelname)s: %(message)s"
 LOG_DATE_FMT = "%d/%m/%Y %H:%M:%S"
 
 
@@ -36,6 +37,8 @@ class Log:
     ----------
     logger : Logger
         logger library instance
+    name : str
+        module name
     lvl : logging constant
         Threshold of debug filtered
     enable_console : bool
@@ -59,11 +62,13 @@ class Log:
         debug log message formatted as printf style
     """
 
-    def __init__(self, lvl=logging.DEBUG, enable_console=True, enable_file=False, filename=None):
+    def __init__(self, name, lvl=logging.DEBUG, enable_console=True, enable_file=False, filename=None):
         """Log class initializer
 
         Parameters
         ----------
+        name : str
+            module name
         lvl : logging constant
             Threshold of debug filtered
         enable_console : bool
@@ -73,21 +78,22 @@ class Log:
         filename : str
             Name of file to write logs
         """
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger(name)
         self.logger.setLevel(lvl)
         self.logger.addFilter(logging.Filter(""))
+        self.name = name
         self.lvl = lvl
         self.enable_console = enable_console
         self.enable_file = enable_file
 
         if not filename and enable_file:
-            self.filename = __name__
+            self.filename = name
         else:
             self.filename = filename
 
         # Manage console log.
         if enable_console:
-            sh = logging.StreamHandler()
+            sh = logging.StreamHandler(stream=sys.stdout)
             sh.setLevel(lvl)
             sh_format = logging.Formatter(fmt=LOG_FMT, datefmt=LOG_DATE_FMT)
             sh_filter = logging.Filter("")
