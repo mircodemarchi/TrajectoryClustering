@@ -202,3 +202,5 @@ fabric.properties
 
 # Custom
 .DS_Store
+data/*
+!data/*.zip
