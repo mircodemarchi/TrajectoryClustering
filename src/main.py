@@ -11,12 +11,19 @@ parser : ArgumentParser
     parser of the script arguments
 args : object
     result of the arguments parametrized
+
+Functions
+---------
+main()
+    project entry point
 """
 
 import os
 import argparse
 import logging
 import configparser
+
+from util import load_motion_sense
 
 # Script arguments
 parser = argparse.ArgumentParser(description="Machine Learning and Deep Learning curses project", epilog="MDM project")
@@ -44,6 +51,7 @@ def main():
     config = configparser.ConfigParser()
     config.read(config_file)
 
+    load_motion_sense()
 
 
 if __name__ == '__main__':
