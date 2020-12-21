@@ -25,11 +25,11 @@ class DataAnalysis:
         plt.show()
 
     def show_relations(self, file=False, filename="relations.png"):
-        fig, axs = plt.subplots(int((len(self.feature_names) + 1) / 2), 2, figsize=(14, 30))
+        fig, axs = plt.subplots(len(self.feature_names), 1, figsize=(14, 60))
         for index, feature in enumerate(self.feature_names):
-            axs[int(index / 2), index % 2].scatter(x=self.x[feature], y=self.y)
-            axs[int(index / 2), index % 2].set_xlabel(feature)
-            axs[int(index / 2), index % 2].set_ylabel("Target")
+            axs[index].scatter(x=self.x[feature], y=self.y, marker="|")
+            axs[index].set_xlabel(feature)
+            axs[index].set_ylabel("Target")
 
         if file:
             plt.savefig(filename)

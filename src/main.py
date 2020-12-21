@@ -22,8 +22,10 @@ import os
 import argparse
 import logging
 import configparser
+import numpy as np
 
-from util import load_motion_sense
+from util import MotionSenseDS
+from util import DataAnalysis
 
 # Script arguments
 parser = argparse.ArgumentParser(description="Machine Learning and Deep Learning curses project", epilog="MDM project")
@@ -51,7 +53,16 @@ def main():
     config = configparser.ConfigParser()
     config.read(config_file)
 
-    load_motion_sense()
+    ms = MotionSenseDS()
+    # dataset, target = ms.load(np.full(MotionSenseDS.TRIALS_NUM, 1))
+    dataset, target = ms.load_all()
+    ms.print_stats()
+
+    da = DataAnalysis(dataset, list(dataset.columns)[0:12], target)
+    da.show_target_distribution(file=True)
+    da.show_relations(file=True)
+    da.show_correlation_matrix(file=True)
+
 
 
 if __name__ == '__main__':
