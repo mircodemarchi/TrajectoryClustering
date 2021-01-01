@@ -154,29 +154,16 @@ class Log:
         """Debug log message"""
         self.__log(logging.DEBUG, msg, *args, **kwargs)
 
-    def set_level(self, level):
+    def set_level(self, lvl):
         """Update the logger log level
 
         Parameters
         ----------
-        level : int in range [0-5]
+        lvl : logging level
+            one of the following: logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL.
         """
-        t = logging.NOTSET
-        if level == 0:
-            t = logging.NOTSET
-        elif level == 1:
-            t = logging.DEBUG
-        elif level == 2:
-            t = logging.INFO
-        elif level == 3:
-            t = logging.WARNING
-        elif level == 4:
-            t = logging.ERROR
-        elif level == 5:
-            t = logging.FATAL
-
-        if level in range(0, 6):
-            self.logger.setLevel(t)
+        if lvl in [logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR, logging.CRITICAL]:
+            self.logger.setLevel(lvl)
 
 
 def test():
