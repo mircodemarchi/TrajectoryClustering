@@ -491,3 +491,4 @@ TSWLatexianTemp*
 .DS_Store
 data/*
 !data/*.zip
+data/scooter_trajectories.zip
