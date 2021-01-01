@@ -232,7 +232,7 @@ class ScooterTrajectoriesDS:
     ZIP_DEFAULT_FN = "scooter_trajectories.zip"
     CSV_DEVICE_FN = "device.csv"
     CSV_POS_FN = ["pos.csv", "pos_1.csv"]
-    CSV_RENTAL_FN = "rental.csv"
+    CSV_RENTAL_FN = "rental_gen.csv"
     CSV_USR_FN = "usr.csv"
 
     GENERATED_DN = "generated"
@@ -261,7 +261,7 @@ class ScooterTrajectoriesDS:
     POS_DEVICE_TIME_CN = POS_COLS[5]
     POS_DEVICE_ID_CN = POS_COLS[6]
 
-    # rental.csv data columns
+    # rental_gen.csv data columns
     RENTAL_COLS = ["ID", "Id_dispositivo", "Id_utente", "Start_latitudine", "Start_longitudine", "Stop_latitudine",
                    "Stop_longitudine", "DataOra_partenza", "DataOra_arrivo", "Km_percorsi"]
     RENTAL_TIME_COLS = [RENTAL_COLS[7], RENTAL_COLS[8]]
@@ -281,28 +281,28 @@ class ScooterTrajectoriesDS:
     POS_RENTAL_MAP_COLS = ["device_id", "rental_id", 'rental_start_time', 'rental_stop_time', 'pos_id',
                            'pos_device_time', 'pos_server_time']
 
-    def __init__(self, unzip_path=None, log_lvl=None):
-        if unzip_path:
-            self.unzip_path = unzip_path
+    def __init__(self, zip_filepath=None, log_lvl=None):
+        if zip_filepath:
+            self.zip_filepath = zip_filepath
         else:
-            self.unzip_path = os.path.join(DATA_FOLDER, self.ZIP_DEFAULT_FN)
+            self.zip_filepath = os.path.join(DATA_FOLDER, self.ZIP_DEFAULT_FN)
 
         if log_lvl is not None:
             if not isinstance(log_lvl, int):
                 raise ValueError("Invalid log level: {}".format(log_lvl))
             log.set_level(log_lvl)
 
-        self.unzip_folder = os.path.splitext(self.unzip_path)[0]
+        self.unzip_folder = os.path.splitext(self.zip_filepath)[0]
         self.dataset = pd.DataFrame()
         self.rental = pd.DataFrame()
         self.pos = pd.DataFrame()
 
     def __unzip(self):
-        if not os.path.exists(self.unzip_path):
+        if not os.path.exists(self.zip_filepath):
             log.f("Unzip path not exist")
             return
 
-        unzip(self.unzip_path)
+        unzip(self.zip_filepath)
 
     def __is_pos_timestamp_in_rental(self, pos, rental):
         pos_server_time_cn = self.POS_TIME_COLS[0]
@@ -575,19 +575,51 @@ class ScooterTrajectoriesDS:
         return self
 
     def load_generated(self):
-        pass
+        if not os.path.exists(os.path.join(self.unzip_folder, self.GENERATED_DN)):
+            log.e("Generated folder not exist")
+            return self
+
+        log.d("Scooter Trajectories load generated")
+        start = time.time()
+
+        pos_rental_map_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_POS_RENTAL_MAP_FN)
+        self.dataset = pd.read_csv(pos_rental_map_fp)
+
+        pos_gen_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_POS_GENERATED_FN)
+        self.pos = pd.read_csv(pos_gen_fp)
+
+        rental_gen_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_RENTAL_GENERATED_FN)
+        self.rental = pd.read_csv(rental_gen_fp)
+
+        end = time.time()
+        log.d("elapsed time: {}".format(get_elapsed(start, end)))
+
+        return self
 
     def to_csv(self):
         if self.dataset.empty or self.rental.empty or self.pos.empty:
             log.e("Empty dataframe: to_csv() error")
             return self
 
-        if not os.path.exists(os.path.join(DATA_FOLDER, self.GENERATED_DN)):
-            os.makedirs(os.path.join(DATA_FOLDER, self.GENERATED_DN))
+        log.d("Scooter Trajectories to csv")
+        start = time.time()
 
-        self.pos.to_csv(os.path.join(DATA_FOLDER, self.GENERATED_DN, self.CSV_POS_GENERATED_FN), index=False)
-        self.rental.to_csv(os.path.join(DATA_FOLDER, self.GENERATED_DN, self.CSV_RENTAL_GENERATED_FN), index=False)
-        self.dataset.to_csv(os.path.join(DATA_FOLDER, self.GENERATED_DN, self.CSV_POS_RENTAL_MAP_FN), index=False)
+        if not os.path.exists(os.path.join(self.unzip_folder, self.GENERATED_DN)):
+            os.makedirs(os.path.join(self.unzip_folder, self.GENERATED_DN))
+
+        # Save data in csv files
+        pos_gen_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_POS_GENERATED_FN)
+        self.pos.to_csv(pos_gen_fp, index=False)
+
+        rental_gen_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_RENTAL_GENERATED_FN)
+        self.rental.to_csv(rental_gen_fp, index=False)
+
+        pos_rental_map_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_POS_RENTAL_MAP_FN)
+        self.dataset.to_csv(pos_rental_map_fp, index=False)
+
+        end = time.time()
+        log.d("elapsed time: {}", get_elapsed(start, end))
+
         return self
 
     def print_stats(self):
