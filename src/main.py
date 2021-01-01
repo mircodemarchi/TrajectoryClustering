@@ -23,7 +23,6 @@ import time
 import argparse
 import logging
 import configparser
-import numpy as np
 
 from util import MotionSenseDS, ScooterTrajectoriesDS
 from util import DataAnalysis
@@ -37,13 +36,13 @@ parser.add_argument("--log",
                     "-l",
                     dest="log_lvl",
                     required=False,
-                    help="Configuration file with all server specification",
+                    help="log level of the project: DEBUG, INFO, WARNING, ERROR, FATAL",
                     default="DEBUG")
 parser.add_argument("--config",
                     "-c",
                     dest="config_file",
                     required=False,
-                    help="Configuration file with all server specification",
+                    help="path to configuration file with all settings",
                     default="defconfig.ini")
 args = parser.parse_args()
 
@@ -52,7 +51,7 @@ def motion_sense_test(config: configparser.SectionProxy, log_lvl):
     if config.getboolean("skip"):
         return
 
-    ms = MotionSenseDS()
+    ms = MotionSenseDS(log_lvl=log_lvl)
     # dataset, target = ms.load(np.full(MotionSenseDS.TRIALS_NUM, 1))
     dataset, target = ms.load_all()
     ms.print_stats()
@@ -67,7 +66,7 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
     if config.getboolean("skip"):
         return
 
-    st = ScooterTrajectoriesDS()
+    st = ScooterTrajectoriesDS(log_lvl=log_lvl)
     if config.getboolean("generate-data"):
         st.generate_all(chunksize=config["chunk-size"],
                         max_chunknum=None if config["max-chunk-num"] is None else config.getint("max-chunk-num"))

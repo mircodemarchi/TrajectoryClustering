@@ -70,11 +70,16 @@ class MotionSenseDS:
     SUBJECT_CN = "subject"
     TRIAL_TYPE_CN = "trial type"
 
-    def __init__(self, unzip_path=None):
+    def __init__(self, unzip_path=None, log_lvl=None):
         if unzip_path:
             self.unzip_path = unzip_path
         else:
             self.unzip_path = os.path.join(DATA_FOLDER, self.ZIP_DEFAULT_FN)
+
+        if log_lvl is not None:
+            if not isinstance(log_lvl, int):
+                raise ValueError("Invalid log level: {}".format(log_lvl))
+            log.set_level(log_lvl)
 
         self.unzip_folder = os.path.splitext(self.unzip_path)[0]
         self.target = None
@@ -276,11 +281,16 @@ class ScooterTrajectoriesDS:
     POS_RENTAL_MAP_COLS = ["device_id", "rental_id", 'rental_start_time', 'rental_stop_time', 'pos_id',
                            'pos_device_time', 'pos_server_time']
 
-    def __init__(self, unzip_path=None):
+    def __init__(self, unzip_path=None, log_lvl=None):
         if unzip_path:
             self.unzip_path = unzip_path
         else:
             self.unzip_path = os.path.join(DATA_FOLDER, self.ZIP_DEFAULT_FN)
+
+        if log_lvl is not None:
+            if not isinstance(log_lvl, int):
+                raise ValueError("Invalid log level: {}".format(log_lvl))
+            log.set_level(log_lvl)
 
         self.unzip_folder = os.path.splitext(self.unzip_path)[0]
         self.dataset = pd.DataFrame()
