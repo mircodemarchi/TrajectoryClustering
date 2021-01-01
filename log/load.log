@@ -1,0 +1,287 @@
+[01/01/2021 19:35:03] util.data - DEBUG: Scooter Trajectories start unzip
+scooter_trajectories.zip: 100%|██████████| 6/6 [00:00<00:00, 76029.68it/s]
+[01/01/2021 19:35:03] util.data - DEBUG: Scooter Trajectories load device, rental, user data
+[01/01/2021 19:35:06] util.data - DEBUG: elapsed time: 00:00:02.97
+[01/01/2021 19:35:06] util.data - DEBUG: Scooter Trajectories load pos and rental timestamp map data
+[01/01/2021 19:35:15] util.data - DEBUG: __chunk 0 merge elapsed time: 00:00:09.08
+[01/01/2021 19:35:25] util.data - DEBUG: __chunk 1 merge elapsed time: 00:00:09.28
+[01/01/2021 19:35:35] util.data - DEBUG: __chunk 2 merge elapsed time: 00:00:09.15
+[01/01/2021 19:35:44] util.data - DEBUG: __chunk 3 merge elapsed time: 00:00:09.09
+[01/01/2021 19:35:54] util.data - DEBUG: __chunk 4 merge elapsed time: 00:00:09.12
+[01/01/2021 19:36:04] util.data - DEBUG: __chunk 5 merge elapsed time: 00:00:09.04
+[01/01/2021 19:36:13] util.data - DEBUG: __chunk 6 merge elapsed time: 00:00:08.88
+[01/01/2021 19:36:23] util.data - DEBUG: __chunk 7 merge elapsed time: 00:00:09.21
+[01/01/2021 19:36:32] util.data - DEBUG: __chunk 8 merge elapsed time: 00:00:09.16
+[01/01/2021 19:36:42] util.data - DEBUG: __chunk 9 merge elapsed time: 00:00:09.00
+[01/01/2021 19:36:52] util.data - DEBUG: __chunk 10 merge elapsed time: 00:00:09.11
+[01/01/2021 19:37:01] util.data - DEBUG: __chunk 11 merge elapsed time: 00:00:09.11
+[01/01/2021 19:37:11] util.data - DEBUG: __chunk 12 merge elapsed time: 00:00:09.21
+[01/01/2021 19:37:20] util.data - DEBUG: __chunk 13 merge elapsed time: 00:00:08.50
+[01/01/2021 19:37:30] util.data - DEBUG: __chunk 14 merge elapsed time: 00:00:08.65
+[01/01/2021 19:37:38] util.data - DEBUG: __chunk 15 merge elapsed time: 00:00:08.25
+[01/01/2021 19:37:47] util.data - DEBUG: __chunk 16 merge elapsed time: 00:00:08.10
+[01/01/2021 19:37:56] util.data - DEBUG: __chunk 17 merge elapsed time: 00:00:08.23
+[01/01/2021 19:38:05] util.data - DEBUG: __chunk 18 merge elapsed time: 00:00:08.30
+[01/01/2021 19:38:14] util.data - DEBUG: __chunk 19 merge elapsed time: 00:00:08.30
+[01/01/2021 19:38:23] util.data - DEBUG: __chunk 20 merge elapsed time: 00:00:08.27
+[01/01/2021 19:38:32] util.data - DEBUG: __chunk 21 merge elapsed time: 00:00:08.18
+[01/01/2021 19:38:40] util.data - DEBUG: __chunk 22 merge elapsed time: 00:00:08.10
+[01/01/2021 19:38:50] util.data - DEBUG: __chunk 23 merge elapsed time: 00:00:08.43
+[01/01/2021 19:38:59] util.data - DEBUG: __chunk 24 merge elapsed time: 00:00:08.38
+[01/01/2021 19:39:08] util.data - DEBUG: __chunk 25 merge elapsed time: 00:00:08.20
+[01/01/2021 19:39:17] util.data - DEBUG: __chunk 26 merge elapsed time: 00:00:08.30
+[01/01/2021 19:39:26] util.data - DEBUG: __chunk 27 merge elapsed time: 00:00:08.36
+[01/01/2021 19:39:35] util.data - DEBUG: __chunk 28 merge elapsed time: 00:00:08.44
+[01/01/2021 19:39:44] util.data - DEBUG: __chunk 29 merge elapsed time: 00:00:08.37
+[01/01/2021 19:39:53] util.data - DEBUG: __chunk 30 merge elapsed time: 00:00:08.43
+[01/01/2021 19:40:02] util.data - DEBUG: __chunk 31 merge elapsed time: 00:00:08.01
+[01/01/2021 19:40:11] util.data - DEBUG: __chunk 32 merge elapsed time: 00:00:08.12
+[01/01/2021 19:40:20] util.data - DEBUG: __chunk 33 merge elapsed time: 00:00:07.93
+[01/01/2021 19:40:29] util.data - DEBUG: __chunk 34 merge elapsed time: 00:00:07.98
+[01/01/2021 19:40:38] util.data - DEBUG: __chunk 35 merge elapsed time: 00:00:08.04
+[01/01/2021 19:40:46] util.data - DEBUG: __chunk 36 merge elapsed time: 00:00:07.73
+[01/01/2021 19:40:55] util.data - DEBUG: __chunk 37 merge elapsed time: 00:00:08.29
+[01/01/2021 19:41:04] util.data - DEBUG: __chunk 38 merge elapsed time: 00:00:07.69
+[01/01/2021 19:41:13] util.data - DEBUG: __chunk 39 merge elapsed time: 00:00:08.32
+[01/01/2021 19:41:22] util.data - DEBUG: __chunk 40 merge elapsed time: 00:00:07.99
+[01/01/2021 19:41:31] util.data - DEBUG: __chunk 41 merge elapsed time: 00:00:07.32
+[01/01/2021 19:41:39] util.data - DEBUG: __chunk 42 merge elapsed time: 00:00:07.71
+[01/01/2021 19:41:47] util.data - DEBUG: __chunk 43 merge elapsed time: 00:00:07.25
+[01/01/2021 19:41:56] util.data - DEBUG: __chunk 44 merge elapsed time: 00:00:07.47
+[01/01/2021 19:42:05] util.data - DEBUG: __chunk 45 merge elapsed time: 00:00:07.58
+[01/01/2021 19:42:13] util.data - DEBUG: __chunk 46 merge elapsed time: 00:00:07.54
+[01/01/2021 19:42:22] util.data - DEBUG: __chunk 47 merge elapsed time: 00:00:07.79
+[01/01/2021 19:42:30] util.data - DEBUG: __chunk 48 merge elapsed time: 00:00:07.04
+[01/01/2021 19:42:38] util.data - DEBUG: __chunk 49 merge elapsed time: 00:00:07.39
+[01/01/2021 19:42:47] util.data - DEBUG: __chunk 50 merge elapsed time: 00:00:07.76
+[01/01/2021 19:42:55] util.data - DEBUG: __chunk 51 merge elapsed time: 00:00:07.16
+[01/01/2021 19:43:03] util.data - DEBUG: __chunk 52 merge elapsed time: 00:00:06.83
+[01/01/2021 19:43:12] util.data - DEBUG: __chunk 53 merge elapsed time: 00:00:07.05
+[01/01/2021 19:43:19] util.data - DEBUG: __chunk 54 merge elapsed time: 00:00:06.06
+[01/01/2021 19:43:26] util.data - DEBUG: __chunk 55 merge elapsed time: 00:00:05.96
+[01/01/2021 19:43:34] util.data - DEBUG: __chunk 56 merge elapsed time: 00:00:06.77
+[01/01/2021 19:43:42] util.data - DEBUG: __chunk 57 merge elapsed time: 00:00:06.74
+[01/01/2021 19:43:50] util.data - DEBUG: __chunk 58 merge elapsed time: 00:00:07.12
+[01/01/2021 19:43:57] util.data - DEBUG: __chunk 59 merge elapsed time: 00:00:05.86
+[01/01/2021 19:44:05] util.data - DEBUG: __chunk 60 merge elapsed time: 00:00:06.68
+[01/01/2021 19:44:13] util.data - DEBUG: __chunk 61 merge elapsed time: 00:00:07.14
+[01/01/2021 19:44:22] util.data - DEBUG: __chunk 62 merge elapsed time: 00:00:07.38
+[01/01/2021 19:44:30] util.data - DEBUG: __chunk 63 merge elapsed time: 00:00:06.58
+[01/01/2021 19:44:38] util.data - DEBUG: __chunk 64 merge elapsed time: 00:00:07.02
+[01/01/2021 19:44:47] util.data - DEBUG: __chunk 65 merge elapsed time: 00:00:07.63
+[01/01/2021 19:44:56] util.data - DEBUG: __chunk 66 merge elapsed time: 00:00:07.86
+[01/01/2021 19:45:05] util.data - DEBUG: __chunk 67 merge elapsed time: 00:00:06.89
+[01/01/2021 19:45:12] util.data - DEBUG: __chunk 68 merge elapsed time: 00:00:06.42
+[01/01/2021 19:45:21] util.data - DEBUG: __chunk 69 merge elapsed time: 00:00:07.35
+[01/01/2021 19:45:30] util.data - DEBUG: __chunk 70 merge elapsed time: 00:00:07.53
+[01/01/2021 19:45:38] util.data - DEBUG: __chunk 71 merge elapsed time: 00:00:06.45
+[01/01/2021 19:45:46] util.data - DEBUG: __chunk 72 merge elapsed time: 00:00:06.71
+[01/01/2021 19:45:55] util.data - DEBUG: __chunk 73 merge elapsed time: 00:00:07.67
+[01/01/2021 19:46:04] util.data - DEBUG: __chunk 74 merge elapsed time: 00:00:07.47
+[01/01/2021 19:46:12] util.data - DEBUG: __chunk 75 merge elapsed time: 00:00:06.47
+[01/01/2021 19:46:20] util.data - DEBUG: __chunk 76 merge elapsed time: 00:00:06.44
+[01/01/2021 19:46:28] util.data - DEBUG: __chunk 77 merge elapsed time: 00:00:06.96
+[01/01/2021 19:46:37] util.data - DEBUG: __chunk 78 merge elapsed time: 00:00:07.09
+[01/01/2021 19:46:45] util.data - DEBUG: __chunk 79 merge elapsed time: 00:00:06.36
+[01/01/2021 19:46:52] util.data - DEBUG: __chunk 80 merge elapsed time: 00:00:05.97
+[01/01/2021 19:47:00] util.data - DEBUG: __chunk 81 merge elapsed time: 00:00:06.55
+[01/01/2021 19:47:09] util.data - DEBUG: __chunk 82 merge elapsed time: 00:00:06.90
+[01/01/2021 19:47:17] util.data - DEBUG: __chunk 83 merge elapsed time: 00:00:07.30
+[01/01/2021 19:47:26] util.data - DEBUG: __chunk 84 merge elapsed time: 00:00:06.68
+[01/01/2021 19:47:33] util.data - DEBUG: __chunk 85 merge elapsed time: 00:00:05.68
+[01/01/2021 19:47:41] util.data - DEBUG: __chunk 86 merge elapsed time: 00:00:06.15
+[01/01/2021 19:47:49] util.data - DEBUG: __chunk 87 merge elapsed time: 00:00:06.67
+[01/01/2021 19:47:54] util.data - DEBUG: __chunk 88 merge elapsed time: 00:00:03.42
+[01/01/2021 19:48:03] util.data - DEBUG: __chunk 89 merge elapsed time: 00:00:07.13
+[01/01/2021 19:48:12] util.data - DEBUG: __chunk 90 merge elapsed time: 00:00:07.04
+[01/01/2021 19:48:20] util.data - DEBUG: __chunk 91 merge elapsed time: 00:00:06.53
+[01/01/2021 19:48:28] util.data - DEBUG: __chunk 92 merge elapsed time: 00:00:06.26
+[01/01/2021 19:48:37] util.data - DEBUG: __chunk 93 merge elapsed time: 00:00:06.46
+[01/01/2021 19:48:46] util.data - DEBUG: __chunk 94 merge elapsed time: 00:00:07.08
+[01/01/2021 19:48:55] util.data - DEBUG: __chunk 95 merge elapsed time: 00:00:07.33
+[01/01/2021 19:49:03] util.data - DEBUG: __chunk 96 merge elapsed time: 00:00:06.83
+[01/01/2021 19:49:12] util.data - DEBUG: __chunk 97 merge elapsed time: 00:00:06.39
+[01/01/2021 19:49:20] util.data - DEBUG: __chunk 98 merge elapsed time: 00:00:06.71
+[01/01/2021 19:49:29] util.data - DEBUG: __chunk 99 merge elapsed time: 00:00:06.97
+[01/01/2021 19:49:38] util.data - DEBUG: __chunk 100 merge elapsed time: 00:00:06.85
+[01/01/2021 19:49:47] util.data - DEBUG: __chunk 101 merge elapsed time: 00:00:06.44
+[01/01/2021 19:49:55] util.data - DEBUG: __chunk 102 merge elapsed time: 00:00:06.28
+[01/01/2021 19:50:03] util.data - DEBUG: __chunk 103 merge elapsed time: 00:00:06.38
+[01/01/2021 19:50:12] util.data - DEBUG: __chunk 104 merge elapsed time: 00:00:06.47
+[01/01/2021 19:50:20] util.data - DEBUG: __chunk 105 merge elapsed time: 00:00:06.42
+[01/01/2021 19:50:28] util.data - DEBUG: __chunk 106 merge elapsed time: 00:00:05.78
+[01/01/2021 19:50:36] util.data - DEBUG: __chunk 107 merge elapsed time: 00:00:06.22
+[01/01/2021 19:50:45] util.data - DEBUG: __chunk 108 merge elapsed time: 00:00:07.16
+[01/01/2021 19:50:55] util.data - DEBUG: __chunk 109 merge elapsed time: 00:00:07.31
+[01/01/2021 19:51:03] util.data - DEBUG: __chunk 110 merge elapsed time: 00:00:06.17
+[01/01/2021 19:51:11] util.data - DEBUG: __chunk 111 merge elapsed time: 00:00:05.87
+[01/01/2021 19:51:20] util.data - DEBUG: __chunk 112 merge elapsed time: 00:00:06.84
+[01/01/2021 19:51:30] util.data - DEBUG: __chunk 113 merge elapsed time: 00:00:07.66
+[01/01/2021 19:51:40] util.data - DEBUG: __chunk 114 merge elapsed time: 00:00:07.80
+[01/01/2021 19:51:50] util.data - DEBUG: __chunk 115 merge elapsed time: 00:00:07.51
+[01/01/2021 19:51:59] util.data - DEBUG: __chunk 116 merge elapsed time: 00:00:07.11
+[01/01/2021 19:52:09] util.data - DEBUG: __chunk 117 merge elapsed time: 00:00:07.10
+[01/01/2021 19:52:18] util.data - DEBUG: __chunk 118 merge elapsed time: 00:00:07.63
+[01/01/2021 19:52:28] util.data - DEBUG: __chunk 119 merge elapsed time: 00:00:07.22
+[01/01/2021 19:52:38] util.data - DEBUG: __chunk 120 merge elapsed time: 00:00:07.89
+[01/01/2021 19:52:48] util.data - DEBUG: __chunk 121 merge elapsed time: 00:00:07.12
+[01/01/2021 19:52:56] util.data - DEBUG: __chunk 122 merge elapsed time: 00:00:05.92
+[01/01/2021 19:53:04] util.data - DEBUG: __chunk 123 merge elapsed time: 00:00:05.87
+[01/01/2021 19:53:13] util.data - DEBUG: __chunk 124 merge elapsed time: 00:00:06.54
+[01/01/2021 19:53:22] util.data - DEBUG: __chunk 125 merge elapsed time: 00:00:06.51
+[01/01/2021 19:53:30] util.data - DEBUG: __chunk 126 merge elapsed time: 00:00:06.01
+[01/01/2021 19:53:39] util.data - DEBUG: __chunk 127 merge elapsed time: 00:00:05.90
+[01/01/2021 19:53:48] util.data - DEBUG: __chunk 128 merge elapsed time: 00:00:06.47
+[01/01/2021 19:53:56] util.data - DEBUG: __chunk 129 merge elapsed time: 00:00:06.44
+[01/01/2021 19:54:05] util.data - DEBUG: __chunk 130 merge elapsed time: 00:00:06.08
+[01/01/2021 19:54:14] util.data - DEBUG: __chunk 131 merge elapsed time: 00:00:06.36
+[01/01/2021 19:54:23] util.data - DEBUG: __chunk 132 merge elapsed time: 00:00:06.69
+[01/01/2021 19:54:32] util.data - DEBUG: __chunk 133 merge elapsed time: 00:00:06.19
+[01/01/2021 19:54:40] util.data - DEBUG: __chunk 134 merge elapsed time: 00:00:05.77
+[01/01/2021 19:54:48] util.data - DEBUG: __chunk 135 merge elapsed time: 00:00:05.81
+[01/01/2021 19:54:57] util.data - DEBUG: __chunk 136 merge elapsed time: 00:00:06.07
+[01/01/2021 19:55:06] util.data - DEBUG: __chunk 137 merge elapsed time: 00:00:06.43
+[01/01/2021 19:55:16] util.data - DEBUG: __chunk 138 merge elapsed time: 00:00:06.88
+[01/01/2021 19:55:26] util.data - DEBUG: __chunk 139 merge elapsed time: 00:00:06.89
+[01/01/2021 19:55:36] util.data - DEBUG: __chunk 140 merge elapsed time: 00:00:07.30
+[01/01/2021 19:55:46] util.data - DEBUG: __chunk 141 merge elapsed time: 00:00:07.08
+[01/01/2021 19:55:55] util.data - DEBUG: __chunk 142 merge elapsed time: 00:00:06.65
+[01/01/2021 19:56:05] util.data - DEBUG: __chunk 143 merge elapsed time: 00:00:06.67
+[01/01/2021 19:56:15] util.data - DEBUG: __chunk 144 merge elapsed time: 00:00:07.35
+[01/01/2021 19:56:26] util.data - DEBUG: __chunk 145 merge elapsed time: 00:00:07.79
+[01/01/2021 19:56:37] util.data - DEBUG: __chunk 146 merge elapsed time: 00:00:07.62
+[01/01/2021 19:56:47] util.data - DEBUG: __chunk 147 merge elapsed time: 00:00:06.75
+[01/01/2021 19:56:57] util.data - DEBUG: __chunk 148 merge elapsed time: 00:00:06.93
+[01/01/2021 19:57:07] util.data - DEBUG: __chunk 149 merge elapsed time: 00:00:07.41
+[01/01/2021 19:57:18] util.data - DEBUG: __chunk 150 merge elapsed time: 00:00:07.64
+[01/01/2021 19:57:29] util.data - DEBUG: __chunk 151 merge elapsed time: 00:00:07.71
+[01/01/2021 19:57:39] util.data - DEBUG: __chunk 152 merge elapsed time: 00:00:07.61
+[01/01/2021 19:57:49] util.data - DEBUG: __chunk 153 merge elapsed time: 00:00:06.49
+[01/01/2021 19:57:59] util.data - DEBUG: __chunk 154 merge elapsed time: 00:00:07.20
+[01/01/2021 19:58:11] util.data - DEBUG: __chunk 155 merge elapsed time: 00:00:08.16
+[01/01/2021 19:58:21] util.data - DEBUG: __chunk 156 merge elapsed time: 00:00:07.21
+[01/01/2021 19:58:32] util.data - DEBUG: __chunk 157 merge elapsed time: 00:00:07.56
+[01/01/2021 19:58:44] util.data - DEBUG: __chunk 158 merge elapsed time: 00:00:09.02
+[01/01/2021 19:58:57] util.data - DEBUG: __chunk 159 merge elapsed time: 00:00:07.53
+[01/01/2021 19:59:06] util.data - DEBUG: __chunk 160 merge elapsed time: 00:00:06.28
+[01/01/2021 19:59:16] util.data - DEBUG: __chunk 161 merge elapsed time: 00:00:06.84
+[01/01/2021 19:59:26] util.data - DEBUG: __chunk 162 merge elapsed time: 00:00:07.02
+[01/01/2021 19:59:36] util.data - DEBUG: __chunk 163 merge elapsed time: 00:00:06.32
+[01/01/2021 19:59:46] util.data - DEBUG: __chunk 164 merge elapsed time: 00:00:06.80
+[01/01/2021 19:59:57] util.data - DEBUG: __chunk 165 merge elapsed time: 00:00:07.30
+[01/01/2021 20:00:07] util.data - DEBUG: __chunk 166 merge elapsed time: 00:00:07.04
+[01/01/2021 20:00:17] util.data - DEBUG: __chunk 167 merge elapsed time: 00:00:06.33
+[01/01/2021 20:00:27] util.data - DEBUG: __chunk 168 merge elapsed time: 00:00:06.87
+[01/01/2021 20:00:37] util.data - DEBUG: __chunk 169 merge elapsed time: 00:00:07.07
+[01/01/2021 20:00:47] util.data - DEBUG: __chunk 170 merge elapsed time: 00:00:06.57
+[01/01/2021 20:00:58] util.data - DEBUG: __chunk 171 merge elapsed time: 00:00:06.71
+[01/01/2021 20:01:08] util.data - DEBUG: __chunk 172 merge elapsed time: 00:00:06.63
+[01/01/2021 20:01:17] util.data - DEBUG: __chunk 173 merge elapsed time: 00:00:06.34
+[01/01/2021 20:01:29] util.data - DEBUG: __chunk 174 merge elapsed time: 00:00:07.58
+[01/01/2021 20:01:37] util.data - DEBUG: __chunk 175 merge elapsed time: 00:00:04.62
+[01/01/2021 20:01:40] util.data - DEBUG: elapsed time: 00:26:33.87
+[01/01/2021 20:01:47] util.data - INFO: ************************************ Scooter Trajectories - Stats *************************************
+[01/01/2021 20:01:47] util.data - INFO: [DATA MAP SHAPE]: (2734076, 7);
+[01/01/2021 20:01:47] util.data - INFO: [DATA MAP COLUMN NAMES]: ['device_id', 'rental_id', 'rental_start_time', 'rental_stop_time', 'pos_id', 'pos_device_time', 'pos_server_time'];
+[01/01/2021 20:01:47] util.data - INFO: [DATA MAP FEATURES TYPES]:
+device_id                     int64
+rental_id                     int64
+rental_start_time    datetime64[ns]
+rental_stop_time     datetime64[ns]
+pos_id                        int64
+pos_device_time      datetime64[ns]
+pos_server_time      datetime64[ns]
+dtype: object;
+[01/01/2021 20:01:47] util.data - INFO: [DATA MAP NULL OCCURRENCES]:
+device_id            0
+rental_id            0
+rental_start_time    0
+rental_stop_time     0
+pos_id               0
+pos_device_time      0
+pos_server_time      0
+dtype: int64;
+[01/01/2021 20:01:48] util.data - INFO: [DATA MAP DESCRIPTION]:
+          device_id     rental_id              rental_start_time               rental_stop_time        pos_id                pos_device_time                pos_server_time
+count  2.734076e+06  2.734076e+06                        2734076                        2734076  2.734076e+06                        2734076                        2734076
+mean   5.779107e+02  1.161502e+05  2020-02-16 00:40:00.566601984  2020-02-16 01:16:20.340367872  3.767708e+07  2020-02-16 00:58:00.931259392  2020-02-16 00:58:00.931259392
+min    1.000000e+00  9.418800e+04     2020-01-11 03:30:41.900000     2020-01-11 03:40:13.164000  2.710914e+07     2020-01-11 03:39:02.359133     2020-01-11 03:39:02.359133
+25%    3.010000e+02  1.087190e+05  2020-02-09 00:59:23.108999936     2020-02-09 01:35:51.204000  3.407512e+07  2020-02-09 01:15:44.977696256  2020-02-09 01:15:44.977696256
+50%    6.320000e+02  1.156070e+05     2020-02-15 22:06:17.864000     2020-02-15 22:36:08.168000  3.710034e+07  2020-02-15 22:18:35.873208832  2020-02-15 22:18:35.873208832
+75%    8.290000e+02  1.247490e+05  2020-02-24 13:29:04.687000064  2020-02-24 13:50:23.337999872  4.143330e+07  2020-02-24 13:39:43.119545344  2020-02-24 13:39:43.119545344
+max    1.000100e+04  1.346950e+05     2020-03-11 08:05:23.095000     2020-03-11 08:10:11.023000  4.745272e+07     2020-03-11 08:10:09.222483     2020-03-11 08:10:09.222483
+std    3.184100e+02  1.029985e+04                            NaN                            NaN  4.932081e+06                            NaN                            NaN;
+[01/01/2021 20:01:48] util.data - INFO: [RENTAL SHAPE]: (34591, 10);
+[01/01/2021 20:01:48] util.data - INFO: [RENTAL COLUMN NAMES]: ['ID', 'Id_dispositivo', 'Id_utente', 'Start_latitudine', 'Start_longitudine', 'Stop_latitudine', 'Stop_longitudine', 'DataOra_partenza', 'DataOra_arrivo', 'Km_percorsi'];
+[01/01/2021 20:01:48] util.data - INFO: [RENTAL FEATURES TYPES]:
+ID                            int64
+Id_dispositivo                int64
+Id_utente                     int64
+Start_latitudine            float64
+Start_longitudine           float64
+Stop_latitudine             float64
+Stop_longitudine            float64
+DataOra_partenza     datetime64[ns]
+DataOra_arrivo       datetime64[ns]
+Km_percorsi                 float64
+dtype: object;
+[01/01/2021 20:01:48] util.data - INFO: [RENTAL NULL OCCURRENCES]:
+ID                   0
+Id_dispositivo       0
+Id_utente            0
+Start_latitudine     0
+Start_longitudine    0
+Stop_latitudine      0
+Stop_longitudine     0
+DataOra_partenza     0
+DataOra_arrivo       0
+Km_percorsi          0
+dtype: int64;
+[01/01/2021 20:01:48] util.data - INFO: [RENTAL DESCRIPTION]:
+                  ID  Id_dispositivo     Id_utente  Start_latitudine  Start_longitudine  Stop_latitudine  Stop_longitudine               DataOra_partenza                 DataOra_arrivo   Km_percorsi
+count   34591.000000    34591.000000  34591.000000      34591.000000       34591.000000     34591.000000      34591.000000                          34591                          34591  34591.000000
+mean   114575.080859      503.846376  48525.275072         44.161688          10.890387        45.361814          9.690045  2020-02-13 14:52:05.299689472  2020-02-13 15:04:37.277341440      1.729280
+min     94188.000000        1.000000      2.000000         42.485028           8.831655        43.684978          7.615795     2020-01-11 03:30:41.900000     2020-01-11 03:40:13.164000      0.000000
+25%    105740.500000      231.000000  31485.000000         44.229379          10.369447        45.429398          9.167137  2020-02-05 08:32:45.543000064  2020-02-05 08:39:23.520499968      0.730000
+50%    114468.000000      427.000000  54977.000000         44.241689          10.402123        45.441734          9.203090  2020-02-15 12:32:47.284999936  2020-02-15 12:55:40.507000064      1.300000
+75%    124609.500000      766.000000  62996.000000         44.259833          12.191402        45.458904         10.990800  2020-02-24 11:12:23.644499968  2020-02-24 11:18:43.321499904      2.200000
+max    134695.000000    10001.000000  75823.000000         44.293866          13.944872        45.497047         12.744960     2020-03-11 08:05:23.095000     2020-03-11 08:10:11.023000     38.980000
+std     11487.614614      353.394267  19177.970779          0.170838           1.334452         0.171053          1.334597                            NaN                            NaN      1.704382;
+[01/01/2021 20:01:48] util.data - INFO: [POS SHAPE]: (2734076, 7);
+[01/01/2021 20:01:48] util.data - INFO: [POS COLUMN NAMES]: ['id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time', 'deviceId'];
+[01/01/2021 20:01:48] util.data - INFO: [POS FEATURES TYPES]:
+id                     object
+latitude              float64
+longitude             float64
+speed                 float64
+server_time    datetime64[ns]
+device_time    datetime64[ns]
+deviceId               object
+dtype: object;
+[01/01/2021 20:01:48] util.data - INFO: [POS NULL OCCURRENCES]:
+id             0
+latitude       0
+longitude      0
+speed          0
+server_time    0
+device_time    0
+deviceId       0
+dtype: int64;
+[01/01/2021 20:01:49] util.data - INFO: [POS DESCRIPTION]:
+           latitude     longitude         speed                    server_time                    device_time
+count  2.734076e+06  2.734076e+06  2.734076e+06                        2734076                        2734076
+mean   4.416619e+01  1.062268e+01  6.599305e+00  2020-02-16 00:58:00.931257344  2020-02-16 00:58:00.931257344
+min    4.023970e+01  1.200153e+00 -2.000000e-02     2020-01-11 03:39:02.359133     2020-01-11 03:39:02.359133
+25%    4.423043e+01  1.036598e+01  5.118749e-02  2020-02-09 01:15:44.977696256  2020-02-09 01:15:44.977696256
+50%    4.424688e+01  1.038863e+01  3.634164e+00  2020-02-15 22:18:35.873208832  2020-02-15 22:18:35.873208832
+75%    4.426664e+01  1.218329e+01  1.204000e+01  2020-02-24 13:39:43.119545344  2020-02-24 13:39:43.119545344
+max    4.438514e+01  1.539524e+01  7.606000e+01     2020-03-11 08:10:09.222483     2020-03-11 08:10:09.222483
+std    1.776750e-01  1.219661e+00  7.420522e+00                            NaN                            NaN;
+[01/01/2021 20:01:49] util.data - INFO: *******************************************************************************************************
+       device_id  rental_id       rental_start_time        rental_stop_time    pos_id            pos_device_time            pos_server_time
+36042         50      94390 2020-01-11 16:32:12.426 2020-01-11 16:37:40.579  27183821 2020-01-11 16:32:22.845763 2020-01-11 16:32:22.845763
+36043         50      94390 2020-01-11 16:32:12.426 2020-01-11 16:37:40.579  27183842 2020-01-11 16:32:32.870860 2020-01-11 16:32:32.870860
+36044         50      94390 2020-01-11 16:32:12.426 2020-01-11 16:37:40.579  27183869 2020-01-11 16:32:42.914177 2020-01-11 16:32:42.914177
+36045         50      94390 2020-01-11 16:32:12.426 2020-01-11 16:37:40.579  27183878 2020-01-11 16:32:47.307101 2020-01-11 16:32:47.307101
+36046         50      94390 2020-01-11 16:32:12.426 2020-01-11 16:37:40.579  27183890 2020-01-11 16:32:52.849612 2020-01-11 16:32:52.849612
+Time: 00:28:00.57
