@@ -27,6 +27,9 @@ import numpy as np
 
 from util import MotionSenseDS, ScooterTrajectoriesDS
 from util import DataAnalysis
+from util import Log
+
+log = Log(__name__, enable_console=True, enable_file=False)
 
 # Script arguments
 parser = argparse.ArgumentParser(description="Machine Learning and Deep Learning curses project", epilog="MDM project")
@@ -41,11 +44,14 @@ parser.add_argument("--config",
                     dest="config_file",
                     required=False,
                     help="Configuration file with all server specification",
-                    default="config.ini")
+                    default="defconfig.ini")
 args = parser.parse_args()
 
 
-def motion_sense_test(config, log_lvl):
+def motion_sense_test(config: configparser.SectionProxy, log_lvl):
+    if config.getboolean("skip"):
+        return
+
     ms = MotionSenseDS()
     # dataset, target = ms.load(np.full(MotionSenseDS.TRIALS_NUM, 1))
     dataset, target = ms.load_all()
@@ -57,29 +63,47 @@ def motion_sense_test(config, log_lvl):
     da.show_correlation_matrix(file=True)
 
 
-def scooter_trajectories(config, log_lvl):
-    st = ScooterTrajectoriesDS().load_all(chunksize=100000).print_stats().to_csv()
-    print(st.dataset.head())
+def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
+    if config.getboolean("skip"):
+        return
+
+    st = ScooterTrajectoriesDS()
+    if config.getboolean("generate-data"):
+        st.generate_all(chunksize=config["chunk-size"],
+                        max_chunknum=None if config["max-chunk-num"] is None else config.getint("max-chunk-num"))
+        st.print_stats().to_csv()
+
+    if config.getboolean("load-generated"):
+        st.load_generated()
 
 
 def main():
     # Handle args
     log_lvl = getattr(logging, args.log_lvl.upper(), logging.DEBUG)
-    config_file = os.path.join(os.path.dirname(__file__), args.config_file)
+    config_file = os.path.join(os.path.dirname(__file__), "..", args.config_file)
+    if not os.path.exists(config_file):
+        log.f("Configuration file do not find, exit")
+        return
 
     # Handle config
-    config = configparser.ConfigParser()
+    config = configparser.ConfigParser(allow_no_value=True)
     config.read(config_file)
 
     main_tests = {
-        # "MotionSense": motion_sense_test,
-        "ScooterTrajectories": scooter_trajectories,
+        "MotionSense": {
+            "test": motion_sense_test,
+            "config": config["MOTION-SENSE"]
+        },
+        "ScooterTrajectories": {
+            "test": scooter_trajectories,
+            "config": config["SCOOTER-TRAJECTORIES"]
+        },
     }
 
     # Start test
     start = time.time()
     for test in main_tests:
-        main_tests[test](config, log_lvl)
+        main_tests[test]["test"](main_tests[test]["config"], log_lvl)
     end = time.time()
 
     # Calculate time
