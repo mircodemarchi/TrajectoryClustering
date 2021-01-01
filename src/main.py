@@ -19,12 +19,13 @@ main()
 """
 
 import os
+import time
 import argparse
 import logging
 import configparser
 import numpy as np
 
-from util import MotionSenseDS
+from util import MotionSenseDS, ScooterTrajectoriesDS
 from util import DataAnalysis
 
 # Script arguments
@@ -44,15 +45,7 @@ parser.add_argument("--config",
 args = parser.parse_args()
 
 
-def main():
-    # Handle args
-    log_lvl = getattr(logging, args.log_lvl.upper(), logging.DEBUG)
-    config_file = os.path.join(os.path.dirname(__file__), args.config_file)
-
-    # Handle config
-    config = configparser.ConfigParser()
-    config.read(config_file)
-
+def motion_sense_test(config, log_lvl):
     ms = MotionSenseDS()
     # dataset, target = ms.load(np.full(MotionSenseDS.TRIALS_NUM, 1))
     dataset, target = ms.load_all()
@@ -63,6 +56,36 @@ def main():
     da.show_relations(file=True)
     da.show_correlation_matrix(file=True)
 
+
+def scooter_trajectories(config, log_lvl):
+    st = ScooterTrajectoriesDS().load_all(chunksize=100000).print_stats().to_csv()
+    print(st.dataset.head())
+
+
+def main():
+    # Handle args
+    log_lvl = getattr(logging, args.log_lvl.upper(), logging.DEBUG)
+    config_file = os.path.join(os.path.dirname(__file__), args.config_file)
+
+    # Handle config
+    config = configparser.ConfigParser()
+    config.read(config_file)
+
+    main_tests = {
+        # "MotionSense": motion_sense_test,
+        "ScooterTrajectories": scooter_trajectories,
+    }
+
+    # Start test
+    start = time.time()
+    for test in main_tests:
+        main_tests[test](config, log_lvl)
+    end = time.time()
+
+    # Calculate time
+    hours, rem = divmod(end - start, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print("Time: {:0>2}:{:0>2}:{:05.2f}".format(int(hours), int(minutes), seconds))
 
 
 if __name__ == '__main__':
