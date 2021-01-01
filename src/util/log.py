@@ -94,7 +94,6 @@ class Log:
         # Manage console log.
         if enable_console:
             sh = logging.StreamHandler(stream=sys.stdout)
-            sh.setLevel(lvl)
             sh_format = logging.Formatter(fmt=LOG_FMT, datefmt=LOG_DATE_FMT)
             sh_filter = logging.Filter("")
             sh.setFormatter(sh_format)
@@ -104,7 +103,6 @@ class Log:
         # Manage console log.
         if enable_file:
             fh = logging.FileHandler(self.filename + ".log")
-            fh.setLevel(lvl)
             fh_format = logging.Formatter(fmt=LOG_FMT, datefmt=LOG_DATE_FMT)
             fh_filter = logging.Filter("")
             fh.setFormatter(fh_format)
@@ -155,6 +153,30 @@ class Log:
     def d(self, msg, *args, **kwargs):
         """Debug log message"""
         self.__log(logging.DEBUG, msg, *args, **kwargs)
+
+    def set_level(self, level):
+        """Update the logger log level
+
+        Parameters
+        ----------
+        level : int in range [0-5]
+        """
+        t = logging.NOTSET
+        if level == 0:
+            t = logging.NOTSET
+        elif level == 1:
+            t = logging.DEBUG
+        elif level == 2:
+            t = logging.INFO
+        elif level == 3:
+            t = logging.WARNING
+        elif level == 4:
+            t = logging.ERROR
+        elif level == 5:
+            t = logging.FATAL
+
+        if level in range(0, 6):
+            self.logger.setLevel(t)
 
 
 def test():
