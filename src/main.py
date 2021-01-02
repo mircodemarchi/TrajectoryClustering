@@ -66,14 +66,24 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
     if config.getboolean("skip"):
         return
 
+    loaded_data = False
     st = ScooterTrajectoriesDS(log_lvl=log_lvl)
     if config.getboolean("generate-data"):
         st.generate_all(chunksize=config["chunk-size"],
                         max_chunknum=None if config["max-chunk-num"] is None else config.getint("max-chunk-num"))
-        st.print_stats().to_csv()
+        st.to_csv()
+        loaded_data = True
 
     if config.getboolean("load-generated"):
         st.load_generated()
+        loaded_data = True
+
+    if loaded_data:
+        st.print_stats()
+
+        if config["perform-analysis"]:
+            DataAnalysis(st.rental, ScooterTrajectoriesDS.RENTAL_ANALYSIS_COLS).show_distribution()
+            DataAnalysis(st.pos, ScooterTrajectoriesDS.POS_ANALYSIS_COLS).show_distribution()
 
 
 def main():

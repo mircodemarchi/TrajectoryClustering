@@ -252,6 +252,7 @@ class ScooterTrajectoriesDS:
 
     # pos.csv and pos_1.csv data columns
     POS_COLS = ["id", "latitude", "longitude", "speed", "server_time", "device_time", "deviceId"]
+    POS_ANALYSIS_COLS = [POS_COLS[0], POS_COLS[1], POS_COLS[2], POS_COLS[3], POS_COLS[6]]
     POS_TIME_COLS = [POS_COLS[4], POS_COLS[5]]
     POS_ID_CN = POS_COLS[0]
     POS_LATITUDE_CN = POS_COLS[1]
@@ -264,6 +265,8 @@ class ScooterTrajectoriesDS:
     # rental_gen.csv data columns
     RENTAL_COLS = ["ID", "Id_dispositivo", "Id_utente", "Start_latitudine", "Start_longitudine", "Stop_latitudine",
                    "Stop_longitudine", "DataOra_partenza", "DataOra_arrivo", "Km_percorsi"]
+    RENTAL_ANALYSIS_COLS = [RENTAL_COLS[0], RENTAL_COLS[1], RENTAL_COLS[2], RENTAL_COLS[3], RENTAL_COLS[4],
+                            RENTAL_COLS[5], RENTAL_COLS[6], RENTAL_COLS[9]]
     RENTAL_TIME_COLS = [RENTAL_COLS[7], RENTAL_COLS[8]]
     RENTAL_ID_CN = RENTAL_COLS[0]
     RENTAL_DEVICE_ID_CN = RENTAL_COLS[1]
@@ -280,6 +283,8 @@ class ScooterTrajectoriesDS:
     POS_RENTAL_CN = "Rental"
     POS_RENTAL_MAP_COLS = ["device_id", "rental_id", 'rental_start_time', 'rental_stop_time', 'pos_id',
                            'pos_device_time', 'pos_server_time']
+    POS_RENTAL_MAP_TIME_COLS = [POS_RENTAL_MAP_COLS[2], POS_RENTAL_MAP_COLS[3],
+                                POS_RENTAL_MAP_COLS[5], POS_RENTAL_MAP_COLS[6]]
 
     def __init__(self, zip_filepath=None, log_lvl=None):
         if zip_filepath:
@@ -583,13 +588,16 @@ class ScooterTrajectoriesDS:
         start = time.time()
 
         pos_rental_map_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_POS_RENTAL_MAP_FN)
-        self.dataset = pd.read_csv(pos_rental_map_fp)
+        self.dataset = pd.read_csv(pos_rental_map_fp, parse_dates=self.POS_RENTAL_MAP_TIME_COLS,
+                                   infer_datetime_format=True, memory_map=True)
 
         pos_gen_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_POS_GENERATED_FN)
-        self.pos = pd.read_csv(pos_gen_fp)
+        self.pos = pd.read_csv(pos_gen_fp, parse_dates=self.POS_TIME_COLS, infer_datetime_format=True,
+                               memory_map=True)
 
         rental_gen_fp = os.path.join(self.unzip_folder, self.GENERATED_DN, self.CSV_RENTAL_GENERATED_FN)
-        self.rental = pd.read_csv(rental_gen_fp)
+        self.rental = pd.read_csv(rental_gen_fp, parse_dates=self.RENTAL_TIME_COLS, infer_datetime_format=True,
+                                  memory_map=True)
 
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
@@ -621,6 +629,10 @@ class ScooterTrajectoriesDS:
         log.d("elapsed time: {}", get_elapsed(start, end))
 
         return self
+
+    def timestamp_clustering(self):
+        # Sort pos rental map data
+        self.dataset = self.dataset.sort_values(by=[])
 
     def print_stats(self):
         if self.dataset.empty or self.rental.empty or self.pos.empty:

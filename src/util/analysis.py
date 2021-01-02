@@ -8,13 +8,29 @@ import pandas as pd
 
 
 class DataAnalysis:
-    def __init__(self, data, feature_names, target):
+    def __init__(self, data, feature_names, target=None):
         self.feature_names = feature_names
         self.target_name = target
         self.x = pd.DataFrame(np.c_[data[feature_names]], columns=feature_names)
-        self.y = data[target]
+        self.y = None if target is None else data[target]
+
+    def show_distribution(self, file=False, filename="distributions.png"):
+        fig, axs = plt.subplots(len(self.feature_names), 1, figsize=(14, 60))
+        for index, feature in enumerate(self.feature_names):
+            sns.histplot(self.x[feature], bins=30, kde=True, ax=axs[index])
+            axs[index].set_title(feature, fontsize=16)
+
+        if file:
+            plt.savefig(filename)
+
+        plt.suptitle("Scatter of target over features", fontsize=16, y=0.99)
+        plt.show()
+        return self
 
     def show_target_distribution(self, file=False, filename="target_distribution.png"):
+        if self.y is None:
+            return self
+
         sns.set(rc={'figure.figsize': (11.7, 8.27)})
         sns.histplot(self.y, bins=30, kde=True)
 
@@ -23,8 +39,12 @@ class DataAnalysis:
 
         plt.suptitle("Check normal distribution on target feature", fontsize=16)
         plt.show()
+        return self
 
     def show_relations(self, file=False, filename="relations.png"):
+        if self.y is None:
+            return
+
         fig, axs = plt.subplots(len(self.feature_names), 1, figsize=(14, 60))
         for index, feature in enumerate(self.feature_names):
             axs[index].scatter(x=self.x[feature], y=self.y, marker="|")
@@ -36,6 +56,7 @@ class DataAnalysis:
 
         plt.suptitle("Scatter of target over features", fontsize=16, y=0.99)
         plt.show()
+        return self
 
     def show_correlation_matrix(self, file=False, filename="correlation_matrix.png"):
         correlation_matrix = self.x.corr().round(2)
@@ -47,3 +68,4 @@ class DataAnalysis:
 
         plt.suptitle("Correlation matrix of features", fontsize=16)
         plt.show()
+        return self
