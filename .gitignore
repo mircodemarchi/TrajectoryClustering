@@ -338,7 +338,7 @@ acs-*.bib
 
 # knitr
 *-concordance.tex
-# TODO Uncomment the next line if you use knitr and want to ignore its generated tikz files
+# TODO Uncomment the next line if you use knitr and want to ignore its bak tikz files
 # *.tikz
 *-tikzDictionary
 
@@ -483,7 +483,7 @@ TSWLatexianTemp*
 
 # REVTeX puts footnotes in the bibliography by default, unless the nofootinbib
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
-# Uncomment the next line to have this generated file ignored.
+# Uncomment the next line to have this bak file ignored.
 #*Notes.bib
 #############################################################
 

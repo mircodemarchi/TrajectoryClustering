@@ -69,9 +69,10 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
     loaded_data = False
     st = ScooterTrajectoriesDS(log_lvl=log_lvl)
     if config.getboolean("generate-data"):
-        st.generate_all(chunksize=config["chunk-size"],
+        st.generate_all(chunksize=config.getint("chunk-size"),
                         max_chunknum=None if config["max-chunk-num"] is None else config.getint("max-chunk-num"))
-        st.to_csv()
+        if not config.getboolean("perform-timestamp-clustering"):
+            st.to_csv()
         loaded_data = True
 
     if config.getboolean("load-generated"):
@@ -81,7 +82,11 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
     if loaded_data:
         st.print_stats()
 
-        if config["perform-analysis"]:
+        if config.getboolean("perform-timestamp-clustering"):
+            st.timestamp_clustering(time_distance=config["time-delta-clustering"])
+            st.to_csv()
+
+        if config.getboolean("perform-analysis"):
             DataAnalysis(st.rental, ScooterTrajectoriesDS.RENTAL_ANALYSIS_COLS).show_distribution()
             DataAnalysis(st.pos, ScooterTrajectoriesDS.POS_ANALYSIS_COLS).show_distribution()
 
