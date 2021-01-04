@@ -493,5 +493,6 @@ TSWLatexianTemp*
 data/*
 !data/*.zip
 data/scooter_trajectories.zip
+data/scooter_trajectories_generated.zip
 
 !log/*.log
