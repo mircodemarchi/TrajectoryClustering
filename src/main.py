@@ -114,15 +114,15 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
             da_dataset = DataAnalysis(dataset_to_analyze, st.dataset.columns, dataset_name="ScooterTrajectories",
                                       save_file=True, filename_prefix="dataset")
             da_dataset.show_line(on=ScooterTrajectoriesDS.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
-                      .show_line(on=ScooterTrajectoriesDS.DATASET_POS_OVER_CLUSTER_ANALYSIS_TUPLE)\
-                      .show_joint(on=ScooterTrajectoriesDS.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)
+                      .show_joint(on=ScooterTrajectoriesDS.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
+                      .show_line(on=ScooterTrajectoriesDS.DATASET_POS_OVER_CLUSTER_ANALYSIS_TUPLE)
 
             dataset_bl = dataset_to_analyze.loc[dataset_to_analyze[st.DATASET_POS_LATITUDE_CN] < 44.0]
             da_dataset_bl = DataAnalysis(dataset_bl, st.dataset.columns, dataset_name="ScooterTrajectories",
                                          save_file=True, filename_prefix="dataset_bottom_left")
             da_dataset_bl.show_line(on=ScooterTrajectoriesDS.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
-                .show_line(on=ScooterTrajectoriesDS.DATASET_POS_OVER_CLUSTER_ANALYSIS_TUPLE)\
-                .show_joint(on=ScooterTrajectoriesDS.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)
+                         .show_joint(on=ScooterTrajectoriesDS.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
+                         .show_line(on=ScooterTrajectoriesDS.DATASET_POS_OVER_CLUSTER_ANALYSIS_TUPLE)
 
             dataset_tr = dataset_to_analyze.loc[dataset_to_analyze[st.DATASET_POS_LATITUDE_CN] >= 44.0]
             da_dataset_tr = DataAnalysis(dataset_tr, st.dataset.columns, dataset_name="ScooterTrajectories",
