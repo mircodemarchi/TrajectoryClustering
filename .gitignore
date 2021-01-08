@@ -490,9 +490,6 @@ TSWLatexianTemp*
 # Custom
 .DS_Store
 
-data/*
-!data/*.zip
-data/scooter_trajectories.zip
-data/scooter_trajectories_generated.zip
+data/*.zip
 
 !log/*.log
