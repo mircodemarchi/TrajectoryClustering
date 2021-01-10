@@ -490,6 +490,7 @@ TSWLatexianTemp*
 # Custom
 .DS_Store
 
-data/*.zip
+data/*
+!data/README.md
 
 !log/*.log
