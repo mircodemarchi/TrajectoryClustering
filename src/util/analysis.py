@@ -8,8 +8,6 @@ import time
 from .util import get_elapsed
 from .log import Log
 
-IMAGE_FOLDER = os.path.join(os.path.dirname(__file__), "..", "..", "image")
-
 log = Log(__name__, enable_console=True, enable_file=False)
 
 
