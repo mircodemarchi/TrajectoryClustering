@@ -1,221 +1,223 @@
-[14/01/2021 22:51:40] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories start unzip
-scooter_trajectories.zip: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:00<00:00, 57719.78it/s]
-[14/01/2021 22:51:40] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load device, rental, user data
-[14/01/2021 22:51:44] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:04.06
-[14/01/2021 22:51:44] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load pos and rental timestamp map data
-[14/01/2021 22:52:29] dataset.scooter_trajectories_ds - DEBUG: __chunk 0 merge elapsed time: 00:00:44.25
-[14/01/2021 22:53:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 1 merge elapsed time: 00:00:34.21
-[14/01/2021 22:53:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 2 merge elapsed time: 00:00:32.03
-[14/01/2021 22:54:06] dataset.scooter_trajectories_ds - DEBUG: __chunk 3 merge elapsed time: 00:00:29.37
-[14/01/2021 22:54:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 4 merge elapsed time: 00:00:29.87
-[14/01/2021 22:55:10] dataset.scooter_trajectories_ds - DEBUG: __chunk 5 merge elapsed time: 00:00:33.66
-[14/01/2021 22:55:40] dataset.scooter_trajectories_ds - DEBUG: __chunk 6 merge elapsed time: 00:00:29.67
-[14/01/2021 22:56:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 7 merge elapsed time: 00:00:27.88
-[14/01/2021 22:56:35] dataset.scooter_trajectories_ds - DEBUG: __chunk 8 merge elapsed time: 00:00:25.96
-[14/01/2021 22:57:01] dataset.scooter_trajectories_ds - DEBUG: __chunk 9 merge elapsed time: 00:00:26.04
-[14/01/2021 22:57:27] dataset.scooter_trajectories_ds - DEBUG: __chunk 10 merge elapsed time: 00:00:24.98
-[14/01/2021 22:57:53] dataset.scooter_trajectories_ds - DEBUG: __chunk 11 merge elapsed time: 00:00:25.29
-[14/01/2021 22:58:17] dataset.scooter_trajectories_ds - DEBUG: __chunk 12 merge elapsed time: 00:00:23.60
-[14/01/2021 22:58:35] dataset.scooter_trajectories_ds - DEBUG: __chunk 13 merge elapsed time: 00:00:17.67
-[14/01/2021 22:58:53] dataset.scooter_trajectories_ds - DEBUG: __chunk 14 merge elapsed time: 00:00:17.92
-[14/01/2021 22:59:10] dataset.scooter_trajectories_ds - DEBUG: __chunk 15 merge elapsed time: 00:00:16.61
-[14/01/2021 22:59:27] dataset.scooter_trajectories_ds - DEBUG: __chunk 16 merge elapsed time: 00:00:16.54
-[14/01/2021 22:59:44] dataset.scooter_trajectories_ds - DEBUG: __chunk 17 merge elapsed time: 00:00:16.70
-[14/01/2021 23:00:02] dataset.scooter_trajectories_ds - DEBUG: __chunk 18 merge elapsed time: 00:00:17.13
-[14/01/2021 23:00:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 19 merge elapsed time: 00:00:17.44
-[14/01/2021 23:00:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 20 merge elapsed time: 00:00:16.26
-[14/01/2021 23:00:51] dataset.scooter_trajectories_ds - DEBUG: __chunk 21 merge elapsed time: 00:00:14.03
-[14/01/2021 23:01:04] dataset.scooter_trajectories_ds - DEBUG: __chunk 22 merge elapsed time: 00:00:13.15
-[14/01/2021 23:01:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 23 merge elapsed time: 00:00:14.46
-[14/01/2021 23:01:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 24 merge elapsed time: 00:00:13.94
-[14/01/2021 23:01:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 25 merge elapsed time: 00:00:13.17
-[14/01/2021 23:02:02] dataset.scooter_trajectories_ds - DEBUG: __chunk 26 merge elapsed time: 00:00:14.18
-[14/01/2021 23:02:18] dataset.scooter_trajectories_ds - DEBUG: __chunk 27 merge elapsed time: 00:00:15.46
-[14/01/2021 23:02:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 28 merge elapsed time: 00:00:15.47
-[14/01/2021 23:02:50] dataset.scooter_trajectories_ds - DEBUG: __chunk 29 merge elapsed time: 00:00:15.86
-[14/01/2021 23:03:06] dataset.scooter_trajectories_ds - DEBUG: __chunk 30 merge elapsed time: 00:00:15.47
-[14/01/2021 23:03:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 31 merge elapsed time: 00:00:12.69
-[14/01/2021 23:03:32] dataset.scooter_trajectories_ds - DEBUG: __chunk 32 merge elapsed time: 00:00:12.61
-[14/01/2021 23:03:43] dataset.scooter_trajectories_ds - DEBUG: __chunk 33 merge elapsed time: 00:00:10.30
-[14/01/2021 23:03:54] dataset.scooter_trajectories_ds - DEBUG: __chunk 34 merge elapsed time: 00:00:10.86
-[14/01/2021 23:04:05] dataset.scooter_trajectories_ds - DEBUG: __chunk 35 merge elapsed time: 00:00:10.91
-[14/01/2021 23:04:16] dataset.scooter_trajectories_ds - DEBUG: __chunk 36 merge elapsed time: 00:00:10.20
-[14/01/2021 23:04:28] dataset.scooter_trajectories_ds - DEBUG: __chunk 37 merge elapsed time: 00:00:11.77
-[14/01/2021 23:04:40] dataset.scooter_trajectories_ds - DEBUG: __chunk 38 merge elapsed time: 00:00:10.90
-[14/01/2021 23:04:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 39 merge elapsed time: 00:00:12.15
-[14/01/2021 23:05:04] dataset.scooter_trajectories_ds - DEBUG: __chunk 40 merge elapsed time: 00:00:11.20
-[14/01/2021 23:05:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 41 merge elapsed time: 00:00:09.33
-[14/01/2021 23:05:24] dataset.scooter_trajectories_ds - DEBUG: __chunk 42 merge elapsed time: 00:00:09.84
-[14/01/2021 23:05:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 43 merge elapsed time: 00:00:08.31
-[14/01/2021 23:05:43] dataset.scooter_trajectories_ds - DEBUG: __chunk 44 merge elapsed time: 00:00:09.93
-[14/01/2021 23:05:53] dataset.scooter_trajectories_ds - DEBUG: __chunk 45 merge elapsed time: 00:00:09.58
-[14/01/2021 23:06:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 46 merge elapsed time: 00:00:09.71
-[14/01/2021 23:06:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 47 merge elapsed time: 00:00:10.04
-[14/01/2021 23:06:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 48 merge elapsed time: 00:00:07.80
-[14/01/2021 23:06:32] dataset.scooter_trajectories_ds - DEBUG: __chunk 49 merge elapsed time: 00:00:09.35
-[14/01/2021 23:06:42] dataset.scooter_trajectories_ds - DEBUG: __chunk 50 merge elapsed time: 00:00:09.85
-[14/01/2021 23:06:51] dataset.scooter_trajectories_ds - DEBUG: __chunk 51 merge elapsed time: 00:00:08.19
-[14/01/2021 23:06:59] dataset.scooter_trajectories_ds - DEBUG: __chunk 52 merge elapsed time: 00:00:07.62
-[14/01/2021 23:07:08] dataset.scooter_trajectories_ds - DEBUG: __chunk 53 merge elapsed time: 00:00:07.95
-[14/01/2021 23:07:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 54 merge elapsed time: 00:00:05.49
-[14/01/2021 23:07:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 55 merge elapsed time: 00:00:04.85
-[14/01/2021 23:07:27] dataset.scooter_trajectories_ds - DEBUG: __chunk 56 merge elapsed time: 00:00:07.56
-[14/01/2021 23:07:35] dataset.scooter_trajectories_ds - DEBUG: __chunk 57 merge elapsed time: 00:00:07.38
-[14/01/2021 23:07:44] dataset.scooter_trajectories_ds - DEBUG: __chunk 58 merge elapsed time: 00:00:08.54
-[14/01/2021 23:07:50] dataset.scooter_trajectories_ds - DEBUG: __chunk 59 merge elapsed time: 00:00:05.20
-[14/01/2021 23:07:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 60 merge elapsed time: 00:00:07.35
-[14/01/2021 23:08:07] dataset.scooter_trajectories_ds - DEBUG: __chunk 61 merge elapsed time: 00:00:08.84
-[14/01/2021 23:08:17] dataset.scooter_trajectories_ds - DEBUG: __chunk 62 merge elapsed time: 00:00:09.25
-[14/01/2021 23:08:24] dataset.scooter_trajectories_ds - DEBUG: __chunk 63 merge elapsed time: 00:00:06.63
-[14/01/2021 23:08:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 64 merge elapsed time: 00:00:08.52
-[14/01/2021 23:08:44] dataset.scooter_trajectories_ds - DEBUG: __chunk 65 merge elapsed time: 00:00:10.30
-[14/01/2021 23:08:55] dataset.scooter_trajectories_ds - DEBUG: __chunk 66 merge elapsed time: 00:00:10.72
-[14/01/2021 23:09:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 67 merge elapsed time: 00:00:07.84
-[14/01/2021 23:09:10] dataset.scooter_trajectories_ds - DEBUG: __chunk 68 merge elapsed time: 00:00:06.51
-[14/01/2021 23:09:20] dataset.scooter_trajectories_ds - DEBUG: __chunk 69 merge elapsed time: 00:00:09.39
-[14/01/2021 23:09:31] dataset.scooter_trajectories_ds - DEBUG: __chunk 70 merge elapsed time: 00:00:09.65
-[14/01/2021 23:09:37] dataset.scooter_trajectories_ds - DEBUG: __chunk 71 merge elapsed time: 00:00:06.06
-[14/01/2021 23:09:45] dataset.scooter_trajectories_ds - DEBUG: __chunk 72 merge elapsed time: 00:00:07.00
-[14/01/2021 23:09:56] dataset.scooter_trajectories_ds - DEBUG: __chunk 73 merge elapsed time: 00:00:10.26
-[14/01/2021 23:10:06] dataset.scooter_trajectories_ds - DEBUG: __chunk 74 merge elapsed time: 00:00:09.76
-[14/01/2021 23:10:13] dataset.scooter_trajectories_ds - DEBUG: __chunk 75 merge elapsed time: 00:00:06.76
-[14/01/2021 23:10:20] dataset.scooter_trajectories_ds - DEBUG: __chunk 76 merge elapsed time: 00:00:06.67
-[14/01/2021 23:10:29] dataset.scooter_trajectories_ds - DEBUG: __chunk 77 merge elapsed time: 00:00:08.56
-[14/01/2021 23:10:39] dataset.scooter_trajectories_ds - DEBUG: __chunk 78 merge elapsed time: 00:00:09.06
-[14/01/2021 23:10:46] dataset.scooter_trajectories_ds - DEBUG: __chunk 79 merge elapsed time: 00:00:06.54
-[14/01/2021 23:10:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 80 merge elapsed time: 00:00:05.68
-[14/01/2021 23:11:00] dataset.scooter_trajectories_ds - DEBUG: __chunk 81 merge elapsed time: 00:00:06.88
-[14/01/2021 23:11:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 82 merge elapsed time: 00:00:08.30
-[14/01/2021 23:11:18] dataset.scooter_trajectories_ds - DEBUG: __chunk 83 merge elapsed time: 00:00:08.86
-[14/01/2021 23:11:25] dataset.scooter_trajectories_ds - DEBUG: __chunk 84 merge elapsed time: 00:00:06.53
-[14/01/2021 23:11:30] dataset.scooter_trajectories_ds - DEBUG: __chunk 85 merge elapsed time: 00:00:04.56
-[14/01/2021 23:11:37] dataset.scooter_trajectories_ds - DEBUG: __chunk 86 merge elapsed time: 00:00:05.70
-[14/01/2021 23:11:45] dataset.scooter_trajectories_ds - DEBUG: __chunk 87 merge elapsed time: 00:00:07.35
-[14/01/2021 23:11:49] dataset.scooter_trajectories_ds - DEBUG: __chunk 88 merge elapsed time: 00:00:03.83
-[14/01/2021 23:11:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 89 merge elapsed time: 00:00:08.05
-[14/01/2021 23:12:05] dataset.scooter_trajectories_ds - DEBUG: __chunk 90 merge elapsed time: 00:00:07.17
-[14/01/2021 23:12:12] dataset.scooter_trajectories_ds - DEBUG: __chunk 91 merge elapsed time: 00:00:06.20
-[14/01/2021 23:12:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 92 merge elapsed time: 00:00:05.86
-[14/01/2021 23:12:26] dataset.scooter_trajectories_ds - DEBUG: __chunk 93 merge elapsed time: 00:00:06.55
-[14/01/2021 23:12:35] dataset.scooter_trajectories_ds - DEBUG: __chunk 94 merge elapsed time: 00:00:08.22
-[14/01/2021 23:12:44] dataset.scooter_trajectories_ds - DEBUG: __chunk 95 merge elapsed time: 00:00:09.16
-[14/01/2021 23:12:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 96 merge elapsed time: 00:00:07.21
-[14/01/2021 23:12:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 97 merge elapsed time: 00:00:05.72
-[14/01/2021 23:13:06] dataset.scooter_trajectories_ds - DEBUG: __chunk 98 merge elapsed time: 00:00:06.79
-[14/01/2021 23:13:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 99 merge elapsed time: 00:00:07.86
-[14/01/2021 23:13:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 100 merge elapsed time: 00:00:06.97
-[14/01/2021 23:13:29] dataset.scooter_trajectories_ds - DEBUG: __chunk 101 merge elapsed time: 00:00:06.32
-[14/01/2021 23:13:35] dataset.scooter_trajectories_ds - DEBUG: __chunk 102 merge elapsed time: 00:00:05.38
-[14/01/2021 23:13:41] dataset.scooter_trajectories_ds - DEBUG: __chunk 103 merge elapsed time: 00:00:05.59
-[14/01/2021 23:13:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 104 merge elapsed time: 00:00:05.72
-[14/01/2021 23:13:53] dataset.scooter_trajectories_ds - DEBUG: __chunk 105 merge elapsed time: 00:00:05.60
-[14/01/2021 23:13:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 106 merge elapsed time: 00:00:04.30
-[14/01/2021 23:14:04] dataset.scooter_trajectories_ds - DEBUG: __chunk 107 merge elapsed time: 00:00:05.41
-[14/01/2021 23:14:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 108 merge elapsed time: 00:00:08.98
-[14/01/2021 23:14:23] dataset.scooter_trajectories_ds - DEBUG: __chunk 109 merge elapsed time: 00:00:08.90
-[14/01/2021 23:14:30] dataset.scooter_trajectories_ds - DEBUG: __chunk 110 merge elapsed time: 00:00:06.01
-[14/01/2021 23:14:35] dataset.scooter_trajectories_ds - DEBUG: __chunk 111 merge elapsed time: 00:00:04.66
-[14/01/2021 23:14:44] dataset.scooter_trajectories_ds - DEBUG: __chunk 112 merge elapsed time: 00:00:07.69
-[14/01/2021 23:14:54] dataset.scooter_trajectories_ds - DEBUG: __chunk 113 merge elapsed time: 00:00:09.41
-[14/01/2021 23:15:04] dataset.scooter_trajectories_ds - DEBUG: __chunk 114 merge elapsed time: 00:00:09.74
-[14/01/2021 23:15:13] dataset.scooter_trajectories_ds - DEBUG: __chunk 115 merge elapsed time: 00:00:08.83
-[14/01/2021 23:15:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 116 merge elapsed time: 00:00:08.05
-[14/01/2021 23:15:31] dataset.scooter_trajectories_ds - DEBUG: __chunk 117 merge elapsed time: 00:00:08.72
-[14/01/2021 23:15:42] dataset.scooter_trajectories_ds - DEBUG: __chunk 118 merge elapsed time: 00:00:10.02
-[14/01/2021 23:15:51] dataset.scooter_trajectories_ds - DEBUG: __chunk 119 merge elapsed time: 00:00:08.54
-[14/01/2021 23:16:02] dataset.scooter_trajectories_ds - DEBUG: __chunk 120 merge elapsed time: 00:00:10.42
-[14/01/2021 23:16:12] dataset.scooter_trajectories_ds - DEBUG: __chunk 121 merge elapsed time: 00:00:08.63
-[14/01/2021 23:16:17] dataset.scooter_trajectories_ds - DEBUG: __chunk 122 merge elapsed time: 00:00:05.08
-[14/01/2021 23:16:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 123 merge elapsed time: 00:00:04.51
-[14/01/2021 23:16:30] dataset.scooter_trajectories_ds - DEBUG: __chunk 124 merge elapsed time: 00:00:06.53
-[14/01/2021 23:16:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 125 merge elapsed time: 00:00:06.12
-[14/01/2021 23:16:42] dataset.scooter_trajectories_ds - DEBUG: __chunk 126 merge elapsed time: 00:00:04.70
-[14/01/2021 23:16:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 127 merge elapsed time: 00:00:04.79
-[14/01/2021 23:16:54] dataset.scooter_trajectories_ds - DEBUG: __chunk 128 merge elapsed time: 00:00:06.27
-[14/01/2021 23:17:01] dataset.scooter_trajectories_ds - DEBUG: __chunk 129 merge elapsed time: 00:00:06.34
-[14/01/2021 23:17:07] dataset.scooter_trajectories_ds - DEBUG: __chunk 130 merge elapsed time: 00:00:05.51
-[14/01/2021 23:17:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 131 merge elapsed time: 00:00:06.18
-[14/01/2021 23:17:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 132 merge elapsed time: 00:00:07.30
-[14/01/2021 23:17:28] dataset.scooter_trajectories_ds - DEBUG: __chunk 133 merge elapsed time: 00:00:05.55
-[14/01/2021 23:17:34] dataset.scooter_trajectories_ds - DEBUG: __chunk 134 merge elapsed time: 00:00:04.51
-[14/01/2021 23:17:39] dataset.scooter_trajectories_ds - DEBUG: __chunk 135 merge elapsed time: 00:00:04.46
-[14/01/2021 23:17:45] dataset.scooter_trajectories_ds - DEBUG: __chunk 136 merge elapsed time: 00:00:05.09
-[14/01/2021 23:17:50] dataset.scooter_trajectories_ds - DEBUG: __chunk 137 merge elapsed time: 00:00:05.15
-[14/01/2021 23:17:57] dataset.scooter_trajectories_ds - DEBUG: __chunk 138 merge elapsed time: 00:00:05.50
-[14/01/2021 23:18:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 139 merge elapsed time: 00:00:05.41
-[14/01/2021 23:18:10] dataset.scooter_trajectories_ds - DEBUG: __chunk 140 merge elapsed time: 00:00:06.82
-[14/01/2021 23:18:17] dataset.scooter_trajectories_ds - DEBUG: __chunk 141 merge elapsed time: 00:00:06.16
-[14/01/2021 23:18:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 142 merge elapsed time: 00:00:04.20
-[14/01/2021 23:18:27] dataset.scooter_trajectories_ds - DEBUG: __chunk 143 merge elapsed time: 00:00:04.12
-[14/01/2021 23:18:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 144 merge elapsed time: 00:00:05.83
-[14/01/2021 23:18:41] dataset.scooter_trajectories_ds - DEBUG: __chunk 145 merge elapsed time: 00:00:07.07
-[14/01/2021 23:18:49] dataset.scooter_trajectories_ds - DEBUG: __chunk 146 merge elapsed time: 00:00:06.67
-[14/01/2021 23:18:54] dataset.scooter_trajectories_ds - DEBUG: __chunk 147 merge elapsed time: 00:00:04.48
-[14/01/2021 23:19:00] dataset.scooter_trajectories_ds - DEBUG: __chunk 148 merge elapsed time: 00:00:05.09
-[14/01/2021 23:19:07] dataset.scooter_trajectories_ds - DEBUG: __chunk 149 merge elapsed time: 00:00:06.65
-[14/01/2021 23:19:15] dataset.scooter_trajectories_ds - DEBUG: __chunk 150 merge elapsed time: 00:00:07.58
-[14/01/2021 23:19:24] dataset.scooter_trajectories_ds - DEBUG: __chunk 151 merge elapsed time: 00:00:07.72
-[14/01/2021 23:19:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 152 merge elapsed time: 00:00:07.99
-[14/01/2021 23:19:39] dataset.scooter_trajectories_ds - DEBUG: __chunk 153 merge elapsed time: 00:00:05.46
-[14/01/2021 23:19:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 154 merge elapsed time: 00:00:07.12
-[14/01/2021 23:19:57] dataset.scooter_trajectories_ds - DEBUG: __chunk 155 merge elapsed time: 00:00:09.37
-[14/01/2021 23:20:05] dataset.scooter_trajectories_ds - DEBUG: __chunk 156 merge elapsed time: 00:00:07.20
-[14/01/2021 23:20:13] dataset.scooter_trajectories_ds - DEBUG: __chunk 157 merge elapsed time: 00:00:07.23
-[14/01/2021 23:20:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 158 merge elapsed time: 00:00:08.91
-[14/01/2021 23:20:30] dataset.scooter_trajectories_ds - DEBUG: __chunk 159 merge elapsed time: 00:00:06.93
-[14/01/2021 23:20:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 160 merge elapsed time: 00:00:05.15
-[14/01/2021 23:20:43] dataset.scooter_trajectories_ds - DEBUG: __chunk 161 merge elapsed time: 00:00:06.31
-[14/01/2021 23:20:50] dataset.scooter_trajectories_ds - DEBUG: __chunk 162 merge elapsed time: 00:00:06.64
-[14/01/2021 23:20:55] dataset.scooter_trajectories_ds - DEBUG: __chunk 163 merge elapsed time: 00:00:04.45
-[14/01/2021 23:21:01] dataset.scooter_trajectories_ds - DEBUG: __chunk 164 merge elapsed time: 00:00:05.29
-[14/01/2021 23:21:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 165 merge elapsed time: 00:00:07.16
-[14/01/2021 23:21:17] dataset.scooter_trajectories_ds - DEBUG: __chunk 166 merge elapsed time: 00:00:06.51
-[14/01/2021 23:21:21] dataset.scooter_trajectories_ds - DEBUG: __chunk 167 merge elapsed time: 00:00:04.04
-[14/01/2021 23:21:28] dataset.scooter_trajectories_ds - DEBUG: __chunk 168 merge elapsed time: 00:00:05.64
-[14/01/2021 23:21:34] dataset.scooter_trajectories_ds - DEBUG: __chunk 169 merge elapsed time: 00:00:04.93
-[14/01/2021 23:21:39] dataset.scooter_trajectories_ds - DEBUG: __chunk 170 merge elapsed time: 00:00:05.05
-[14/01/2021 23:21:46] dataset.scooter_trajectories_ds - DEBUG: __chunk 171 merge elapsed time: 00:00:05.67
-[14/01/2021 23:21:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 172 merge elapsed time: 00:00:05.93
-[14/01/2021 23:21:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 173 merge elapsed time: 00:00:04.93
-[14/01/2021 23:22:07] dataset.scooter_trajectories_ds - DEBUG: __chunk 174 merge elapsed time: 00:00:07.91
-[14/01/2021 23:22:12] dataset.scooter_trajectories_ds - DEBUG: __chunk 175 merge elapsed time: 00:00:04.91
-[14/01/2021 23:22:13] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:30:28.50
-[14/01/2021 23:22:13] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories build final data
-[14/01/2021 23:22:22] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:09.18
-[14/01/2021 23:22:22] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories to csv
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:32.07
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (14826, 12);
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km'];
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
-rental_id                   int64
-device_id                   int64
-device_km                 float64
-user_id                     int64
-usr_km                    float64
-latitude_start            float64
-longitude_start           float64
-latitude_stop             float64
-longitude_stop            float64
-start_time         datetime64[ns]
-stop_time          datetime64[ns]
-rental_km                 float64
+[15/01/2021 00:03:57] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories start unzip
+scooter_trajectories.zip: 100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:00<00:00, 68947.46it/s]
+[15/01/2021 00:03:57] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load device, rental, user data
+[15/01/2021 00:04:02] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:04.17
+[15/01/2021 00:04:02] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load pos and rental timestamp map data
+[15/01/2021 00:04:34] dataset.scooter_trajectories_ds - DEBUG: __chunk 0 merge elapsed time: 00:00:31.77
+[15/01/2021 00:05:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 1 merge elapsed time: 00:00:28.90
+[15/01/2021 00:05:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 2 merge elapsed time: 00:00:29.38
+[15/01/2021 00:06:04] dataset.scooter_trajectories_ds - DEBUG: __chunk 3 merge elapsed time: 00:00:30.33
+[15/01/2021 00:06:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 4 merge elapsed time: 00:00:31.60
+[15/01/2021 00:07:06] dataset.scooter_trajectories_ds - DEBUG: __chunk 5 merge elapsed time: 00:00:29.66
+[15/01/2021 00:07:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 6 merge elapsed time: 00:00:29.48
+[15/01/2021 00:08:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 7 merge elapsed time: 00:00:27.04
+[15/01/2021 00:08:30] dataset.scooter_trajectories_ds - DEBUG: __chunk 8 merge elapsed time: 00:00:26.02
+[15/01/2021 00:08:56] dataset.scooter_trajectories_ds - DEBUG: __chunk 9 merge elapsed time: 00:00:26.38
+[15/01/2021 00:09:24] dataset.scooter_trajectories_ds - DEBUG: __chunk 10 merge elapsed time: 00:00:27.59
+[15/01/2021 00:09:54] dataset.scooter_trajectories_ds - DEBUG: __chunk 11 merge elapsed time: 00:00:29.04
+[15/01/2021 00:10:27] dataset.scooter_trajectories_ds - DEBUG: __chunk 12 merge elapsed time: 00:00:32.45
+[15/01/2021 00:10:50] dataset.scooter_trajectories_ds - DEBUG: __chunk 13 merge elapsed time: 00:00:22.65
+[15/01/2021 00:11:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 14 merge elapsed time: 00:00:23.82
+[15/01/2021 00:11:44] dataset.scooter_trajectories_ds - DEBUG: __chunk 15 merge elapsed time: 00:00:29.02
+[15/01/2021 00:12:18] dataset.scooter_trajectories_ds - DEBUG: __chunk 16 merge elapsed time: 00:00:33.99
+[15/01/2021 00:12:48] dataset.scooter_trajectories_ds - DEBUG: __chunk 17 merge elapsed time: 00:00:29.22
+[15/01/2021 00:13:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 18 merge elapsed time: 00:00:30.39
+[15/01/2021 00:13:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 19 merge elapsed time: 00:00:32.48
+[15/01/2021 00:14:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 20 merge elapsed time: 00:00:29.69
+[15/01/2021 00:14:49] dataset.scooter_trajectories_ds - DEBUG: __chunk 21 merge elapsed time: 00:00:26.84
+[15/01/2021 00:15:18] dataset.scooter_trajectories_ds - DEBUG: __chunk 22 merge elapsed time: 00:00:28.32
+[15/01/2021 00:15:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 23 merge elapsed time: 00:00:28.96
+[15/01/2021 00:16:16] dataset.scooter_trajectories_ds - DEBUG: __chunk 24 merge elapsed time: 00:00:27.59
+[15/01/2021 00:16:30] dataset.scooter_trajectories_ds - DEBUG: __chunk 25 merge elapsed time: 00:00:13.52
+[15/01/2021 00:16:46] dataset.scooter_trajectories_ds - DEBUG: __chunk 26 merge elapsed time: 00:00:16.17
+[15/01/2021 00:17:02] dataset.scooter_trajectories_ds - DEBUG: __chunk 27 merge elapsed time: 00:00:14.97
+[15/01/2021 00:17:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 28 merge elapsed time: 00:00:16.64
+[15/01/2021 00:17:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 29 merge elapsed time: 00:00:16.88
+[15/01/2021 00:17:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 30 merge elapsed time: 00:00:15.53
+[15/01/2021 00:18:07] dataset.scooter_trajectories_ds - DEBUG: __chunk 31 merge elapsed time: 00:00:14.18
+[15/01/2021 00:18:23] dataset.scooter_trajectories_ds - DEBUG: __chunk 32 merge elapsed time: 00:00:15.31
+[15/01/2021 00:18:34] dataset.scooter_trajectories_ds - DEBUG: __chunk 33 merge elapsed time: 00:00:11.01
+[15/01/2021 00:18:46] dataset.scooter_trajectories_ds - DEBUG: __chunk 34 merge elapsed time: 00:00:11.52
+[15/01/2021 00:18:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 35 merge elapsed time: 00:00:11.68
+[15/01/2021 00:19:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 36 merge elapsed time: 00:00:10.70
+[15/01/2021 00:19:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 37 merge elapsed time: 00:00:11.97
+[15/01/2021 00:19:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 38 merge elapsed time: 00:00:11.18
+[15/01/2021 00:19:46] dataset.scooter_trajectories_ds - DEBUG: __chunk 39 merge elapsed time: 00:00:12.30
+[15/01/2021 00:19:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 40 merge elapsed time: 00:00:11.43
+[15/01/2021 00:20:08] dataset.scooter_trajectories_ds - DEBUG: __chunk 41 merge elapsed time: 00:00:09.39
+[15/01/2021 00:20:18] dataset.scooter_trajectories_ds - DEBUG: __chunk 42 merge elapsed time: 00:00:09.83
+[15/01/2021 00:20:27] dataset.scooter_trajectories_ds - DEBUG: __chunk 43 merge elapsed time: 00:00:08.30
+[15/01/2021 00:20:37] dataset.scooter_trajectories_ds - DEBUG: __chunk 44 merge elapsed time: 00:00:09.72
+[15/01/2021 00:20:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 45 merge elapsed time: 00:00:09.53
+[15/01/2021 00:20:57] dataset.scooter_trajectories_ds - DEBUG: __chunk 46 merge elapsed time: 00:00:09.58
+[15/01/2021 00:21:08] dataset.scooter_trajectories_ds - DEBUG: __chunk 47 merge elapsed time: 00:00:09.94
+[15/01/2021 00:21:16] dataset.scooter_trajectories_ds - DEBUG: __chunk 48 merge elapsed time: 00:00:07.90
+[15/01/2021 00:21:27] dataset.scooter_trajectories_ds - DEBUG: __chunk 49 merge elapsed time: 00:00:09.86
+[15/01/2021 00:21:37] dataset.scooter_trajectories_ds - DEBUG: __chunk 50 merge elapsed time: 00:00:10.33
+[15/01/2021 00:21:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 51 merge elapsed time: 00:00:08.73
+[15/01/2021 00:21:55] dataset.scooter_trajectories_ds - DEBUG: __chunk 52 merge elapsed time: 00:00:07.71
+[15/01/2021 00:22:04] dataset.scooter_trajectories_ds - DEBUG: __chunk 53 merge elapsed time: 00:00:08.45
+[15/01/2021 00:22:10] dataset.scooter_trajectories_ds - DEBUG: __chunk 54 merge elapsed time: 00:00:05.80
+[15/01/2021 00:22:16] dataset.scooter_trajectories_ds - DEBUG: __chunk 55 merge elapsed time: 00:00:05.33
+[15/01/2021 00:22:25] dataset.scooter_trajectories_ds - DEBUG: __chunk 56 merge elapsed time: 00:00:08.02
+[15/01/2021 00:22:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 57 merge elapsed time: 00:00:08.00
+[15/01/2021 00:22:43] dataset.scooter_trajectories_ds - DEBUG: __chunk 58 merge elapsed time: 00:00:09.22
+[15/01/2021 00:22:49] dataset.scooter_trajectories_ds - DEBUG: __chunk 59 merge elapsed time: 00:00:05.58
+[15/01/2021 00:22:57] dataset.scooter_trajectories_ds - DEBUG: __chunk 60 merge elapsed time: 00:00:07.90
+[15/01/2021 00:23:08] dataset.scooter_trajectories_ds - DEBUG: __chunk 61 merge elapsed time: 00:00:09.69
+[15/01/2021 00:23:18] dataset.scooter_trajectories_ds - DEBUG: __chunk 62 merge elapsed time: 00:00:10.03
+[15/01/2021 00:23:26] dataset.scooter_trajectories_ds - DEBUG: __chunk 63 merge elapsed time: 00:00:07.13
+[15/01/2021 00:23:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 64 merge elapsed time: 00:00:09.13
+[15/01/2021 00:23:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 65 merge elapsed time: 00:00:10.85
+[15/01/2021 00:23:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 66 merge elapsed time: 00:00:10.93
+[15/01/2021 00:24:07] dataset.scooter_trajectories_ds - DEBUG: __chunk 67 merge elapsed time: 00:00:08.12
+[15/01/2021 00:24:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 68 merge elapsed time: 00:00:06.76
+[15/01/2021 00:24:25] dataset.scooter_trajectories_ds - DEBUG: __chunk 69 merge elapsed time: 00:00:10.23
+[15/01/2021 00:24:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 70 merge elapsed time: 00:00:10.38
+[15/01/2021 00:24:43] dataset.scooter_trajectories_ds - DEBUG: __chunk 71 merge elapsed time: 00:00:06.25
+[15/01/2021 00:24:51] dataset.scooter_trajectories_ds - DEBUG: __chunk 72 merge elapsed time: 00:00:07.43
+[15/01/2021 00:25:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 73 merge elapsed time: 00:00:11.08
+[15/01/2021 00:25:13] dataset.scooter_trajectories_ds - DEBUG: __chunk 74 merge elapsed time: 00:00:10.26
+[15/01/2021 00:25:21] dataset.scooter_trajectories_ds - DEBUG: __chunk 75 merge elapsed time: 00:00:06.73
+[15/01/2021 00:25:28] dataset.scooter_trajectories_ds - DEBUG: __chunk 76 merge elapsed time: 00:00:07.02
+[15/01/2021 00:25:37] dataset.scooter_trajectories_ds - DEBUG: __chunk 77 merge elapsed time: 00:00:08.78
+[15/01/2021 00:25:48] dataset.scooter_trajectories_ds - DEBUG: __chunk 78 merge elapsed time: 00:00:09.56
+[15/01/2021 00:25:55] dataset.scooter_trajectories_ds - DEBUG: __chunk 79 merge elapsed time: 00:00:06.83
+[15/01/2021 00:26:01] dataset.scooter_trajectories_ds - DEBUG: __chunk 80 merge elapsed time: 00:00:05.65
+[15/01/2021 00:26:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 81 merge elapsed time: 00:00:07.37
+[15/01/2021 00:26:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 82 merge elapsed time: 00:00:08.99
+[15/01/2021 00:26:29] dataset.scooter_trajectories_ds - DEBUG: __chunk 83 merge elapsed time: 00:00:09.60
+[15/01/2021 00:26:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 84 merge elapsed time: 00:00:06.66
+[15/01/2021 00:26:42] dataset.scooter_trajectories_ds - DEBUG: __chunk 85 merge elapsed time: 00:00:04.99
+[15/01/2021 00:26:48] dataset.scooter_trajectories_ds - DEBUG: __chunk 86 merge elapsed time: 00:00:05.98
+[15/01/2021 00:26:56] dataset.scooter_trajectories_ds - DEBUG: __chunk 87 merge elapsed time: 00:00:07.63
+[15/01/2021 00:27:01] dataset.scooter_trajectories_ds - DEBUG: __chunk 88 merge elapsed time: 00:00:04.04
+[15/01/2021 00:27:10] dataset.scooter_trajectories_ds - DEBUG: __chunk 89 merge elapsed time: 00:00:08.66
+[15/01/2021 00:27:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 90 merge elapsed time: 00:00:07.83
+[15/01/2021 00:27:26] dataset.scooter_trajectories_ds - DEBUG: __chunk 91 merge elapsed time: 00:00:06.75
+[15/01/2021 00:27:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 92 merge elapsed time: 00:00:06.42
+[15/01/2021 00:27:41] dataset.scooter_trajectories_ds - DEBUG: __chunk 93 merge elapsed time: 00:00:07.02
+[15/01/2021 00:27:50] dataset.scooter_trajectories_ds - DEBUG: __chunk 94 merge elapsed time: 00:00:08.85
+[15/01/2021 00:28:01] dataset.scooter_trajectories_ds - DEBUG: __chunk 95 merge elapsed time: 00:00:09.77
+[15/01/2021 00:28:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 96 merge elapsed time: 00:00:07.60
+[15/01/2021 00:28:15] dataset.scooter_trajectories_ds - DEBUG: __chunk 97 merge elapsed time: 00:00:06.16
+[15/01/2021 00:28:24] dataset.scooter_trajectories_ds - DEBUG: __chunk 98 merge elapsed time: 00:00:07.41
+[15/01/2021 00:28:32] dataset.scooter_trajectories_ds - DEBUG: __chunk 99 merge elapsed time: 00:00:08.21
+[15/01/2021 00:28:40] dataset.scooter_trajectories_ds - DEBUG: __chunk 100 merge elapsed time: 00:00:07.27
+[15/01/2021 00:28:48] dataset.scooter_trajectories_ds - DEBUG: __chunk 101 merge elapsed time: 00:00:06.75
+[15/01/2021 00:28:54] dataset.scooter_trajectories_ds - DEBUG: __chunk 102 merge elapsed time: 00:00:05.66
+[15/01/2021 00:29:01] dataset.scooter_trajectories_ds - DEBUG: __chunk 103 merge elapsed time: 00:00:06.10
+[15/01/2021 00:29:07] dataset.scooter_trajectories_ds - DEBUG: __chunk 104 merge elapsed time: 00:00:06.20
+[15/01/2021 00:29:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 105 merge elapsed time: 00:00:06.06
+[15/01/2021 00:29:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 106 merge elapsed time: 00:00:04.42
+[15/01/2021 00:29:26] dataset.scooter_trajectories_ds - DEBUG: __chunk 107 merge elapsed time: 00:00:05.84
+[15/01/2021 00:29:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 108 merge elapsed time: 00:00:09.53
+[15/01/2021 00:29:46] dataset.scooter_trajectories_ds - DEBUG: __chunk 109 merge elapsed time: 00:00:09.73
+[15/01/2021 00:29:53] dataset.scooter_trajectories_ds - DEBUG: __chunk 110 merge elapsed time: 00:00:06.55
+[15/01/2021 00:29:59] dataset.scooter_trajectories_ds - DEBUG: __chunk 111 merge elapsed time: 00:00:05.15
+[15/01/2021 00:30:08] dataset.scooter_trajectories_ds - DEBUG: __chunk 112 merge elapsed time: 00:00:08.22
+[15/01/2021 00:30:19] dataset.scooter_trajectories_ds - DEBUG: __chunk 113 merge elapsed time: 00:00:10.30
+[15/01/2021 00:30:30] dataset.scooter_trajectories_ds - DEBUG: __chunk 114 merge elapsed time: 00:00:10.44
+[15/01/2021 00:30:40] dataset.scooter_trajectories_ds - DEBUG: __chunk 115 merge elapsed time: 00:00:09.71
+[15/01/2021 00:30:50] dataset.scooter_trajectories_ds - DEBUG: __chunk 116 merge elapsed time: 00:00:08.61
+[15/01/2021 00:30:59] dataset.scooter_trajectories_ds - DEBUG: __chunk 117 merge elapsed time: 00:00:08.93
+[15/01/2021 00:31:10] dataset.scooter_trajectories_ds - DEBUG: __chunk 118 merge elapsed time: 00:00:10.28
+[15/01/2021 00:31:20] dataset.scooter_trajectories_ds - DEBUG: __chunk 119 merge elapsed time: 00:00:08.85
+[15/01/2021 00:31:31] dataset.scooter_trajectories_ds - DEBUG: __chunk 120 merge elapsed time: 00:00:10.85
+[15/01/2021 00:31:41] dataset.scooter_trajectories_ds - DEBUG: __chunk 121 merge elapsed time: 00:00:09.24
+[15/01/2021 00:31:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 122 merge elapsed time: 00:00:05.09
+[15/01/2021 00:31:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 123 merge elapsed time: 00:00:04.88
+[15/01/2021 00:32:00] dataset.scooter_trajectories_ds - DEBUG: __chunk 124 merge elapsed time: 00:00:06.88
+[15/01/2021 00:32:07] dataset.scooter_trajectories_ds - DEBUG: __chunk 125 merge elapsed time: 00:00:06.41
+[15/01/2021 00:32:13] dataset.scooter_trajectories_ds - DEBUG: __chunk 126 merge elapsed time: 00:00:04.98
+[15/01/2021 00:32:18] dataset.scooter_trajectories_ds - DEBUG: __chunk 127 merge elapsed time: 00:00:05.11
+[15/01/2021 00:32:26] dataset.scooter_trajectories_ds - DEBUG: __chunk 128 merge elapsed time: 00:00:06.81
+[15/01/2021 00:32:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 129 merge elapsed time: 00:00:06.64
+[15/01/2021 00:32:39] dataset.scooter_trajectories_ds - DEBUG: __chunk 130 merge elapsed time: 00:00:05.43
+[15/01/2021 00:32:46] dataset.scooter_trajectories_ds - DEBUG: __chunk 131 merge elapsed time: 00:00:05.92
+[15/01/2021 00:32:53] dataset.scooter_trajectories_ds - DEBUG: __chunk 132 merge elapsed time: 00:00:06.91
+[15/01/2021 00:32:59] dataset.scooter_trajectories_ds - DEBUG: __chunk 133 merge elapsed time: 00:00:05.21
+[15/01/2021 00:33:04] dataset.scooter_trajectories_ds - DEBUG: __chunk 134 merge elapsed time: 00:00:04.43
+[15/01/2021 00:33:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 135 merge elapsed time: 00:00:04.32
+[15/01/2021 00:33:15] dataset.scooter_trajectories_ds - DEBUG: __chunk 136 merge elapsed time: 00:00:04.68
+[15/01/2021 00:33:20] dataset.scooter_trajectories_ds - DEBUG: __chunk 137 merge elapsed time: 00:00:05.01
+[15/01/2021 00:33:26] dataset.scooter_trajectories_ds - DEBUG: __chunk 138 merge elapsed time: 00:00:05.31
+[15/01/2021 00:33:32] dataset.scooter_trajectories_ds - DEBUG: __chunk 139 merge elapsed time: 00:00:05.21
+[15/01/2021 00:33:39] dataset.scooter_trajectories_ds - DEBUG: __chunk 140 merge elapsed time: 00:00:06.36
+[15/01/2021 00:33:46] dataset.scooter_trajectories_ds - DEBUG: __chunk 141 merge elapsed time: 00:00:05.90
+[15/01/2021 00:33:51] dataset.scooter_trajectories_ds - DEBUG: __chunk 142 merge elapsed time: 00:00:03.91
+[15/01/2021 00:33:55] dataset.scooter_trajectories_ds - DEBUG: __chunk 143 merge elapsed time: 00:00:03.90
+[15/01/2021 00:34:01] dataset.scooter_trajectories_ds - DEBUG: __chunk 144 merge elapsed time: 00:00:05.44
+[15/01/2021 00:34:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 145 merge elapsed time: 00:00:06.60
+[15/01/2021 00:34:16] dataset.scooter_trajectories_ds - DEBUG: __chunk 146 merge elapsed time: 00:00:06.56
+[15/01/2021 00:34:21] dataset.scooter_trajectories_ds - DEBUG: __chunk 147 merge elapsed time: 00:00:04.21
+[15/01/2021 00:34:26] dataset.scooter_trajectories_ds - DEBUG: __chunk 148 merge elapsed time: 00:00:04.72
+[15/01/2021 00:34:33] dataset.scooter_trajectories_ds - DEBUG: __chunk 149 merge elapsed time: 00:00:06.05
+[15/01/2021 00:34:40] dataset.scooter_trajectories_ds - DEBUG: __chunk 150 merge elapsed time: 00:00:06.79
+[15/01/2021 00:34:48] dataset.scooter_trajectories_ds - DEBUG: __chunk 151 merge elapsed time: 00:00:07.30
+[15/01/2021 00:34:57] dataset.scooter_trajectories_ds - DEBUG: __chunk 152 merge elapsed time: 00:00:07.85
+[15/01/2021 00:35:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 153 merge elapsed time: 00:00:05.61
+[15/01/2021 00:35:11] dataset.scooter_trajectories_ds - DEBUG: __chunk 154 merge elapsed time: 00:00:07.06
+[15/01/2021 00:35:21] dataset.scooter_trajectories_ds - DEBUG: __chunk 155 merge elapsed time: 00:00:09.04
+[15/01/2021 00:35:29] dataset.scooter_trajectories_ds - DEBUG: __chunk 156 merge elapsed time: 00:00:06.96
+[15/01/2021 00:35:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 157 merge elapsed time: 00:00:06.78
+[15/01/2021 00:35:45] dataset.scooter_trajectories_ds - DEBUG: __chunk 158 merge elapsed time: 00:00:08.29
+[15/01/2021 00:35:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 159 merge elapsed time: 00:00:06.53
+[15/01/2021 00:35:58] dataset.scooter_trajectories_ds - DEBUG: __chunk 160 merge elapsed time: 00:00:04.81
+[15/01/2021 00:36:04] dataset.scooter_trajectories_ds - DEBUG: __chunk 161 merge elapsed time: 00:00:05.97
+[15/01/2021 00:36:11] dataset.scooter_trajectories_ds - DEBUG: __chunk 162 merge elapsed time: 00:00:06.12
+[15/01/2021 00:36:16] dataset.scooter_trajectories_ds - DEBUG: __chunk 163 merge elapsed time: 00:00:04.16
+[15/01/2021 00:36:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 164 merge elapsed time: 00:00:05.32
+[15/01/2021 00:36:30] dataset.scooter_trajectories_ds - DEBUG: __chunk 165 merge elapsed time: 00:00:06.84
+[15/01/2021 00:36:36] dataset.scooter_trajectories_ds - DEBUG: __chunk 166 merge elapsed time: 00:00:05.86
+[15/01/2021 00:36:41] dataset.scooter_trajectories_ds - DEBUG: __chunk 167 merge elapsed time: 00:00:03.62
+[15/01/2021 00:36:47] dataset.scooter_trajectories_ds - DEBUG: __chunk 168 merge elapsed time: 00:00:05.27
+[15/01/2021 00:36:52] dataset.scooter_trajectories_ds - DEBUG: __chunk 169 merge elapsed time: 00:00:04.46
+[15/01/2021 00:36:57] dataset.scooter_trajectories_ds - DEBUG: __chunk 170 merge elapsed time: 00:00:04.84
+[15/01/2021 00:37:03] dataset.scooter_trajectories_ds - DEBUG: __chunk 171 merge elapsed time: 00:00:05.09
+[15/01/2021 00:37:09] dataset.scooter_trajectories_ds - DEBUG: __chunk 172 merge elapsed time: 00:00:05.45
+[15/01/2021 00:37:14] dataset.scooter_trajectories_ds - DEBUG: __chunk 173 merge elapsed time: 00:00:04.59
+[15/01/2021 00:37:22] dataset.scooter_trajectories_ds - DEBUG: __chunk 174 merge elapsed time: 00:00:07.12
+[15/01/2021 00:37:28] dataset.scooter_trajectories_ds - DEBUG: __chunk 175 merge elapsed time: 00:00:04.63
+[15/01/2021 00:37:28] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:33:26.20
+[15/01/2021 00:37:28] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories build final data
+[15/01/2021 00:37:37] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:08.66
+[15/01/2021 00:37:37] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories to csv
+[15/01/2021 00:38:08] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:31.90
+[15/01/2021 00:38:08] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
+[15/01/2021 00:38:08] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (14826, 13);
+[15/01/2021 00:38:08] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'rental_positions'];
+[15/01/2021 00:38:08] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
+rental_id                    int64
+device_id                    int64
+device_km                  float64
+user_id                      int64
+usr_km                     float64
+latitude_start             float64
+longitude_start            float64
+latitude_stop              float64
+longitude_stop             float64
+start_time          datetime64[ns]
+stop_time           datetime64[ns]
+rental_km                  float64
+rental_positions            object
 dtype: object;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
-rental_id          0
-device_id          0
-device_km          0
-user_id            0
-usr_km             0
-latitude_start     0
-longitude_start    0
-latitude_stop      0
-longitude_stop     0
-start_time         0
-stop_time          0
-rental_km          0
+[15/01/2021 00:38:08] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
+rental_id           0
+device_id           0
+device_km           0
+user_id             0
+usr_km              0
+latitude_start      0
+longitude_start     0
+latitude_stop       0
+longitude_stop      0
+start_time          0
+stop_time           0
+rental_km           0
+rental_positions    0
 dtype: int64;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
            rental_id     device_id     device_km       user_id        usr_km  latitude_start
 count   14826.000000  14826.000000  14826.000000  14826.000000  14826.000000    14826.000000
 mean   109459.244705    215.781195    423.092541  39409.562323     61.235254       44.153858
@@ -234,9 +236,9 @@ min           8.832870      43.684978        7.615795     2020-01-11 03:30:41.90
 75%          12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
 max          13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
 std           1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
 id                          int64
 device_id                   int64
 user_id                     int64
@@ -248,7 +250,7 @@ start_time         datetime64[ns]
 stop_time          datetime64[ns]
 km                        float64
 dtype: object;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
 id                 0
 device_id          0
 user_id            0
@@ -260,7 +262,7 @@ start_time         0
 stop_time          0
 km                 0
 dtype: int64;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
                   id     device_id       user_id  latitude_start  longitude_start  latitude_stop  longitude_stop                     start_time                      stop_time            km
 count   14826.000000  14826.000000  14826.000000    14826.000000     14826.000000   14826.000000    14826.000000                          14826                          14826  14826.000000
 mean   109459.244705    215.781195  39409.562323       44.153858        11.481653      45.353871       10.281107  2020-02-06 08:25:01.239833088  2020-02-06 08:35:12.895151104      1.564281
@@ -270,9 +272,9 @@ min     94188.000000      1.000000      2.000000       42.485028         8.83287
 75%    118533.750000    305.000000  54099.750000       44.241925        12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
 max    134690.000000  10001.000000  75805.000000       44.259358        13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
 std     11897.537349    228.660821  17483.048296        0.174064         1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (817076, 8);
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'cluster_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (817076, 8);
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'cluster_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
 id                     object
 rental_id              object
 cluster_id            float64
@@ -282,7 +284,7 @@ speed                 float64
 server_time    datetime64[ns]
 device_time    datetime64[ns]
 dtype: object;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
 id                  0
 rental_id           0
 cluster_id     817076
@@ -292,7 +294,7 @@ speed               0
 server_time         0
 device_time         0
 dtype: int64;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
        cluster_id       latitude      longitude          speed                    server_time                    device_time
 count         0.0  817076.000000  817076.000000  817076.000000                         817076                         817076
 mean          NaN      44.134314      11.379200       6.998857  2020-02-08 20:47:26.399620096  2020-02-08 20:47:26.399620096
@@ -302,5 +304,5 @@ min           NaN      40.239700       1.200153      -0.020000     2020-01-11 03
 75%           NaN      44.241895      12.195317      13.630000  2020-02-20 13:48:08.995729408  2020-02-20 13:48:08.995729408
 max           NaN      44.385139      15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186
 std           NaN       0.202575       1.447571       7.661406                            NaN                            NaN;
-[14/01/2021 23:22:54] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
-Time: 00:31:14.37
+[15/01/2021 00:38:09] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
+Time: 00:34:11.58

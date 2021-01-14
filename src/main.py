@@ -69,16 +69,16 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
         return
 
     st = ScooterTrajectoriesDS(log_lvl=log_lvl)
-    if config.getboolean("generate-data"):
+    if config.getboolean("load-original-data"):
         st.generate_all(chunksize=config.getint("chunk-size"),
                         max_chunknum=None if config["max-chunk-num"] is None else config.getint("max-chunk-num"))
         st.to_csv()
 
-    if config.getboolean("load-generated"):
+    if config.getboolean("load-generated-data"):
         st.load_generated()
 
-    if config.getboolean("perform-timestamp-clustering"):
-        st.timestamp_clustering(time_distance=config["time-delta-clustering"])
+    if config.getboolean("perform-timedelta-heuristic"):
+        st.timestamp_clustering(time_distance=config["timedelta"])
         st.to_csv()
 
     if not st.dataset.empty:

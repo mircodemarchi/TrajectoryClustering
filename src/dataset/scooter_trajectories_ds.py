@@ -201,9 +201,10 @@ class ScooterTrajectoriesDS:
         merge_df, pos_df, rental_df, _ = self.__sort(gen_df, pos_df, rental_df)
 
         # Build dataset
-        dataset_sort_cols = C.DATASET_COLS
-        dataset_sort_cols.remove(C.DATASET_RENTAL_POSITIONS_CN)
-        groups_by_rental = merge_df.groupby(dataset_sort_cols)
+        dataset_group_cols = list(C.MERGE_COLS_RENTAL_MAP.values()) + list(C.MERGE_COLS_DEVICE_MAP.values()) + list(
+            C.MERGE_COLS_USR_MAP.values())
+        dataset_group_cols = list(dict.fromkeys(dataset_group_cols))
+        groups_by_rental = merge_df.groupby(dataset_group_cols)
         dataset_df = groups_by_rental[C.MERGE_POS_ID_CN].apply(list).reset_index(name=C.DATASET_RENTAL_POSITIONS_CN)
         dataset_df = dataset_df[C.DATASET_COLS]
 
@@ -289,15 +290,15 @@ class ScooterTrajectoriesDS:
         return pos_valid_df, rental_valid_df
 
     def __find_timestamp_cluster(self, group_df, time_delta):
-        dataset_pos_time_cols = [C.MERGE_POS_SERVER_TIME_CN, C.MERGE_POS_DEVICE_TIME_CN]
-        time_columns_group = group_df[dataset_pos_time_cols].reset_index(drop=True)
+        pos_time_cols = [C.POS_GEN_SERVER_TIME_CN, C.POS_GEN_DEVICE_TIME_CN]
+        time_columns_group = group_df[pos_time_cols].reset_index(drop=True)
 
         # Find the positions that have a distance between the previous position at least of time_distance
         prev_time_columns_group = time_columns_group.iloc[time_columns_group.index - 1].reset_index(drop=True)
         time_gaps = time_columns_group.subtract(prev_time_columns_group) >= time_delta
 
         # Assign a different id for each time sequence
-        time_gaps = time_gaps[dataset_pos_time_cols[0]] & time_gaps[dataset_pos_time_cols[1]]
+        time_gaps = time_gaps[pos_time_cols[0]] & time_gaps[pos_time_cols[1]]
         return time_gaps.cumsum()
 
     def __load_support_data(self):
@@ -441,11 +442,13 @@ class ScooterTrajectoriesDS:
         start = time.time()
         time_delta = pd.Timedelta(time_distance)
 
-        # timestamp_cluster = []
-        # for _, group in groups_by_rental:
-        #     timestamp_cluster.extend(self.__find_timestamp_cluster(group, time_delta))
+        groups_by_rental = self.pos.groupby(by=[C.POS_GEN_RENTAL_ID_CN])
 
-        # self.dataset[C.DATASET_CLUSTER_ID_CN] = timestamp_cluster
+        timestamp_cluster = []
+        for _, group in groups_by_rental:
+            timestamp_cluster.extend(self.__find_timestamp_cluster(group, time_delta))
+
+        self.dataset[C.POS_GEN_CLUSTER_ID_CN] = timestamp_cluster
 
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
