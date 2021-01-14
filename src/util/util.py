@@ -2,7 +2,7 @@
 import sys
 import os
 import zipfile
-import tqdm
+from tqdm import tqdm
 
 from .constant import DATA_FOLDER
 

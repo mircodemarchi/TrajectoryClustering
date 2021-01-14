@@ -68,25 +68,21 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
     if config.getboolean("skip"):
         return
 
-    loaded_data = False
     st = ScooterTrajectoriesDS(log_lvl=log_lvl)
     if config.getboolean("generate-data"):
         st.generate_all(chunksize=config.getint("chunk-size"),
                         max_chunknum=None if config["max-chunk-num"] is None else config.getint("max-chunk-num"))
-        if not config.getboolean("perform-timestamp-clustering"):
-            st.to_csv()
-        loaded_data = True
+        st.to_csv()
 
     if config.getboolean("load-generated"):
         st.load_generated()
-        loaded_data = True
 
-    if loaded_data:
+    if config.getboolean("perform-timestamp-clustering"):
+        st.timestamp_clustering(time_distance=config["time-delta-clustering"])
+        st.to_csv()
+
+    if not st.dataset.empty:
         st.print_stats()
-
-        if config.getboolean("perform-timestamp-clustering"):
-            st.timestamp_clustering(time_distance=config["time-delta-clustering"])
-            st.to_csv()
 
         if config.getboolean("perform-analysis"):
             # Rental analysis
@@ -115,23 +111,23 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
             dataset_to_analyze = st.dataset.loc[st.dataset[STC.DATASET_RENTAL_ID_CN].isin(rental_to_analyze)]
             da_dataset = DataAnalysis(dataset_to_analyze, st.dataset.columns, dataset_name="ScooterTrajectories",
                                       save_file=True, filename_prefix="dataset")
-            da_dataset.show_line(on=STC.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
-                      .show_joint(on=STC.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
-                      .show_line(on=STC.DATASET_POS_OVER_CLUSTER_ANALYSIS_TUPLE)
+            da_dataset.show_line(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)\
+                      .show_joint(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)\
+                      .show_line(on=STC.POS_GEN_OVER_CLUSTER_ANALYSIS_TUPLE)
 
             dataset_bl = dataset_to_analyze.loc[dataset_to_analyze[STC.DATASET_POS_LATITUDE_CN] < 44.0]
             da_dataset_bl = DataAnalysis(dataset_bl, st.dataset.columns, dataset_name="ScooterTrajectories",
                                          save_file=True, filename_prefix="dataset_bottom_left")
-            da_dataset_bl.show_line(on=STC.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
-                         .show_joint(on=STC.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
-                         .show_line(on=STC.DATASET_POS_OVER_CLUSTER_ANALYSIS_TUPLE)
+            da_dataset_bl.show_line(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)\
+                         .show_joint(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)\
+                         .show_line(on=STC.POS_GEN_OVER_CLUSTER_ANALYSIS_TUPLE)
 
             dataset_tr = dataset_to_analyze.loc[dataset_to_analyze[STC.DATASET_POS_LATITUDE_CN] >= 44.0]
             da_dataset_tr = DataAnalysis(dataset_tr, st.dataset.columns, dataset_name="ScooterTrajectories",
                                          save_file=True, filename_prefix="dataset_top_right")
-            da_dataset_tr.show_line(on=STC.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)\
-                .show_line(on=STC.DATASET_POS_OVER_CLUSTER_ANALYSIS_TUPLE)\
-                .show_joint(on=STC.DATASET_POS_OVER_RENTAL_ANALYSIS_TUPLE)
+            da_dataset_tr.show_line(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)\
+                .show_line(on=STC.POS_GEN_OVER_CLUSTER_ANALYSIS_TUPLE)\
+                .show_joint(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)
 
 
 def main():

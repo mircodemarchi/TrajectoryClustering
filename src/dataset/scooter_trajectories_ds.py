@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 import time
+import json
 
 from util.log import Log
 from util.util import get_elapsed, unzip
@@ -25,10 +26,10 @@ class ScooterTrajectoriesDS:
             log.set_level(log_lvl)
 
         self.unzip_folder = os.path.splitext(self.zip_filepath)[0]
-        self.merge = pd.DataFrame()
-        self.dataset = pd.DataFrame()
-        self.rental = pd.DataFrame()
-        self.pos = pd.DataFrame()
+        self.merge = pd.DataFrame(columns=C.MERGE_COLS)
+        self.dataset = pd.DataFrame(columns=C.DATASET_COLS)
+        self.rental = pd.DataFrame(columns=C.RENTAL_COLS)
+        self.pos = pd.DataFrame(columns=C.POS_GEN_COLS)
 
     def __unzip(self):
         if not os.path.exists(self.zip_filepath):
@@ -141,7 +142,6 @@ class ScooterTrajectoriesDS:
 
         start = time.time()
         gen_data = pd.DataFrame(columns=C.MERGE_COLS)
-        pos_data = pd.DataFrame(columns=C.POS_COLS)
 
         # Parse device data
         curr_chunk = 0
@@ -169,7 +169,7 @@ class ScooterTrajectoriesDS:
                         log.d("__chunk {} merge elapsed time: {}".format(curr_chunk, merge_elapsed_time))
                         reader.close()
                         end = time.time()
-                        return pos_rental_map_df, pos_chunk_df, get_elapsed(start, end)
+                        return pos_rental_map_df, get_elapsed(start, end)
                 else:
                     # Load all chunk
                     pos_chunk_df = self.__parse_pos_datetime(pos_chunk_df)
@@ -177,18 +177,38 @@ class ScooterTrajectoriesDS:
                                                                          user_df, device_df)
                     log.d("__chunk {} merge elapsed time: {}".format(curr_chunk, merge_elapsed_time))
                     gen_data = pd.concat([gen_data, pos_rental_map_df], axis=0)
-                    pos_data = pd.concat([pos_data, pos_chunk_df], axis=0)
 
                     if max_chunknum is not None and max_chunknum == curr_chunk:
                         end = time.time()
-                        return gen_data, pos_data, get_elapsed(start, end)
+                        return gen_data, get_elapsed(start, end)
 
                 curr_chunk += 1
 
             reader.close()
 
         end = time.time()
-        return gen_data, pos_data, get_elapsed(start, end)
+        return gen_data, get_elapsed(start, end)
+
+    def __build(self, gen_df, rental_df):
+        start = time.time()
+        # Calculate valid positions and rental according to the timestamp of generated data
+        pos_df = gen_df[list(C.POS_GEN_COLS_MERGE_MAP.keys())]
+        pos_df = pos_df.rename(columns=C.POS_GEN_COLS_MERGE_MAP)
+        pos_df, rental_df = self.__find_data_map(gen_df, pos_df, rental_df)
+
+        # Sort generated data, pos data and rental data
+        pos_df = pd.DataFrame(pos_df, columns=C.POS_GEN_COLS)
+        merge_df, pos_df, rental_df, _ = self.__sort(gen_df, pos_df, rental_df)
+
+        # Build dataset
+        dataset_sort_cols = C.DATASET_COLS
+        dataset_sort_cols.remove(C.DATASET_RENTAL_POSITIONS_CN)
+        groups_by_rental = merge_df.groupby(dataset_sort_cols)
+        dataset_df = groups_by_rental[C.MERGE_POS_ID_CN].apply(list).reset_index(name=C.DATASET_RENTAL_POSITIONS_CN)
+        dataset_df = dataset_df[C.DATASET_COLS]
+
+        end = time.time()
+        return dataset_df, merge_df, pos_df, rental_df, get_elapsed(start, end)
 
     def __map_pos_into_rental(self, rental_df: pd.DataFrame, pos_df: pd.DataFrame):
         def ___find_pos_of_rental(p_df, rental, rental_idx):
@@ -201,12 +221,12 @@ class ScooterTrajectoriesDS:
                   .format(rental_idx, pos_of_rental.index.to_numpy(), get_elapsed(start, end)))
             return pos_of_rental
 
-        rental_df[C.RENTAL_POSITIONS_CN] = [
+        rental_df[C.DATASET_RENTAL_POSITIONS_CN] = [
             ___find_pos_of_rental(pos_df, rental, rental_idx)
             for rental_idx, rental in rental_df.iterrows()]
 
         # Take only the rental with positions not empty
-        not_empty_positions = [pos.size != 0 for pos in rental_df[C.RENTAL_POSITIONS_CN]]
+        not_empty_positions = [pos.size != 0 for pos in rental_df[C.DATASET_RENTAL_POSITIONS_CN]]
         rental_df = rental_df[not_empty_positions]
         return rental_df
 
@@ -231,20 +251,20 @@ class ScooterTrajectoriesDS:
         start = time.time()
 
         # Merge rental data with pos data
-        rental_df = rental_df.rename(columns=C.DATASET_COLS_RENTAL_MAP)
-        pos_df = pos_df.rename(columns=C.DATASET_COLS_POS_MAP)
+        rental_df = rental_df.rename(columns=C.MERGE_COLS_RENTAL_MAP)
+        pos_df = pos_df.rename(columns=C.MERGE_COLS_POS_MAP)
         merged_df = rental_df.merge(pos_df, on=C.POS_DEVICE_ID_CN)
 
         # Filter pos data in rental timestamp range
         merged_df = merged_df.loc[
             self.__is_pos_timestamp_in_rental(merged_df[C.POS_TIME_COLS], merged_df[C.RENTAL_TIME_COLS])]
 
-        # Merge usr
-        user_df = user_df.rename(columns=C.DATASET_COLS_USR_MAP)
+        # Merge rental data with usr data
+        user_df = user_df.rename(columns=C.MERGE_COLS_USR_MAP)
         merged_df = merged_df.merge(user_df, on=C.RENTAL_USR_ID_CN)
 
-        # Merge device
-        device_df = device_df.rename(columns=C.DATASET_COLS_DEVICE_MAP)
+        # Merge rental data with device data
+        device_df = device_df.rename(columns=C.MERGE_COLS_DEVICE_MAP)
         merged_df = merged_df.merge(device_df, on=C.RENTAL_DEVICE_ID_CN)
 
         end = time.time()
@@ -264,12 +284,12 @@ class ScooterTrajectoriesDS:
         return pos_filtered_df, rental_filtered_df, get_elapsed(start, end)
 
     def __find_data_map(self, rental_pos_map_df, pos_df, rental_df):
-        rental_valid_df = rental_df.loc[rental_df[C.RENTAL_ID_CN].isin(rental_pos_map_df[C.DATASET_RENTAL_ID_CN])]
-        pos_valid_df = pos_df.loc[pos_df[C.POS_ID_CN].isin(rental_pos_map_df[C.DATASET_POS_ID_CN])]
+        rental_valid_df = rental_df.loc[rental_df[C.RENTAL_ID_CN].isin(rental_pos_map_df[C.MERGE_RENTAL_ID_CN])]
+        pos_valid_df = pos_df.loc[pos_df[C.POS_GEN_ID_CN].isin(rental_pos_map_df[C.MERGE_POS_ID_CN])]
         return pos_valid_df, rental_valid_df
 
     def __find_timestamp_cluster(self, group_df, time_delta):
-        dataset_pos_time_cols = [C.DATASET_POS_SERVER_TIME_CN, C.DATASET_POS_DEVICE_TIME_CN]
+        dataset_pos_time_cols = [C.MERGE_POS_SERVER_TIME_CN, C.MERGE_POS_DEVICE_TIME_CN]
         time_columns_group = group_df[dataset_pos_time_cols].reset_index(drop=True)
 
         # Find the positions that have a distance between the previous position at least of time_distance
@@ -288,20 +308,42 @@ class ScooterTrajectoriesDS:
         end = time.time()
         return device_df, rental_df, user_df, get_elapsed(start, end)
 
+    def __sort(self, rental_pos_map_df, pos_df, rental_df):
+        start = time.time()
+        # List column names for sorting
+        merge_sort_cols = C.MERGE_SORT_COLS
+        pos_sort_cols = C.POS_GEN_SORT_COLS
+        rental_sort_cols = C.RENTAL_SORT_COLS
+
+        # Sort generated merge
+        rental_pos_map_df = rental_pos_map_df.sort_values(by=merge_sort_cols, ignore_index=True)
+        pos_df = pos_df.sort_values(by=pos_sort_cols, ignore_index=True)
+        rental_df = rental_df.sort_values(by=rental_sort_cols, ignore_index=True)
+
+        # Columns sort
+        rental_pos_map_df = rental_pos_map_df[C.MERGE_COLS]
+        pos_df = pos_df[C.POS_GEN_COLS]
+        rental_df = rental_df[C.RENTAL_COLS]
+
+        end = time.time()
+        return rental_pos_map_df, pos_df, rental_df, get_elapsed(start, end)
+
     def generate(self, chunknum=0, chunksize=50000):
         log.d("Scooter Trajectories start unzip")
         self.__unzip()
 
         log.d("Scooter Trajectories load device, rental, user data")
-        device_df, rental_df, user_df, support_data_load_time = self.__load_support_data()
-        log.d("elapsed time: {}".format(support_data_load_time))
+        device_df, rental_df, user_df, load_time = self.__load_support_data()
+        log.d("elapsed time: {}".format(load_time))
 
         # Load dataset and positions according to chunk info
-        map_pos_rental_df, pos_df, load_time = self.__generate(device_df, rental_df, user_df, chunknum, chunksize)
-        log.d(" - load map elapsed time: {}".format(load_time))
+        log.d("Scooter Trajectories load pos and rental timestamp map data")
+        gen_df, load_time = self.__generate(device_df, rental_df, user_df, chunknum=chunknum, chunksize=chunksize)
+        log.d("elapsed time: {}".format(load_time))
 
-        # Calculate valid positions and rental according to the each other timestamp mapping
-        self.pos, self.rental = self.__find_data_map(map_pos_rental_df, pos_df, rental_df)
+        log.d("Scooter Trajectories build final data")
+        self.dataset, self.merge, self.pos, self.rental, load_time = self.__build(gen_df, rental_df)
+        log.d("elapsed time: {}".format(load_time))
 
         return self
 
@@ -310,18 +352,17 @@ class ScooterTrajectoriesDS:
         self.__unzip()
 
         log.d("Scooter Trajectories load device, rental, user data")
-        device_df, rental_df, user_df, support_data_load_time = self.__load_support_data()
-        log.d("elapsed time: {}".format(support_data_load_time))
-
-        log.d("Scooter Trajectories load pos and rental timestamp map data")
-        gen_df, pos_df, load_time = self.__generate(device_df, rental_df, user_df, chunknum=None,
-                                                               chunksize=chunksize, max_chunknum=max_chunknum)
+        device_df, rental_df, user_df, load_time = self.__load_support_data()
         log.d("elapsed time: {}".format(load_time))
 
-        self.merge = gen_df[C.MERGE_COLS]
+        log.d("Scooter Trajectories load pos and rental timestamp map data")
+        gen_df, load_time = self.__generate(device_df, rental_df, user_df, chunknum=None,
+                                            chunksize=chunksize, max_chunknum=max_chunknum)
+        log.d("elapsed time: {}".format(load_time))
 
-        # Calculate valid positions and rental according to the each other timestamp mapping
-        self.pos, self.rental = self.__find_data_map(gen_df, pos_df, rental_df)
+        log.d("Scooter Trajectories build final data")
+        self.dataset, self.merge, self.pos, self.rental, load_time = self.__build(gen_df, rental_df)
+        log.d("elapsed time: {}".format(load_time))
 
         return self
 
@@ -335,14 +376,14 @@ class ScooterTrajectoriesDS:
 
         dataset_gen_fp = os.path.join(DATA_FOLDER, C.GENERATED_DN, C.CSV_DATASET_GENERATED_FN)
         if os.path.exists(dataset_gen_fp):
-            self.dataset = pd.read_csv(dataset_gen_fp, parse_dates=C.DATASET_TIME_COLS,
-                                       infer_datetime_format=True, memory_map=True)
+            self.dataset = pd.read_csv(dataset_gen_fp, memory_map=True, parse_dates=C.DATASET_TIME_COLS,
+                                       converters={C.DATASET_RENTAL_POSITIONS_CN: json.loads})
         else:
             log.w("{} path not exist".format(dataset_gen_fp))
 
         merge_gen_fp = os.path.join(DATA_FOLDER, C.GENERATED_DN, C.CSV_MERGE_GENERATED_FN)
         if os.path.exists(merge_gen_fp):
-            self.merge = pd.read_csv(merge_gen_fp, parse_dates=C.DATASET_TIME_COLS,
+            self.merge = pd.read_csv(merge_gen_fp, parse_dates=C.MERGE_TIME_COLS,
                                      infer_datetime_format=True, memory_map=True)
         else:
             log.w("{} path not exist".format(merge_gen_fp))
@@ -400,19 +441,11 @@ class ScooterTrajectoriesDS:
         start = time.time()
         time_delta = pd.Timedelta(time_distance)
 
-        # Sort pos rental map data
-        self.dataset = pd.DataFrame(self.merge.sort_values(
-            by=[C.DATASET_RENTAL_ID_CN, C.DATASET_POS_SERVER_TIME_CN, C.DATASET_POS_DEVICE_TIME_CN],
-            ignore_index=True))
+        # timestamp_cluster = []
+        # for _, group in groups_by_rental:
+        #     timestamp_cluster.extend(self.__find_timestamp_cluster(group, time_delta))
 
-        dataset_group_by_rental = self.dataset.groupby([C.DATASET_RENTAL_ID_CN])
-
-        timestamp_cluster = []
-        for _, group in dataset_group_by_rental:
-            timestamp_cluster.extend(self.__find_timestamp_cluster(group, time_delta))
-
-        self.dataset[C.DATASET_CLUSTER_ID_CN] = timestamp_cluster
-        self.dataset = self.dataset[C.DATASET_COLS]
+        # self.dataset[C.DATASET_CLUSTER_ID_CN] = timestamp_cluster
 
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
