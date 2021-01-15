@@ -1,6 +1,10 @@
 cffi
+mkl-fft
+mkl-random
+mkl-service
 olefile
 pip-chill
+plotly
 scikit-learn
 seaborn
 torch
