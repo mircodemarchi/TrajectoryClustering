@@ -28,8 +28,6 @@ class ScooterTrajectoriesC:
 
     # pos.csv and pos_1.csv data columns
     POS_COLS: Final = ["id", "latitude", "longitude", "speed", "server_time", "device_time", "device_id"]
-    POS_ANALYSIS_COLS: Final = [POS_COLS[0], POS_COLS[1], POS_COLS[2], POS_COLS[3], POS_COLS[4], POS_COLS[5], POS_COLS[6]]
-    POS_2D_ANALYSIS_COUPLES: Final = [(POS_COLS[1], POS_COLS[2])]
     POS_TIME_COLS: Final = [POS_COLS[4], POS_COLS[5]]
     POS_ID_CN: Final = POS_COLS[0]
     POS_LATITUDE_CN: Final = POS_COLS[1]
@@ -154,3 +152,7 @@ class ScooterTrajectoriesC:
         MERGE_POS_SPEED_CN: POS_GEN_SPEED_CN, MERGE_POS_SERVER_TIME_CN: POS_GEN_SERVER_TIME_CN,
         MERGE_POS_DEVICE_TIME_CN: POS_GEN_DEVICE_TIME_CN
     }
+    POS_GEN_ANALYSIS_COLS: Final = [POS_ID_CN, POS_GEN_RENTAL_ID_CN, POS_GEN_CLUSTER_ID_CN, POS_GEN_LATITUDE_CN,
+                                    POS_GEN_LONGITUDE_CN, POS_GEN_SPEED_CN, POS_GEN_SERVER_TIME_CN,
+                                    POS_GEN_DEVICE_TIME_CN]
+    POS_GEN_2D_ANALYSIS_COUPLES: Final = [(POS_GEN_LATITUDE_CN, POS_GEN_LONGITUDE_CN)]

@@ -448,7 +448,7 @@ class ScooterTrajectoriesDS:
         for _, group in groups_by_rental:
             timestamp_cluster.extend(self.__find_timestamp_cluster(group, time_delta))
 
-        self.dataset[C.POS_GEN_CLUSTER_ID_CN] = timestamp_cluster
+        self.pos[C.POS_GEN_CLUSTER_ID_CN] = timestamp_cluster
 
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))

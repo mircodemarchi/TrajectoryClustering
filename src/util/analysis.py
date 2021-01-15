@@ -7,6 +7,7 @@ import os
 import time
 from .util import get_elapsed
 from .log import Log
+from .constant import IMAGE_FOLDER
 
 log = Log(__name__, enable_console=True, enable_file=False)
 
