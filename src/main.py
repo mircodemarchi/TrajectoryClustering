@@ -79,14 +79,16 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
 
     if config.getboolean("perform-timedelta-heuristic") or config.getboolean("perform-spreaddelta-heuristic")\
             or config.getboolean("perform-edgedelta-heuristic"):
+        groupby = STC.POS_GEN_RENTAL_ID_CN
         if config.getboolean("perform-timedelta-heuristic"):
             st.timedelta_heuristic(timedelta=config["timedelta"])
+            groupby = [STC.POS_GEN_RENTAL_ID_CN, STC.POS_GEN_TIMEDELTA_ID_CN]
 
         if config.getboolean("perform-spreaddelta-heuristic"):
-            st.spreaddelta_heuristic(spreaddelta=config.getfloat("spreaddelta"), groupby=STC.POS_GEN_RENTAL_ID_CN)
+            st.spreaddelta_heuristic(spreaddelta=config.getfloat("spreaddelta"), groupby=groupby)
 
         if config.getboolean("perform-edgedelta-heuristic"):
-            st.edgedelta_heuristic(edgedelta=config.getfloat("edgedelta"), groupby=STC.POS_GEN_RENTAL_ID_CN)
+            st.edgedelta_heuristic(edgedelta=config.getfloat("edgedelta"), groupby=groupby)
 
         st.to_csv()
 
