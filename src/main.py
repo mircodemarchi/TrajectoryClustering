@@ -78,7 +78,7 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
         st.load_generated()
 
     if config.getboolean("perform-timedelta-heuristic") or config.getboolean("perform-spreaddelta-heuristic")\
-            or config.getboolean("perform-edgedelta-heuristic"):
+            or config.getboolean("perform-edgedelta-heuristic") or config.getboolean("perform-coorddelta-heuristic"):
         groupby = STC.POS_GEN_RENTAL_ID_CN
         if config.getboolean("perform-timedelta-heuristic"):
             st.timedelta_heuristic(timedelta=config["timedelta"])
@@ -90,6 +90,9 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
         if config.getboolean("perform-edgedelta-heuristic"):
             st.edgedelta_heuristic(edgedelta=config.getfloat("edgedelta"), groupby=groupby)
 
+        if config.getboolean("perform-coorddelta-heuristic"):
+            st.coorddelta_heuristic(spreaddelta=config.getfloat("spreaddelta"), edgedelta=config.getfloat("edgedelta"),
+                                    groupby=groupby)
         st.to_csv()
 
     if not st.dataset.empty:

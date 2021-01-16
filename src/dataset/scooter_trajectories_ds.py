@@ -473,7 +473,7 @@ class ScooterTrajectoriesDS:
         start = time.time()
 
         # Initialize column to null
-        self.pos[C.POS_GEN_CLUSTER_ID_CN] = np.nan
+        self.pos[C.POS_GEN_SPREADDELTA_ID_CN] = np.nan
 
         # Group position for the column specified by the user
         pos_groups = self.pos.groupby(by=groupby)
@@ -485,7 +485,7 @@ class ScooterTrajectoriesDS:
         else:
             pos_groups_as_index = self.pos[groupby]
         i = 0
-        while self.pos[C.POS_GEN_CLUSTER_ID_CN].isnull().sum() != 0:
+        while self.pos[C.POS_GEN_SPREADDELTA_ID_CN].isnull().sum() != 0:
             group = pos_groups.get_group(spread_pos_groups.index[0])
 
             # Get the current group spread
@@ -495,9 +495,9 @@ class ScooterTrajectoriesDS:
 
             # Assign index at the positions of the same spread cluster
             spread_cluster = spread_pos_groups.loc[self.__find_spreaddelta(spread_pos_groups, spread, spreaddelta)]
-            self.pos.loc[pos_groups_as_index.isin(spread_cluster.index), C.POS_GEN_CLUSTER_ID_CN] = i
+            self.pos.loc[pos_groups_as_index.isin(spread_cluster.index), C.POS_GEN_SPREADDELTA_ID_CN] = i
 
-            if self.pos[C.POS_GEN_CLUSTER_ID_CN].isnull().sum() == 0:
+            if self.pos[C.POS_GEN_SPREADDELTA_ID_CN].isnull().sum() == 0:
                 break
 
             # Remove groups already assigned and update the list
@@ -507,7 +507,8 @@ class ScooterTrajectoriesDS:
             i += 1
 
         sys.stdout.write("\r")
-        self.pos = self.pos.astype({C.POS_GEN_CLUSTER_ID_CN: "int64"})
+        self.pos = self.pos.astype({C.POS_GEN_SPREADDELTA_ID_CN: "int64"})
+        self.pos = self.pos[C.POS_GEN_COLS]
 
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
@@ -518,7 +519,7 @@ class ScooterTrajectoriesDS:
         start = time.time()
 
         # Initialize column to null
-        self.pos[C.POS_GEN_CLUSTER_ID_CN] = np.nan
+        self.pos[C.POS_GEN_EDGEDELTA_ID_CN] = np.nan
 
         # Group position for the column specified by the user
         pos_groups = self.pos.groupby(by=groupby)
@@ -533,7 +534,7 @@ class ScooterTrajectoriesDS:
         else:
             pos_groups_as_index = self.pos[groupby]
         i = 0
-        while self.pos[C.POS_GEN_CLUSTER_ID_CN].isnull().sum() != 0:
+        while self.pos[C.POS_GEN_EDGEDELTA_ID_CN].isnull().sum() != 0:
             group = pos_groups.get_group(edge_pos_groups.index[0])
 
             # Get the current group spread
@@ -544,9 +545,9 @@ class ScooterTrajectoriesDS:
 
             # Assign index at the positions of the same spread cluster
             edge_cluster = edge_pos_groups.loc[self.__find_edgedelta(edge_pos_groups, edge, edgedelta)]
-            self.pos.loc[pos_groups_as_index.isin(edge_cluster.index), C.POS_GEN_CLUSTER_ID_CN] = i
+            self.pos.loc[pos_groups_as_index.isin(edge_cluster.index), C.POS_GEN_EDGEDELTA_ID_CN] = i
 
-            if self.pos[C.POS_GEN_CLUSTER_ID_CN].isnull().sum() == 0:
+            if self.pos[C.POS_GEN_EDGEDELTA_ID_CN].isnull().sum() == 0:
                 break
 
             # Remove groups already assigned and update the list
@@ -556,7 +557,66 @@ class ScooterTrajectoriesDS:
             i += 1
 
         sys.stdout.write("\r")
+        self.pos = self.pos.astype({C.POS_GEN_EDGEDELTA_ID_CN: "int64"})
+        self.pos = self.pos[C.POS_GEN_COLS]
+
+        end = time.time()
+        log.d("elapsed time: {}".format(get_elapsed(start, end)))
+        return self
+
+    def coorddelta_heuristic(self, spreaddelta, edgedelta, groupby):
+        log.d("Scooter Trajectories coorddelta heuristic")
+        start = time.time()
+
+        # Initialize column to null
+        self.pos[C.POS_GEN_CLUSTER_ID_CN] = np.nan
+
+        # Group position for the column specified by the user
+        pos_groups = self.pos.groupby(by=groupby)
+        # Calculate the spread of each position group
+        spread_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: x.iloc[-1] - x.iloc[0])
+        # Calculate the edge for each position group
+        edge_pos_groups_cols = [c + "_start" for c in C.POS_GEN_COORD_COLS] + [c + "_end" for c in C.POS_GEN_COORD_COLS]
+        edge_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: pd.concat([x.iloc[0], x.iloc[-1]],
+                                                                                     ignore_index=True))
+        edge_pos_groups = edge_pos_groups.rename(columns=dict(zip(edge_pos_groups.columns, edge_pos_groups_cols)))
+
+        if type(groupby) == list:
+            pos_groups_as_index = pd.MultiIndex.from_frame(self.pos[groupby])
+        else:
+            pos_groups_as_index = self.pos[groupby]
+        i = 0
+        while self.pos[C.POS_GEN_CLUSTER_ID_CN].isnull().sum() != 0:
+            if edge_pos_groups.index[0] != spread_pos_groups.index[0]:
+                log.f("coorddelta_heuristic internal fatal fail: spread and edge groups must have the same indexing")
+                break
+            group = pos_groups.get_group(edge_pos_groups.index[0])
+
+            # Get the current group spread
+            start_coord = group[C.POS_GEN_COORD_COLS].iloc[0]
+            stop_coord = group[C.POS_GEN_COORD_COLS].iloc[-1]
+            spread = stop_coord - start_coord
+            edge = pd.concat([start_coord, stop_coord], ignore_index=True)
+            edge = edge.rename(dict(zip(edge.index, edge_pos_groups_cols)))
+
+            # Assign index at the positions of the same spread cluster
+            coord_cluster = edge_pos_groups.loc[self.__find_edgedelta(edge_pos_groups, edge, edgedelta) &
+                                                self.__find_spreaddelta(spread_pos_groups, spread, spreaddelta)]
+            self.pos.loc[pos_groups_as_index.isin(coord_cluster.index), C.POS_GEN_CLUSTER_ID_CN] = i
+
+            if self.pos[C.POS_GEN_CLUSTER_ID_CN].isnull().sum() == 0:
+                break
+
+            # Remove groups already assigned and update the list
+            spread_pos_groups = spread_pos_groups.drop(index=coord_cluster.index)
+            edge_pos_groups = edge_pos_groups.drop(index=coord_cluster.index)
+            sys.stdout.write("\r {:.3f} %".format(
+                (pos_groups.ngroups - len(edge_pos_groups.index)) * 100 / pos_groups.ngroups))
+            i += 1
+
+        sys.stdout.write("\r")
         self.pos = self.pos.astype({C.POS_GEN_CLUSTER_ID_CN: "int64"})
+        self.pos = self.pos[C.POS_GEN_COLS]
 
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
