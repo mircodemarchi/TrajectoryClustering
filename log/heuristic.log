@@ -1,0 +1,140 @@
+[16/01/2021 16:49:53] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load generated
+[16/01/2021 16:49:54] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:01.60
+[16/01/2021 16:49:54] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories timedelta heuristic
+[16/01/2021 16:50:11] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:17.26
+[16/01/2021 16:50:11] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories spreaddelta heuristic
+[16/01/2021 16:50:42] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:30.39
+[16/01/2021 16:50:42] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories edgedelta heuristic
+[16/01/2021 16:51:19] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:37.19
+[16/01/2021 16:51:19] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories coorddelta heuristic
+[16/01/2021 16:52:29] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:01:09.69
+[16/01/2021 16:52:29] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories to csv
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:06.85
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (7686, 13);
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'rental_positions'];
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
+rental_id                    int64
+device_id                    int64
+device_km                  float64
+user_id                      int64
+usr_km                     float64
+latitude_start             float64
+longitude_start            float64
+latitude_stop              float64
+longitude_stop             float64
+start_time          datetime64[ns]
+stop_time           datetime64[ns]
+rental_km                  float64
+rental_positions            object
+dtype: object;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
+rental_id           0
+device_id           0
+device_km           0
+user_id             0
+usr_km              0
+latitude_start      0
+longitude_start     0
+latitude_stop       0
+longitude_stop      0
+start_time          0
+stop_time           0
+rental_km           0
+rental_positions    0
+dtype: int64;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
+           rental_id     device_id    device_km       user_id       usr_km  latitude_start
+count    7686.000000   7686.000000  7686.000000   7686.000000  7686.000000     7686.000000
+mean    99613.864299    214.003383   408.160224  37805.676295    62.135680       44.137252
+std      4121.721550    251.833343   472.951930  15119.146284   192.866364        0.184183
+min     94188.000000      1.000000     0.000000      2.000000     0.000000       42.485028
+25%     96160.250000    114.000000   279.790000  23111.000000     5.472500       43.876515
+50%     98262.500000    211.000000   387.370000  40528.000000    16.590000       44.237359
+75%    103701.000000    300.000000   481.090000  53161.000000    50.410000       44.241837
+max    107500.000000  10001.000000  7691.340000  58065.000000  2496.269999       44.258408
+       longitude_start  latitude_stop  longitude_stop                     start_time                      stop_time    rental_km
+count      7686.000000    7686.000000     7686.000000                           7686                           7686  7686.000000
+mean         11.340181      45.337182       10.139561  2020-01-23 18:38:28.463567360  2020-01-23 18:48:35.263312896     1.529415
+min           8.832870      43.684978        7.615795     2020-01-11 03:30:41.900000     2020-01-11 03:40:13.164000     0.000000
+25%           8.894681      45.079178        7.696374  2020-01-16 12:32:48.507250176  2020-01-16 12:39:25.853499904     0.710000
+50%          12.189161      45.437342       10.987843  2020-01-21 13:59:05.586500096  2020-01-21 14:13:32.653999872     1.190000
+75%          12.194596      45.441848       10.995592  2020-02-01 20:18:18.981499904  2020-02-01 20:30:22.865500160     1.950000
+max          13.944872      45.458462       12.744960     2020-02-08 12:50:27.503000     2020-02-08 12:59:10.397000    21.889999
+std           1.452957       0.184387        1.453251                            NaN                            NaN     1.332719;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
+id                          int64
+device_id                   int64
+user_id                     int64
+latitude_start            float64
+longitude_start           float64
+latitude_stop             float64
+longitude_stop            float64
+start_time         datetime64[ns]
+stop_time          datetime64[ns]
+km                        float64
+dtype: object;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
+id                 0
+device_id          0
+user_id            0
+latitude_start     0
+longitude_start    0
+latitude_stop      0
+longitude_stop     0
+start_time         0
+stop_time          0
+km                 0
+dtype: int64;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
+                  id     device_id       user_id  latitude_start  longitude_start  latitude_stop  longitude_stop                     start_time                      stop_time            km
+count   14826.000000  14826.000000  14826.000000    14826.000000     14826.000000   14826.000000    14826.000000                          14826                          14826  14826.000000
+mean   109459.244705    215.781195  39409.562323       44.153858        11.481653      45.353871       10.281107  2020-02-06 08:25:01.239833088  2020-02-06 08:35:12.895151104      1.564281
+min     94188.000000      1.000000      2.000000       42.485028         8.832870      43.684978        7.615795     2020-01-11 03:30:41.900000     2020-01-11 03:40:13.164000      0.000000
+25%     98080.250000    116.000000  23082.000000       44.229356        12.176958      45.428550       10.969543  2020-01-20 22:47:15.383000064  2020-01-20 22:58:09.530999808      0.720000
+50%    106997.500000    217.000000  39863.500000       44.238084        12.190134      45.438225       10.989071  2020-02-07 18:37:46.497999872  2020-02-07 18:52:04.947500032      1.230000
+75%    118533.750000    305.000000  54099.750000       44.241925        12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
+max    134690.000000  10001.000000  75805.000000       44.259358        13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
+std     11897.537349    228.660821  17483.048296        0.174064         1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (344419, 11);
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'timedelta_id', 'spreaddelta_id', 'edgedelta_id', 'cluster_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
+id                         int64
+rental_id                  int64
+timedelta_id               int64
+spreaddelta_id             int64
+edgedelta_id               int64
+cluster_id                 int64
+latitude                 float64
+longitude                float64
+speed                    float64
+server_time       datetime64[ns]
+device_time       datetime64[ns]
+dtype: object;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
+id                0
+rental_id         0
+timedelta_id      0
+spreaddelta_id    0
+edgedelta_id      0
+cluster_id        0
+latitude          0
+longitude         0
+speed             0
+server_time       0
+device_time       0
+dtype: int64;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
+                 id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id     cluster_id       latitude      longitude          speed                    server_time                    device_time
+count  3.444190e+05  344419.000000  344419.000000   344419.000000  344419.000000  344419.000000  344419.000000  344419.000000  344419.000000                         344419                         344419
+mean   3.011804e+07   99958.620843       5.760870        1.735871      20.224610      27.327482      44.117150      11.199181       6.536001  2020-01-24 13:07:31.914166016  2020-01-24 13:07:31.914166016
+min    2.710914e+07   94188.000000       0.000000        0.000000       0.000000       0.000000      42.484956       8.815627      -0.020000     2020-01-11 03:39:02.359133     2020-01-11 03:39:02.359133
+25%    2.840503e+07   96446.000000       0.000000        0.000000       0.000000       0.000000      43.870873       8.886090       0.170000  2020-01-17 09:41:23.739575808  2020-01-17 09:41:23.739575808
+50%    2.977513e+07   98728.000000       0.000000        0.000000       4.000000       5.000000      44.236895      12.187070       3.397375  2020-01-22 18:15:37.884605952  2020-01-22 18:15:37.884605952
+75%    3.202494e+07  103956.000000       2.000000        1.000000      20.000000      24.000000      44.241307      12.194358      12.780000  2020-02-02 00:06:38.156475904  2020-02-02 00:06:38.156475904
+max    3.339474e+07  106685.000000     578.000000       39.000000     221.000000     282.000000      44.273032      13.952780      76.059998     2020-02-07 06:38:39.982493     2020-02-07 06:38:39.982493
+std    1.987405e+06    3984.319492      22.624935        4.796378      38.319582      51.193968       0.199910       1.532710       7.245204                            NaN                            NaN;
+[16/01/2021 16:52:36] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
+Time: 00:02:43.40
