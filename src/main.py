@@ -77,8 +77,17 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
     if config.getboolean("load-generated-data"):
         st.load_generated()
 
-    if config.getboolean("perform-timedelta-heuristic"):
-        st.timestamp_clustering(time_distance=config["timedelta"])
+    if config.getboolean("perform-timedelta-heuristic") or config.getboolean("perform-spreaddelta-heuristic")\
+            or config.getboolean("perform-edgedelta-heuristic"):
+        if config.getboolean("perform-timedelta-heuristic"):
+            st.timedelta_heuristic(timedelta=config["timedelta"])
+
+        if config.getboolean("perform-spreaddelta-heuristic"):
+            st.spreaddelta_heuristic(spreaddelta=config.getfloat("spreaddelta"), groupby=STC.POS_GEN_RENTAL_ID_CN)
+
+        if config.getboolean("perform-edgedelta-heuristic"):
+            st.edgedelta_heuristic(edgedelta=config.getfloat("edgedelta"), groupby=STC.POS_GEN_RENTAL_ID_CN)
+
         st.to_csv()
 
     if not st.dataset.empty:
