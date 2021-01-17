@@ -478,7 +478,7 @@ class ScooterTrajectoriesDS:
         # Group position for the column specified by the user
         pos_groups = self.pos.groupby(by=groupby)
         # Calculate the spread of each position group
-        spread_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: x.iloc[-1] - x.iloc[0])
+        spread_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: x.max() - x.min())
 
         if type(groupby) == list:
             pos_groups_as_index = pd.MultiIndex.from_frame(self.pos[groupby])
@@ -489,9 +489,9 @@ class ScooterTrajectoriesDS:
             group = pos_groups.get_group(spread_pos_groups.index[0])
 
             # Get the current group spread
-            start_coord = group[C.POS_GEN_COORD_COLS].iloc[0]
-            stop_coord = group[C.POS_GEN_COORD_COLS].iloc[-1]
-            spread = stop_coord - start_coord
+            min_coord = group[C.POS_GEN_COORD_COLS].min()
+            max_coord = group[C.POS_GEN_COORD_COLS].max()
+            spread = max_coord - min_coord
 
             # Assign index at the positions of the same spread cluster
             spread_cluster = spread_pos_groups.loc[self.__find_spreaddelta(spread_pos_groups, spread, spreaddelta)]
@@ -538,9 +538,9 @@ class ScooterTrajectoriesDS:
             group = pos_groups.get_group(edge_pos_groups.index[0])
 
             # Get the current group spread
-            start_edge = group[C.POS_GEN_COORD_COLS].iloc[0]
-            stop_edge = group[C.POS_GEN_COORD_COLS].iloc[-1]
-            edge = pd.concat([start_edge, stop_edge], ignore_index=True)
+            start_coord = group[C.POS_GEN_COORD_COLS].iloc[0]
+            stop_coord = group[C.POS_GEN_COORD_COLS].iloc[-1]
+            edge = pd.concat([start_coord, stop_coord], ignore_index=True)
             edge = edge.rename(dict(zip(edge.index, edge_pos_groups_cols)))
 
             # Assign index at the positions of the same spread cluster
@@ -574,7 +574,7 @@ class ScooterTrajectoriesDS:
         # Group position for the column specified by the user
         pos_groups = self.pos.groupby(by=groupby)
         # Calculate the spread of each position group
-        spread_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: x.iloc[-1] - x.iloc[0])
+        spread_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: x.max() - x.min())
         # Calculate the edge for each position group
         edge_pos_groups_cols = [c + "_start" for c in C.POS_GEN_COORD_COLS] + [c + "_end" for c in C.POS_GEN_COORD_COLS]
         edge_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: pd.concat([x.iloc[0], x.iloc[-1]],
@@ -593,9 +593,11 @@ class ScooterTrajectoriesDS:
             group = pos_groups.get_group(edge_pos_groups.index[0])
 
             # Get the current group spread
+            min_coord = group[C.POS_GEN_COORD_COLS].min()
+            max_coord = group[C.POS_GEN_COORD_COLS].max()
             start_coord = group[C.POS_GEN_COORD_COLS].iloc[0]
             stop_coord = group[C.POS_GEN_COORD_COLS].iloc[-1]
-            spread = stop_coord - start_coord
+            spread = max_coord - min_coord
             edge = pd.concat([start_coord, stop_coord], ignore_index=True)
             edge = edge.rename(dict(zip(edge.index, edge_pos_groups_cols)))
 
