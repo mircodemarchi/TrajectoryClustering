@@ -102,7 +102,7 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
             # Rental analysis
             da_rental = DataAnalysis(st.rental, STC.RENTAL_ANALYSIS_COLS,
                                      dataset_name="ScooterTrajectories",
-                                     save_file=True, filename_prefix="rental")
+                                     save_file=True, prefix="rental")
             da_rental.show_distributions().show_2d_distributions(STC.RENTAL_2D_ANALYSIS_COUPLES)
             for c in STC.RENTAL_2D_ANALYSIS_COUPLES:
                 da_rental.show_joint(on=c)
@@ -114,7 +114,7 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
                 pos_to_analyze = st.pos.iloc[:config.getint("num-of-pos-to-analyze")]
 
             da_pos = DataAnalysis(pos_to_analyze, STC.POS_GEN_ANALYSIS_COLS,
-                                  dataset_name="ScooterTrajectories", save_file=True, filename_prefix="pos")
+                                  dataset_name="ScooterTrajectories", save_file=True, prefix="pos")
             da_pos.show_distributions().show_2d_distributions(STC.POS_GEN_2D_ANALYSIS_COUPLES)
             for c in STC.POS_GEN_2D_ANALYSIS_COUPLES:
                 da_pos.show_joint(on=c)
@@ -124,24 +124,39 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
                                 :config.getint("num-of-rental-in-dataset-to-analyze")]
             dataset_to_analyze = st.pos.loc[st.pos[STC.POS_GEN_RENTAL_ID_CN].isin(rental_to_analyze)]
             da_dataset = DataAnalysis(dataset_to_analyze, st.pos.columns, dataset_name="ScooterTrajectories",
-                                      save_file=True, filename_prefix="results")
+                                      save_file=True, prefix="dataset_all")
             da_dataset.show_line(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)
-            da_dataset.show_joint(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)
-            da_dataset.show_line(on=STC.POS_GEN_OVER_CLUSTER_ANALYSIS_TUPLE)
 
             dataset_bl = dataset_to_analyze.loc[dataset_to_analyze[STC.POS_GEN_LATITUDE_CN] < 44.0]
             da_dataset_bl = DataAnalysis(dataset_bl, st.pos.columns, dataset_name="ScooterTrajectories",
-                                         save_file=True, filename_prefix="dataset_bottom_left")
+                                         save_file=True, prefix="dataset_bottom_left")
             da_dataset_bl.show_line(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)
             da_dataset_bl.show_joint(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)
-            da_dataset_bl.show_line(on=STC.POS_GEN_OVER_CLUSTER_ANALYSIS_TUPLE)
+            da_dataset_bl.show_line(on=STC.POS_GEN_OVER_TIMEDELTA_ANALYSIS_TUPLE)
+            da_dataset_bl.show_joint(on=STC.POS_GEN_OVER_SPREADDELTA_ANALYSIS_TUPLE)
+            da_dataset_bl.show_joint(on=STC.POS_GEN_OVER_EDGEDELTA_ANALYSIS_TUPLE)
+            da_dataset_bl.show_joint(on=STC.POS_GEN_OVER_COORDDELTA_ANALYSIS_TUPLE)
 
             dataset_tr = dataset_to_analyze.loc[dataset_to_analyze[STC.POS_GEN_LATITUDE_CN] >= 44.0]
             da_dataset_tr = DataAnalysis(dataset_tr, st.pos.columns, dataset_name="ScooterTrajectories",
-                                         save_file=True, filename_prefix="dataset_top_right")
+                                         save_file=True, prefix="dataset_top_right")
             da_dataset_tr.show_line(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)
-            da_dataset_tr.show_line(on=STC.POS_GEN_OVER_CLUSTER_ANALYSIS_TUPLE)
             da_dataset_tr.show_joint(on=STC.POS_GEN_OVER_RENTAL_ANALYSIS_TUPLE)
+            da_dataset_tr.show_line(on=STC.POS_GEN_OVER_TIMEDELTA_ANALYSIS_TUPLE)
+            da_dataset_tr.show_joint(on=STC.POS_GEN_OVER_SPREADDELTA_ANALYSIS_TUPLE)
+            da_dataset_tr.show_joint(on=STC.POS_GEN_OVER_EDGEDELTA_ANALYSIS_TUPLE)
+            da_dataset_tr.show_joint(on=STC.POS_GEN_OVER_COORDDELTA_ANALYSIS_TUPLE)
+
+        if config.getboolean("perform-map"):
+            rental_to_analyze = st.pos[STC.POS_GEN_RENTAL_ID_CN].unique()[
+                                :config.getint("num-of-rental-in-dataset-to-analyze")]
+            dataset_to_analyze = st.pos.loc[st.pos[STC.POS_GEN_RENTAL_ID_CN].isin(rental_to_analyze)]
+            da_dataset = DataAnalysis(dataset_to_analyze, st.pos.columns, dataset_name="ScooterTrajectories",
+                                      save_file=True)
+            da_dataset.show_line_map(on=STC.POS_GEN_OVER_RENTAL_MAP_TUPLE,
+                                     hover_data=STC.POS_GEN_OVER_RENTAL_MAP_HOVER_DATA)
+            da_dataset.show_scatter_map(on=STC.POS_GEN_OVER_CLUSTER_MAP_TUPLE,
+                                        hover_data=STC.POS_GEN_OVER_CLUSTER_MAP_HOVER_DATA)
 
 
 def main():
