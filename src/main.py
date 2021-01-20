@@ -30,6 +30,8 @@ from dataset.constant import ScooterTrajectoriesC as STC
 from util import DataAnalysis
 from util import Log
 
+from ml import Clustering
+
 log = Log(__name__, enable_console=True, enable_file=False)
 
 # Script arguments
@@ -157,6 +159,36 @@ def scooter_trajectories(config: configparser.SectionProxy, log_lvl):
                                      hover_data=STC.POS_GEN_OVER_RENTAL_MAP_HOVER_DATA)
             da_dataset.show_scatter_map(on=STC.POS_GEN_OVER_CLUSTER_MAP_TUPLE,
                                         hover_data=STC.POS_GEN_OVER_CLUSTER_MAP_HOVER_DATA)
+
+        if config.getboolean("perform-kmeans"):
+            st.time_to_float()
+            kmeans = Clustering(st.merge, STC.MERGE_CLUSTERING_COLS, dataset_name="ScooterTrajectories")
+
+            if config["n-clusters"] is None:
+                kmeans.test(standardize=config.getboolean("with-standardization"), pca=config.getboolean("with-pca"))
+                kmeans.show_wcss()
+            else:
+                kmeans.exec(config.getint("n-clusters"), standardize=config.getboolean("with-standardization"),
+                            pca=config.getboolean("with-pca"))
+                st.merge["labels"] = kmeans.labels
+                # All dataset k-means analysis
+                da_dataset = DataAnalysis(st.merge, st.merge.columns, dataset_name="ScooterTrajectories",
+                                          save_file=True, prefix="kmeans_all")
+                da_dataset.show_joint(on=[STC.MERGE_POS_LONGITUDE_CN, STC.MERGE_POS_LATITUDE_CN, "labels"])
+
+                rental_to_analyze = st.merge[STC.MERGE_RENTAL_ID_CN].unique()[
+                                    :config.getint("num-of-rental-in-dataset-to-analyze")]
+                dataset_to_analyze = st.merge.loc[st.merge[STC.MERGE_RENTAL_ID_CN].isin(rental_to_analyze)]
+                # Bottom left dataset k-means analysis
+                dataset_bl = dataset_to_analyze.loc[dataset_to_analyze[STC.POS_GEN_LATITUDE_CN] < 44.0]
+                da_dataset_bl = DataAnalysis(dataset_bl, dataset_bl.columns, dataset_name="ScooterTrajectories",
+                                             save_file=True, prefix="kmeans_bottom_left")
+                da_dataset_bl.show_joint(on=[STC.MERGE_POS_LONGITUDE_CN, STC.MERGE_POS_LATITUDE_CN, "labels"])
+                # Top right dataset k-means analysis
+                dataset_tr = dataset_to_analyze.loc[dataset_to_analyze[STC.MERGE_POS_LATITUDE_CN] >= 44.0]
+                da_dataset_tr = DataAnalysis(dataset_tr, dataset_tr.columns, dataset_name="ScooterTrajectories",
+                                             save_file=True, prefix="kmeans_top_right")
+                da_dataset_tr.show_joint(on=[STC.MERGE_POS_LONGITUDE_CN, STC.MERGE_POS_LATITUDE_CN, "labels"])
 
 
 def main():
