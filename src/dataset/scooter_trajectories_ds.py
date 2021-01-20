@@ -624,6 +624,9 @@ class ScooterTrajectoriesDS:
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return self
 
+    def time_to_float(self):
+        self.merge[C.MERGE_TIME_COLS] = self.merge[C.MERGE_TIME_COLS].applymap(lambda x: x.timestamp())
+
     def print_stats(self):
         if self.dataset.empty or self.rental.empty or self.pos.empty:
             log.e("Empty dataframe: print_stats() error")
