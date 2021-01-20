@@ -129,6 +129,11 @@ class ScooterTrajectoriesC:
         POS_DEVICE_ID_CN: MERGE_DEVICE_ID_CN
     }
 
+    MERGE_CLUSTERING_COLS: Final = [MERGE_RENTAL_ID_CN, MERGE_START_LATITUDE_CN,
+                                    MERGE_START_LONGITUDE_CN, MERGE_STOP_LATITUDE_CN, MERGE_STOP_LONGITUDE_CN,
+                                    MERGE_START_TIME_CN, MERGE_STOP_TIME_CN, MERGE_POS_LATITUDE_CN,
+                                    MERGE_POS_LONGITUDE_CN, MERGE_POS_SERVER_TIME_CN]
+
     POS_GEN_ID_CN: Final = POS_ID_CN
     POS_GEN_RENTAL_ID_CN: Final = MERGE_RENTAL_ID_CN
     POS_GEN_TIMEDELTA_ID_CN: Final = "timedelta_id"
