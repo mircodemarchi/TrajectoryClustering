@@ -298,6 +298,7 @@ class ScooterTrajectoriesDS:
         # Find the positions that have a distance between the previous position at least of time_distance
         prev_time_columns_group = time_columns_group.iloc[time_columns_group.index - 1].reset_index(drop=True)
         time_gaps = time_columns_group.subtract(prev_time_columns_group)
+        time_gaps.iloc[0] = pd.Timedelta(0)
         time_gaps_map = time_gaps >= time_delta
 
         # Assign a different id for each time sequence
@@ -340,11 +341,6 @@ class ScooterTrajectoriesDS:
 
         end = time.time()
         return rental_pos_map_df, pos_df, rental_df, get_elapsed(start, end)
-
-    def __time_to_float(self):
-        self.merge[C.MERGE_TIME_COLS] = self.merge[C.MERGE_TIME_COLS].applymap(lambda x: x.timestamp())
-        self.pos[C.POS_TIME_COLS] = self.pos[C.POS_TIME_COLS].applymap(lambda x: x.timestamp())
-        self.rental[C.RENTAL_TIME_COLS] = self.rental[C.RENTAL_TIME_COLS].applymap(lambda x: x.timestamp())
 
     def generate(self, chunknum=0, chunksize=50000):
         log.d("Scooter Trajectories start unzip")
@@ -410,13 +406,8 @@ class ScooterTrajectoriesDS:
 
         pos_gen_fp = os.path.join(DATA_FOLDER, C.GENERATED_DN, C.CSV_POS_GENERATED_FN)
         if os.path.exists(pos_gen_fp):
-            self.pos = pd.read_csv(pos_gen_fp, parse_dates=C.POS_TIME_COLS, infer_datetime_format=True, memory_map=True)
-            if not self.pos[[C.POS_GEN_SPREAD_CN, C.POS_GEN_EDGE_CN, C.POS_GEN_TIME_GAP_CN]].isnull().values.any():
-                self.pos = pd.read_csv(pos_gen_fp, parse_dates=C.POS_TIME_COLS,
-                                       infer_datetime_format=True, memory_map=True,
-                                       converters={C.POS_GEN_SPREAD_CN: json.loads,
-                                                   C.POS_GEN_EDGE_CN: json.loads,
-                                                   C.POS_GEN_TIME_GAP_CN: json.loads})
+            self.pos = pd.read_csv(pos_gen_fp, parse_dates=C.POS_TIME_COLS,
+                                   infer_datetime_format=True, memory_map=True)
             self.pos = pd.DataFrame(self.pos, columns=C.POS_GEN_COLS)
         else:
             log.w("{} path not exist".format(pos_gen_fp))
@@ -474,7 +465,7 @@ class ScooterTrajectoriesDS:
         for _, group in groups_by_rental:
             group_timedelta_ids, group_time_gaps = self.__find_timedelta(group, time_delta)
             timedelta_ids.extend(group_timedelta_ids)
-            time_gaps.extend(group_time_gaps.values.tolist())
+            time_gaps.extend(group_time_gaps.astype("timedelta64[ms]").mean(axis=1))
             sys.stdout.write("\r {:.3f} %".format(len(timedelta_ids) * 100 / len(self.pos.index)))
 
         sys.stdout.write("\r")
@@ -503,7 +494,8 @@ class ScooterTrajectoriesDS:
             pos_groups_as_index = self.pos[groupby]
 
         # Save spread in positions
-        self.pos[C.POS_GEN_SPREAD_CN] = spread_pos_groups.loc[pos_groups_as_index].values.tolist()
+        self.pos[C.POS_GEN_SPREAD_CN] = (spread_pos_groups[C.POS_GEN_COORD_COLS[0]] *
+                                         spread_pos_groups[C.POS_GEN_COORD_COLS[1]]).loc[pos_groups_as_index].values
 
         # Calculate cluster spread id
         i = 0
@@ -518,9 +510,6 @@ class ScooterTrajectoriesDS:
             # Assign index at the positions of the same spread cluster
             spread_cluster = spread_pos_groups.loc[self.__find_spreaddelta(spread_pos_groups, spread, spreaddelta)]
             self.pos.loc[pos_groups_as_index.isin(spread_cluster.index), C.POS_GEN_SPREADDELTA_ID_CN] = i
-
-            if self.pos[C.POS_GEN_SPREADDELTA_ID_CN].isnull().sum() == 0:
-                break
 
             # Remove groups already assigned and update the list
             spread_pos_groups = spread_pos_groups.drop(index=spread_cluster.index)
@@ -557,7 +546,14 @@ class ScooterTrajectoriesDS:
             pos_groups_as_index = self.pos[groupby]
 
         # Save edge in positions
-        self.pos[C.POS_GEN_EDGE_CN] = edge_pos_groups.loc[pos_groups_as_index].values.tolist()
+        self.pos[C.POS_GEN_EDGE_LATITUDE_START_CN] = edge_pos_groups[
+            edge_pos_groups_cols[0]].loc[pos_groups_as_index].values
+        self.pos[C.POS_GEN_EDGE_LONGITUDE_START_CN] = edge_pos_groups[
+            edge_pos_groups_cols[1]].loc[pos_groups_as_index].values
+        self.pos[C.POS_GEN_EDGE_LATITUDE_STOP_CN] = edge_pos_groups[
+            edge_pos_groups_cols[2]].loc[pos_groups_as_index].values
+        self.pos[C.POS_GEN_EDGE_LONGITUDE_STOP_CN] = edge_pos_groups[
+            edge_pos_groups_cols[3]].loc[pos_groups_as_index].values
 
         # Calculate cluster edge id
         i = 0
@@ -573,9 +569,6 @@ class ScooterTrajectoriesDS:
             # Assign index at the positions of the same spread cluster
             edge_cluster = edge_pos_groups.loc[self.__find_edgedelta(edge_pos_groups, edge, edgedelta)]
             self.pos.loc[pos_groups_as_index.isin(edge_cluster.index), C.POS_GEN_EDGEDELTA_ID_CN] = i
-
-            if self.pos[C.POS_GEN_EDGEDELTA_ID_CN].isnull().sum() == 0:
-                break
 
             # Remove groups already assigned and update the list
             edge_pos_groups = edge_pos_groups.drop(index=edge_cluster.index)
@@ -633,9 +626,6 @@ class ScooterTrajectoriesDS:
                                                 self.__find_spreaddelta(spread_pos_groups, spread, spreaddelta)]
             self.pos.loc[pos_groups_as_index.isin(coord_cluster.index), C.POS_GEN_COORDDELTA_ID_CN] = i
 
-            if self.pos[C.POS_GEN_COORDDELTA_ID_CN].isnull().sum() == 0:
-                break
-
             # Remove groups already assigned and update the list
             spread_pos_groups = spread_pos_groups.drop(index=coord_cluster.index)
             edge_pos_groups = edge_pos_groups.drop(index=coord_cluster.index)
@@ -651,18 +641,19 @@ class ScooterTrajectoriesDS:
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return self
 
-    def prepare_for_clustering(self):
-        self.__time_to_float()
+    def heuristic_empty(self):
+        """
+        Heuristic columns are empty if there is a value of heuristic columns that is null.
 
-        pos_sort_cols = C.POS_GEN_SORT_COLS
-        merge_sort_cols = [C.POS_GEN_COLS_MERGE_MAP[c] for c in pos_sort_cols]
+        Returns
+        -------
+        Bool
+            True if the heuristics columns are not fully filled otherwise false.
+        """
+        return self.pos[C.POS_GEN_HEURISTIC_COLS].isnull().values.any()
 
-        ordered_pos = self.pos.sort_values(by=pos_sort_cols, ignore_index=True)
-        ordered_merge = self.merge.sort_values(by=merge_sort_cols, ignore_index=True)
-
-        pos_cluster_cols = [C.POS_GEN_SPREAD_CN, C.POS_GEN_EDGE_CN, C.POS_GEN_TIME_GAP_CN]
-        result_cols = ordered_merge.columns + pos_cluster_cols
-        return pd.concat([ordered_merge, ordered_pos[pos_cluster_cols]], axis=1), result_cols
+    def empty(self):
+        return self.dataset.empty or self.pos.empty or self.rental.empty or self.merge.empty
 
     def print_stats(self):
         if self.dataset.empty or self.rental.empty or self.pos.empty:
@@ -689,7 +680,9 @@ class ScooterTrajectoriesDS:
         log.i("[POS COLUMN NAMES]: {};".format(list(self.pos.columns)))
         log.i("[POS FEATURES TYPES]:\n{};".format(self.pos.dtypes))
         log.i("[POS NULL OCCURRENCES]:\n{};".format(self.pos.isnull().sum()))
-        log.i("[POS DESCRIPTION]:\n{};".format(self.pos.describe(datetime_is_numeric=True)))
+        log.i("[POS DESCRIPTION]:\n{}\n{};".format(
+            self.pos[self.pos.columns[:int(len(self.pos.columns) / 2)]].describe(datetime_is_numeric=True),
+            self.pos[self.pos.columns[int(len(self.pos.columns) / 2):]].describe(datetime_is_numeric=True)))
         log.i("[MERGE SHAPE]: {};".format(self.merge.shape))
         log.i("[MERGE COLUMN NAMES]: {};".format(list(self.merge.columns)))
         log.i("[MERGE FEATURES TYPES]:\n{};".format(self.merge.dtypes))

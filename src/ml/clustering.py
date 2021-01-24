@@ -1,4 +1,6 @@
 import time
+import sys
+import os
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -7,8 +9,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
-from util import get_elapsed
-from util import Log
+from util.util import get_elapsed
+from util.log import Log
+from util.constant import IMAGE_FOLDER
 
 
 log = Log(__name__, enable_console=True, enable_file=False)
@@ -22,6 +25,10 @@ class Clustering:
         self.wcss = None
         self.inertia = None
         self.labels = None
+
+        self.image_folder = os.path.join(IMAGE_FOLDER, dataset_name) if dataset_name is not None else IMAGE_FOLDER
+        if not os.path.exists(self.image_folder) and self.save_file:
+            os.makedirs(self.image_folder)
 
     def __preprocessing(self, x, standardize, pca):
         start = time.time()
@@ -72,32 +79,42 @@ class Clustering:
         x, elapsed = self.__preprocessing(self.x, standardize, pca)
         log.d("elapsed time: {}".format(elapsed))
 
-        log.d("Clustering {} k-means process".format(self.dataset_name))
+        log.d("Clustering {} k-means test in range {}".format(self.dataset_name, range_clusters))
         start = time.time()
         wcss = []
         for c in range_clusters:
             inertia, _, _ = self.__exec(x, c)
             wcss.append(inertia)
+            sys.stdout.write("\r {:.3f} %".format(c * 100 / range_clusters.stop))
 
+        sys.stdout.write("\r")
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
 
         self.wcss = wcss
         return self
 
-    def show_variance(self):
+    def show_variance(self, title="Explained Variance by Components", save_file=False, prefix=None):
+        prefix = "" if prefix is None else "{}_".format(prefix)
+        filename = prefix + "variance.png"
         log.d("Clustering {} show cumulative variance".format(self.dataset_name))
         variance_cumulated = self.__get_cumulated_variance(self.x)
 
         plt.figure(figsize=(10, 8))
         plt.plot(range(1, variance_cumulated.shape[0] + 1), variance_cumulated, marker="o", linestyle="--")
-        plt.title("Explained Variance by Components")
+        plt.title(title)
         plt.xlabel("Number of Components")
         plt.ylabel("Cumulative Explained Variance")
+
+        if save_file:
+            plt.savefig(os.path.join(self.image_folder, filename))
+
         plt.show()
         return self
 
-    def show_wcss(self):
+    def show_wcss(self, title="K-Means Clustering", save_file=False, prefix=None):
+        prefix = "" if prefix is None else "{}_".format(prefix)
+        filename = prefix + "wcss.png"
         log.d("Clustering {} show wcss".format(self.dataset_name))
         if self.wcss is None:
             log.e("Clustering error: perform test method before show_wcss")
@@ -105,8 +122,12 @@ class Clustering:
 
         plt.figure(figsize=(10, 8))
         plt.plot(range(1, len(self.wcss) + 1), self.wcss, marker="o", linestyle="--")
-        plt.title("K-Means Clustering")
+        plt.title(title)
         plt.xlabel("Number of Clusters")
         plt.ylabel("WCSS")
+
+        if save_file:
+            plt.savefig(os.path.join(self.image_folder, filename))
+
         plt.show()
         return self

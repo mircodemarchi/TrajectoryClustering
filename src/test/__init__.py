@@ -1,0 +1,1 @@
+from .scooter_trajectories_test import ScooterTrajectoriesTest
