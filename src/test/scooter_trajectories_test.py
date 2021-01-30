@@ -118,7 +118,8 @@ class ScooterTrajectoriesTest:
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return join
 
-    def __line_joint_analysis(self, dataset, joint_list=None, line_list=None, prefix=None):
+    def __line_joint_analysis(self, dataset, joint_list=None, line_list=None, line_table_list=None, line_3d_list=None,
+                              prefix=None):
         da = DataAnalysis(dataset, dataset.columns, dataset_name=DATASET_NAME, save_file=SAVE_FILE, prefix=prefix)
         if joint_list is not None:
             for t in joint_list:
@@ -127,6 +128,14 @@ class ScooterTrajectoriesTest:
         if line_list is not None:
             for t in line_list:
                 da.show_line(on=t, groupby=self.groupby)
+
+        if line_table_list is not None:
+            for t in line_table_list:
+                da.show_line_table(on=t)
+
+        if line_3d_list is not None:
+            for t in line_list:
+                da.show_3d_line(on=t, groupby=self.groupby)
         return self
 
     def __overview_analysis(self, dataset, cols, couples=None, prefix=None):
@@ -138,13 +147,15 @@ class ScooterTrajectoriesTest:
                 da.show_joint(on=c)
         return self
 
-    def __cardinal_analysis(self, dataset, joint_list=None, line_list=None, prefix=None, skip_filter=True):
+    def __cardinal_analysis(self, dataset, joint_list=None, line_list=None, line_table_list=None, line_3d_list=None,
+                            prefix=None, force_filter=False):
         partitions = self.__partition(dataset, only_north=self.only_north)
         for key in partitions:
             prefix_with_cardinal = "{}_{}".format(prefix, key) if prefix is not None else key
-            if not skip_filter:
-                partitions[key] = self.__filter(partitions[key])
-            self.__line_joint_analysis(partitions[key], joint_list, line_list, prefix_with_cardinal)
+            partitions[key] = self.__filter(partitions[key], force_filter)
+            self.__line_joint_analysis(partitions[key], joint_list=joint_list, line_list=line_list,
+                                       line_table_list=line_table_list, line_3d_list=line_3d_list,
+                                       prefix=prefix_with_cardinal)
         return self
 
     def load_from_original(self):
