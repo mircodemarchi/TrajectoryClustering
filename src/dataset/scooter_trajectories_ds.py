@@ -290,7 +290,7 @@ class ScooterTrajectoriesDS:
         pos_valid_df = pos_df.loc[pos_df[C.POS_GEN_ID_CN].isin(rental_pos_map_df[C.MERGE_POS_ID_CN])]
         return pos_valid_df, rental_valid_df
 
-    def __find_timedelta(self, group_df, time_delta):
+    def __find_timedelta(self, group_df, time_delta=None):
         pos_time_cols = [C.POS_GEN_SERVER_TIME_CN, C.POS_GEN_DEVICE_TIME_CN]
         time_columns_group = group_df[pos_time_cols].reset_index(drop=True)
 
@@ -298,11 +298,16 @@ class ScooterTrajectoriesDS:
         prev_time_columns_group = time_columns_group.iloc[time_columns_group.index - 1].reset_index(drop=True)
         time_gaps = time_columns_group.subtract(prev_time_columns_group)
         time_gaps.iloc[0] = pd.Timedelta(0)
+
+        # Calculate time_delta dynamically if None
+        if time_delta is None:
+            # Take the 50% + 34.1% of normal distribution
+            time_delta = time_gaps.mean() + time_gaps.std().fillna(pd.Timedelta(0))
         time_gaps_map = time_gaps >= time_delta
 
         # Assign a different id for each time sequence
         time_gaps_map = time_gaps_map[pos_time_cols[0]] & time_gaps_map[pos_time_cols[1]]
-        return time_gaps_map.cumsum(), time_gaps
+        return time_gaps_map.ne(time_gaps_map.shift()).cumsum(), time_gaps
 
     def __find_spreaddelta(self, group_df, spread, spread_delta):
         map_df = (group_df >= (spread - spread_delta)) & (group_df <= (spread + spread_delta))
@@ -453,16 +458,17 @@ class ScooterTrajectoriesDS:
 
         return self
 
-    def timedelta_heuristic(self, timedelta):
+    def timedelta_heuristic(self, timedelta=None):
         log.d("Scooter Trajectories timedelta heuristic")
         start = time.time()
-        time_delta = pd.Timedelta(timedelta)
+
+        timedelta = pd.Timedelta(timedelta) if timedelta is not None else None
         groups_by_rental = self.pos.groupby(by=[C.POS_GEN_RENTAL_ID_CN])
 
         timedelta_ids = []
         time_gaps = []
         for _, group in groups_by_rental:
-            group_timedelta_ids, group_time_gaps = self.__find_timedelta(group, time_delta)
+            group_timedelta_ids, group_time_gaps = self.__find_timedelta(group, timedelta)
             timedelta_ids.extend(group_timedelta_ids)
             time_gaps.extend(group_time_gaps.astype("timedelta64[ms]").mean(axis=1))
             sys.stdout.write("\r {:.3f} %".format(len(timedelta_ids) * 100 / len(self.pos.index)))
@@ -670,8 +676,8 @@ class ScooterTrajectoriesDS:
         log.i("[DATA MAP FEATURES TYPES]:\n{};".format(self.dataset.dtypes))
         log.i("[DATA MAP NULL OCCURRENCES]:\n{};".format(self.dataset.isnull().sum()))
         log.i("[DATA MAP DESCRIPTION]:\n{}\n{};".format(
-            self.dataset[self.dataset.columns[:int(len(self.dataset.columns)/2)]].describe(datetime_is_numeric=True),
-            self.dataset[self.dataset.columns[int(len(self.dataset.columns)/2):]].describe(datetime_is_numeric=True)))
+            self.dataset[self.dataset.columns[:int(len(self.dataset.columns) / 2)]].describe(datetime_is_numeric=True),
+            self.dataset[self.dataset.columns[int(len(self.dataset.columns) / 2):]].describe(datetime_is_numeric=True)))
         log.i("[RENTAL SHAPE]: {};".format(self.rental.shape))
         log.i("[RENTAL COLUMN NAMES]: {};".format(list(self.rental.columns)))
         log.i("[RENTAL FEATURES TYPES]:\n{};".format(self.rental.dtypes))
