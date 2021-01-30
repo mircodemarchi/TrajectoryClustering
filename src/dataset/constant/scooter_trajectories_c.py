@@ -137,7 +137,8 @@ class ScooterTrajectoriesC:
     POS_GEN_COORDDELTA_ID_CN: Final = "coorddelta_id"
     POS_GEN_LATITUDE_CN: Final = POS_LATITUDE_CN
     POS_GEN_LONGITUDE_CN: Final = POS_LONGITUDE_CN
-    POS_GEN_SPREAD_CN: Final = "spread"
+    POS_GEN_SPREAD_LATITUDE_CN: Final = "spread_latitude"
+    POS_GEN_SPREAD_LONGITUDE_CN: Final = "spread_longitude"
     POS_GEN_EDGE_LATITUDE_START_CN: Final = "edge_latitude_start"
     POS_GEN_EDGE_LATITUDE_STOP_CN: Final = "edge_latitude_stop"
     POS_GEN_EDGE_LONGITUDE_START_CN: Final = "edge_longitude_start"

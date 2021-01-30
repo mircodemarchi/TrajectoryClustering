@@ -11,7 +11,6 @@ from util.constant import DATA_FOLDER
 
 from .constant import ScooterTrajectoriesC as C
 
-
 log = Log(__name__, enable_console=True, enable_file=False)
 
 
@@ -243,7 +242,7 @@ class ScooterTrajectoriesDS:
             return rental_of_pos
 
         pos_df[C.POS_RENTAL_CN] = [___find_rental_of_pos(rental_df, pos, pos_idx)
-                                      for pos_idx, pos in pos_df.iterrows()]
+                                   for pos_idx, pos in pos_df.iterrows()]
 
         # Remove positions without rentals
         pos_df = pos_df[[rentals.size != 0 for rentals in pos_df[C.POS_RENTAL_CN]]]
@@ -307,7 +306,7 @@ class ScooterTrajectoriesDS:
 
     def __find_spreaddelta(self, group_df, spread, spread_delta):
         map_df = (group_df >= (spread - spread_delta)) & (group_df <= (spread + spread_delta))
-        return map_df[C.POS_GEN_LATITUDE_CN] & map_df[C.POS_GEN_LONGITUDE_CN]
+        return map_df[C.POS_GEN_SPREAD_LATITUDE_CN] & map_df[C.POS_GEN_SPREAD_LONGITUDE_CN]
 
     def __find_edgedelta(self, group_df, edge, edge_delta):
         map_df = (group_df >= (edge - edge_delta)) & (group_df <= (edge + edge_delta))
@@ -476,9 +475,10 @@ class ScooterTrajectoriesDS:
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return self
 
-    def spreaddelta_heuristic(self, spreaddelta, groupby):
+    def spreaddelta_heuristic(self, groupby, spreaddelta=None):
         log.d("Scooter Trajectories spreaddelta heuristic")
         start = time.time()
+        delta = spreaddelta if spreaddelta is not None else None
 
         # Initialize column to null
         self.pos[C.POS_GEN_SPREADDELTA_ID_CN] = np.nan
@@ -486,29 +486,30 @@ class ScooterTrajectoriesDS:
         # Group position for the column specified by the user
         pos_groups = self.pos.groupby(by=groupby)
         # Calculate the spread of each position group
+        spread_pos_groups_cols = [C.POS_GEN_SPREAD_LATITUDE_CN, C.POS_GEN_SPREAD_LONGITUDE_CN]
         spread_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: x.max() - x.min())
-
+        spread_pos_groups = spread_pos_groups.rename(columns=dict(zip(spread_pos_groups.columns,
+                                                                      spread_pos_groups_cols)))
         if type(groupby) == list:
             pos_groups_as_index = pd.MultiIndex.from_frame(self.pos[groupby])
         else:
             pos_groups_as_index = self.pos[groupby]
 
         # Save spread in positions
-        self.pos[C.POS_GEN_SPREAD_CN] = (spread_pos_groups[C.POS_GEN_COORD_COLS[0]] *
-                                         spread_pos_groups[C.POS_GEN_COORD_COLS[1]]).loc[pos_groups_as_index].values
+        self.pos[spread_pos_groups_cols] = spread_pos_groups.loc[pos_groups_as_index].values
 
         # Calculate cluster spread id
-        i = 0
+        i = 1
         while self.pos[C.POS_GEN_SPREADDELTA_ID_CN].isnull().sum() != 0:
-            group = pos_groups.get_group(spread_pos_groups.index[0])
+            # Find the mean spread
+            nearest_mean = spread_pos_groups.iloc[
+                (spread_pos_groups-spread_pos_groups.mean()).abs().sum(axis=1).argmin()]
 
-            # Get the current group spread
-            min_coord = group[C.POS_GEN_COORD_COLS].min()
-            max_coord = group[C.POS_GEN_COORD_COLS].max()
-            spread = max_coord - min_coord
+            if spreaddelta is None:
+                delta = spread_pos_groups.std().fillna(0.0) / 4  # Take the 20% of normal distribution
 
             # Assign index at the positions of the same spread cluster
-            spread_cluster = spread_pos_groups.loc[self.__find_spreaddelta(spread_pos_groups, spread, spreaddelta)]
+            spread_cluster = spread_pos_groups.loc[self.__find_spreaddelta(spread_pos_groups, nearest_mean, delta)]
             self.pos.loc[pos_groups_as_index.isin(spread_cluster.index), C.POS_GEN_SPREADDELTA_ID_CN] = i
 
             # Remove groups already assigned and update the list
