@@ -81,6 +81,7 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
         n_clusters=None if config["n-clusters"] is None else config.getint("n-clusters"),
         with_pca=config.getboolean("with-pca"),
         with_standardization=config.getboolean("with-standardization"),
+        with_normalization=config.getboolean("with-normalization"),
         only_north=config.getboolean("only-north")
     )
 
