@@ -2,9 +2,16 @@
 
 """
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d.art3d import Line3DCollection
+from matplotlib.colors import ListedColormap, BoundaryNorm
+#from mpl_toolkits.basemap import Basemap
 import plotly
 import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import seaborn as sns
+import numpy as np
+import pandas as pd
 import os
 import time
 from .util import get_elapsed
@@ -12,6 +19,8 @@ from .log import Log
 from .constant import IMAGE_FOLDER, HTML_FOLDER
 
 log = Log(__name__, enable_console=True, enable_file=False)
+
+PALETTE = "Set1"
 
 
 class DataAnalysis:
@@ -48,7 +57,8 @@ class DataAnalysis:
         feature_names = self.feature_names
         fig, axs = plt.subplots(int((len(feature_names) + 1) / 2), 2, figsize=(20, 3*len(feature_names)), squeeze=False)
         for index, feature in enumerate(feature_names):
-            sns.histplot(self.x, x=feature, stat="density", kde=True, ax=axs[int(index / 2), index % 2])
+            sns.histplot(self.x, x=feature, stat="density", common_norm=True, kde=True,
+                         ax=axs[int(index / 2), index % 2])
             axs[int(index / 2), index % 2].set_title(feature, fontsize=16)
         plt.suptitle(title, fontsize=16)
 
@@ -97,10 +107,11 @@ class DataAnalysis:
             log.e("show_line parameter error: \"on\" size {}".format(len(on)))
             return self
 
-        g = sns.JointGrid(data=self.x, x=x, y=y, hue=z, palette="Spectral")
-        g.plot_joint(sns.scatterplot, marker=".")
-        g.plot_marginals(sns.histplot, kde=True, stat="density")
-        g.plot_marginals(sns.rugplot, height=-.15, clip_on=False)
+        g = sns.JointGrid(data=self.x, x=x, y=y, hue=z, palette=PALETTE)
+        g.plot_joint(sns.scatterplot, marker=".", linewidth=0, legend="brief")
+        g.plot_marginals(sns.histplot, kde=False, common_norm=True, stat="density", alpha=0.5, linewidth=1,
+                         element="step", fill=False)
+        # g.plot_marginals(sns.rugplot, height=-.15, clip_on=False)
         g.fig.suptitle(title)
 
         if self.save_file:
@@ -116,33 +127,113 @@ class DataAnalysis:
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return self
 
-    def show_line(self, on, filename="line.png", title="Line"):
+    def show_line(self, on, groupby, filename="line.png", title="Line"):
         log.d("DataAnalysis show line plot of {} on {}".format(self.dataset_name, on))
         start = time.time()
 
         title = "{} {}".format(self.title_prefix, title)
-        x, y, z, w = None, None, None, None
-        legend = "auto"
+        fig, ax = plt.subplots()
         if len(on) == 3:
             x, y, z = on
             title = "{}, {} and {} ".format(x, y, z) + title
-        elif len(on) == 4:
+            unique = self.x[z].unique()
+            palette = dict(zip(unique, sns.color_palette(PALETTE, n_colors=len(unique))))
+            for _, g in self.x.groupby(by=groupby):
+                sns.lineplot(x=x, y=y, hue=z, estimator=None, data=g, legend=False, sort=False, palette=palette, ax=ax)
+        elif len(on) == 2:
+            x, y = on
+            title = "{} and {} ".format(x, y) + title
+            palette = sns.color_palette(n_colors=1)[0]
+            for _, g in self.x.groupby(by=groupby):
+                sns.lineplot(x=x, y=y, estimator=None, data=g[[x, y]], legend=False, sort=False, color=palette, ax=ax)
+        else:
+            log.e("show_line parameter error: \"on\" size {}".format(len(on)))
+            return self
+
+        fig.suptitle(title)
+
+        if self.save_file:
+            filename = self.filename_prefix + "*{}*{}*{}*_".format(x, y, z) + filename
+            fig.savefig(os.path.join(self.image_folder, filename))
+
+        plt.show()
+
+        end = time.time()
+        log.d("elapsed time: {}".format(get_elapsed(start, end)))
+        return self
+
+    def show_3d_line(self, on, groupby, filename="3d_line.png", title="3D Line"):
+        log.d("DataAnalysis show 3d line plot of {} on {}".format(self.dataset_name, on))
+        start = time.time()
+
+        title = "{} {}".format(self.title_prefix, title)
+        if len(on) == 3:
+            x, y, z = on
+            title = "{}, {} and {} ".format(x, y, z) + title
+        else:
+            log.e("show_line parameter error: \"on\" size {}".format(len(on)))
+            return self
+
+        unique = self.x[z].unique()
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+
+        # # Previous version
+        # ax.set_zlim(self.x[z].min(), self.x[z].max())
+        # ax.set_xlim(self.x[x].min(), self.x[x].max())
+        # ax.set_ylim(self.x[y].min(), self.x[y].max())
+        # cmap = ListedColormap(sns.color_palette(PALETTE, n_colors=len(unique)).as_hex())
+        # norm = BoundaryNorm(unique, cmap.N)
+        # for _, g in self.x.groupby(by=groupby):
+        #     if g[z].unique().size == 1:
+        #         points = g[[x, y, z]].to_numpy().reshape(-1, 1, 3)
+        #         segments = np.concatenate([points, np.roll(points, -1, axis=0)], axis=1)
+        #         lc = Line3DCollection(segments, cmap=cmap, norm=norm, linewidths=0.5, array=g[z])
+        #         ax.add_collection3d(lc)
+        #     else:
+        #         for _, sub_g in g.groupby(by=z):
+        #             points = sub_g[[x, y, z]].to_numpy().reshape(-1, 1, 3)
+        #             segments = np.concatenate([points, np.roll(points, -1, axis=0)], axis=1)
+        #             lc = Line3DCollection(segments, cmap=cmap, norm=norm, linewidths=0.5, array=sub_g[z])
+        #             ax.add_collection3d(lc)
+
+        palette = pd.DataFrame(sns.color_palette(PALETTE, n_colors=len(unique)).as_hex(), index=unique)
+        for _, g in self.x.groupby(by=groupby):
+            if g[z].unique().size == 1:
+                ax.plot3D(g[x], g[y], g[z], palette.loc[g[z].unique()[0], 0], linewidth=0.5)
+            else:
+                for sub_g_name, sub_g in g.groupby(by=z):
+                    ax.plot3D(sub_g[x], sub_g[y], sub_g[z], palette.loc[sub_g_name, 0], linewidth=0.5)
+        plt.suptitle(title)
+
+        if self.save_file:
+            filename = self.filename_prefix + "*{}*{}*{}*_".format(x, y, z) + filename
+            plt.savefig(os.path.join(self.image_folder, filename))
+
+        plt.show()
+
+        end = time.time()
+        log.d("elapsed time: {}".format(get_elapsed(start, end)))
+        return self
+
+    def show_line_table(self, on, filename="line_table.png", title="Line Table"):
+        log.d("DataAnalysis show line table plot of {} on {}".format(self.dataset_name, on))
+        start = time.time()
+
+        title = "{} {}".format(self.title_prefix, title)
+        if len(on) == 4:
             x, y, w, z = on
-            legend = "full"
             title = "{}, {}, {} and {} ".format(x, y, z, w) + title
         else:
             log.e("show_line parameter error: \"on\" size {}".format(len(on)))
             return self
 
         p = sns.relplot(x=x, y=y, kind="line", hue=z, col=w, col_wrap=None if w is None else 10, estimator=None,
-                        data=self.x, legend=legend, sort=False, palette="Spectral")
+                        data=self.x, legend="full", sort=False, palette=PALETTE)
         p.fig.suptitle(title)
 
         if self.save_file:
-            if w is None:
-                filename = self.filename_prefix + "*{}*{}*{}*_".format(x, y, z) + filename
-            else:
-                filename = self.filename_prefix + "*{}*{}*{}*{}*_".format(x, y, z, w) + filename
+            filename = self.filename_prefix + "*{}*{}*{}*{}*_".format(x, y, z, w) + filename
             p.savefig(os.path.join(self.image_folder, filename))
 
         plt.show()
@@ -151,7 +242,7 @@ class DataAnalysis:
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return self
 
-    def show_line_map(self, on, hover_data=None, filename="line_map.html"):
+    def show_line_map(self, on, groupby, hover_data=None, filename="line_map.html"):
         log.d("DataAnalysis show line map of {} on {}".format(self.dataset_name, on))
         start = time.time()
 
@@ -160,11 +251,22 @@ class DataAnalysis:
             return self
 
         x, y, z = on
-        fig = px.line_mapbox(self.x, lat=x, lon=y, color=z,
-                             hover_name=None if hover_data is None else hover_data[0],
-                             hover_data=None if hover_data is None else hover_data[1:])
-        fig.update_layout(mapbox_style="open-street-map",
-                          mapbox_zoom=8,
+        unique = self.x[z].unique()
+        palette = pd.DataFrame(sns.color_palette(PALETTE, n_colors=len(unique)).as_hex(), index=unique, columns=["p"])
+        fig = make_subplots()
+        for _, g in self.x.groupby(by=groupby):
+            fig.add_scattermapbox(lat=g[x], lon=g[y], mode="lines",
+                                  line=go.scattermapbox.Line(color=palette.loc[g[z], "p"].values[0]),
+                                  name=None if hover_data is None else str(g[hover_data[0]].values[0]),
+                                  text=None if hover_data is None else g[hover_data[1:]].values.tolist())
+        # fig = px.line_mapbox(self.x, lat=x, lon=y, color=z,
+        #                      hover_name=None if hover_data is None else hover_data[0],
+        #                      hover_data=None if hover_data is None else hover_data[1:])
+        fig.update_layout(mapbox_style="stamen-toner",
+                          mapbox_zoom=7,
+                          mapbox_center_lat=self.x[x].mean(),
+                          mapbox_center_lon=self.x[y].mean(),
+                          showlegend=False,
                           margin={"r": 0, "t": 0, "l": 0, "b": 0})
         plotly.offline.plot(fig, filename=os.path.join(self.html_folder, self.filename_prefix + filename))
 
@@ -188,6 +290,26 @@ class DataAnalysis:
             mapbox_style="stamen-toner",
             mapbox_zoom=8,
             margin={"r": 0, "t": 0, "l": 0, "b": 0})
+        plotly.offline.plot(fig, filename=os.path.join(self.html_folder, self.filename_prefix + filename))
+
+        end = time.time()
+        log.d("elapsed time: {}".format(get_elapsed(start, end)))
+        return self
+
+    def show_3d_map(self, on, groupby, hover_data=None, filename="3d_map.html"):
+        log.d("DataAnalysis show 3d map of {} on {}".format(self.dataset_name, on))
+        start = time.time()
+
+        if len(on) != 3:
+            log.e("show_line parameter error: \"on\" size {}".format(len(on)))
+            return self
+
+        y, x, z = on
+        unique = self.x[z].unique()
+        palette = pd.DataFrame(sns.color_palette(PALETTE, n_colors=len(unique)).as_hex(), index=unique, columns=["p"])
+        fig = make_subplots()
+        for _, g in self.x.groupby(by=groupby):
+            fig.add_scatter3d(x=g[x], y=g[y], z=g[z], line=dict(color=palette.loc[g[z], "p"]), mode="lines")
         plotly.offline.plot(fig, filename=os.path.join(self.html_folder, self.filename_prefix + filename))
 
         end = time.time()
