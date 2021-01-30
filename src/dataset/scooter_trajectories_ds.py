@@ -601,53 +601,68 @@ class ScooterTrajectoriesDS:
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return self
 
-    def coorddelta_heuristic(self, spreaddelta, edgedelta, groupby):
+    def coorddelta_heuristic(self, groupby, spreaddelta=None, edgedelta=None):
         log.d("Scooter Trajectories coorddelta heuristic")
         start = time.time()
+        e_delta = edgedelta if edgedelta is not None else None
+        s_delta = spreaddelta if spreaddelta is not None else None
 
         # Initialize column to null
         self.pos[C.POS_GEN_COORDDELTA_ID_CN] = np.nan
 
         # Group position for the column specified by the user
         pos_groups = self.pos.groupby(by=groupby)
-        # Calculate the spread of each position group
-        spread_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: x.max() - x.min())
-        # Calculate the edge for each position group
-        edge_pos_groups_cols = [c + "_start" for c in C.POS_GEN_COORD_COLS] + [c + "_end" for c in C.POS_GEN_COORD_COLS]
-        edge_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: pd.concat([x.iloc[0], x.iloc[-1]],
-                                                                                     ignore_index=True))
-        edge_pos_groups = edge_pos_groups.rename(columns=dict(zip(edge_pos_groups.columns, edge_pos_groups_cols)))
+        # Get the edge and the spread for each position group
+        spread_pos_groups_cols = [C.POS_GEN_SPREAD_LATITUDE_CN, C.POS_GEN_SPREAD_LONGITUDE_CN]
+        edge_pos_groups_cols = [C.POS_GEN_EDGE_LATITUDE_START_CN, C.POS_GEN_EDGE_LATITUDE_STOP_CN,
+                                C.POS_GEN_EDGE_LONGITUDE_START_CN, C.POS_GEN_EDGE_LONGITUDE_STOP_CN]
+        coord_pos_groups = self.pos[groupby + edge_pos_groups_cols + spread_pos_groups_cols].drop_duplicates()\
+            .set_index(groupby)
 
         if type(groupby) == list:
             pos_groups_as_index = pd.MultiIndex.from_frame(self.pos[groupby])
         else:
             pos_groups_as_index = self.pos[groupby]
-        i = 0
+        i = 1
         while self.pos[C.POS_GEN_COORDDELTA_ID_CN].isnull().sum() != 0:
-            if edge_pos_groups.index[0] != spread_pos_groups.index[0]:
-                log.f("coorddelta_heuristic internal fatal fail: spread and edge groups must have the same indexing")
-                break
-            group = pos_groups.get_group(edge_pos_groups.index[0])
+            # Find the mean edge
+            random_edge = coord_pos_groups[edge_pos_groups_cols].sample()
+            if i == 1:
+                while len(pos_groups[C.POS_GEN_COORD_COLS].get_group(random_edge.index[0]).index) == 1:
+                    random_edge = coord_pos_groups[edge_pos_groups_cols].sample()
 
-            # Get the current group spread
-            min_coord = group[C.POS_GEN_COORD_COLS].min()
-            max_coord = group[C.POS_GEN_COORD_COLS].max()
-            start_coord = group[C.POS_GEN_COORD_COLS].iloc[0]
-            stop_coord = group[C.POS_GEN_COORD_COLS].iloc[-1]
-            spread = max_coord - min_coord
-            edge = pd.concat([start_coord, stop_coord], ignore_index=True)
-            edge = edge.rename(dict(zip(edge.index, edge_pos_groups_cols)))
+            group = pos_groups[C.POS_GEN_COORD_COLS].get_group(random_edge.index[0])
+            group_std = group.std().fillna(0.0) * 2  # Take the 95% of positions normal distribution
+            group_mean = group.mean()
+            valid_pos = self.pos.set_index(groupby).loc[coord_pos_groups.index]
+            groups_near = valid_pos[edge_pos_groups_cols + spread_pos_groups_cols].loc[self.__find_posdelta(
+                valid_pos[C.POS_GEN_COORD_COLS], group_mean, group_std)]
+            edges_over_group = coord_pos_groups[edge_pos_groups_cols].loc[groups_near.index]
+            e_nearest_mean = edges_over_group.iloc[
+                (edges_over_group - edges_over_group.mean()).abs().sum(axis=1).argmin()]
 
-            # Assign index at the positions of the same spread cluster
-            coord_cluster = edge_pos_groups.loc[self.__find_edgedelta(edge_pos_groups, edge, edgedelta) &
-                                                self.__find_spreaddelta(spread_pos_groups, spread, spreaddelta)]
+            if edgedelta is None:
+                e_delta = edges_over_group.std().fillna(0.0) * 2  # Take the 95% of edges normal distribution
+
+            # Find the mean spread
+            spreads_over_group = coord_pos_groups[spread_pos_groups_cols].loc[groups_near.index]
+            s_nearest_mean = spreads_over_group.loc[e_nearest_mean.name].drop_duplicates().iloc[0]
+            # s_nearest_mean = spreads_over_group.iloc[
+            #     (spreads_over_group - spreads_over_group.mean()).abs().sum(axis=1).argmin()]
+
+            if spreaddelta is None:
+                s_delta = spreads_over_group.std().fillna(0.0) / 4  # Take the 20% of normal distribution
+
+            # Assign index at the positions of the same coord cluster
+            coord_cluster = coord_pos_groups.loc[
+                self.__find_edgedelta(coord_pos_groups[edge_pos_groups_cols], e_nearest_mean, e_delta) &
+                self.__find_spreaddelta(coord_pos_groups[spread_pos_groups_cols], s_nearest_mean, s_delta)]
             self.pos.loc[pos_groups_as_index.isin(coord_cluster.index), C.POS_GEN_COORDDELTA_ID_CN] = i
 
             # Remove groups already assigned and update the list
-            spread_pos_groups = spread_pos_groups.drop(index=coord_cluster.index)
-            edge_pos_groups = edge_pos_groups.drop(index=coord_cluster.index)
+            coord_pos_groups = coord_pos_groups.drop(index=coord_cluster.index)
             sys.stdout.write("\r {:.3f} %".format(
-                (pos_groups.ngroups - len(edge_pos_groups.index)) * 100 / pos_groups.ngroups))
+                (pos_groups.ngroups - len(coord_pos_groups.index)) * 100 / pos_groups.ngroups))
             i += 1
 
         sys.stdout.write("\r")
