@@ -112,8 +112,11 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
     if config.getboolean("perform-heuristic-analysis"):
         st_test.heuristic_data_analysis()
 
+    if config.getboolean("perform-kmeans") and st_test.is_clustering_processed():
+        st_test.clusterized_data_analysis()
+
     if config.getboolean("perform-map"):
-        st_test.maps(skip_filter=False)
+        st_test.maps()
 
 
 def main():
