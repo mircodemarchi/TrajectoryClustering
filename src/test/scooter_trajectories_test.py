@@ -74,12 +74,25 @@ class ScooterTrajectoriesTest:
 
         return data_partitioned
 
-    def __filter(self, dataset):
-        if self.rental_num_to_analyze is None:
-            return dataset
+    def __pos_filter(self, pos):
+        return pos[(pos[STC.POS_GEN_LONGITUDE_CN] > 8.0) & (pos[STC.POS_GEN_LONGITUDE_CN] < 15.0) &
+                   (pos[STC.POS_GEN_LATITUDE_CN] > 42.0) & (pos[STC.POS_GEN_LATITUDE_CN] < 45.0)]
+
+    def __rental_filter(self, rental):
+        return rental[(rental[STC.RENTAL_START_LONGITUDE_CN] > 7.0) & (rental[STC.RENTAL_START_LONGITUDE_CN] < 15.0) &
+                      (rental[STC.RENTAL_STOP_LONGITUDE_CN] > 7.0) & (rental[STC.RENTAL_STOP_LONGITUDE_CN] < 15.0) &
+                      (rental[STC.RENTAL_START_LATITUDE_CN] > 42.0) & (rental[STC.RENTAL_START_LATITUDE_CN] < 46.0) &
+                      (rental[STC.RENTAL_STOP_LATITUDE_CN] > 42.0) & (rental[STC.RENTAL_STOP_LATITUDE_CN] < 46.0)]
+
+    def __filter(self, dataset, force=False):
+        if force:
+            rental_num = FORCE_RENTAL_NUM_TO_ANALYZE
+        elif self.rental_num_to_analyze is not None:
+            rental_num = self.rental_num_to_analyze
         else:
-            rental_to_analyze = dataset[STC.MERGE_RENTAL_ID_CN].unique()[:self.rental_num_to_analyze]
-            return dataset.loc[dataset[STC.MERGE_RENTAL_ID_CN].isin(rental_to_analyze)]
+            return dataset
+        rental_to_analyze = dataset[STC.MERGE_RENTAL_ID_CN].unique()[:rental_num]
+        return dataset.loc[dataset[STC.MERGE_RENTAL_ID_CN].isin(rental_to_analyze)]
 
     def __prepare(self):
         log.d("Test {} prepare data for clustering".format(DATASET_NAME))
@@ -89,10 +102,12 @@ class ScooterTrajectoriesTest:
         merge_sort_cols = [merge_cols_pos_gen_map[c] for c in pos_sort_cols]
 
         # Sort to align the frame rows
-        ordered_merge = self.st.merge.sort_values(by=merge_sort_cols, ignore_index=True)
+        ordered_merge = self.__pos_filter(self.st.merge)
+        ordered_merge = ordered_merge.sort_values(by=merge_sort_cols, ignore_index=True)
         join = ordered_merge
         if self.is_heuristic_processed():
-            ordered_pos = self.st.pos.sort_values(by=pos_sort_cols, ignore_index=True)
+            ordered_pos = self.__pos_filter(self.st.pos)
+            ordered_pos = ordered_pos.sort_values(by=pos_sort_cols, ignore_index=True)
             join = pd.concat([join, ordered_pos[STC.POS_GEN_HEURISTIC_COLS]], axis=1)
 
         # Convert time columns in float
