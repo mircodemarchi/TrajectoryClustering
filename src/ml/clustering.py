@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, Normalizer
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 
@@ -18,10 +18,11 @@ log = Log(__name__, enable_console=True, enable_file=False)
 
 
 class Clustering:
-    def __init__(self, data, feature_names, dataset_name=None):
+    def __init__(self, data, feature_names, dataset_name=None, save_file=False):
         self.feature_names = feature_names
         self.x = pd.DataFrame(np.c_[data[feature_names]], columns=feature_names)
         self.dataset_name = "" if dataset_name is None else dataset_name
+        self.save_file = save_file
         self.wcss = None
         self.inertia = None
         self.labels = None
@@ -30,18 +31,41 @@ class Clustering:
         if not os.path.exists(self.image_folder) and self.save_file:
             os.makedirs(self.image_folder)
 
-    def __preprocessing(self, x, standardize, pca):
+    def __preprocessing(self, x, standardize=False, normalize=False, pca=False, components=None):
         start = time.time()
+        columns = x.columns
+        x = x.to_numpy()
         if standardize:
             scaler = StandardScaler()
             x = scaler.fit_transform(x)
 
+        if normalize:
+            normalizer = Normalizer()
+            x = normalizer.fit_transform(x)
+
         if pca:
-            variance_cumulated = self.__get_cumulated_variance(x)
-            n_components = np.where(variance_cumulated > 0.8)[0][0]
-            pca_model = PCA(n_components=n_components)
-            pca_model.fit(x)
-            x = pca_model.transform(x)
+            if type(components) is list:
+                ret_x = np.empty((len(components), x.shape[0]))
+                i = 0
+                for c in components:
+                    if len(c) > 1:
+                        pca_model = PCA(n_components=1)
+                        ret_x[i] = pca_model.fit_transform(x[:, columns.get_loc(c[0]):columns.get_loc(c[-1])]).squeeze()
+                    else:
+                        ret_x[i] = x[:, columns.get_loc(c[0])]
+                    i += 1
+                x = ret_x.T
+            elif type(components) is int:
+                n_components = int(components)
+                pca_model = PCA(n_components=n_components)
+                x = pca_model.fit_transform(x)
+            else:
+                if components is not None:
+                    log.w("__preprocessing: not expected \"components\", take it as None")
+                variance_cumulated = self.__get_cumulated_variance(x)
+                n_components = np.where(variance_cumulated > 0.8)[0][0]
+                pca_model = PCA(n_components=n_components)
+                x = pca_model.fit_transform(x)
 
         end = time.time()
         return x, get_elapsed(start, end)
@@ -61,10 +85,12 @@ class Clustering:
         variance_cumulated = pca_model.explained_variance_ratio_.cumsum()
         return variance_cumulated
 
-    def exec(self, n_clusters, standardize=False, pca=False):
+    def exec(self, n_clusters, standardize=False, normalize=False, pca=False, components=None):
         log.d("Clustering {} preprocessing".format(self.dataset_name))
-        x, elapsed = self.__preprocessing(self.x, standardize, pca)
+        x, elapsed = self.__preprocessing(self.x, standardize=standardize, normalize=normalize,
+                                          pca=pca, components=components)
         log.d("elapsed time: {}".format(elapsed))
+        log.d("components: {}".format(x.shape[1]))
 
         log.d("Clustering {} k-means process".format(self.dataset_name))
         inertia, labels, elapsed = self.__exec(x, n_clusters)
@@ -74,10 +100,12 @@ class Clustering:
         self.labels = labels
         return self
 
-    def test(self, range_clusters=range(1, 50), standardize=False, pca=False):
+    def test(self, range_clusters=range(1, 50), standardize=False, normalize=False, pca=False, components=None):
         log.d("Clustering {} preprocessing".format(self.dataset_name))
-        x, elapsed = self.__preprocessing(self.x, standardize, pca)
+        x, elapsed = self.__preprocessing(self.x, standardize=standardize, normalize=normalize,
+                                          pca=pca, components=components)
         log.d("elapsed time: {}".format(elapsed))
+        log.d("components: {}".format(x.shape[1]))
 
         log.d("Clustering {} k-means test in range {}".format(self.dataset_name, range_clusters))
         start = time.time()
