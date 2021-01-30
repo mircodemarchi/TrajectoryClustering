@@ -108,7 +108,7 @@ class DataAnalysis:
             return self
 
         g = sns.JointGrid(data=self.x, x=x, y=y, hue=z, palette=PALETTE)
-        g.plot_joint(sns.scatterplot, marker=".", linewidth=0, legend="brief")
+        g.plot_joint(sns.scatterplot, marker=".", linewidth=0, legend=False)
         g.plot_marginals(sns.histplot, kde=False, common_norm=True, stat="density", alpha=0.5, linewidth=1,
                          element="step", fill=False)
         # g.plot_marginals(sns.rugplot, height=-.15, clip_on=False)
@@ -133,6 +133,7 @@ class DataAnalysis:
 
         title = "{} {}".format(self.title_prefix, title)
         fig, ax = plt.subplots()
+        x, y, z = None, None, None
         if len(on) == 3:
             x, y, z = on
             title = "{}, {} and {} ".format(x, y, z) + title
@@ -153,7 +154,10 @@ class DataAnalysis:
         fig.suptitle(title)
 
         if self.save_file:
-            filename = self.filename_prefix + "*{}*{}*{}*_".format(x, y, z) + filename
+            if z is None:
+                filename = self.filename_prefix + "*{}*{}*_".format(x, y) + filename
+            else:
+                filename = self.filename_prefix + "*{}*{}*{}*_".format(x, y, z) + filename
             fig.savefig(os.path.join(self.image_folder, filename))
 
         plt.show()

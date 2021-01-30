@@ -13,11 +13,11 @@ from util.util import get_elapsed
 log = Log(__name__, enable_console=True, enable_file=False)
 
 DATASET_NAME = "ScooterTrajectories"
-SAVE_FILE = False
+SAVE_FILE = True
 
 RENTAL_IMG_FN_PREFIX = "rental"
 POS_IMG_FN_PREFIX = "pos"
-POS_OVER_RENTAL_IMG_FN_PREFIX = "data_all"
+POS_OVER_RENTAL_IMG_FN_PREFIX = "all"
 CLUSTER_IMG_FN_PREFIX = "kmeans"
 CLUSTER_TEST_IMG_FN_PREFIX = "kmeans_test"
 HEURISTIC_IMG_FN_PREFIX = "heuristic"
@@ -308,8 +308,15 @@ class ScooterTrajectoriesTest:
                                  line_3d_list=[STC.POS_GEN_OVER_SPREADDELTA_ANALYSIS_TUPLE,
                                                STC.POS_GEN_OVER_EDGEDELTA_ANALYSIS_TUPLE,
                                                STC.POS_GEN_OVER_COORDDELTA_ANALYSIS_TUPLE])
+        # Timedelta analysis
         self.__cardinal_analysis(pos_filter, prefix=p,
-                                 line_table_list=[STC.POS_GEN_OVER_TIMEDELTA_ANALYSIS_TUPLE], force_filter=True)
+                                 line_table_list=[STC.POS_GEN_OVER_TIMEDELTA_TABLE_ANALYSIS_TUPLE], force_filter=True)
+        group_on_timedelta = [STC.POS_GEN_RENTAL_ID_CN, STC.POS_GEN_TIMEDELTA_ID_CN]
+        pos_unique_timedelta = pos_filter.copy()
+        pos_unique_timedelta[STC.POS_GEN_TIMEDELTA_ID_CN] = pos_unique_timedelta.loc[:, group_on_timedelta].ne(
+            pos_unique_timedelta.loc[:, group_on_timedelta].shift()).any(axis=1).cumsum()
+        self.__cardinal_analysis(pos_unique_timedelta, prefix=p,
+                                 line_list=[STC.POS_GEN_OVER_TIMEDELTA_ANALYSIS_TUPLE])
 
     def clusterized_data_analysis(self):
         log.d("Test {} clusterized data analysis".format(DATASET_NAME))
