@@ -315,8 +315,12 @@ class ScooterTrajectoriesDS:
 
     def __find_edgedelta(self, group_df, edge, edge_delta):
         map_df = (group_df >= (edge - edge_delta)) & (group_df <= (edge + edge_delta))
-        return map_df[C.POS_GEN_LATITUDE_CN + "_start"] & map_df[C.POS_GEN_LONGITUDE_CN + "_start"] & \
-            map_df[C.POS_GEN_LATITUDE_CN + "_end"] & map_df[C.POS_GEN_LONGITUDE_CN + "_end"]
+        return map_df[C.POS_GEN_EDGE_LATITUDE_START_CN] & map_df[C.POS_GEN_EDGE_LONGITUDE_START_CN] & \
+            map_df[C.POS_GEN_EDGE_LATITUDE_STOP_CN] & map_df[C.POS_GEN_EDGE_LONGITUDE_STOP_CN]
+
+    def __find_posdelta(self, group_df, pos, pos_delta):
+        map_df = (group_df >= (pos - pos_delta)) & (group_df <= (pos + pos_delta))
+        return map_df[C.POS_GEN_LATITUDE_CN] & map_df[C.POS_GEN_LONGITUDE_CN]
 
     def __load_support_data(self):
         start = time.time()
@@ -532,9 +536,10 @@ class ScooterTrajectoriesDS:
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return self
 
-    def edgedelta_heuristic(self, edgedelta, groupby):
+    def edgedelta_heuristic(self, groupby, edgedelta=None):
         log.d("Scooter Trajectories edgedelta heuristic")
         start = time.time()
+        delta = edgedelta if edgedelta is not None else None
 
         # Initialize column to null
         self.pos[C.POS_GEN_EDGEDELTA_ID_CN] = np.nan
@@ -542,7 +547,8 @@ class ScooterTrajectoriesDS:
         # Group position for the column specified by the user
         pos_groups = self.pos.groupby(by=groupby)
         # Calculate the edge for each position group
-        edge_pos_groups_cols = [c + "_start" for c in C.POS_GEN_COORD_COLS] + [c + "_end" for c in C.POS_GEN_COORD_COLS]
+        edge_pos_groups_cols = [C.POS_GEN_EDGE_LATITUDE_START_CN, C.POS_GEN_EDGE_LONGITUDE_START_CN,
+                                C.POS_GEN_EDGE_LATITUDE_STOP_CN, C.POS_GEN_EDGE_LONGITUDE_STOP_CN]
         edge_pos_groups = pos_groups[C.POS_GEN_COORD_COLS].apply(lambda x: pd.concat([x.iloc[0], x.iloc[-1]],
                                                                                      ignore_index=True))
         edge_pos_groups = edge_pos_groups.rename(columns=dict(zip(edge_pos_groups.columns, edge_pos_groups_cols)))
@@ -553,28 +559,32 @@ class ScooterTrajectoriesDS:
             pos_groups_as_index = self.pos[groupby]
 
         # Save edge in positions
-        self.pos[C.POS_GEN_EDGE_LATITUDE_START_CN] = edge_pos_groups[
-            edge_pos_groups_cols[0]].loc[pos_groups_as_index].values
-        self.pos[C.POS_GEN_EDGE_LONGITUDE_START_CN] = edge_pos_groups[
-            edge_pos_groups_cols[1]].loc[pos_groups_as_index].values
-        self.pos[C.POS_GEN_EDGE_LATITUDE_STOP_CN] = edge_pos_groups[
-            edge_pos_groups_cols[2]].loc[pos_groups_as_index].values
-        self.pos[C.POS_GEN_EDGE_LONGITUDE_STOP_CN] = edge_pos_groups[
-            edge_pos_groups_cols[3]].loc[pos_groups_as_index].values
+        self.pos[edge_pos_groups_cols] = edge_pos_groups.loc[pos_groups_as_index].values
 
         # Calculate cluster edge id
-        i = 0
+        i = 1
         while self.pos[C.POS_GEN_EDGEDELTA_ID_CN].isnull().sum() != 0:
-            group = pos_groups.get_group(edge_pos_groups.index[0])
+            # Find the mean edge
+            random_edge = edge_pos_groups.sample()
+            if i == 1:
+                while len(pos_groups[C.POS_GEN_COORD_COLS].get_group(random_edge.index[0]).index) == 1:
+                    random_edge = edge_pos_groups.sample()
 
-            # Get the current group spread
-            start_coord = group[C.POS_GEN_COORD_COLS].iloc[0]
-            stop_coord = group[C.POS_GEN_COORD_COLS].iloc[-1]
-            edge = pd.concat([start_coord, stop_coord], ignore_index=True)
-            edge = edge.rename(dict(zip(edge.index, edge_pos_groups_cols)))
+            group = pos_groups[C.POS_GEN_COORD_COLS].get_group(random_edge.index[0])
+            group_std = group.std().fillna(0.0) * 2  # Take the 95% of positions normal distribution
+            group_mean = group.mean()
+            valid_pos = self.pos.set_index(groupby).loc[edge_pos_groups.index]
+            groups_near = valid_pos.loc[self.__find_posdelta(
+                valid_pos[C.POS_GEN_COORD_COLS], group_mean, group_std)].drop_duplicates()
+            edges_over_group = edge_pos_groups.loc[groups_near.index]
+            nearest_mean = edges_over_group.iloc[
+                (edges_over_group - edges_over_group.mean()).abs().sum(axis=1).argmin()]
+
+            if edgedelta is None:
+                delta = edges_over_group.std().fillna(0.0) * 2  # Take the 95% of edges normal distribution
 
             # Assign index at the positions of the same spread cluster
-            edge_cluster = edge_pos_groups.loc[self.__find_edgedelta(edge_pos_groups, edge, edgedelta)]
+            edge_cluster = edge_pos_groups.loc[self.__find_edgedelta(edge_pos_groups, nearest_mean, delta)]
             self.pos.loc[pos_groups_as_index.isin(edge_cluster.index), C.POS_GEN_EDGEDELTA_ID_CN] = i
 
             # Remove groups already assigned and update the list
