@@ -172,7 +172,6 @@ class ScooterTrajectoriesTest:
             self.st.generate_all(max_chunknum=self.max_chunk_num)
         else:
             self.st.generate_all()
-        self.load_done = True
         return self
 
     def load_from_generated(self):
@@ -182,7 +181,6 @@ class ScooterTrajectoriesTest:
             return self
 
         self.st.load_generated()
-        self.load_done = True
         return self
 
     def store(self):
@@ -369,5 +367,13 @@ class ScooterTrajectoriesTest:
         log.i("**************************** Scooter Trajectories Test - Partition Stats ******************************")
         for key in partitions:
             log.i("[PARTITION {} SHAPE]: {};".format(key, partitions[key].shape))
+            log.i("[PARTITION {} DESCRIPTION]: \n{}\n{};".format(key,
+                  partitions[key][partitions[key].columns[
+                                :int(len(partitions[key].columns) / 2)]].describe(datetime_is_numeric=True),
+                  partitions[key][partitions[key].columns[
+                                int(len(partitions[key].columns) / 2):]].describe(datetime_is_numeric=True)))
+        log.i("[FILTER POS SHAPE]: {}".format(len(self.__filter(self.__pos_filter(self.st.pos)).index)))
+        log.i("[FILTER RENTAL SHAPE]: {}".format(self.rental_num_to_analyze if self.rental_num_to_analyze is not None
+                                                 else len(self.__rental_filter(self.st.rental).index)))
         log.i("*******************************************************************************************************")
         return self
