@@ -1,9 +1,11 @@
-[22/01/2021 16:48:35] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load generated
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:06.40
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (14826, 13);
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'rental_positions'];
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
+[30/01/2021 16:52:08] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories start load from already generated data
+[30/01/2021 16:52:08] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load generated
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:07.29
+[30/01/2021 16:52:15] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories print stats
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (14826, 13);
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'rental_positions'];
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
 rental_id                    int64
 device_id                    int64
 device_km                  float64
@@ -18,7 +20,7 @@ stop_time           datetime64[ns]
 rental_km                  float64
 rental_positions            object
 dtype: object;
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
 rental_id           0
 device_id           0
 device_km           0
@@ -33,7 +35,7 @@ stop_time           0
 rental_km           0
 rental_positions    0
 dtype: int64;
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
            rental_id     device_id     device_km       user_id        usr_km  latitude_start
 count   14826.000000  14826.000000  14826.000000  14826.000000  14826.000000    14826.000000
 mean   109459.244705    215.781195    423.092541  39409.562323     61.235254       44.153858
@@ -52,9 +54,9 @@ min           8.832870      43.684978        7.615795     2020-01-11 03:30:41.90
 75%          12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
 max          13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
 std           1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
 id                          int64
 device_id                   int64
 user_id                     int64
@@ -66,7 +68,7 @@ start_time         datetime64[ns]
 stop_time          datetime64[ns]
 km                        float64
 dtype: object;
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
 id                 0
 device_id          0
 user_id            0
@@ -78,7 +80,7 @@ start_time         0
 stop_time          0
 km                 0
 dtype: int64;
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
                   id     device_id       user_id  latitude_start  longitude_start  latitude_stop  longitude_stop                     start_time                      stop_time            km
 count   14826.000000  14826.000000  14826.000000    14826.000000     14826.000000   14826.000000    14826.000000                          14826                          14826  14826.000000
 mean   109459.244705    215.781195  39409.562323       44.153858        11.481653      45.353871       10.281107  2020-02-06 08:25:01.239833088  2020-02-06 08:35:12.895151104      1.564281
@@ -88,53 +90,70 @@ min     94188.000000      1.000000      2.000000       42.485028         8.83287
 75%    118533.750000    305.000000  54099.750000       44.241925        12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
 max    134690.000000  10001.000000  75805.000000       44.259358        13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
 std     11897.537349    228.660821  17483.048296        0.174064         1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (817076, 14);
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'timedelta_id', 'spreaddelta_id', 'edgedelta_id', 'coorddelta_id', 'latitude', 'longitude', 'spread', 'edge', 'speed', 'server_time', 'device_time', 'time_gap'];
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
-id                         int64
-rental_id                  int64
-timedelta_id             float64
-spreaddelta_id           float64
-edgedelta_id             float64
-coorddelta_id            float64
-latitude                 float64
-longitude                float64
-spread                   float64
-edge                     float64
-speed                    float64
-server_time       datetime64[ns]
-device_time       datetime64[ns]
-time_gap                 float64
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (817076, 18);
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'timedelta_id', 'spreaddelta_id', 'edgedelta_id', 'coorddelta_id', 'latitude', 'longitude', 'spread_latitude', 'spread_longitude', 'edge_latitude_start', 'edge_latitude_stop', 'edge_longitude_start', 'edge_longitude_stop', 'speed', 'server_time', 'device_time', 'time_gap'];
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
+id                               int64
+rental_id                        int64
+timedelta_id                     int64
+spreaddelta_id                   int64
+edgedelta_id                     int64
+coorddelta_id                    int64
+latitude                       float64
+longitude                      float64
+spread_latitude                float64
+spread_longitude               float64
+edge_latitude_start            float64
+edge_latitude_stop             float64
+edge_longitude_start           float64
+edge_longitude_stop            float64
+speed                          float64
+server_time             datetime64[ns]
+device_time             datetime64[ns]
+time_gap                       float64
 dtype: object;
-[22/01/2021 16:48:41] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
-id                     0
-rental_id              0
-timedelta_id      817076
-spreaddelta_id    817076
-edgedelta_id      817076
-coorddelta_id     817076
-latitude               0
-longitude              0
-spread            817076
-edge              817076
-speed                  0
-server_time            0
-device_time            0
-time_gap          817076
+[30/01/2021 16:52:15] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
+id                      0
+rental_id               0
+timedelta_id            0
+spreaddelta_id          0
+edgedelta_id            0
+coorddelta_id           0
+latitude                0
+longitude               0
+spread_latitude         0
+spread_longitude        0
+edge_latitude_start     0
+edge_latitude_stop      0
+edge_longitude_start    0
+edge_longitude_stop     0
+speed                   0
+server_time             0
+device_time             0
+time_gap                0
 dtype: int64;
-[22/01/2021 16:48:42] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
-                 id      rental_id  timedelta_id  spreaddelta_id  edgedelta_id  coorddelta_id       latitude      longitude  spread  edge          speed                    server_time                    device_time  time_gap
-count  8.170760e+05  817076.000000           0.0             0.0           0.0            0.0  817076.000000  817076.000000     0.0   0.0  817076.000000                         817076                         817076       0.0
-mean   3.529087e+07  111082.453362           NaN             NaN           NaN            NaN      44.134314      11.379200     NaN   NaN       6.998857  2020-02-08 20:47:26.399620096  2020-02-08 20:47:26.399620096       NaN
-min    2.710914e+07   94188.000000           NaN             NaN           NaN            NaN      40.239700       1.200153     NaN   NaN      -0.020000     2020-01-11 03:39:02.359133     2020-01-11 03:39:02.359133       NaN
-25%    3.167745e+07  102641.500000           NaN             NaN           NaN            NaN      43.878656      12.145071     NaN   NaN       0.190000  2020-01-31 13:31:16.017654272  2020-01-31 13:31:16.017654272       NaN
-50%    3.463179e+07  109763.000000           NaN             NaN           NaN            NaN      44.237981      12.188552     NaN   NaN       3.782235  2020-02-10 11:22:20.693996544  2020-02-10 11:22:20.693996544       NaN
-75%    3.937418e+07  120183.000000           NaN             NaN           NaN            NaN      44.241895      12.195317     NaN   NaN      13.630000  2020-02-20 13:48:08.995729408  2020-02-20 13:48:08.995729408       NaN
-max    4.744404e+07  134690.000000           NaN             NaN           NaN            NaN      44.385139      15.395244     NaN   NaN      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186       NaN
-std    5.411770e+06   11466.480812           NaN             NaN           NaN            NaN       0.202575       1.447571     NaN   NaN       7.661406                            NaN                            NaN       NaN;
-[22/01/2021 16:48:42] dataset.scooter_trajectories_ds - INFO: [MERGE SHAPE]: (817076, 18);
-[22/01/2021 16:48:42] dataset.scooter_trajectories_ds - INFO: [MERGE COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'pos_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
-[22/01/2021 16:48:42] dataset.scooter_trajectories_ds - INFO: [MERGE FEATURES TYPES]:
+[30/01/2021 16:52:16] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
+                 id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
+count  8.170760e+05  817076.000000  817076.000000   817076.000000  817076.000000  817076.000000  817076.000000  817076.000000    817076.000000
+mean   3.529087e+07  111082.453362       9.159114        2.397718     107.533729     243.635298      44.134314      11.379200         0.004225
+std    5.411770e+06   11466.480812      16.260550        1.607956     145.991520     303.418626       0.202575       1.447571         0.014546
+min    2.710914e+07   94188.000000       1.000000        1.000000       1.000000       1.000000      40.239700       1.200153         0.000000
+25%    3.167745e+07  102641.500000       1.000000        1.000000      11.000000      36.000000      43.878656      12.145071         0.000645
+50%    3.463179e+07  109763.000000       3.000000        2.000000      52.000000     140.000000      44.237981      12.188552         0.002507
+75%    3.937418e+07  120183.000000       9.000000        4.000000     156.000000     312.000000      44.241895      12.195317         0.005863
+max    4.744404e+07  134690.000000     319.000000       12.000000    1002.000000    1622.000000      44.385139      15.395244         3.996987
+       spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop          speed                    server_time                    device_time      time_gap
+count     817076.000000        817076.000000       817076.000000         817076.000000        817076.000000  817076.000000                         817076                         817076  8.170760e+05
+mean           0.006311            44.134280           44.134280             11.379329            11.379075       6.998857  2020-02-08 20:47:26.399620096  2020-02-08 20:47:26.399620096  1.076801e+04
+min            0.000000            42.484956           41.069159              1.200153             1.200153      -0.020000     2020-01-11 03:39:02.359133     2020-01-11 03:39:02.359133  0.000000e+00
+25%            0.000892            43.877457           43.879884             12.145415            12.143553       0.190000  2020-01-31 13:31:16.017654272  2020-01-31 13:31:16.017654272  5.565000e+03
+50%            0.003740            44.237913           44.238000             12.188788            12.188418       3.782235  2020-02-10 11:22:20.693996544  2020-02-10 11:22:20.693996544  1.014500e+04
+75%            0.008745            44.241872           44.241921             12.195336            12.195485      13.630000  2020-02-20 13:48:08.995729408  2020-02-20 13:48:08.995729408  1.141600e+04
+max            3.215676            44.385139           44.385139             13.952780            15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186  2.248234e+06
+std            0.013451             0.202434            0.202579              1.447449             1.447650       7.661406                            NaN                            NaN  1.270517e+04;
+[30/01/2021 16:52:16] dataset.scooter_trajectories_ds - INFO: [MERGE SHAPE]: (817076, 18);
+[30/01/2021 16:52:16] dataset.scooter_trajectories_ds - INFO: [MERGE COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'pos_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
+[30/01/2021 16:52:16] dataset.scooter_trajectories_ds - INFO: [MERGE FEATURES TYPES]:
 rental_id                   int64
 device_id                   int64
 device_km                 float64
@@ -154,7 +173,7 @@ speed                     float64
 server_time        datetime64[ns]
 device_time        datetime64[ns]
 dtype: object;
-[22/01/2021 16:48:42] dataset.scooter_trajectories_ds - INFO: [MERGE NULL OCCURRENCES]:
+[30/01/2021 16:52:16] dataset.scooter_trajectories_ds - INFO: [MERGE NULL OCCURRENCES]:
 rental_id          0
 device_id          0
 device_km          0
@@ -174,7 +193,7 @@ speed              0
 server_time        0
 device_time        0
 dtype: int64;
-[22/01/2021 16:48:43] dataset.scooter_trajectories_ds - INFO: [MERGE DESCRIPTION]:
+[30/01/2021 16:52:16] dataset.scooter_trajectories_ds - INFO: [MERGE DESCRIPTION]:
            rental_id      device_id      device_km        user_id         usr_km  latitude_start  longitude_start  latitude_stop  longitude_stop
 count  817076.000000  817076.000000  817076.000000  817076.000000  817076.000000   817076.000000    817076.000000  817076.000000   817076.000000
 mean   111082.453362     202.128212     417.227499   44248.982820      56.278105       44.134254        11.379424      45.334185       10.178376
@@ -193,5 +212,89 @@ min       2020-01-11 03:30:41.900000     2020-01-11 03:40:13.164000       0.0000
 75%    2020-02-20 13:32:02.967000064  2020-02-20 14:05:14.510000128       3.490000  3.937418e+07      44.241895      12.195317      13.630000  2020-02-20 13:48:08.995729408  2020-02-20 13:48:08.995729408
 max       2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000      21.889999  4.744404e+07      44.385139      15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186
 std                              NaN                            NaN       2.365046  5.411770e+06       0.202575       1.447571       7.661406                            NaN                            NaN;
-[22/01/2021 16:48:43] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
-Time: 00:00:07.88
+[30/01/2021 16:52:16] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
+[30/01/2021 16:52:16] test.scooter_trajectories_test - INFO: **************************** Scooter Trajectories Test - Partition Stats ******************************
+[30/01/2021 16:52:16] test.scooter_trajectories_test - INFO: [PARTITION N-E SHAPE]: (608251, 18);
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [PARTITION N-E DESCRIPTION]: 
+                 id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
+count  6.082510e+05  608251.000000  608251.000000   608251.000000  608251.000000  608251.000000  608251.000000  608251.000000    608251.000000
+mean   3.556594e+07  111668.917950       8.605424        2.348386      72.390033     155.594122      44.239226      12.190926         0.003960
+std    5.359821e+06   11350.884341      14.488807        1.565446     108.425917     194.706624       0.006956       0.011355         0.014549
+min    2.710914e+07   94188.000000       1.000000        1.000000       1.000000       1.000000      44.197778      12.070697         0.000000
+25%    3.176806e+07  103038.000000       1.000000        1.000000      10.000000      26.000000      44.236756      12.185802         0.000602
+50%    3.522190e+07  110988.000000       3.000000        2.000000      29.000000     113.000000      44.239716      12.192136         0.002387
+75%    3.953215e+07  120767.000000       9.000000        4.000000     101.000000     168.000000      44.242871      12.197173         0.005577
+max    4.744404e+07  134690.000000     185.000000       12.000000     998.000000    1589.000000      44.273032      12.246938         3.996987
+       spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop          speed                    server_time                    device_time      time_gap
+count     608251.000000        608251.000000       608251.000000         608251.000000        608251.000000  608251.000000                         608251                         608251  6.082510e+05
+mean           0.006157            44.239152           44.239180             12.191007            12.190851       7.178662  2020-02-09 17:45:19.160702976  2020-02-09 17:45:19.160702976  1.073743e+04
+min            0.000000            44.197785           41.069159             10.380282            10.380292       0.000000     2020-01-11 03:39:02.359133     2020-01-11 03:39:02.359133  0.000000e+00
+25%            0.000853            44.236689           44.236565             12.185793            12.185779       0.192271  2020-01-31 22:17:21.527559424  2020-01-31 22:17:21.527559424  5.482000e+03
+50%            0.003682            44.239735           44.239808             12.192105            12.192062       3.986711  2020-02-11 20:58:54.531540992  2020-02-11 20:58:54.531540992  1.009900e+04
+75%            0.008617            44.242762           44.242875             12.197180            12.197276      14.240000  2020-02-20 22:11:28.045442048  2020-02-20 22:11:28.045442048  1.140700e+04
+max            3.215676            44.264838           44.264838             12.240397            15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186  2.248234e+06
+std            0.012767             0.007009            0.009118              0.011317             0.013354       7.791597                            NaN                            NaN  1.191677e+04;
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [PARTITION N-W SHAPE]: (202795, 18);
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [PARTITION N-W DESCRIPTION]: 
+                 id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
+count  2.027950e+05  202795.000000  202795.000000   202795.000000  202795.000000  202795.000000  202795.000000  202795.000000    202795.000000
+mean   3.440111e+07  109186.204852      10.551971        2.565408     203.602239     492.686871      43.860615       8.872686         0.005047
+std    5.444593e+06   11551.230030      20.461644        1.723176     181.182861     397.773793       0.012613       0.015886         0.006214
+min    2.711671e+07   94190.000000       1.000000        1.000000       3.000000       2.000000      43.812437       8.815627         0.000000
+25%    2.932211e+07   98079.000000       1.000000        1.000000      73.000000     165.000000      43.851697       8.862828         0.000828
+50%    3.319895e+07  106404.000000       3.000000        2.000000     145.000000     371.000000      43.864660       8.875827         0.003063
+75%    3.799570e+07  117419.000000      11.000000        4.000000     292.000000     736.000000      43.869675       8.884347         0.006870
+max    4.735200e+07  134685.000000     319.000000        8.000000    1002.000000    1622.000000      43.895447       8.929387         0.049018
+       spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop          speed                    server_time                    device_time       time_gap
+count     202795.000000        202795.000000       202795.000000         202795.000000        202795.000000  202795.000000                         202795                         202795  202795.000000
+mean           0.006795            43.860651           43.860593              8.873006             8.872445       6.613783  2020-02-06 01:55:11.117854976  2020-02-06 01:55:11.117854976   10873.266604
+min            0.000000            43.818042           43.812437              8.815797             8.815795      -0.020000     2020-01-11 05:06:19.817751     2020-01-11 05:06:19.817751       0.000000
+25%            0.001072            43.852020           43.851230              8.863580             8.862128       0.200000  2020-01-20 22:47:31.811146496  2020-01-20 22:47:31.811146496    5781.000000
+50%            0.004007            43.864712           43.864705              8.876867             8.875598       3.480000  2020-02-06 14:23:58.037925120  2020-02-06 14:23:58.037925120   10295.000000
+75%            0.009465            43.869454           43.869956              8.884328             8.884538      12.320000  2020-02-17 13:05:08.719929856  2020-02-17 13:05:08.719929856   11421.000000
+max            0.057833            43.895413           43.895413              8.929340             8.929312      36.779999     2020-03-10 23:40:33.678236     2020-03-10 23:40:33.678236  965843.000000
+std            0.008130             0.012452            0.012911              0.015755             0.016233       7.266941                            NaN                            NaN   14924.202154;
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [PARTITION S-E SHAPE]: (5620, 18);
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [PARTITION S-E DESCRIPTION]: 
+                 id      rental_id  timedelta_id  spreaddelta_id  edgedelta_id  coorddelta_id     latitude    longitude  spread_latitude
+count  5.620000e+03    5620.000000   5620.000000     5620.000000   5620.000000    5620.000000  5620.000000  5620.000000      5620.000000
+mean   3.771338e+07  116238.005160     18.424733        1.720641    435.713167     780.773488    42.764820    13.942710         0.001386
+std    5.980921e+06   12618.806357     20.227489        1.130355    249.150679     441.650526     0.001778     0.003790         0.001638
+min    2.717100e+07   94350.000000      1.000000        1.000000     62.000000     145.000000    42.760422    13.934544         0.000000
+25%    3.319705e+07  106409.000000      3.000000        1.000000    268.000000     408.000000    42.763903    13.940586         0.000156
+50%    4.138501e+07  124607.000000      7.000000        1.000000    366.000000     513.000000    42.764890    13.940954         0.000507
+75%    4.258291e+07  126917.000000     29.000000        2.000000    612.000000    1214.000000    42.765961    13.944709         0.002331
+max    4.725827e+07  134535.000000     75.000000        4.000000    997.000000    1587.000000    42.768093    13.952780         0.006650
+       spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop        speed                    server_time                    device_time       time_gap
+count       5620.000000          5620.000000         5620.000000           5620.000000          5620.000000  5620.000000                           5620                           5620    5620.000000
+mean           0.002489            42.764759           42.764811             13.942722            13.942741     1.875829  2020-02-14 23:10:00.803995904  2020-02-14 23:10:00.803995904   10641.572064
+min            0.000000            42.760754           42.760754             13.934750            13.934875     0.000000     2020-01-11 14:41:00.662955     2020-01-11 14:41:00.662955       0.000000
+25%            0.000126            42.763062           42.764154             13.940648            13.940648     0.020000  2020-02-06 14:15:18.919114240  2020-02-06 14:15:18.919114240    7619.250000
+50%            0.001146            42.764897           42.764889             13.941174            13.940989     0.150000  2020-02-24 10:33:25.906043904  2020-02-24 10:33:25.906043904   10761.000000
+75%            0.003925            42.766181           42.765984             13.944479            13.944674     1.310000  2020-02-27 12:40:17.348273664  2020-02-27 12:40:17.348273664   11579.000000
+max            0.011608            42.768086           42.768086             13.952780            13.952780    26.799999     2020-03-10 16:14:25.783113     2020-03-10 16:14:25.783113  122702.000000
+std            0.002974             0.001749            0.001815              0.003507             0.003832     4.438398                            NaN                            NaN    7614.301936;
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [PARTITION S-W SHAPE]: (361, 18);
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [PARTITION S-W DESCRIPTION]: 
+                 id      rental_id  timedelta_id  spreaddelta_id  edgedelta_id  coorddelta_id    latitude   longitude  spread_latitude
+count  3.610000e+02     361.000000     361.00000      361.000000    361.000000     361.000000  361.000000  361.000000       361.000000
+mean   3.406470e+07  108211.171745      15.66482        1.753463    195.872576     197.180055   42.485086   11.795675         0.002627
+std    2.939950e+06    6166.192745      13.81851        2.339906    222.340568     258.986600    0.000060    0.000045         0.007907
+min    2.761850e+07   95331.000000       1.00000        1.000000    125.000000     115.000000   42.484956   11.795470         0.000000
+25%    3.195146e+07  103522.000000       5.00000        1.000000    125.000000     115.000000   42.485044   11.795658         0.000000
+50%    3.627675e+07  112928.000000       9.00000        1.000000    125.000000     115.000000   42.485061   11.795673         0.000106
+75%    3.627981e+07  112936.000000      25.00000        1.000000    125.000000     115.000000   42.485120   11.795692         0.000164
+max    4.557011e+07  131733.000000      53.00000        9.000000    994.000000    1118.000000   42.485287   11.795857         0.027140
+       spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop       speed                    server_time                    device_time      time_gap
+count        361.000000           361.000000          361.000000            361.000000           361.000000  361.000000                            361                            361    361.000000
+mean           0.016737            42.485248           42.487544             11.794696            11.779484    0.996537  2020-02-07 06:45:54.632490240  2020-02-07 06:45:54.632490240   6234.914127
+min            0.000000            42.484956           42.484963             11.618586            11.618607    0.000000     2020-01-13 17:42:38.942594     2020-01-13 17:42:38.942594      0.000000
+25%            0.000000            42.485044           42.485040             11.795660            11.795623    0.000000  2020-02-01 16:43:34.673435904  2020-02-01 16:43:34.673435904   1696.000000
+50%            0.000062            42.485070           42.485044             11.795673            11.795661    0.150000  2020-02-14 09:27:33.113518080  2020-02-14 09:27:33.113518080   6310.000000
+75%            0.000136            42.485150           42.485123             11.795703            11.795673    1.260000  2020-02-14 09:40:29.449096960  2020-02-14 09:40:29.449096960  10132.000000
+max            0.177107            42.512197           42.512197             11.795814            11.795857   14.800000     2020-03-05 14:38:32.488901     2020-03-05 14:38:32.488901  18855.000000
+std            0.051765             0.002012            0.007820              0.013162             0.051087    1.803516                            NaN                            NaN   4248.117434;
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [FILTER POS SHAPE]: 817072
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: [FILTER RENTAL SHAPE]: 14826
+[30/01/2021 16:52:17] test.scooter_trajectories_test - INFO: *******************************************************************************************************
+Time: 00:00:09.72

@@ -1,11 +1,11 @@
-[31/01/2021 22:34:14] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories start load from already generated data
-[31/01/2021 22:34:14] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load generated
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:07.29
-[31/01/2021 22:34:21] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories print stats
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (14826, 13);
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'rental_positions'];
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
+[31/01/2021 18:49:30] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories start load from already generated data
+[31/01/2021 18:49:30] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load generated
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:07.62
+[31/01/2021 18:49:38] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories print stats
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (14826, 13);
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'rental_positions'];
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
 rental_id                    int64
 device_id                    int64
 device_km                  float64
@@ -20,7 +20,7 @@ stop_time           datetime64[ns]
 rental_km                  float64
 rental_positions            object
 dtype: object;
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
 rental_id           0
 device_id           0
 device_km           0
@@ -35,7 +35,7 @@ stop_time           0
 rental_km           0
 rental_positions    0
 dtype: int64;
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
            rental_id     device_id     device_km       user_id        usr_km  latitude_start
 count   14826.000000  14826.000000  14826.000000  14826.000000  14826.000000    14826.000000
 mean   109459.244705    215.781195    423.092541  39409.562323     61.235254       44.153858
@@ -54,9 +54,9 @@ min           8.832870      43.684978        7.615795     2020-01-11 03:30:41.90
 75%          12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
 max          13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
 std           1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
 id                          int64
 device_id                   int64
 user_id                     int64
@@ -68,7 +68,7 @@ start_time         datetime64[ns]
 stop_time          datetime64[ns]
 km                        float64
 dtype: object;
-[31/01/2021 22:34:21] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
 id                 0
 device_id          0
 user_id            0
@@ -80,7 +80,7 @@ start_time         0
 stop_time          0
 km                 0
 dtype: int64;
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
                   id     device_id       user_id  latitude_start  longitude_start  latitude_stop  longitude_stop                     start_time                      stop_time            km
 count   14826.000000  14826.000000  14826.000000    14826.000000     14826.000000   14826.000000    14826.000000                          14826                          14826  14826.000000
 mean   109459.244705    215.781195  39409.562323       44.153858        11.481653      45.353871       10.281107  2020-02-06 08:25:01.239833088  2020-02-06 08:35:12.895151104      1.564281
@@ -90,9 +90,9 @@ min     94188.000000      1.000000      2.000000       42.485028         8.83287
 75%    118533.750000    305.000000  54099.750000       44.241925        12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
 max    134690.000000  10001.000000  75805.000000       44.259358        13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
 std     11897.537349    228.660821  17483.048296        0.174064         1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (817076, 18);
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'timedelta_id', 'spreaddelta_id', 'edgedelta_id', 'coorddelta_id', 'latitude', 'longitude', 'spread_latitude', 'spread_longitude', 'edge_latitude_start', 'edge_latitude_stop', 'edge_longitude_start', 'edge_longitude_stop', 'speed', 'server_time', 'device_time', 'time_gap'];
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (817076, 18);
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'timedelta_id', 'spreaddelta_id', 'edgedelta_id', 'coorddelta_id', 'latitude', 'longitude', 'spread_latitude', 'spread_longitude', 'edge_latitude_start', 'edge_latitude_stop', 'edge_longitude_start', 'edge_longitude_stop', 'speed', 'server_time', 'device_time', 'time_gap'];
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
 id                               int64
 rental_id                        int64
 timedelta_id                     int64
@@ -112,7 +112,7 @@ server_time             datetime64[ns]
 device_time             datetime64[ns]
 time_gap                       float64
 dtype: object;
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
+[31/01/2021 18:49:38] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
 id                      0
 rental_id               0
 timedelta_id            0
@@ -132,7 +132,7 @@ server_time             0
 device_time             0
 time_gap                0
 dtype: int64;
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
+[31/01/2021 18:49:39] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
                  id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
 count  8.170760e+05  817076.000000  817076.000000   817076.000000  817076.000000  817076.000000  817076.000000  817076.000000    817076.000000
 mean   3.529087e+07  111082.453362       9.159114        1.556115      19.430747      70.778798      44.134314      11.379200         0.004225
@@ -151,9 +151,9 @@ min            0.000000            42.484956           41.069159              1.
 75%            0.008745            44.241872           44.241921             12.195336            12.195485      13.630000  2020-02-20 13:48:08.995729408  2020-02-20 13:48:08.995729408  1.141600e+04
 max            3.215676            44.385139           44.385139             13.952780            15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186  2.248234e+06
 std            0.013451             0.202434            0.202579              1.447449             1.447650       7.661406                            NaN                            NaN  1.270517e+04;
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [MERGE SHAPE]: (817076, 18);
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [MERGE COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'pos_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [MERGE FEATURES TYPES]:
+[31/01/2021 18:49:39] dataset.scooter_trajectories_ds - INFO: [MERGE SHAPE]: (817076, 18);
+[31/01/2021 18:49:39] dataset.scooter_trajectories_ds - INFO: [MERGE COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'pos_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
+[31/01/2021 18:49:39] dataset.scooter_trajectories_ds - INFO: [MERGE FEATURES TYPES]:
 rental_id                   int64
 device_id                   int64
 device_km                 float64
@@ -173,7 +173,7 @@ speed                     float64
 server_time        datetime64[ns]
 device_time        datetime64[ns]
 dtype: object;
-[31/01/2021 22:34:22] dataset.scooter_trajectories_ds - INFO: [MERGE NULL OCCURRENCES]:
+[31/01/2021 18:49:39] dataset.scooter_trajectories_ds - INFO: [MERGE NULL OCCURRENCES]:
 rental_id          0
 device_id          0
 device_km          0
@@ -193,7 +193,7 @@ speed              0
 server_time        0
 device_time        0
 dtype: int64;
-[31/01/2021 22:34:23] dataset.scooter_trajectories_ds - INFO: [MERGE DESCRIPTION]:
+[31/01/2021 18:49:39] dataset.scooter_trajectories_ds - INFO: [MERGE DESCRIPTION]:
            rental_id      device_id      device_km        user_id         usr_km  latitude_start  longitude_start  latitude_stop  longitude_stop
 count  817076.000000  817076.000000  817076.000000  817076.000000  817076.000000   817076.000000    817076.000000  817076.000000   817076.000000
 mean   111082.453362     202.128212     417.227499   44248.982820      56.278105       44.134254        11.379424      45.334185       10.178376
@@ -212,10 +212,10 @@ min       2020-01-11 03:30:41.900000     2020-01-11 03:40:13.164000       0.0000
 75%    2020-02-20 13:32:02.967000064  2020-02-20 14:05:14.510000128       3.490000  3.937418e+07      44.241895      12.195317      13.630000  2020-02-20 13:48:08.995729408  2020-02-20 13:48:08.995729408
 max       2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000      21.889999  4.744404e+07      44.385139      15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186
 std                              NaN                            NaN       2.365046  5.411770e+06       0.202575       1.447571       7.661406                            NaN                            NaN;
-[31/01/2021 22:34:23] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
-[31/01/2021 22:34:23] test.scooter_trajectories_test - INFO: **************************** Scooter Trajectories Test - Partition Stats ******************************
-[31/01/2021 22:34:23] test.scooter_trajectories_test - INFO: [PARTITION N-E SHAPE]: (608251, 18);
-[31/01/2021 22:34:23] test.scooter_trajectories_test - INFO: [PARTITION N-E DESCRIPTION]: 
+[31/01/2021 18:49:39] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
+[31/01/2021 18:49:39] test.scooter_trajectories_test - INFO: **************************** Scooter Trajectories Test - Partition Stats ******************************
+[31/01/2021 18:49:39] test.scooter_trajectories_test - INFO: [PARTITION N-E SHAPE]: (608251, 18);
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [PARTITION N-E DESCRIPTION]: 
                  id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
 count  6.082510e+05  608251.000000  608251.000000   608251.000000  608251.000000  608251.000000  608251.000000  608251.000000    608251.000000
 mean   3.556594e+07  111668.917950       8.605424        1.541186      15.070910      42.411210      44.239226      12.190926         0.003960
@@ -234,8 +234,8 @@ min            0.000000            44.197785           41.069159             10.
 75%            0.008617            44.242762           44.242875             12.197180            12.197276      14.240000  2020-02-20 22:11:28.045442048  2020-02-20 22:11:28.045442048  1.140700e+04
 max            3.215676            44.264838           44.264838             12.240397            15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186  2.248234e+06
 std            0.012767             0.007009            0.009118              0.011317             0.013354       7.791597                            NaN                            NaN  1.191677e+04;
-[31/01/2021 22:34:23] test.scooter_trajectories_test - INFO: [PARTITION N-W SHAPE]: (202795, 18);
-[31/01/2021 22:34:24] test.scooter_trajectories_test - INFO: [PARTITION N-W DESCRIPTION]: 
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [PARTITION N-W SHAPE]: (202795, 18);
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [PARTITION N-W DESCRIPTION]: 
                  id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
 count  2.027950e+05  202795.000000  202795.000000   202795.000000  202795.000000  202795.000000  202795.000000  202795.000000    202795.000000
 mean   3.440111e+07  109186.204852      10.551971        1.613077      30.445933     149.443418      43.860615       8.872686         0.005047
@@ -254,8 +254,8 @@ min            0.000000            43.818042           43.812437              8.
 75%            0.009465            43.869454           43.869956              8.884328             8.884538      12.320000  2020-02-17 13:05:08.719929856  2020-02-17 13:05:08.719929856   11421.000000
 max            0.057833            43.895413           43.895413              8.929340             8.929312      36.779999     2020-03-10 23:40:33.678236     2020-03-10 23:40:33.678236  965843.000000
 std            0.008130             0.012452            0.012911              0.015755             0.016233       7.266941                            NaN                            NaN   14924.202154;
-[31/01/2021 22:34:24] test.scooter_trajectories_test - INFO: [PARTITION S-E SHAPE]: (5620, 18);
-[31/01/2021 22:34:24] test.scooter_trajectories_test - INFO: [PARTITION S-E DESCRIPTION]: 
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [PARTITION S-E SHAPE]: (5620, 18);
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [PARTITION S-E DESCRIPTION]: 
                  id      rental_id  timedelta_id  spreaddelta_id  edgedelta_id  coorddelta_id     latitude    longitude  spread_latitude
 count  5.620000e+03    5620.000000   5620.000000     5620.000000   5620.000000    5620.000000  5620.000000  5620.000000      5620.000000
 mean   3.771338e+07  116238.005160     18.424733        1.130605     87.586477     294.604804    42.764820    13.942710         0.001386
@@ -274,8 +274,8 @@ min            0.000000            42.760754           42.760754             13.
 75%            0.003925            42.766181           42.765984             13.944479            13.944674     1.310000  2020-02-27 12:40:17.348273664  2020-02-27 12:40:17.348273664   11579.000000
 max            0.011608            42.768086           42.768086             13.952780            13.952780    26.799999     2020-03-10 16:14:25.783113     2020-03-10 16:14:25.783113  122702.000000
 std            0.002974             0.001749            0.001815              0.003507             0.003832     4.438398                            NaN                            NaN    7614.301936;
-[31/01/2021 22:34:24] test.scooter_trajectories_test - INFO: [PARTITION S-W SHAPE]: (361, 18);
-[31/01/2021 22:34:24] test.scooter_trajectories_test - INFO: [PARTITION S-W DESCRIPTION]: 
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [PARTITION S-W SHAPE]: (361, 18);
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [PARTITION S-W DESCRIPTION]: 
                  id      rental_id  timedelta_id  spreaddelta_id  edgedelta_id  coorddelta_id    latitude   longitude  spread_latitude
 count  3.610000e+02     361.000000     361.00000      361.000000    361.000000     361.000000  361.000000  361.000000       361.000000
 mean   3.406470e+07  108211.171745      15.66482        1.282548    100.817175     170.299169   42.485086   11.795675         0.002627
@@ -294,133 +294,76 @@ min            0.000000            42.484956           42.484963             11.
 75%            0.000136            42.485150           42.485123             11.795703            11.795673    1.260000  2020-02-14 09:40:29.449096960  2020-02-14 09:40:29.449096960  10132.000000
 max            0.177107            42.512197           42.512197             11.795814            11.795857   14.800000     2020-03-05 14:38:32.488901     2020-03-05 14:38:32.488901  18855.000000
 std            0.051765             0.002012            0.007820              0.013162             0.051087    1.803516                            NaN                            NaN   4248.117434;
-[31/01/2021 22:34:24] test.scooter_trajectories_test - INFO: [FILTER POS SHAPE]: 817072
-[31/01/2021 22:34:24] test.scooter_trajectories_test - INFO: [FILTER RENTAL SHAPE]: 14826
-[31/01/2021 22:34:24] test.scooter_trajectories_test - INFO: *******************************************************************************************************
-[31/01/2021 22:34:24] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories generated data analysis
-[31/01/2021 22:34:24] util.analysis - DEBUG: DataAnalysis show distributions of ScooterTrajectories
-[31/01/2021 22:34:44] util.analysis - DEBUG: elapsed time: 00:00:19.81
-[31/01/2021 22:34:44] util.analysis - DEBUG: DataAnalysis show 2D distribution of ScooterTrajectories on couples [('longitude_start', 'latitude_start'), ('longitude_stop', 'latitude_stop')]
-[31/01/2021 22:35:04] util.analysis - DEBUG: elapsed time: 00:00:20.20
-[31/01/2021 22:35:04] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude_start', 'latitude_start')
-[31/01/2021 22:35:05] util.analysis - DEBUG: elapsed time: 00:00:00.71
-[31/01/2021 22:35:05] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude_stop', 'latitude_stop')
-[31/01/2021 22:35:05] util.analysis - DEBUG: elapsed time: 00:00:00.69
-[31/01/2021 22:35:05] util.analysis - DEBUG: DataAnalysis show distributions of ScooterTrajectories
-[31/01/2021 22:35:49] util.analysis - DEBUG: elapsed time: 00:00:43.89
-[31/01/2021 22:35:49] util.analysis - DEBUG: DataAnalysis show 2D distribution of ScooterTrajectories on couples [('longitude', 'latitude')]
-[31/01/2021 22:43:50] util.analysis - DEBUG: elapsed time: 00:08:00.38
-[31/01/2021 22:43:50] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 22:43:51] util.analysis - DEBUG: elapsed time: 00:00:01.78
-[31/01/2021 22:43:52] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 22:43:53] util.analysis - DEBUG: elapsed time: 00:00:01.56
-[31/01/2021 22:43:53] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 23:13:11] util.analysis - DEBUG: elapsed time: 00:29:17.81
-[31/01/2021 23:13:11] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 23:13:12] util.analysis - DEBUG: elapsed time: 00:00:00.85
-[31/01/2021 23:13:12] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 23:19:13] util.analysis - DEBUG: elapsed time: 00:06:00.80
-[31/01/2021 23:19:13] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 23:19:13] util.analysis - DEBUG: elapsed time: 00:00:00.72
-[31/01/2021 23:19:13] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 23:19:19] util.analysis - DEBUG: elapsed time: 00:00:05.69
-[31/01/2021 23:19:19] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 23:19:20] util.analysis - DEBUG: elapsed time: 00:00:00.74
-[31/01/2021 23:19:20] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude')
-[31/01/2021 23:19:22] util.analysis - DEBUG: elapsed time: 00:00:01.75
-[31/01/2021 23:19:22] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 00:13:56] util.analysis - DEBUG: elapsed time: 00:54:34.14
-[01/02/2021 00:13:56] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 00:17:15] util.analysis - DEBUG: elapsed time: 00:03:18.66
-[01/02/2021 00:17:15] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 00:55:36] util.analysis - DEBUG: elapsed time: 00:38:20.86
-[01/02/2021 00:55:36] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 00:59:59] util.analysis - DEBUG: elapsed time: 00:04:23.56
-[01/02/2021 00:59:59] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:00:52] util.analysis - DEBUG: elapsed time: 00:00:52.99
-[01/02/2021 01:00:52] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:08:27] util.analysis - DEBUG: elapsed time: 00:07:34.53
-[01/02/2021 01:08:27] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:09:48] util.analysis - DEBUG: elapsed time: 00:01:20.86
-[01/02/2021 01:09:48] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:09:49] util.analysis - DEBUG: elapsed time: 00:00:01.11
-[01/02/2021 01:09:49] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:10:09] util.analysis - DEBUG: elapsed time: 00:00:20.01
-[01/02/2021 01:10:09] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:10:12] util.analysis - DEBUG: elapsed time: 00:00:03.25
-[01/02/2021 01:10:12] util.analysis - DEBUG: DataAnalysis show joint plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:10:13] util.analysis - DEBUG: elapsed time: 00:00:00.95
-[01/02/2021 01:10:13] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:10:15] util.analysis - DEBUG: elapsed time: 00:00:02.25
-[01/02/2021 01:10:15] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id')
-[01/02/2021 01:10:16] util.analysis - DEBUG: elapsed time: 00:00:00.74
-[01/02/2021 01:10:16] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories heuristic data analysis
-[01/02/2021 01:10:16] util.analysis - DEBUG: DataAnalysis show distributions of ScooterTrajectories
-[01/02/2021 01:10:31] util.analysis - DEBUG: elapsed time: 00:00:15.35
-[01/02/2021 01:10:31] util.analysis - DEBUG: DataAnalysis show distributions of ScooterTrajectories
-[01/02/2021 01:12:57] util.analysis - DEBUG: elapsed time: 00:02:25.71
-[01/02/2021 01:12:57] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
-[01/02/2021 01:51:20] util.analysis - DEBUG: elapsed time: 00:38:22.32
-[01/02/2021 01:51:20] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
-[01/02/2021 02:31:53] util.analysis - DEBUG: elapsed time: 00:40:33.35
-[01/02/2021 02:31:53] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
-[01/02/2021 03:12:48] util.analysis - DEBUG: elapsed time: 00:40:55.12
-[01/02/2021 03:12:48] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
-[01/02/2021 03:17:48] util.analysis - DEBUG: elapsed time: 00:04:59.86
-[01/02/2021 03:17:48] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
-[01/02/2021 03:22:43] util.analysis - DEBUG: elapsed time: 00:04:54.53
-[01/02/2021 03:22:43] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
-[01/02/2021 03:27:39] util.analysis - DEBUG: elapsed time: 00:04:56.84
-[01/02/2021 03:27:39] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
-[01/02/2021 03:36:08] util.analysis - DEBUG: elapsed time: 00:08:28.56
-[01/02/2021 03:36:08] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
-[01/02/2021 03:45:16] util.analysis - DEBUG: elapsed time: 00:09:08.35
-[01/02/2021 03:45:16] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
-[01/02/2021 03:54:25] util.analysis - DEBUG: elapsed time: 00:09:08.74
-[01/02/2021 03:54:25] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
-[01/02/2021 03:55:57] util.analysis - DEBUG: elapsed time: 00:01:31.87
-[01/02/2021 03:55:57] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
-[01/02/2021 03:57:28] util.analysis - DEBUG: elapsed time: 00:01:30.77
-[01/02/2021 03:57:28] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
-[01/02/2021 03:58:58] util.analysis - DEBUG: elapsed time: 00:01:30.73
-[01/02/2021 03:58:58] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
-[01/02/2021 03:59:08] util.analysis - DEBUG: elapsed time: 00:00:09.22
-[01/02/2021 03:59:08] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
-[01/02/2021 03:59:28] util.analysis - DEBUG: elapsed time: 00:00:20.02
-[01/02/2021 03:59:28] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
-[01/02/2021 03:59:36] util.analysis - DEBUG: elapsed time: 00:00:08.50
-[01/02/2021 03:59:36] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
-[01/02/2021 03:59:38] util.analysis - DEBUG: elapsed time: 00:00:01.85
-[01/02/2021 03:59:38] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
-[01/02/2021 03:59:40] util.analysis - DEBUG: elapsed time: 00:00:02.01
-[01/02/2021 03:59:40] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
-[01/02/2021 03:59:42] util.analysis - DEBUG: elapsed time: 00:00:01.90
-[01/02/2021 03:59:42] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
-[01/02/2021 03:59:44] util.analysis - DEBUG: elapsed time: 00:00:02.42
-[01/02/2021 03:59:44] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
-[01/02/2021 03:59:47] util.analysis - DEBUG: elapsed time: 00:00:02.47
-[01/02/2021 03:59:47] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
-[01/02/2021 03:59:49] util.analysis - DEBUG: elapsed time: 00:00:02.60
-[01/02/2021 03:59:49] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
-[01/02/2021 03:59:50] util.analysis - DEBUG: elapsed time: 00:00:00.80
-[01/02/2021 03:59:50] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
-[01/02/2021 03:59:51] util.analysis - DEBUG: elapsed time: 00:00:00.79
-[01/02/2021 03:59:51] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
-[01/02/2021 03:59:52] util.analysis - DEBUG: elapsed time: 00:00:00.85
-[01/02/2021 03:59:52] util.analysis - DEBUG: DataAnalysis show line table plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id', 'timedelta_id')
-[01/02/2021 04:01:19] util.analysis - DEBUG: elapsed time: 00:01:26.93
-[01/02/2021 04:01:19] util.analysis - DEBUG: DataAnalysis show line table plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id', 'timedelta_id')
-[01/02/2021 04:02:33] util.analysis - DEBUG: elapsed time: 00:01:14.46
-[01/02/2021 04:02:33] util.analysis - DEBUG: DataAnalysis show line table plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id', 'timedelta_id')
-[01/02/2021 04:03:12] util.analysis - DEBUG: elapsed time: 00:00:38.78
-[01/02/2021 04:03:12] util.analysis - DEBUG: DataAnalysis show line table plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id', 'timedelta_id')
-[01/02/2021 04:03:24] util.analysis - DEBUG: elapsed time: 00:00:11.42
-[01/02/2021 04:03:24] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'timedelta_id')
-[01/02/2021 04:48:10] util.analysis - DEBUG: elapsed time: 00:44:46.12
-[01/02/2021 04:48:10] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'timedelta_id')
-[01/02/2021 04:57:51] util.analysis - DEBUG: elapsed time: 00:09:41.27
-[01/02/2021 04:57:51] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'timedelta_id')
-[01/02/2021 04:58:00] util.analysis - DEBUG: elapsed time: 00:00:08.44
-[01/02/2021 04:58:00] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'timedelta_id')
-[01/02/2021 04:58:02] util.analysis - DEBUG: elapsed time: 00:00:02.51
-Time: 06:23:48.39
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [FILTER POS SHAPE]: 817072
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: [FILTER RENTAL SHAPE]: 14826
+[31/01/2021 18:49:40] test.scooter_trajectories_test - INFO: *******************************************************************************************************
+[31/01/2021 18:49:40] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories heuristic data analysis
+[31/01/2021 18:49:40] util.analysis - DEBUG: DataAnalysis show distributions of ScooterTrajectories
+[31/01/2021 18:49:57] util.analysis - DEBUG: elapsed time: 00:00:16.17
+[31/01/2021 18:49:57] util.analysis - DEBUG: DataAnalysis show distributions of ScooterTrajectories
+[31/01/2021 18:52:39] util.analysis - DEBUG: elapsed time: 00:02:42.11
+[31/01/2021 18:52:39] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
+[31/01/2021 19:29:05] util.analysis - DEBUG: elapsed time: 00:36:26.00
+[31/01/2021 19:29:05] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
+[31/01/2021 20:09:27] util.analysis - DEBUG: elapsed time: 00:40:22.46
+[31/01/2021 20:09:27] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
+[31/01/2021 20:47:14] util.analysis - DEBUG: elapsed time: 00:37:46.81
+[31/01/2021 20:47:14] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
+[31/01/2021 20:52:11] util.analysis - DEBUG: elapsed time: 00:04:56.85
+[31/01/2021 20:52:11] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
+[31/01/2021 20:57:09] util.analysis - DEBUG: elapsed time: 00:04:58.04
+[31/01/2021 20:57:09] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
+[31/01/2021 21:02:06] util.analysis - DEBUG: elapsed time: 00:04:57.17
+[31/01/2021 21:02:06] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
+[31/01/2021 21:10:35] util.analysis - DEBUG: elapsed time: 00:08:29.04
+[31/01/2021 21:10:35] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
+[31/01/2021 21:19:41] util.analysis - DEBUG: elapsed time: 00:09:05.27
+[31/01/2021 21:19:41] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
+[31/01/2021 21:28:48] util.analysis - DEBUG: elapsed time: 00:09:06.95
+[31/01/2021 21:28:48] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
+[31/01/2021 21:30:20] util.analysis - DEBUG: elapsed time: 00:01:32.32
+[31/01/2021 21:30:20] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
+[31/01/2021 21:31:51] util.analysis - DEBUG: elapsed time: 00:01:31.57
+[31/01/2021 21:31:51] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
+[31/01/2021 21:33:23] util.analysis - DEBUG: elapsed time: 00:01:31.33
+[31/01/2021 21:33:23] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
+[31/01/2021 21:33:30] util.analysis - DEBUG: elapsed time: 00:00:07.52
+[31/01/2021 21:33:30] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
+[31/01/2021 21:33:39] util.analysis - DEBUG: elapsed time: 00:00:08.36
+[31/01/2021 21:33:39] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
+[31/01/2021 21:33:47] util.analysis - DEBUG: elapsed time: 00:00:08.37
+[31/01/2021 21:33:47] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
+[31/01/2021 21:33:49] util.analysis - DEBUG: elapsed time: 00:00:01.93
+[31/01/2021 21:33:49] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
+[31/01/2021 21:33:53] util.analysis - DEBUG: elapsed time: 00:00:03.70
+[31/01/2021 21:33:53] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
+[31/01/2021 21:33:55] util.analysis - DEBUG: elapsed time: 00:00:02.00
+[31/01/2021 21:33:55] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
+[31/01/2021 21:33:57] util.analysis - DEBUG: elapsed time: 00:00:02.29
+[31/01/2021 21:33:57] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
+[31/01/2021 21:34:00] util.analysis - DEBUG: elapsed time: 00:00:02.63
+[31/01/2021 21:34:00] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
+[31/01/2021 21:34:02] util.analysis - DEBUG: elapsed time: 00:00:02.55
+[31/01/2021 21:34:02] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'spreaddelta_id')
+[31/01/2021 21:34:03] util.analysis - DEBUG: elapsed time: 00:00:00.84
+[31/01/2021 21:34:03] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'edgedelta_id')
+[31/01/2021 21:34:04] util.analysis - DEBUG: elapsed time: 00:00:00.81
+[31/01/2021 21:34:04] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ('longitude', 'latitude', 'coorddelta_id')
+[31/01/2021 21:34:05] util.analysis - DEBUG: elapsed time: 00:00:00.89
+[31/01/2021 21:34:05] util.analysis - DEBUG: DataAnalysis show line table plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id', 'timedelta_id')
+[31/01/2021 21:36:11] util.analysis - DEBUG: elapsed time: 00:02:06.50
+[31/01/2021 21:36:11] util.analysis - DEBUG: DataAnalysis show line table plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id', 'timedelta_id')
+[31/01/2021 21:37:47] util.analysis - DEBUG: elapsed time: 00:01:35.21
+[31/01/2021 21:37:47] util.analysis - DEBUG: DataAnalysis show line table plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id', 'timedelta_id')
+[31/01/2021 21:38:05] util.analysis - DEBUG: elapsed time: 00:00:18.34
+[31/01/2021 21:38:05] util.analysis - DEBUG: DataAnalysis show line table plot of ScooterTrajectories on ('longitude', 'latitude', 'rental_id', 'timedelta_id')
+[31/01/2021 21:38:16] util.analysis - DEBUG: elapsed time: 00:00:10.90
+[31/01/2021 21:38:16] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'timedelta_id')
+[31/01/2021 22:18:59] util.analysis - DEBUG: elapsed time: 00:40:42.86
+[31/01/2021 22:18:59] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'timedelta_id')
+[31/01/2021 22:27:46] util.analysis - DEBUG: elapsed time: 00:08:46.82
+[31/01/2021 22:27:46] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'timedelta_id')
+[31/01/2021 22:27:54] util.analysis - DEBUG: elapsed time: 00:00:08.06
+[31/01/2021 22:27:54] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ('longitude', 'latitude', 'timedelta_id')
+[31/01/2021 22:27:56] util.analysis - DEBUG: elapsed time: 00:00:02.29
+Time: 03:38:26.06
