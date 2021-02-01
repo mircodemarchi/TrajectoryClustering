@@ -18,11 +18,14 @@ SAVE_FILE = True
 RENTAL_IMG_FN_PREFIX = "rental"
 POS_IMG_FN_PREFIX = "pos"
 POS_OVER_RENTAL_IMG_FN_PREFIX = "all"
-CLUSTER_IMG_FN_PREFIX = "kmeans"
-CLUSTER_TEST_IMG_FN_PREFIX = "kmeans_test"
+CLUSTER_IMG_FN_PREFIX = "clustering"
+CLUSTER_TEST_IMG_FN_PREFIX = "clustering_test"
 HEURISTIC_IMG_FN_PREFIX = "heuristic"
 
 FORCE_RENTAL_NUM_TO_ANALYZE = 100
+
+CLUSTERING_METHODS = ["k-means", "mean-shift", "gaussian-mixture", "full-agglomerative", "ward-agglomerative"]
+POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING = 30000
 
 
 class ScooterTrajectoriesTest:
@@ -48,9 +51,11 @@ class ScooterTrajectoriesTest:
         self.only_north = only_north
 
         # Others
+        self.data_prepared = None
+        self.partitions = None
         self.clustering_done = False
-        self.data_clusterized = None
-        self.partitions_clusterized = None
+        self.all_clusters = None
+        self.partitions_clusters = None
         self.groupby = [STC.POS_GEN_RENTAL_ID_CN,
                         STC.POS_GEN_TIMEDELTA_ID_CN] if group_on_timedelta else STC.POS_GEN_RENTAL_ID_CN
 
@@ -109,6 +114,11 @@ class ScooterTrajectoriesTest:
             ordered_pos = self.__pos_filter(self.st.pos)
             ordered_pos = ordered_pos.sort_values(by=pos_sort_cols, ignore_index=True)
             join = pd.concat([join, ordered_pos[STC.POS_GEN_HEURISTIC_COLS]], axis=1)
+
+            # Cumsum the timedelta id
+            group_on_timedelta = [STC.POS_GEN_RENTAL_ID_CN, STC.POS_GEN_TIMEDELTA_ID_CN]
+            join[STC.POS_GEN_TIMEDELTA_ID_CN] = join.loc[:, group_on_timedelta].ne(
+                join.loc[:, group_on_timedelta].shift()).any(axis=1).cumsum()
 
         # Convert time columns in float
         join_time_cols = STC.MERGE_TIME_COLS
@@ -195,7 +205,7 @@ class ScooterTrajectoriesTest:
         return not self.st.heuristic_empty()
 
     def is_clustering_processed(self):
-        return self.clustering_done and self.data_clusterized is not None and self.partitions_clusterized is not None
+        return self.clustering_done and self.all_clusters is not None and self.partitions_clusters is not None
 
     def heuristic(self):
         log.d("Test {} start heuristic process".format(DATASET_NAME))
@@ -221,12 +231,12 @@ class ScooterTrajectoriesTest:
         partitions = self.__partition(dataset_for_clustering, only_north=self.only_north)
 
         # Perform clustering tests
-        kmeans = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name="ScooterTrajectories")
+        kmeans = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
         kmeans.test(range_clusters=range(1, 20), standardize=self.with_standardization,
                     normalize=self.with_normalization,  pca=self.with_pca, components=STC.CLUSTERING_COMPONENTS)
         kmeans.show_wcss(save_file=SAVE_FILE, prefix=prefix + "all")
         for key in partitions:
-            kmeans = Clustering(partitions[key], STC.CLUSTERING_COLS, dataset_name="ScooterTrajectories")
+            kmeans = Clustering(partitions[key], STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
             kmeans.test(range_clusters=range(1, 30), standardize=self.with_standardization,
                         normalize=self.with_normalization, pca=self.with_pca, components=STC.CLUSTERING_COMPONENTS)
             kmeans.show_wcss(save_file=SAVE_FILE, prefix=prefix + key)
@@ -236,30 +246,42 @@ class ScooterTrajectoriesTest:
             self.test_clustering()
             return self
 
-        log.d("Test {} start clustering k-means analysis".format(DATASET_NAME))
+        log.d("Test {} start clustering".format(DATASET_NAME))
         if not self.is_heuristic_processed():
             log.e("Test {} clustering: you have to process heuristic earlier".format(DATASET_NAME))
             return self
 
-        components = STC.CLUSTERING_COMPONENTS  # STC.CLUSTERING_COMPONENTS or None or a number
+        components = None  # STC.CLUSTERING_COMPONENTS or None or a number
         dataset_for_clustering = self.__prepare()
-
-        # Perform clustering in relation to the entire data
-        kmeans = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name="ScooterTrajectories")
-        kmeans.exec(self.n_clusters, standardize=self.with_standardization, normalize=self.with_normalization,
-                    pca=self.with_pca, components=components)
-        dataset_for_clustering[STC.CLUSTER_ID_CN] = kmeans.labels
+        self.data_prepared = dataset_for_clustering
 
         # Perform clustering in relation to each partition
         partitions = self.__partition(dataset_for_clustering, only_north=self.only_north)
-        for key in partitions:
-            kmeans = Clustering(partitions[key], STC.CLUSTERING_COLS, dataset_name="ScooterTrajectories")
-            kmeans.exec(self.n_clusters, standardize=self.with_standardization, normalize=self.with_normalization,
-                        pca=self.with_pca, components=components)
-            partitions[key][STC.CLUSTER_ID_CN] = kmeans.labels
+        self.partitions = partitions
+        self.partitions_clusters = dict()
+        for method in CLUSTERING_METHODS:
+            self.partitions_clusters[method] = dict()
+            for key in partitions:
+                log.d("Test {} clustering of {} data with {}".format(DATASET_NAME, key, method))
+                if method.endswith("agglomerative") and POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING is not None:
+                    c = Clustering(partitions[key].iloc[:POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING],
+                                   STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
+                else:
+                    c = Clustering(partitions[key], STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
+                c.exec(method=method, n_clusters=self.n_clusters,
+                       standardize=self.with_standardization, normalize=self.with_normalization,
+                       pca=self.with_pca, components=components)
+                self.partitions_clusters[method][key] = c.labels
 
-        self.data_clusterized = dataset_for_clustering
-        self.partitions_clusterized = partitions
+        c = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
+        self.all_clusters = dict()
+        # Perform clustering in relation to the entire data
+        log.d("Test {} clustering of entire data with {}".format(DATASET_NAME, "k-means"))
+        c.exec(method="k-means", n_clusters=self.n_clusters,
+               standardize=self.with_standardization, normalize=self.with_normalization,
+               pca=self.with_pca, components=components)
+        self.all_clusters["k-means"] = c.labels
+
         self.clustering_done = True
 
     def generated_data_analysis(self):
@@ -319,26 +341,38 @@ class ScooterTrajectoriesTest:
                                  line_list=[STC.POS_GEN_OVER_TIMEDELTA_ANALYSIS_TUPLE])
 
     def clusterized_data_analysis(self):
-        log.d("Test {} clusterized data analysis".format(DATASET_NAME))
+        log.d("Test {} analysis of clusterized data".format(DATASET_NAME))
         if not self.is_clustering_processed():
             log.e("Test {} clusterized data analysis: you have to process clustering earlier".format(DATASET_NAME))
             return self
 
-        prefix = CLUSTER_IMG_FN_PREFIX
-        prefix = "" if prefix is None else "{}_".format(prefix)
+        partitions = self.partitions
+        for method in self.partitions_clusters:
+            prefix = "{}_{}_".format(CLUSTER_IMG_FN_PREFIX, method)
+            # Clustering analysis for each partition
+            for key in partitions:
+                log.d("Test {} analysis clusterized of {} data with {}".format(DATASET_NAME, key, method))
+                if method.endswith("agglomerative") and POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING is not None:
+                    p = partitions[key].iloc[:POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING].copy()
+                else:
+                    p = partitions[key].copy()
+                p[STC.CLUSTER_ID_CN] = self.partitions_clusters[method][key]
+                self.__line_joint_analysis(self.__filter(p), prefix=prefix + key,
+                                           line_list=[STC.CLUSTER_ANALYSIS_TUPLE],
+                                           line_3d_list=[STC.CLUSTER_ANALYSIS_TUPLE])
 
-        dataset_for_clustering = self.data_clusterized
-        self.__line_joint_analysis(self.__filter(dataset_for_clustering), line_list=[STC.CLUSTER_ANALYSIS_TUPLE],
-                                   prefix=prefix + "all")
-        self.__cardinal_analysis(dataset_for_clustering, line_list=[STC.CLUSTER_ANALYSIS_TUPLE],
-                                 prefix=prefix + "all")
-
-        # Clustering analysis for each partition
-        partitions = self.partitions_clusterized
-        for key in partitions:
-            self.__line_joint_analysis(self.__filter(partitions[key]), prefix=prefix + key,
-                                       line_list=[STC.CLUSTER_ANALYSIS_TUPLE],
-                                       line_3d_list=[STC.CLUSTER_ANALYSIS_TUPLE])
+        dataset_for_clustering = self.data_prepared
+        for method in self.all_clusters:
+            log.d("Test {} analysis clusterized of entire data with {}".format(DATASET_NAME, method))
+            prefix = "{}_{}_".format(CLUSTER_IMG_FN_PREFIX, method)
+            # Clustering analysis for the entire dataset
+            if method.endswith("agglomerative") and POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING is not None:
+                d = dataset_for_clustering.iloc[:POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING].copy()
+            else:
+                d = dataset_for_clustering.copy()
+            d[STC.CLUSTER_ID_CN] = self.all_clusters[method]
+            self.__line_joint_analysis(self.__filter(d), line_list=[STC.CLUSTER_ANALYSIS_TUPLE], prefix=prefix + "all")
+            self.__cardinal_analysis(d, line_list=[STC.CLUSTER_ANALYSIS_TUPLE], prefix=prefix + "all")
 
     def maps(self):
         log.d("Test {} generate maps".format(DATASET_NAME))

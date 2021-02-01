@@ -29,8 +29,6 @@ from test import ScooterTrajectoriesTest
 from util import DataAnalysis
 from util import Log
 
-from ml import Clustering
-
 log = Log(__name__, enable_console=True, enable_file=False)
 
 # Script arguments
@@ -100,7 +98,7 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
         st_test.heuristic()
         st_test.store()
 
-    if config.getboolean("perform-kmeans"):
+    if config.getboolean("perform-clustering"):
         st_test.clustering()
 
     # Analysis
@@ -112,7 +110,7 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
     if config.getboolean("perform-heuristic-analysis"):
         st_test.heuristic_data_analysis()
 
-    if config.getboolean("perform-kmeans") and st_test.is_clustering_processed():
+    if config.getboolean("perform-clustering") and st_test.is_clustering_processed():
         st_test.clusterized_data_analysis()
 
     if config.getboolean("perform-map"):

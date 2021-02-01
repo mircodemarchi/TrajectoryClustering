@@ -6,7 +6,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from sklearn.preprocessing import StandardScaler, Normalizer
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, MeanShift, estimate_bandwidth, AgglomerativeClustering
+from sklearn.mixture import GaussianMixture
 from sklearn.decomposition import PCA
 
 from util.util import get_elapsed
@@ -64,18 +65,45 @@ class Clustering:
                     log.w("__preprocessing: not expected \"components\", take it as None")
                 variance_cumulated = self.__get_cumulated_variance(x)
                 n_components = np.where(variance_cumulated > 0.8)[0][0]
-                pca_model = PCA(n_components=n_components)
+                pca_model = PCA(n_components=max(n_components, 1))
                 x = pca_model.fit_transform(x)
 
         end = time.time()
         return x, get_elapsed(start, end)
 
-    def __exec(self, x, n_clusters):
+    def __exec(self, x, method, n_clusters):
         start = time.time()
-        km = KMeans(n_clusters=n_clusters, init="k-means++", random_state=42)
-        km.fit(x)
+        if method == "k-means":
+            km = KMeans(n_clusters=n_clusters, init="k-means++", random_state=42)
+            km.fit(x)
+            inertia = km.inertia_
+            labels = km.labels_
+        elif method == "mean-shift":
+            bandwidth = estimate_bandwidth(x, quantile=0.2, n_samples=500)
+            ms = MeanShift(bandwidth=bandwidth, bin_seeding=True)
+            ms.fit(x)
+            inertia = None
+            labels = ms.labels_
+        elif method == "gaussian-mixture":
+            mg = GaussianMixture(n_components=n_clusters)
+            mg.fit(x)
+            inertia = None
+            labels = mg.predict(x)
+        elif method == "full-agglomerative":
+            fa = AgglomerativeClustering(linkage="complete", n_clusters=n_clusters)
+            fa.fit(x)
+            inertia = None
+            labels = fa.labels_
+        elif method == "ward-agglomerative":
+            fa = AgglomerativeClustering(linkage="ward", n_clusters=n_clusters)
+            fa.fit(x)
+            inertia = None
+            labels = fa.labels_
+        else:
+            log.e("Clustering __exec: method {} not recognised".format(method))
+            return None, None, 0
         end = time.time()
-        return km.inertia_, km.labels_, get_elapsed(start, end)
+        return inertia, labels, get_elapsed(start, end)
 
     def __get_cumulated_variance(self, x):
         scaler = StandardScaler()
@@ -85,15 +113,15 @@ class Clustering:
         variance_cumulated = pca_model.explained_variance_ratio_.cumsum()
         return variance_cumulated
 
-    def exec(self, n_clusters, standardize=False, normalize=False, pca=False, components=None):
+    def exec(self, method, n_clusters, standardize=False, normalize=False, pca=False, components=None):
         log.d("Clustering {} preprocessing".format(self.dataset_name))
         x, elapsed = self.__preprocessing(self.x, standardize=standardize, normalize=normalize,
                                           pca=pca, components=components)
         log.d("elapsed time: {}".format(elapsed))
         log.d("components: {}".format(x.shape[1]))
 
-        log.d("Clustering {} k-means process".format(self.dataset_name))
-        inertia, labels, elapsed = self.__exec(x, n_clusters)
+        log.d("Clustering {} exec {}".format(self.dataset_name, method))
+        inertia, labels, elapsed = self.__exec(x, method, n_clusters)
         log.d("elapsed time: {}".format(elapsed))
 
         self.inertia = inertia
@@ -140,7 +168,7 @@ class Clustering:
         plt.show()
         return self
 
-    def show_wcss(self, title="K-Means Clustering", save_file=False, prefix=None):
+    def show_wcss(self, title="Within Cluster Sums of Squares", save_file=False, prefix=None):
         prefix = "" if prefix is None else "{}_".format(prefix)
         filename = prefix + "wcss.png"
         log.d("Clustering {} show wcss".format(self.dataset_name))
