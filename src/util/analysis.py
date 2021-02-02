@@ -116,9 +116,9 @@ class DataAnalysis:
 
         if self.save_file:
             if z is None:
-                filename = self.filename_prefix + "*{}*{}*_".format(x, y) + filename
+                filename = self.filename_prefix + "-{}-{}-_".format(x, y) + filename
             else:
-                filename = self.filename_prefix + "*{}*{}*{}*_".format(x, y, z) + filename
+                filename = self.filename_prefix + "-{}-{}-{}-_".format(x, y, z) + filename
             g.savefig(os.path.join(self.image_folder, filename))
 
         plt.show()
@@ -155,9 +155,9 @@ class DataAnalysis:
 
         if self.save_file:
             if z is None:
-                filename = self.filename_prefix + "*{}*{}*_".format(x, y) + filename
+                filename = self.filename_prefix + "-{}-{}-_".format(x, y) + filename
             else:
-                filename = self.filename_prefix + "*{}*{}*{}*_".format(x, y, z) + filename
+                filename = self.filename_prefix + "-{}-{}-{}-_".format(x, y, z) + filename
             fig.savefig(os.path.join(self.image_folder, filename))
 
         plt.show()
@@ -211,7 +211,7 @@ class DataAnalysis:
         plt.suptitle(title)
 
         if self.save_file:
-            filename = self.filename_prefix + "*{}*{}*{}*_".format(x, y, z) + filename
+            filename = self.filename_prefix + "-{}-{}-{}-_".format(x, y, z) + filename
             plt.savefig(os.path.join(self.image_folder, filename))
 
         plt.show()
@@ -237,7 +237,7 @@ class DataAnalysis:
         p.fig.suptitle(title)
 
         if self.save_file:
-            filename = self.filename_prefix + "*{}*{}*{}*{}*_".format(x, y, z, w) + filename
+            filename = self.filename_prefix + "-{}-{}-{}-{}-_".format(x, y, z, w) + filename
             p.savefig(os.path.join(self.image_folder, filename))
 
         plt.show()
