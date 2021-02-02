@@ -1,0 +1,198 @@
+\documentclass[]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\title{Scooter Trajectories Clustering\\
+	{\large University of Verona\\Computer Engineering for Robotics and Smart Industry\\Machine Learning and Deep Learning\\2020/2021\\}}
+\author{Mirco De Marchi - VR445319}
+
+%\usepackage{algorithm,algorithmic}
+
+\usepackage{hyperref}
+\hypersetup{
+    linktoc=all
+}
+
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+
+\usepackage{listings}
+
+% Table environment
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.2}
+\usepackage{float}
+\restylefloat{table}
+
+\usepackage{amsmath}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+
+\usepackage{multicol}
+%\setlength{\multicolsep}{6.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\setlength\multicolsep{0pt}
+
+\begin{document}
+\maketitle
+
+% ABSTRACT
+\begin{abstract}
+	The aim of this review is to present the main unsupervised learning techniques used for scooter trajectories clustering. The dataset that I used contains a big amount of positions taken in rentals that run through some cities in Italy. The objective is to find recurrent places crossed by the trajectories. This review presents some analysis on the positions and the implementation of some heuristics that manage data in a systematic way: the \textit{spreaddelta heuristic}, the \textit{edgedelta heuristic} and the \textit{coorddelta heuristic}. Then I performed some machine learning clustering techniques on the dataset: \textit{mean shift}, \textit{full linkage}, \textit{ward hierarchical} and \textit{k-means}, adding the features extracted from the heuristics performed before. All the features are extracted with \textit{Principal Component Analysis (PCA)} with an improvement that select the component to focus on and the features has been integrated with the informations obtained from the heuristic procedures in order to optimize feature extraction. 
+\end{abstract}
+
+% INTRODUZIONE
+\section{Motivation}
+\input{chapters/chapter01motivation}
+
+% BACKGROUND
+\section{State of art}
+\input{chapters/chapter02state_of_art}
+
+% METODOLOGIA
+\section{Objectives}
+\input{chapters/chapter03objectives}
+
+% METHODOLOGY
+\section{Methodology}
+\input{chapters/chapter04methodology}
+
+% RESULTS
+\section{Results}
+\input{chapters/chapter05results}
+
+% CONCLUSION
+\section{Conclusion}
+\input{chapters/chapter06conclusion}
+
+%\begin{figure*}[bt]
+%	\centering
+%	\includegraphics[width=\textwidth]{efsmM}
+%	\caption{EFSM Moltiplicatore Floating-Point}
+%	\label{fig:efsmM}
+%\end{figure*}
+
+\bibliographystyle{IEEEtran}
+\bibliography{biblio}
+
+\begin{figure*}
+	\centering
+	\caption{Original dataset ER model}
+	\label{original-dataset-diagram}
+	\begin{tikzpicture}[node distance=2cm, scale=0.9, transform shape]
+	\node (rental) [rectangle, draw=black, rounded corners, text justified, text width=4cm, rectangle split, rectangle split parts=2]
+	{
+		\textbf{RENTAL}
+		\nodepart{second}
+		id: Id\\
+		\underline{device-id}: Id\\
+		\underline{user-id}: Id\\
+		start-latitude: float64\\
+		start-longitude: float64\\
+		stop-latitude: float64\\
+		stop-longitude: float64\\
+		start-time: datetime64\\
+		stop-time: datetime64\\
+		km: float64
+	};
+	\node (device) [rectangle, draw=black, rounded corners, text justified, text width=3cm, rectangle split, rectangle split parts=2, right=of rental, yshift=1.5cm]
+	{
+		\textbf{DEVICE}
+		\nodepart{second}
+		id: Id\\
+		km: float64
+	};
+	\node (pos) [rectangle, draw=black, rounded corners, text justified, text width=8cm, rectangle split, rectangle split parts=2, right=of device, yshift=-1.5cm]
+	{
+		\textbf{POS}
+		\nodepart{second}
+		id: Id\\
+		\underline{device-id}: Id\\
+		latitude: float64\\
+		longitude: float64\\
+		speed: float64\\
+		server-time: datetime64\\
+		device-time: datetime64\\
+	};
+	\node (user) [rectangle, draw=black, rounded corners, text justified, text width=3cm, rectangle split, rectangle split parts=2, below=of device, yshift=0.4cm]
+	{
+		\textbf{USER}
+		\nodepart{second}
+		id: Id\\
+		km: float64
+	};
+
+	\draw ([yshift=1.5cm]rental.east) -- node[above]{*..1}  (device.west);
+	\draw ([yshift=-1.5cm]rental.east) -- node[above]{*..1} (user.west);
+	\draw (device.east) -- node[above]{1..*} ([yshift=1.5cm]pos.west);
+	\end{tikzpicture}
+\end{figure*}
+
+\begin{figure*}
+	\centering
+	\caption{Generated dataset ER model}
+	\label{generated-dataset-diagram}
+	\begin{tikzpicture}[node distance=2cm, scale=0.9, transform shape]
+	\node (rental) [rectangle, draw=black, rounded corners, text justified, text width=4cm, rectangle split, rectangle split parts=2]
+	{
+		\textbf{RENTAL}
+		\nodepart{second}
+		id: Id\\
+		\underline{device-id}: Id\\
+		\underline{user-id}: Id\\
+		start-latitude: float64\\
+		start-longitude: float64\\
+		stop-latitude: float64\\
+		stop-longitude: float64\\
+		start-time: datetime64\\
+		stop-time: datetime64\\
+		km: float64
+	};
+	\node (pos) [rectangle, draw=black, rounded corners, text justified, text width=8cm, rectangle split, rectangle split parts=2, right=of rental]
+	{
+		\textbf{POS}
+		\nodepart{second}\begin{multicols*}{2}
+		id: Id\\
+		\underline{rental-id}: Id\\
+		timedelta-id: Id\\
+		spreaddelta-id: Id\\
+		edgedelta-id: Id\\
+		coorddelta-id: Id\\
+		latitude: float64\\
+		longitude: float64\\
+		spread-latitude: float64\\
+		spread-longitude: float64\\
+		\vfill
+		\columnbreak
+		edge-latitude-start: float64\\
+		edge-latitude-stop: float64\\
+		edge-longitude-start: float64\\
+		edge-longitude-stop: float64\\
+		speed: float64\\
+		server-time: datetime64\\
+		device-time: datetime64\\
+		time-gap: float64\\
+		\end{multicols*}
+	};
+	\node (device) [rectangle, draw=black, rounded corners, text justified, text width=3cm, rectangle split, rectangle split parts=2, left=of rental, yshift=1.5cm]
+	{
+		\textbf{DEVICE}
+		\nodepart{second}
+		id: Id\\
+		km: float64
+	};
+	\node (user) [rectangle, draw=black, rounded corners, text justified, text width=3cm, rectangle split, rectangle split parts=2, left=of rental, yshift=-1.5cm]
+	{
+		\textbf{USER}
+		\nodepart{second}
+		id: Id\\
+		km: float64
+	};
+	
+	\draw ([yshift=1.5cm]rental.west) -- node[above]{1..1}  (device.east);
+	\draw ([yshift=-1.5cm]rental.west) -- node[above]{ 1..*} (user.east);
+	\draw (rental.east) -- node[above]{1..*} (pos.west);
+	\end{tikzpicture}
+\end{figure*}
+
+\end{document}

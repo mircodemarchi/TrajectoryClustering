@@ -1,0 +1,44 @@
+The original dataset is composed by 4 tables in CSV fomat: \textit{pos.csv}, \textit{rental.csv}, \textit{user.csv}, \textit{device.csv}. This dataset is a subset of an another dataset with some sensitive data dropped (as user name or email) and positions manumit in order to protect proprietary data. Although the data are only a subset of the proprietary data, the amount positions is really huge and it weighs about 2GB. 
+
+The \textit{pos.csv} table contains all the positions, characterized by latitude, longitude, speed, timestamp and a device id used to join with \textit{device.csv} table. The \textit{device.csv} and \textit{user.csv} tables contain the kilometers traveled respectively by a scooter and by a user. At last, the \textit{rental.csv} table contains the longitude and latitude positions of rental starting and ending points with related timestamp, and all the ids used to join the other tables with this one. 
+
+The first thing that I have noticed is that the dataset is not built very well, because the informations referenced are not semantically correct. In fact, I would have the positions in relation with the rental and not with the device, therefore I tried to join the tables and I noticed that each rental is referenced by an unique device id. It means that there not exist multiple device used in different rental, but the device table is used only to take the positions in relation with rentals. Moreover I noticed that not all positions data have a matched rental, and not all rentals have some matched positions. This is caused by the subset extraction and the previous operation performed to protect sensitive informations. It means that the dataset can be filtered and reduced in size.
+
+As result of this first analysis I implemented an algorithm that filters and joins the table in a single one, in order to have simpler data to handle. This operation was really tricky because the total amount of data is huge and I had to use optimized functions based on database join algorithms and chunks management to be able to handle these data in shot time. At last, the resulting table has been sorted for rental id, position id and timestamp, in order to have everything ready to perform plot representation and some feature analysis.
+
+After that I performed some analysis on the features. I studied their distribution and I started to think how could be possible to group or divide positions. In particular I learnt that two trajectories can be similar in shape and can be divided in time. It means that a sequence of positions, a trajectory, can be similar to another one, evaluating his shape appearance and location in the geographical map, and therefore his sequence of latitude and longitude. On the other hand a trajectory can be different to another one if there is a temporal space between each other. The starting assumption of this analysis is that all positions belong to a rental, it means that starting from how data are constructed, I assume that a trajectory is the sequence of positions sorted in time that belong to the same rental. As result I implemented 3 different clustering heuristics performed in a systematic and statistical way on the entire sequence of positions:
+\begin{itemize}
+	\item \textbf{timedelta heuristic}: considers that a trajectory of a rental can be divided in a sequence of trajectories if the time gap between a position and previous one exceeds a \textit{timedelta} value. First of all I calculated the time gaps for each set of positions grouping in rental: 
+	\begin{align}
+		TIMEGAPS = \{p.time - p[-1].time \mid \forall p \in POS \}
+	\end{align}
+	where \verb|p[-1]| is the previous position and the field \verb|.time| is the related timestamp. The \textit{timedelta} value can be assigned by a user that runs the heuristic process or can be automatically calculated. To calculate automatically the timedelta value I plotted the timegaps distribution, I noticed that the curve is unimodal and I assumed to approximate it as a normal distribution. Therefore I assigned the timegaps standard deviation to my timedelta in order to exploit the statistical empirical rule and cover a percentage of timegaps distribution. In this case I take all the left tail of the distribution and the $43\%$ of the right one, and that ones that remains outside are the positions candidates that divide a trajectory from another one. This operation has been performed for each rental positions in order to obtain a set of sub-trajectories of rental trajectory.
+	\item \textbf{spreaddelta heuristic}: considers that a trajectory of a rental can be considered similar to another one if they spread the same area. I calculate the spread area for each rental trajectory in the following way: 
+	\begin{align}
+		SPREADS = \{max(t) - min(t) \mid \forall t \in TRAJ \}
+	\end{align}
+	where \verb|max(t)| and \verb|min(t)| calculate respectively the maximum and the minimum latitude and longitude of a set of positions, and \verb|TRAJ| is the set of trajectories that can be grouped for each rental, but even for timedelta heuristic previously calculated in order to consider the time gaps division of trajectory and not only the rental division. Also in this case the result of spread distribution is a unimodal curve that can be approximated in a normal distribution and I have again exploited the empirical rule to compute the trajectories similar for spread. I assigned $std(SPREADS) / 4$ to the spreaddelta if you want to automatically calculate it, otherwise of course you can choose the value of spreaddelta. If automatically calculated, the spreaddelta will cover the spread distribution of about $20\%$. This operation will be repeated as long as all the positions has spread id assigned, and when a position is assigned it is discarded from the distribution calculus. 
+	\item \textbf{edgedelta heuristic}: acts as the spreaddelta heuristic, but it consider the edge of a trajectory, or rather the first position and the last position of the trajectory. The main problem here is that the distribution of edge positions has 2 centres or, in other words, it is bimodal. In fact the dataset positions involves mainly in 2 different cities of Italy, and this translates in a bimodal distribution of the positions. In this case I can't use the distribution mean or the standard deviation because they should result wrong, but I have to approximate these values. To resolve this issue I applied for simplicity only 1 iteration of Mean Shift starting from a random position in order to get closer to a centre of the distribution (one of the two indifferently) and to obtain a spread subset more significant to calculate the deviation standard and use it as edgedelta. In particular the value assign to edgedelta is $std(meanshift(EDGES, iter=1)) * 2$ and obtain the $95\%$ of the subset of edges found by meanshift. The set of edges is calculated in the following way: 
+	\begin{align}
+		EDGES = \{concat(p[0], p[-1]) \mid \forall t \in TRAJ \}
+	\end{align}
+ 	\item \textbf{coorddelta heuristic}: it is a combination spread and edge heuristics and combine the main advantages of each other. To guarantee the convergence of this algorithm edge heuristic and spread heuristic have to manage the same subset of trajectory. Therefore first it is applied edge heuristic to find a subset of trajectories near a distribution centre and then both heuristics, edge and spread, are applied to same subset.
+\end{itemize}
+
+After the implementation of these heuristic techniques, I started to prepare the features to be processed by clustering algorithms. In particular I decided to perform Standardization, Normalization and than Principal Component Analysis (PCA) on features. The component extracted by PCA can be dediced in 3 different ways:
+\begin{enumerate}
+	\item By a number of component decided a priori;
+	\item By the cumulative variance calculated by PCA over the number of features, considering to cover almost an $80\%$ of variance;
+	\item Constructing a list of features subset and performing PCA to produce 1 component for each features subset. The result will be a concatenation of columns produced by PCA for different subset of features.
+\end{enumerate}
+
+As feature extraction, I considered that the work done for the heuristic algorithm could return useful for clustering algorithms. In particular $TIMEGAPS$, $SPREADS$ and $EDGES$ sets can be used as new features of my data. Therefore I integrate my data features with the ones extracted from the heuristic and I used it to be processed with Standardization, Normalization, PCA and than clustering algorithms.
+
+The clustering algorithms that I used are the following: 
+\begin{itemize}
+	\item \textbf{K-Means}:
+	\item \textbf{Mean Shift}:
+	\item \textbf{Gaussian Mixture}:
+	\item \textbf{Full Hierarchy}:
+	\item \textbf{Ward Hierarchy}: 
+\end{itemize}
