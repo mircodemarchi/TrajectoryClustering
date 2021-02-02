@@ -273,14 +273,19 @@ class ScooterTrajectoriesTest:
                        pca=self.with_pca, components=components)
                 self.partitions_clusters[method][key] = c.labels
 
-        c = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
         self.all_clusters = dict()
         # Perform clustering in relation to the entire data
-        log.d("Test {} clustering of entire data with {}".format(DATASET_NAME, "k-means"))
-        c.exec(method="k-means", n_clusters=self.n_clusters,
-               standardize=self.with_standardization, normalize=self.with_normalization,
-               pca=self.with_pca, components=components)
-        self.all_clusters["k-means"] = c.labels
+        for method in CLUSTERING_METHODS:
+            log.d("Test {} clustering of entire data with {}".format(DATASET_NAME, method))
+            if method.endswith("agglomerative") and POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING is not None:
+                c = Clustering(dataset_for_clustering.iloc[:POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING],
+                               STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
+            else:
+                c = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
+            c.exec(method="k-means", n_clusters=self.n_clusters,
+                   standardize=self.with_standardization, normalize=self.with_normalization,
+                   pca=self.with_pca, components=components)
+            self.all_clusters[method] = c.labels
 
         self.clustering_done = True
 
