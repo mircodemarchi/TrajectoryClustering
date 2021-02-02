@@ -490,6 +490,12 @@ TSWLatexianTemp*
 # Custom
 .DS_Store
 
+image/*/*
+!image/README.md
+
+html/*/*
+!html/**/README.md
+
 data/*
 !data/README.md
 
