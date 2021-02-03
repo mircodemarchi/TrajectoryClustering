@@ -97,7 +97,7 @@ The configuration file (ex. _defconfig.ini_) is divided in different sections, o
 
     - `max-chunk-num`: int optional
 
-        The index of the last chunk to parse of the positions of original dataset. This is a limit to speed up the loading and filtering of original dataset. If omitted, it will take every chunk.  
+        The index of the original dataset last chunk to parse. This is a limit to speed up the load and filter of original dataset. If omitted, it will take every chunk.  
 
     - `rental-num-to-analyze`: int optional
 
@@ -109,13 +109,15 @@ The configuration file (ex. _defconfig.ini_) is divided in different sections, o
 
     - `perform-heuristic`: bool
 
-        Performs on generated dataset timedelta heuristic, spreaddelta heuristic, edgedelta heuristic and coorddelta heuristic and overwrite the generated dataset with the heuristic columns.
+        Performs timedelta heuristic, spreaddelta heuristic, edgedelta heuristic and coorddelta heuristic on generated dataset and overwrite the generated dataset with the computed heuristic columns.
 
     - `group-on-timedelta`: bool
 
+        Groups the trajectory by the timedelta heuristic division using _timedelta_id_, otherwise groups the trajectory by rentals using _rental_id_. This setting is used by spreaddelta heuristic, edgedelta heuristic, coorddelta heuristic and the performed analysis. 
+
     - `timedelta`: int optional
 
-        The delta value that if greater than the difference in time of two positions, consider each other part of a different trajectory. 
+        The delta value that if greater than the difference in time of two positions, consider each other as different trajectories. 
 
     - `spreaddelta`: int optional
 
@@ -151,7 +153,7 @@ The configuration file (ex. _defconfig.ini_) is divided in different sections, o
 
     - `perform-heuristic-analysis`: bool
 
-        Perform analysis of heuristic columns (if performed and saved in your generated data) as scatter plots, line plots and distribution plots. The results are saved as images in _\<proj-dir\>/image_ folder.
+        Perform analysis of heuristic columns (if previously performed and saved in your generated data) as scatter plots, line plots and distribution plots. The results are saved as images in _\<proj-dir\>/image_ folder.
 
     - `perform-map`: bool
 
