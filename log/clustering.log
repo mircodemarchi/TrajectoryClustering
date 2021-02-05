@@ -1,140 +1,164 @@
-[01/02/2021 22:42:44] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories start load from already generated data
-[01/02/2021 22:42:44] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load generated
-[01/02/2021 22:42:51] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:07.63
-[01/02/2021 22:42:51] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories start clustering
-[01/02/2021 22:42:51] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories prepare data for clustering
-[01/02/2021 22:43:19] test.scooter_trajectories_test - DEBUG: elapsed time: 00:00:27.13
-[01/02/2021 22:43:19] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with k-means
-[01/02/2021 22:43:19] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:20] ml.clustering - DEBUG: elapsed time: 00:00:01.10
-[01/02/2021 22:43:20] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:20] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
-[01/02/2021 22:43:26] ml.clustering - DEBUG: elapsed time: 00:00:05.47
-[01/02/2021 22:43:26] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with k-means
-[01/02/2021 22:43:26] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:26] ml.clustering - DEBUG: elapsed time: 00:00:00.34
-[01/02/2021 22:43:26] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:26] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
-[01/02/2021 22:43:28] ml.clustering - DEBUG: elapsed time: 00:00:02.20
-[01/02/2021 22:43:28] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with k-means
-[01/02/2021 22:43:28] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:28] ml.clustering - DEBUG: elapsed time: 00:00:00.01
-[01/02/2021 22:43:28] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:28] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
-[01/02/2021 22:43:28] ml.clustering - DEBUG: elapsed time: 00:00:00.11
-[01/02/2021 22:43:28] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with k-means
-[01/02/2021 22:43:28] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:28] ml.clustering - DEBUG: elapsed time: 00:00:00.00
-[01/02/2021 22:43:28] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:28] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
-[01/02/2021 22:43:28] ml.clustering - DEBUG: elapsed time: 00:00:00.06
-[01/02/2021 22:43:28] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with mean-shift
-[01/02/2021 22:43:28] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:29] ml.clustering - DEBUG: elapsed time: 00:00:01.13
-[01/02/2021 22:43:29] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:29] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
-[01/02/2021 22:43:42] ml.clustering - DEBUG: elapsed time: 00:00:12.64
-[01/02/2021 22:43:42] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with mean-shift
-[01/02/2021 22:43:42] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:42] ml.clustering - DEBUG: elapsed time: 00:00:00.34
-[01/02/2021 22:43:42] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:42] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
-[01/02/2021 22:43:47] ml.clustering - DEBUG: elapsed time: 00:00:04.28
-[01/02/2021 22:43:47] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with mean-shift
-[01/02/2021 22:43:47] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:47] ml.clustering - DEBUG: elapsed time: 00:00:00.01
-[01/02/2021 22:43:47] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:47] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
-[01/02/2021 22:43:47] ml.clustering - DEBUG: elapsed time: 00:00:00.17
-[01/02/2021 22:43:47] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with mean-shift
-[01/02/2021 22:43:47] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:47] ml.clustering - DEBUG: elapsed time: 00:00:00.00
-[01/02/2021 22:43:47] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:47] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
-[01/02/2021 22:43:47] ml.clustering - DEBUG: elapsed time: 00:00:00.09
-[01/02/2021 22:43:47] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with gaussian-mixture
-[01/02/2021 22:43:47] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:43:48] ml.clustering - DEBUG: elapsed time: 00:00:01.09
-[01/02/2021 22:43:48] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:43:48] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
-[01/02/2021 22:44:05] ml.clustering - DEBUG: elapsed time: 00:00:16.45
-[01/02/2021 22:44:05] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with gaussian-mixture
-[01/02/2021 22:44:05] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:44:05] ml.clustering - DEBUG: elapsed time: 00:00:00.34
-[01/02/2021 22:44:05] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:44:05] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
-[01/02/2021 22:44:08] ml.clustering - DEBUG: elapsed time: 00:00:02.70
-[01/02/2021 22:44:08] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with gaussian-mixture
-[01/02/2021 22:44:08] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:44:08] ml.clustering - DEBUG: elapsed time: 00:00:00.01
-[01/02/2021 22:44:08] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:44:08] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
-[01/02/2021 22:44:08] ml.clustering - DEBUG: elapsed time: 00:00:00.10
-[01/02/2021 22:44:08] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with gaussian-mixture
-[01/02/2021 22:44:08] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:44:08] ml.clustering - DEBUG: elapsed time: 00:00:00.00
-[01/02/2021 22:44:08] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:44:08] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
-[01/02/2021 22:44:08] ml.clustering - DEBUG: elapsed time: 00:00:00.04
-[01/02/2021 22:44:08] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with full-agglomerative
-[01/02/2021 22:44:08] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:44:08] ml.clustering - DEBUG: elapsed time: 00:00:00.05
-[01/02/2021 22:44:08] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:44:08] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
-[01/02/2021 22:44:39] ml.clustering - DEBUG: elapsed time: 00:00:31.40
-[01/02/2021 22:44:39] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with full-agglomerative
-[01/02/2021 22:44:39] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:44:39] ml.clustering - DEBUG: elapsed time: 00:00:00.03
-[01/02/2021 22:44:39] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:44:39] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
-[01/02/2021 22:45:11] ml.clustering - DEBUG: elapsed time: 00:00:32.08
-[01/02/2021 22:45:11] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with full-agglomerative
-[01/02/2021 22:45:11] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:45:11] ml.clustering - DEBUG: elapsed time: 00:00:00.01
-[01/02/2021 22:45:11] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:45:11] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
-[01/02/2021 22:45:12] ml.clustering - DEBUG: elapsed time: 00:00:00.70
-[01/02/2021 22:45:12] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with full-agglomerative
-[01/02/2021 22:45:12] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:45:12] ml.clustering - DEBUG: elapsed time: 00:00:00.00
-[01/02/2021 22:45:12] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:45:12] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
-[01/02/2021 22:45:12] ml.clustering - DEBUG: elapsed time: 00:00:00.00
-[01/02/2021 22:45:12] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with ward-agglomerative
-[01/02/2021 22:45:12] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:45:12] ml.clustering - DEBUG: elapsed time: 00:00:00.06
-[01/02/2021 22:45:12] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:45:12] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
-[01/02/2021 22:45:47] ml.clustering - DEBUG: elapsed time: 00:00:34.31
-[01/02/2021 22:45:47] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with ward-agglomerative
-[01/02/2021 22:45:47] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:45:47] ml.clustering - DEBUG: elapsed time: 00:00:00.03
-[01/02/2021 22:45:47] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:45:47] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
-[01/02/2021 22:46:21] ml.clustering - DEBUG: elapsed time: 00:00:34.34
-[01/02/2021 22:46:21] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with ward-agglomerative
-[01/02/2021 22:46:21] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:46:21] ml.clustering - DEBUG: elapsed time: 00:00:00.01
-[01/02/2021 22:46:21] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:46:21] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
-[01/02/2021 22:46:22] ml.clustering - DEBUG: elapsed time: 00:00:00.81
-[01/02/2021 22:46:22] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with ward-agglomerative
-[01/02/2021 22:46:22] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:46:22] ml.clustering - DEBUG: elapsed time: 00:00:00.00
-[01/02/2021 22:46:22] ml.clustering - DEBUG: components: 2
-[01/02/2021 22:46:22] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
-[01/02/2021 22:46:22] ml.clustering - DEBUG: elapsed time: 00:00:00.00
-[01/02/2021 22:46:22] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of entire data with k-means
-[01/02/2021 22:46:22] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
-[01/02/2021 22:46:23] ml.clustering - DEBUG: elapsed time: 00:00:01.37
-[01/02/2021 22:46:23] ml.clustering - DEBUG: components: 1
-[01/02/2021 22:46:23] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
-[01/02/2021 22:46:27] ml.clustering - DEBUG: elapsed time: 00:00:04.05
-[01/02/2021 22:46:27] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories print stats
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (14826, 13);
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'rental_positions'];
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
+[04/02/2021 23:04:56] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories start load from already generated data
+[04/02/2021 23:04:56] dataset.scooter_trajectories_ds - DEBUG: Scooter Trajectories load generated
+[04/02/2021 23:05:04] dataset.scooter_trajectories_ds - DEBUG: elapsed time: 00:00:08.30
+[04/02/2021 23:05:04] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories start clustering
+[04/02/2021 23:05:05] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories prepare data for clustering
+[04/02/2021 23:05:39] test.scooter_trajectories_test - DEBUG: elapsed time: 00:00:34.57
+[04/02/2021 23:05:40] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with k-means
+[04/02/2021 23:05:40] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:05:41] ml.clustering - DEBUG: elapsed time: 00:00:00.87
+[04/02/2021 23:05:41] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:05:41] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
+[04/02/2021 23:05:47] ml.clustering - DEBUG: elapsed time: 00:00:06.44
+[04/02/2021 23:05:47] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with k-means
+[04/02/2021 23:05:47] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:05:47] ml.clustering - DEBUG: elapsed time: 00:00:00.30
+[04/02/2021 23:05:47] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:05:47] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
+[04/02/2021 23:05:50] ml.clustering - DEBUG: elapsed time: 00:00:02.24
+[04/02/2021 23:05:50] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with k-means
+[04/02/2021 23:05:50] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:05:50] ml.clustering - DEBUG: elapsed time: 00:00:00.02
+[04/02/2021 23:05:50] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:05:50] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
+[04/02/2021 23:05:50] ml.clustering - DEBUG: elapsed time: 00:00:00.14
+[04/02/2021 23:05:50] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with k-means
+[04/02/2021 23:05:50] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:05:50] ml.clustering - DEBUG: elapsed time: 00:00:00.00
+[04/02/2021 23:05:50] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:05:50] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
+[04/02/2021 23:05:50] ml.clustering - DEBUG: elapsed time: 00:00:00.07
+[04/02/2021 23:05:50] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with mean-shift
+[04/02/2021 23:05:50] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:05:51] ml.clustering - DEBUG: elapsed time: 00:00:01.16
+[04/02/2021 23:05:51] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:05:51] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
+[04/02/2021 23:07:04] ml.clustering - DEBUG: elapsed time: 00:01:13.13
+[04/02/2021 23:07:04] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with mean-shift
+[04/02/2021 23:07:04] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:07:04] ml.clustering - DEBUG: elapsed time: 00:00:00.24
+[04/02/2021 23:07:04] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:07:04] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
+[04/02/2021 23:07:20] ml.clustering - DEBUG: elapsed time: 00:00:15.13
+[04/02/2021 23:07:20] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with mean-shift
+[04/02/2021 23:07:20] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:07:20] ml.clustering - DEBUG: elapsed time: 00:00:00.01
+[04/02/2021 23:07:20] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:07:20] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
+[04/02/2021 23:07:20] ml.clustering - DEBUG: elapsed time: 00:00:00.39
+[04/02/2021 23:07:20] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with mean-shift
+[04/02/2021 23:07:20] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:07:20] ml.clustering - DEBUG: elapsed time: 00:00:00.00
+[04/02/2021 23:07:20] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:07:20] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
+[04/02/2021 23:07:20] ml.clustering - DEBUG: elapsed time: 00:00:00.09
+[04/02/2021 23:07:20] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with gaussian-mixture
+[04/02/2021 23:07:20] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:07:21] ml.clustering - DEBUG: elapsed time: 00:00:00.71
+[04/02/2021 23:07:21] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:07:21] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
+[04/02/2021 23:07:57] ml.clustering - DEBUG: elapsed time: 00:00:36.06
+[04/02/2021 23:07:57] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with gaussian-mixture
+[04/02/2021 23:07:57] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:07:57] ml.clustering - DEBUG: elapsed time: 00:00:00.21
+[04/02/2021 23:07:57] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:07:57] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
+[04/02/2021 23:08:01] ml.clustering - DEBUG: elapsed time: 00:00:04.17
+[04/02/2021 23:08:01] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with gaussian-mixture
+[04/02/2021 23:08:01] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:08:01] ml.clustering - DEBUG: elapsed time: 00:00:00.01
+[04/02/2021 23:08:01] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:08:01] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
+[04/02/2021 23:08:01] ml.clustering - DEBUG: elapsed time: 00:00:00.08
+[04/02/2021 23:08:01] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with gaussian-mixture
+[04/02/2021 23:08:01] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:08:01] ml.clustering - DEBUG: elapsed time: 00:00:00.00
+[04/02/2021 23:08:01] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:08:01] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
+[04/02/2021 23:08:01] ml.clustering - DEBUG: elapsed time: 00:00:00.04
+[04/02/2021 23:08:01] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with full-agglomerative
+[04/02/2021 23:08:01] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:08:01] ml.clustering - DEBUG: elapsed time: 00:00:00.04
+[04/02/2021 23:08:01] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:08:01] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
+[04/02/2021 23:08:51] ml.clustering - DEBUG: elapsed time: 00:00:49.14
+[04/02/2021 23:08:51] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with full-agglomerative
+[04/02/2021 23:08:51] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:08:51] ml.clustering - DEBUG: elapsed time: 00:00:00.04
+[04/02/2021 23:08:51] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:08:51] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
+[04/02/2021 23:09:27] ml.clustering - DEBUG: elapsed time: 00:00:36.49
+[04/02/2021 23:09:27] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with full-agglomerative
+[04/02/2021 23:09:27] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:09:27] ml.clustering - DEBUG: elapsed time: 00:00:00.01
+[04/02/2021 23:09:27] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:09:27] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
+[04/02/2021 23:09:28] ml.clustering - DEBUG: elapsed time: 00:00:00.77
+[04/02/2021 23:09:28] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with full-agglomerative
+[04/02/2021 23:09:28] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:09:28] ml.clustering - DEBUG: elapsed time: 00:00:00.00
+[04/02/2021 23:09:28] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:09:28] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
+[04/02/2021 23:09:28] ml.clustering - DEBUG: elapsed time: 00:00:00.00
+[04/02/2021 23:09:28] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-E data with ward-agglomerative
+[04/02/2021 23:09:28] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:09:28] ml.clustering - DEBUG: elapsed time: 00:00:00.03
+[04/02/2021 23:09:28] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:09:28] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
+[04/02/2021 23:10:11] ml.clustering - DEBUG: elapsed time: 00:00:43.42
+[04/02/2021 23:10:11] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of N-W data with ward-agglomerative
+[04/02/2021 23:10:11] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:10:11] ml.clustering - DEBUG: elapsed time: 00:00:00.03
+[04/02/2021 23:10:11] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:10:11] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
+[04/02/2021 23:10:51] ml.clustering - DEBUG: elapsed time: 00:00:39.97
+[04/02/2021 23:10:51] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-E data with ward-agglomerative
+[04/02/2021 23:10:51] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:10:51] ml.clustering - DEBUG: elapsed time: 00:00:00.01
+[04/02/2021 23:10:51] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:10:51] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
+[04/02/2021 23:10:52] ml.clustering - DEBUG: elapsed time: 00:00:00.85
+[04/02/2021 23:10:52] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of S-W data with ward-agglomerative
+[04/02/2021 23:10:52] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:10:52] ml.clustering - DEBUG: elapsed time: 00:00:00.00
+[04/02/2021 23:10:52] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:10:52] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
+[04/02/2021 23:10:52] ml.clustering - DEBUG: elapsed time: 00:00:00.00
+[04/02/2021 23:10:52] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of entire data with k-means
+[04/02/2021 23:10:52] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:10:53] ml.clustering - DEBUG: elapsed time: 00:00:00.89
+[04/02/2021 23:10:53] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:10:53] ml.clustering - DEBUG: Clustering ScooterTrajectories exec k-means
+[04/02/2021 23:10:58] ml.clustering - DEBUG: elapsed time: 00:00:05.07
+[04/02/2021 23:10:58] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of entire data with mean-shift
+[04/02/2021 23:10:58] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:10:59] ml.clustering - DEBUG: elapsed time: 00:00:00.98
+[04/02/2021 23:10:59] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:10:59] ml.clustering - DEBUG: Clustering ScooterTrajectories exec mean-shift
+[04/02/2021 23:11:43] ml.clustering - DEBUG: elapsed time: 00:00:43.36
+[04/02/2021 23:11:43] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of entire data with gaussian-mixture
+[04/02/2021 23:11:43] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:11:44] ml.clustering - DEBUG: elapsed time: 00:00:00.93
+[04/02/2021 23:11:44] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:11:44] ml.clustering - DEBUG: Clustering ScooterTrajectories exec gaussian-mixture
+[04/02/2021 23:11:58] ml.clustering - DEBUG: elapsed time: 00:00:14.67
+[04/02/2021 23:11:58] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of entire data with full-agglomerative
+[04/02/2021 23:11:58] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:11:58] ml.clustering - DEBUG: elapsed time: 00:00:00.04
+[04/02/2021 23:11:58] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:11:58] ml.clustering - DEBUG: Clustering ScooterTrajectories exec full-agglomerative
+[04/02/2021 23:12:32] ml.clustering - DEBUG: elapsed time: 00:00:33.12
+[04/02/2021 23:12:32] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories clustering of entire data with ward-agglomerative
+[04/02/2021 23:12:32] ml.clustering - DEBUG: Clustering ScooterTrajectories preprocessing
+[04/02/2021 23:12:32] ml.clustering - DEBUG: elapsed time: 00:00:00.03
+[04/02/2021 23:12:32] ml.clustering - DEBUG: components: 5
+[04/02/2021 23:12:32] ml.clustering - DEBUG: Clustering ScooterTrajectories exec ward-agglomerative
+[04/02/2021 23:13:10] ml.clustering - DEBUG: elapsed time: 00:00:38.41
+[04/02/2021 23:13:10] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories print stats
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: ************************************ Scooter Trajectories - Stats *************************************
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [DATA MAP SHAPE]: (14826, 13);
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [DATA MAP COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'rental_positions'];
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [DATA MAP FEATURES TYPES]:
 rental_id                    int64
 device_id                    int64
 device_km                  float64
@@ -149,7 +173,7 @@ stop_time           datetime64[ns]
 rental_km                  float64
 rental_positions            object
 dtype: object;
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [DATA MAP NULL OCCURRENCES]:
 rental_id           0
 device_id           0
 device_km           0
@@ -164,7 +188,7 @@ stop_time           0
 rental_km           0
 rental_positions    0
 dtype: int64;
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [DATA MAP DESCRIPTION]:
            rental_id     device_id     device_km       user_id        usr_km  latitude_start
 count   14826.000000  14826.000000  14826.000000  14826.000000  14826.000000    14826.000000
 mean   109459.244705    215.781195    423.092541  39409.562323     61.235254       44.153858
@@ -183,9 +207,9 @@ min           8.832870      43.684978        7.615795     2020-01-11 03:30:41.90
 75%          12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
 max          13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
 std           1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [RENTAL SHAPE]: (14826, 10);
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [RENTAL COLUMN NAMES]: ['id', 'device_id', 'user_id', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'km'];
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [RENTAL FEATURES TYPES]:
 id                          int64
 device_id                   int64
 user_id                     int64
@@ -197,7 +221,7 @@ start_time         datetime64[ns]
 stop_time          datetime64[ns]
 km                        float64
 dtype: object;
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [RENTAL NULL OCCURRENCES]:
 id                 0
 device_id          0
 user_id            0
@@ -209,7 +233,7 @@ start_time         0
 stop_time          0
 km                 0
 dtype: int64;
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [RENTAL DESCRIPTION]:
                   id     device_id       user_id  latitude_start  longitude_start  latitude_stop  longitude_stop                     start_time                      stop_time            km
 count   14826.000000  14826.000000  14826.000000    14826.000000     14826.000000   14826.000000    14826.000000                          14826                          14826  14826.000000
 mean   109459.244705    215.781195  39409.562323       44.153858        11.481653      45.353871       10.281107  2020-02-06 08:25:01.239833088  2020-02-06 08:35:12.895151104      1.564281
@@ -219,9 +243,9 @@ min     94188.000000      1.000000      2.000000       42.485028         8.83287
 75%    118533.750000    305.000000  54099.750000       44.241925        12.195700      45.442275       10.996293  2020-02-18 19:15:36.233000192  2020-02-18 19:27:12.811250176      2.000000
 max    134690.000000  10001.000000  75805.000000       44.259358        13.944872      45.459476       12.744960     2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000     21.889999
 std     11897.537349    228.660821  17483.048296        0.174064         1.366076       0.174229        1.366336                            NaN                            NaN      1.363680;
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (817076, 18);
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'timedelta_id', 'spreaddelta_id', 'edgedelta_id', 'coorddelta_id', 'latitude', 'longitude', 'spread_latitude', 'spread_longitude', 'edge_latitude_start', 'edge_latitude_stop', 'edge_longitude_start', 'edge_longitude_stop', 'speed', 'server_time', 'device_time', 'time_gap'];
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [POS SHAPE]: (817076, 18);
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [POS COLUMN NAMES]: ['id', 'rental_id', 'timedelta_id', 'spreaddelta_id', 'edgedelta_id', 'coorddelta_id', 'latitude', 'longitude', 'spread_latitude', 'spread_longitude', 'edge_latitude_start', 'edge_latitude_stop', 'edge_longitude_start', 'edge_longitude_stop', 'speed', 'server_time', 'device_time', 'time_gap'];
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [POS FEATURES TYPES]:
 id                               int64
 rental_id                        int64
 timedelta_id                     int64
@@ -241,7 +265,7 @@ server_time             datetime64[ns]
 device_time             datetime64[ns]
 time_gap                       float64
 dtype: object;
-[01/02/2021 22:46:27] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
+[04/02/2021 23:13:10] dataset.scooter_trajectories_ds - INFO: [POS NULL OCCURRENCES]:
 id                      0
 rental_id               0
 timedelta_id            0
@@ -261,7 +285,7 @@ server_time             0
 device_time             0
 time_gap                0
 dtype: int64;
-[01/02/2021 22:46:28] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
+[04/02/2021 23:13:11] dataset.scooter_trajectories_ds - INFO: [POS DESCRIPTION]:
                  id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
 count  8.170760e+05  817076.000000  817076.000000   817076.000000  817076.000000  817076.000000  817076.000000  817076.000000    817076.000000
 mean   3.529087e+07  111082.453362       9.159114        1.556115      19.430747      70.778798      44.134314      11.379200         0.004225
@@ -280,9 +304,9 @@ min            0.000000            42.484956           41.069159              1.
 75%            0.008745            44.241872           44.241921             12.195336            12.195485      13.630000  2020-02-20 13:48:08.995729408  2020-02-20 13:48:08.995729408  1.141600e+04
 max            3.215676            44.385139           44.385139             13.952780            15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186  2.248234e+06
 std            0.013451             0.202434            0.202579              1.447449             1.447650       7.661406                            NaN                            NaN  1.270517e+04;
-[01/02/2021 22:46:28] dataset.scooter_trajectories_ds - INFO: [MERGE SHAPE]: (817076, 18);
-[01/02/2021 22:46:28] dataset.scooter_trajectories_ds - INFO: [MERGE COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'pos_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
-[01/02/2021 22:46:28] dataset.scooter_trajectories_ds - INFO: [MERGE FEATURES TYPES]:
+[04/02/2021 23:13:11] dataset.scooter_trajectories_ds - INFO: [MERGE SHAPE]: (817076, 18);
+[04/02/2021 23:13:11] dataset.scooter_trajectories_ds - INFO: [MERGE COLUMN NAMES]: ['rental_id', 'device_id', 'device_km', 'user_id', 'usr_km', 'latitude_start', 'longitude_start', 'latitude_stop', 'longitude_stop', 'start_time', 'stop_time', 'rental_km', 'pos_id', 'latitude', 'longitude', 'speed', 'server_time', 'device_time'];
+[04/02/2021 23:13:11] dataset.scooter_trajectories_ds - INFO: [MERGE FEATURES TYPES]:
 rental_id                   int64
 device_id                   int64
 device_km                 float64
@@ -302,7 +326,7 @@ speed                     float64
 server_time        datetime64[ns]
 device_time        datetime64[ns]
 dtype: object;
-[01/02/2021 22:46:28] dataset.scooter_trajectories_ds - INFO: [MERGE NULL OCCURRENCES]:
+[04/02/2021 23:13:11] dataset.scooter_trajectories_ds - INFO: [MERGE NULL OCCURRENCES]:
 rental_id          0
 device_id          0
 device_km          0
@@ -322,7 +346,7 @@ speed              0
 server_time        0
 device_time        0
 dtype: int64;
-[01/02/2021 22:46:28] dataset.scooter_trajectories_ds - INFO: [MERGE DESCRIPTION]:
+[04/02/2021 23:13:12] dataset.scooter_trajectories_ds - INFO: [MERGE DESCRIPTION]:
            rental_id      device_id      device_km        user_id         usr_km  latitude_start  longitude_start  latitude_stop  longitude_stop
 count  817076.000000  817076.000000  817076.000000  817076.000000  817076.000000   817076.000000    817076.000000  817076.000000   817076.000000
 mean   111082.453362     202.128212     417.227499   44248.982820      56.278105       44.134254        11.379424      45.334185       10.178376
@@ -341,10 +365,10 @@ min       2020-01-11 03:30:41.900000     2020-01-11 03:40:13.164000       0.0000
 75%    2020-02-20 13:32:02.967000064  2020-02-20 14:05:14.510000128       3.490000  3.937418e+07      44.241895      12.195317      13.630000  2020-02-20 13:48:08.995729408  2020-02-20 13:48:08.995729408
 max       2020-03-11 07:20:41.773000     2020-03-11 07:24:53.642000      21.889999  4.744404e+07      44.385139      15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186
 std                              NaN                            NaN       2.365046  5.411770e+06       0.202575       1.447571       7.661406                            NaN                            NaN;
-[01/02/2021 22:46:28] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: **************************** Scooter Trajectories Test - Partition Stats ******************************
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [PARTITION N-E SHAPE]: (608251, 18);
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [PARTITION N-E DESCRIPTION]: 
+[04/02/2021 23:13:12] dataset.scooter_trajectories_ds - INFO: *******************************************************************************************************
+[04/02/2021 23:13:12] test.scooter_trajectories_test - INFO: **************************** Scooter Trajectories Test - Partition Stats ******************************
+[04/02/2021 23:13:12] test.scooter_trajectories_test - INFO: [PARTITION N-E SHAPE]: (608251, 18);
+[04/02/2021 23:13:12] test.scooter_trajectories_test - INFO: [PARTITION N-E DESCRIPTION]: 
                  id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
 count  6.082510e+05  608251.000000  608251.000000   608251.000000  608251.000000  608251.000000  608251.000000  608251.000000    608251.000000
 mean   3.556594e+07  111668.917950       8.605424        1.541186      15.070910      42.411210      44.239226      12.190926         0.003960
@@ -363,8 +387,8 @@ min            0.000000            44.197785           41.069159             10.
 75%            0.008617            44.242762           44.242875             12.197180            12.197276      14.240000  2020-02-20 22:11:28.045442048  2020-02-20 22:11:28.045442048  1.140700e+04
 max            3.215676            44.264838           44.264838             12.240397            15.395244      76.059998     2020-03-11 07:24:52.426186     2020-03-11 07:24:52.426186  2.248234e+06
 std            0.012767             0.007009            0.009118              0.011317             0.013354       7.791597                            NaN                            NaN  1.191677e+04;
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [PARTITION N-W SHAPE]: (202795, 18);
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [PARTITION N-W DESCRIPTION]: 
+[04/02/2021 23:13:12] test.scooter_trajectories_test - INFO: [PARTITION N-W SHAPE]: (202795, 18);
+[04/02/2021 23:13:12] test.scooter_trajectories_test - INFO: [PARTITION N-W DESCRIPTION]: 
                  id      rental_id   timedelta_id  spreaddelta_id   edgedelta_id  coorddelta_id       latitude      longitude  spread_latitude
 count  2.027950e+05  202795.000000  202795.000000   202795.000000  202795.000000  202795.000000  202795.000000  202795.000000    202795.000000
 mean   3.440111e+07  109186.204852      10.551971        1.613077      30.445933     149.443418      43.860615       8.872686         0.005047
@@ -383,8 +407,8 @@ min            0.000000            43.818042           43.812437              8.
 75%            0.009465            43.869454           43.869956              8.884328             8.884538      12.320000  2020-02-17 13:05:08.719929856  2020-02-17 13:05:08.719929856   11421.000000
 max            0.057833            43.895413           43.895413              8.929340             8.929312      36.779999     2020-03-10 23:40:33.678236     2020-03-10 23:40:33.678236  965843.000000
 std            0.008130             0.012452            0.012911              0.015755             0.016233       7.266941                            NaN                            NaN   14924.202154;
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [PARTITION S-E SHAPE]: (5620, 18);
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [PARTITION S-E DESCRIPTION]: 
+[04/02/2021 23:13:12] test.scooter_trajectories_test - INFO: [PARTITION S-E SHAPE]: (5620, 18);
+[04/02/2021 23:13:12] test.scooter_trajectories_test - INFO: [PARTITION S-E DESCRIPTION]: 
                  id      rental_id  timedelta_id  spreaddelta_id  edgedelta_id  coorddelta_id     latitude    longitude  spread_latitude
 count  5.620000e+03    5620.000000   5620.000000     5620.000000   5620.000000    5620.000000  5620.000000  5620.000000      5620.000000
 mean   3.771338e+07  116238.005160     18.424733        1.130605     87.586477     294.604804    42.764820    13.942710         0.001386
@@ -403,8 +427,8 @@ min            0.000000            42.760754           42.760754             13.
 75%            0.003925            42.766181           42.765984             13.944479            13.944674     1.310000  2020-02-27 12:40:17.348273664  2020-02-27 12:40:17.348273664   11579.000000
 max            0.011608            42.768086           42.768086             13.952780            13.952780    26.799999     2020-03-10 16:14:25.783113     2020-03-10 16:14:25.783113  122702.000000
 std            0.002974             0.001749            0.001815              0.003507             0.003832     4.438398                            NaN                            NaN    7614.301936;
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [PARTITION S-W SHAPE]: (361, 18);
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [PARTITION S-W DESCRIPTION]: 
+[04/02/2021 23:13:12] test.scooter_trajectories_test - INFO: [PARTITION S-W SHAPE]: (361, 18);
+[04/02/2021 23:13:13] test.scooter_trajectories_test - INFO: [PARTITION S-W DESCRIPTION]: 
                  id      rental_id  timedelta_id  spreaddelta_id  edgedelta_id  coorddelta_id    latitude   longitude  spread_latitude
 count  3.610000e+02     361.000000     361.00000      361.000000    361.000000     361.000000  361.000000  361.000000       361.000000
 mean   3.406470e+07  108211.171745      15.66482        1.282548    100.817175     170.299169   42.485086   11.795675         0.002627
@@ -423,119 +447,678 @@ min            0.000000            42.484956           42.484963             11.
 75%            0.000136            42.485150           42.485123             11.795703            11.795673    1.260000  2020-02-14 09:40:29.449096960  2020-02-14 09:40:29.449096960  10132.000000
 max            0.177107            42.512197           42.512197             11.795814            11.795857   14.800000     2020-03-05 14:38:32.488901     2020-03-05 14:38:32.488901  18855.000000
 std            0.051765             0.002012            0.007820              0.013162             0.051087    1.803516                            NaN                            NaN   4248.117434;
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [FILTER POS SHAPE]: 7256
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: [FILTER RENTAL SHAPE]: 200
-[01/02/2021 22:46:29] test.scooter_trajectories_test - INFO: *******************************************************************************************************
-[01/02/2021 22:46:29] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis of clusterized data
-[01/02/2021 22:46:29] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with k-means
-[01/02/2021 22:46:29] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:46:44] util.analysis - DEBUG: elapsed time: 00:00:14.49
-[01/02/2021 22:46:44] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:46:48] util.analysis - DEBUG: elapsed time: 00:00:03.71
-[01/02/2021 22:46:48] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with k-means
-[01/02/2021 22:46:48] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:04] util.analysis - DEBUG: elapsed time: 00:00:15.95
-[01/02/2021 22:47:04] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:07] util.analysis - DEBUG: elapsed time: 00:00:03.75
-[01/02/2021 22:47:07] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with k-means
-[01/02/2021 22:47:07] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:15] util.analysis - DEBUG: elapsed time: 00:00:07.27
-[01/02/2021 22:47:15] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:17] util.analysis - DEBUG: elapsed time: 00:00:01.83
-[01/02/2021 22:47:17] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with k-means
-[01/02/2021 22:47:17] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:19] util.analysis - DEBUG: elapsed time: 00:00:02.42
-[01/02/2021 22:47:19] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:20] util.analysis - DEBUG: elapsed time: 00:00:00.86
-[01/02/2021 22:47:20] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with mean-shift
-[01/02/2021 22:47:20] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:34] util.analysis - DEBUG: elapsed time: 00:00:13.61
-[01/02/2021 22:47:34] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:37] util.analysis - DEBUG: elapsed time: 00:00:03.42
-[01/02/2021 22:47:37] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with mean-shift
-[01/02/2021 22:47:37] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:53] util.analysis - DEBUG: elapsed time: 00:00:15.67
-[01/02/2021 22:47:53] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:47:57] util.analysis - DEBUG: elapsed time: 00:00:03.79
-[01/02/2021 22:47:57] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with mean-shift
-[01/02/2021 22:47:57] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:04] util.analysis - DEBUG: elapsed time: 00:00:07.20
-[01/02/2021 22:48:04] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:06] util.analysis - DEBUG: elapsed time: 00:00:01.93
-[01/02/2021 22:48:06] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with mean-shift
-[01/02/2021 22:48:06] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:08] util.analysis - DEBUG: elapsed time: 00:00:02.34
-[01/02/2021 22:48:08] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:09] util.analysis - DEBUG: elapsed time: 00:00:00.87
-[01/02/2021 22:48:09] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with gaussian-mixture
-[01/02/2021 22:48:09] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:24] util.analysis - DEBUG: elapsed time: 00:00:14.61
-[01/02/2021 22:48:24] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:27] util.analysis - DEBUG: elapsed time: 00:00:03.57
-[01/02/2021 22:48:27] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with gaussian-mixture
-[01/02/2021 22:48:27] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:44] util.analysis - DEBUG: elapsed time: 00:00:16.32
-[01/02/2021 22:48:44] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:47] util.analysis - DEBUG: elapsed time: 00:00:03.81
-[01/02/2021 22:48:47] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with gaussian-mixture
-[01/02/2021 22:48:47] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:55] util.analysis - DEBUG: elapsed time: 00:00:07.25
-[01/02/2021 22:48:55] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:56] util.analysis - DEBUG: elapsed time: 00:00:01.78
-[01/02/2021 22:48:56] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with gaussian-mixture
-[01/02/2021 22:48:56] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:48:59] util.analysis - DEBUG: elapsed time: 00:00:02.42
-[01/02/2021 22:48:59] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:00] util.analysis - DEBUG: elapsed time: 00:00:00.87
-[01/02/2021 22:49:00] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with full-agglomerative
-[01/02/2021 22:49:00] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:14] util.analysis - DEBUG: elapsed time: 00:00:14.11
-[01/02/2021 22:49:14] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:17] util.analysis - DEBUG: elapsed time: 00:00:03.58
-[01/02/2021 22:49:17] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with full-agglomerative
-[01/02/2021 22:49:17] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:33] util.analysis - DEBUG: elapsed time: 00:00:16.01
-[01/02/2021 22:49:33] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:37] util.analysis - DEBUG: elapsed time: 00:00:03.85
-[01/02/2021 22:49:37] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with full-agglomerative
-[01/02/2021 22:49:37] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:45] util.analysis - DEBUG: elapsed time: 00:00:07.31
-[01/02/2021 22:49:45] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:46] util.analysis - DEBUG: elapsed time: 00:00:01.78
-[01/02/2021 22:49:46] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with full-agglomerative
-[01/02/2021 22:49:46] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:49] util.analysis - DEBUG: elapsed time: 00:00:02.49
-[01/02/2021 22:49:49] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:49:50] util.analysis - DEBUG: elapsed time: 00:00:00.86
-[01/02/2021 22:49:50] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with ward-agglomerative
-[01/02/2021 22:49:50] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:04] util.analysis - DEBUG: elapsed time: 00:00:14.36
-[01/02/2021 22:50:04] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:08] util.analysis - DEBUG: elapsed time: 00:00:03.49
-[01/02/2021 22:50:08] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with ward-agglomerative
-[01/02/2021 22:50:08] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:23] util.analysis - DEBUG: elapsed time: 00:00:15.86
-[01/02/2021 22:50:23] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:27] util.analysis - DEBUG: elapsed time: 00:00:03.79
-[01/02/2021 22:50:27] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with ward-agglomerative
-[01/02/2021 22:50:27] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:35] util.analysis - DEBUG: elapsed time: 00:00:07.29
-[01/02/2021 22:50:35] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:36] util.analysis - DEBUG: elapsed time: 00:00:01.80
-[01/02/2021 22:50:36] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with ward-agglomerative
-[01/02/2021 22:50:36] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:39] util.analysis - DEBUG: elapsed time: 00:00:02.41
-[01/02/2021 22:50:39] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:40] util.analysis - DEBUG: elapsed time: 00:00:00.86
-[01/02/2021 22:50:40] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of entire data with k-means
-[01/02/2021 22:50:40] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:50:55] util.analysis - DEBUG: elapsed time: 00:00:15.05
-[01/02/2021 22:50:55] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:51:09] util.analysis - DEBUG: elapsed time: 00:00:13.80
-[01/02/2021 22:51:09] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:51:25] util.analysis - DEBUG: elapsed time: 00:00:15.90
-[01/02/2021 22:51:25] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:51:33] util.analysis - DEBUG: elapsed time: 00:00:07.80
-[01/02/2021 22:51:33] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
-[01/02/2021 22:51:35] util.analysis - DEBUG: elapsed time: 00:00:02.40
-Time: 00:08:51.45
+[04/02/2021 23:13:13] test.scooter_trajectories_test - INFO: [FILTER POS SHAPE]: 7256
+[04/02/2021 23:13:13] test.scooter_trajectories_test - INFO: [FILTER RENTAL SHAPE]: 200
+[04/02/2021 23:13:13] test.scooter_trajectories_test - INFO: *******************************************************************************************************
+[04/02/2021 23:13:13] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis of clusterized data
+[04/02/2021 23:13:13] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with k-means
+[04/02/2021 23:13:13] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:13:13] ml.clustering - INFO: ***************************** Clustering - Method k-means                 ***************************
+[04/02/2021 23:13:13] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.240708  12.201206         0.002970          0.005625            44.240705           44.240712             12.200997            12.200140
+1     44.230742  12.184819         0.005289          0.005748            44.230714           44.231037             12.184878            12.185288
+2     44.242637  12.177588         0.004197          0.008771            44.242441           44.242526             12.178523            12.178425
+3     44.237072  12.195641         0.003852          0.006820            44.237159           44.237129             12.195158            12.195436
+4     44.245249  12.194135         0.003467          0.004623            44.245044           44.244790             12.194253            12.193854
+[04/02/2021 23:13:13] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.002008   0.007278         0.003218          0.006735             0.002160            0.002614              0.007193             0.008279
+1     0.007513   0.006006         0.013603          0.013753             0.007763            0.014422              0.005757             0.014178
+2     0.004568   0.013527         0.004559          0.011376             0.004700            0.004850              0.014768             0.015797
+3     0.002209   0.005730         0.032022          0.022625             0.002491            0.003168              0.005415             0.008022
+4     0.003304   0.004456         0.003608          0.005103             0.003324            0.003805              0.004599             0.005430
+[04/02/2021 23:13:18] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.35288263339956655
+[04/02/2021 23:13:18] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:13:19] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:13:35] util.analysis - DEBUG: elapsed time: 00:00:15.83
+[04/02/2021 23:13:35] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:13:38] util.analysis - DEBUG: elapsed time: 00:00:03.78
+[04/02/2021 23:13:38] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with k-means
+[04/02/2021 23:13:38] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:13:38] ml.clustering - INFO: ***************************** Clustering - Method k-means                 ***************************
+[04/02/2021 23:13:38] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     43.859437   8.872809         0.017351          0.017434            43.860333           43.859078              8.874239             8.871609
+1     43.848499   8.848845         0.004424          0.006045            43.848781           43.848383              8.849258             8.849083
+2     43.872949   8.864219         0.003489          0.007142            43.872622           43.872760              8.864978             8.864904
+3     43.842704   8.872358         0.004036          0.003960            43.842754           43.842783              8.872558             8.871872
+4     43.867190   8.886137         0.002930          0.005046            43.867037           43.867334              8.885970             8.885662
+[04/02/2021 23:13:38] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.009659   0.013468         0.008372          0.010811             0.009469            0.011720              0.013303             0.015584
+1     0.007832   0.008862         0.004774          0.007126             0.007845            0.007937              0.009324             0.009598
+2     0.005014   0.009258         0.003191          0.008188             0.004975            0.005355              0.009805             0.010489
+3     0.009413   0.007030         0.004409          0.004916             0.009505            0.009677              0.007170             0.007895
+4     0.003845   0.006584         0.002744          0.005970             0.003801            0.004134              0.006562             0.007406
+[04/02/2021 23:13:44] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.3862316792117239
+[04/02/2021 23:13:44] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:13:44] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:14:01] util.analysis - DEBUG: elapsed time: 00:00:17.66
+[04/02/2021 23:14:01] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:14:06] util.analysis - DEBUG: elapsed time: 00:00:04.05
+[04/02/2021 23:14:06] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with k-means
+[04/02/2021 23:14:06] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:14:06] ml.clustering - INFO: ***************************** Clustering - Method k-means                 ***************************
+[04/02/2021 23:14:06] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.762537  13.946588         0.000797          0.001884            42.762619           42.762649             13.946370            13.946289
+1     42.765419  13.940020         0.000276          0.000482            42.765473           42.765395             13.940039            13.940178
+2     42.767883  13.949254         0.000190          0.000401            42.767887           42.767799             13.949168            13.949160
+3     42.764403  13.943133         0.003732          0.006453            42.763961           42.764261             13.943078            13.943292
+4     42.765413  13.940354         0.002312          0.003886            42.765410           42.765546             13.940876            13.940358
+[04/02/2021 23:14:06] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.001085   0.002712         0.000822          0.001910             0.001152            0.001294              0.002804             0.003193
+1     0.000749   0.001368         0.000218          0.000502             0.000721            0.000746              0.001390             0.001483
+2     0.000321   0.000739         0.000432          0.001427             0.000280            0.000462              0.001105             0.000756
+3     0.001757   0.003248         0.001553          0.002987             0.001479            0.001926              0.002024             0.003358
+4     0.000882   0.001303         0.000389          0.001465             0.000924            0.000821              0.000996             0.002018
+[04/02/2021 23:14:06] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5316397209810863
+[04/02/2021 23:14:06] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:14:06] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:14:14] util.analysis - DEBUG: elapsed time: 00:00:07.47
+[04/02/2021 23:14:14] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:14:16] util.analysis - DEBUG: elapsed time: 00:00:02.11
+[04/02/2021 23:14:16] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with k-means
+[04/02/2021 23:14:16] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:14:16] ml.clustering - INFO: ***************************** Clustering - Method k-means                 ***************************
+[04/02/2021 23:14:16] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.485169  11.795697         0.000126          0.000084            42.485138           42.485091             11.795687            11.795658
+1     42.485038  11.795665         0.000072          0.000053            42.485065           42.485044             11.795667            11.795669
+2     42.485122  11.795669         0.027113          0.177049            42.486786           42.511366             11.785280            11.623853
+3     42.485091  11.795751         0.000058          0.000076            42.485086           42.485084             11.795715            11.795703
+4     42.485115  11.795618         0.000079          0.000091            42.485110           42.485100             11.795649            11.795626
+[04/02/2021 23:14:16] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.000049   0.000023         0.000069          0.000065             0.000072            0.000075              0.000030             0.000037
+1     0.000016   0.000019         0.000070          0.000057             0.000056            0.000028              0.000029             0.000027
+2     0.000046   0.000031         0.000018          0.000020             0.006438            0.004646              0.042296             0.030352
+3     0.000036   0.000040         0.000053          0.000067             0.000036            0.000050              0.000050             0.000073
+4     0.000045   0.000036         0.000068          0.000080             0.000047            0.000058              0.000058             0.000029
+[04/02/2021 23:14:16] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.6251643955958307
+[04/02/2021 23:14:16] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:14:16] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:14:19] util.analysis - DEBUG: elapsed time: 00:00:02.75
+[04/02/2021 23:14:19] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:14:20] util.analysis - DEBUG: elapsed time: 00:00:00.92
+[04/02/2021 23:14:20] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with mean-shift
+[04/02/2021 23:14:20] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:14:20] ml.clustering - INFO: ***************************** Clustering - Method mean-shift              ***************************
+[04/02/2021 23:14:20] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.242134  12.198116         0.003238          0.005432            44.242060           44.241988             12.197983            12.197396
+1     44.232448  12.187503         0.004783          0.005746            44.232452           44.232635             12.187467            12.187838
+2     44.243108  12.178660         0.004409          0.008634            44.242909           44.242931             12.179463            12.179513
+[04/02/2021 23:14:20] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.003670   0.006731         0.003459          0.006688             0.003643            0.003944              0.006579             0.007746
+1     0.006990   0.006881         0.011748          0.012285             0.007237            0.012547              0.006646             0.013043
+2     0.004801   0.013136         0.028751          0.021660             0.004919            0.005049              0.014201             0.015367
+[04/02/2021 23:14:25] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.4028274426635649
+[04/02/2021 23:14:25] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:14:25] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:14:40] util.analysis - DEBUG: elapsed time: 00:00:15.13
+[04/02/2021 23:14:40] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:14:44] util.analysis - DEBUG: elapsed time: 00:00:03.77
+[04/02/2021 23:14:44] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with mean-shift
+[04/02/2021 23:14:44] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:14:44] ml.clustering - INFO: ***************************** Clustering - Method mean-shift              ***************************
+[04/02/2021 23:14:44] ml.clustering - INFO: [FEATURES MEAN]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     43.86858   8.879859         0.004079          0.006675            43.868277           43.868630              8.879969             8.879589
+1     43.84750   8.860876         0.006641          0.006994            43.848096           43.847361              8.861542             8.860683
+[04/02/2021 23:14:44] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.005386   0.011981         0.004685          0.007898             0.005312            0.005729              0.011812             0.012435
+1     0.009838   0.014399         0.007872          0.008496             0.010513            0.010281              0.014693             0.014845
+[04/02/2021 23:14:50] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5128002976421082
+[04/02/2021 23:14:50] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:14:50] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:15:06] util.analysis - DEBUG: elapsed time: 00:00:16.23
+[04/02/2021 23:15:06] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:15:10] util.analysis - DEBUG: elapsed time: 00:00:03.95
+[04/02/2021 23:15:10] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with mean-shift
+[04/02/2021 23:15:10] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:15:10] ml.clustering - INFO: ***************************** Clustering - Method mean-shift              ***************************
+[04/02/2021 23:15:10] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.765494  13.939955         0.000511          0.000948            42.765533           42.765475             13.940096            13.940172
+1     42.764545  13.942593         0.003423          0.005785            42.764225           42.764480             13.942587            13.942634
+2     42.762569  13.946518         0.000835          0.001926            42.762636           42.762693             13.946306            13.946183
+3     42.767871  13.949185         0.000213          0.000441            42.767871           42.767783             13.949093            13.949062
+[04/02/2021 23:15:10] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.000792   0.001380         0.000689          0.001482             0.000742            0.000801              0.001395             0.001691
+1     0.001573   0.003014         0.001480          0.002933             0.001418            0.001741              0.001957             0.003217
+2     0.001093   0.002714         0.000845          0.001910             0.001152            0.001316              0.002807             0.003236
+3     0.000341   0.001021         0.000490          0.001479             0.000328            0.000493              0.001343             0.001254
+[04/02/2021 23:15:11] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5322084515293324
+[04/02/2021 23:15:11] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:15:11] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:15:18] util.analysis - DEBUG: elapsed time: 00:00:07.34
+[04/02/2021 23:15:18] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:15:20] util.analysis - DEBUG: elapsed time: 00:00:01.93
+[04/02/2021 23:15:20] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with mean-shift
+[04/02/2021 23:15:20] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:15:20] ml.clustering - INFO: ***************************** Clustering - Method mean-shift              ***************************
+[04/02/2021 23:15:20] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.485039  11.795667         0.000070          0.000052            42.485066           42.485044             11.795668            11.795670
+1     42.485174  11.795690         0.000132          0.000085            42.485142           42.485091             11.795684            11.795656
+2     42.485103  11.795747         0.000064          0.000078            42.485091           42.485087             11.795712            11.795698
+3     42.485107  11.795614         0.000079          0.000094            42.485105           42.485102             11.795649            11.795625
+4     42.485122  11.795669         0.027113          0.177049            42.486786           42.511366             11.785280            11.623853
+[04/02/2021 23:15:20] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.000016   0.000018         0.000069          0.000057             0.000056            0.000028              0.000030             0.000028
+1     0.000049   0.000025         0.000068          0.000064             0.000074            0.000077              0.000030             0.000036
+2     0.000035   0.000040         0.000055          0.000067             0.000037            0.000050              0.000048             0.000071
+3     0.000048   0.000038         0.000068          0.000080             0.000052            0.000058              0.000059             0.000029
+4     0.000046   0.000031         0.000018          0.000020             0.006438            0.004646              0.042296             0.030352
+[04/02/2021 23:15:20] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.6062459222646643
+[04/02/2021 23:15:20] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:15:20] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:15:22] util.analysis - DEBUG: elapsed time: 00:00:02.40
+[04/02/2021 23:15:22] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:15:23] util.analysis - DEBUG: elapsed time: 00:00:00.88
+[04/02/2021 23:15:23] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with gaussian-mixture
+[04/02/2021 23:15:23] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:15:23] ml.clustering - INFO: ***************************** Clustering - Method gaussian-mixture        ***************************
+[04/02/2021 23:15:23] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.239473  12.191574         0.005956          0.009284            44.239313           44.239372             12.191713            12.191395
+1     44.227779  12.182852         0.005148          0.005079            44.227960           44.228502             12.182939            12.183592
+2     44.242904  12.199740         0.002276          0.003929            44.242852           44.242702             12.199679            12.198794
+3     44.239311  12.190606         0.000272          0.000716            44.239309           44.239311             12.190607            12.190608
+4     44.244521  12.172854         0.002946          0.007085            44.244423           44.243986             12.173151            12.174697
+[04/02/2021 23:15:23] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.005065   0.008371         0.020705          0.017290             0.005249            0.010126              0.008406             0.013608
+1     0.007893   0.005475         0.005618          0.005087             0.008128            0.008259              0.005345             0.006532
+2     0.003156   0.006255         0.002092          0.004436             0.003178            0.003272              0.006159             0.006575
+3     0.007299   0.014111         0.000831          0.002790             0.007301            0.007294              0.014111             0.014121
+4     0.004675   0.011756         0.003054          0.007471             0.004675            0.004703              0.011815             0.012459
+[04/02/2021 23:15:28] ml.clustering - INFO: [SILHOUETTE SCORE]: -0.027960350828001378
+[04/02/2021 23:15:28] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:15:28] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:15:44] util.analysis - DEBUG: elapsed time: 00:00:15.46
+[04/02/2021 23:15:44] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:15:48] util.analysis - DEBUG: elapsed time: 00:00:04.18
+[04/02/2021 23:15:48] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with gaussian-mixture
+[04/02/2021 23:15:48] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:15:48] ml.clustering - INFO: ***************************** Clustering - Method gaussian-mixture        ***************************
+[04/02/2021 23:15:48] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     43.867489   8.886739         0.001291          0.002194            43.867472           43.867492              8.886703             8.886542
+1     43.842511   8.872723         0.001630          0.001731            43.842549           43.842517              8.872750             8.872508
+2     43.861311   8.873231         0.008829          0.011567            43.861362           43.861260              8.873908             8.872767
+3     43.872546   8.862219         0.001284          0.002230            43.872463           43.872538              8.862166             8.862415
+4     43.845450   8.847386         0.002011          0.003167            43.845665           43.845479              8.847418             8.847696
+[04/02/2021 23:15:48] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.003428   0.006065         0.001284          0.002841             0.003429            0.003508              0.006045             0.006193
+1     0.009733   0.006916         0.001921          0.002478             0.009721            0.009776              0.006923             0.007176
+2     0.011441   0.014755         0.006990          0.009033             0.011177            0.012094              0.014448             0.015627
+3     0.006015   0.011033         0.001449          0.003431             0.005943            0.006072              0.011022             0.011250
+4     0.005774   0.007350         0.002187          0.003786             0.005720            0.005808              0.007390             0.007652
+[04/02/2021 23:15:53] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.08636955970549043
+[04/02/2021 23:15:53] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:15:53] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:16:12] util.analysis - DEBUG: elapsed time: 00:00:18.20
+[04/02/2021 23:16:12] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:16:16] util.analysis - DEBUG: elapsed time: 00:00:04.38
+[04/02/2021 23:16:16] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with gaussian-mixture
+[04/02/2021 23:16:16] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:16:16] ml.clustering - INFO: ***************************** Clustering - Method gaussian-mixture        ***************************
+[04/02/2021 23:16:16] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.762551  13.946505         0.000811          0.001869            42.762633           42.762692             13.946245            13.946196
+1     42.765416  13.940033         0.000263          0.000454            42.765469           42.765397             13.940061            13.940171
+2     42.764862  13.942504         0.003310          0.005871            42.765014           42.764761             13.941559            13.942672
+3     42.767943  13.949201         0.000126          0.000181            42.767934           42.767881             13.949203            13.949156
+4     42.764752  13.941199         0.002658          0.004161            42.763169           42.764768             13.944708            13.941177
+[04/02/2021 23:16:16] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.001081   0.002715         0.000828          0.001831             0.001150            0.001326              0.002777             0.003244
+1     0.000750   0.001331         0.000193          0.000441             0.000724            0.000746              0.001348             0.001433
+2     0.001780   0.003563         0.001587          0.003194             0.001416            0.001950              0.002126             0.003746
+3     0.000054   0.000369         0.000330          0.000389             0.000065            0.000304              0.000382             0.000184
+4     0.000681   0.001277         0.000868          0.000735             0.000700            0.000682              0.001199             0.001303
+[04/02/2021 23:16:17] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.4916316030170374
+[04/02/2021 23:16:17] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:16:17] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:16:24] util.analysis - DEBUG: elapsed time: 00:00:07.37
+[04/02/2021 23:16:24] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:16:26] util.analysis - DEBUG: elapsed time: 00:00:01.98
+[04/02/2021 23:16:26] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with gaussian-mixture
+[04/02/2021 23:16:26] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:16:26] ml.clustering - INFO: ***************************** Clustering - Method gaussian-mixture        ***************************
+[04/02/2021 23:16:26] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.485122  11.795669         0.027113          0.177049            42.486786           42.511366             11.785280            11.623853
+1     42.485052  11.795626         0.000059          0.000070            42.485066           42.485057             11.795637            11.795638
+2     42.485040  11.795670         0.000074          0.000047            42.485070           42.485043             11.795671            11.795674
+3     42.485098  11.795736         0.000066          0.000078            42.485087           42.485082             11.795706            11.795692
+4     42.485167  11.795667         0.000129          0.000094            42.485144           42.485106             11.795682            11.795644
+[04/02/2021 23:16:26] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.000046   0.000031         0.000018          0.000020             0.006438            0.004646              0.042296             0.030352
+1     0.000035   0.000037         0.000053          0.000066             0.000046            0.000036              0.000042             0.000028
+2     0.000006   0.000006         0.000075          0.000055             0.000058            0.000022              0.000028             0.000026
+3     0.000047   0.000040         0.000057          0.000066             0.000042            0.000056              0.000046             0.000065
+4     0.000049   0.000036         0.000068          0.000071             0.000069            0.000075              0.000035             0.000032
+[04/02/2021 23:16:26] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5394027788064779
+[04/02/2021 23:16:26] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:16:26] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:16:29] util.analysis - DEBUG: elapsed time: 00:00:02.38
+[04/02/2021 23:16:29] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:16:29] util.analysis - DEBUG: elapsed time: 00:00:00.88
+[04/02/2021 23:16:29] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with full-agglomerative
+[04/02/2021 23:16:29] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:16:29] ml.clustering - INFO: ***************************** Clustering - Method full-agglomerative      ***************************
+[04/02/2021 23:16:29] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.244992  12.192645         0.004278          0.006587            44.244426           44.244868             12.193275            12.192590
+1     44.241416  12.192132         0.012387          0.016234            44.239902           44.241009             12.193372            12.191896
+2     44.236667  12.186167         0.002401          0.006162            44.236806           44.236751             12.185677            12.187743
+3     44.238958  12.200475         0.002490          0.007553            44.238975           44.238650             12.199357            12.200569
+4     44.229949  12.185832         0.012253          0.012498            44.229735           44.230227             12.185437            12.187395
+[04/02/2021 23:16:29] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.004113   0.009305         0.003694          0.006398             0.003698            0.003828              0.008613             0.009307
+1     0.004799   0.008735         0.005162          0.008352             0.004405            0.004968              0.008989             0.013300
+2     0.004985   0.009282         0.002147          0.008308             0.005068            0.004939              0.009088             0.011652
+3     0.002222   0.007748         0.002260          0.009425             0.002437            0.002412              0.007654             0.009520
+4     0.009015   0.007698         0.007211          0.009565             0.009989            0.010291              0.006467             0.012159
+[04/02/2021 23:16:34] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.1660725269944962
+[04/02/2021 23:16:34] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:16:34] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:16:41] ml.clustering - DEBUG: elapsed time: 00:00:06.31
+[04/02/2021 23:16:41] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:16:55] util.analysis - DEBUG: elapsed time: 00:00:14.56
+[04/02/2021 23:16:55] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:16:59] util.analysis - DEBUG: elapsed time: 00:00:03.51
+[04/02/2021 23:16:59] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with full-agglomerative
+[04/02/2021 23:16:59] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:16:59] ml.clustering - INFO: ***************************** Clustering - Method full-agglomerative      ***************************
+[04/02/2021 23:16:59] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     43.862193   8.863618         0.012912          0.016274            43.861513           43.861562              8.864231             8.863751
+1     43.842039   8.861741         0.004624          0.004630            43.842174           43.841914              8.861934             8.861353
+2     43.868768   8.880299         0.002056          0.004178            43.868655           43.868807              8.880523             8.880195
+3     43.859481   8.862166         0.001228          0.003104            43.859457           43.859463              8.862682             8.862090
+4     43.867891   8.883823         0.008638          0.011944            43.866872           43.869170              8.884050             8.882419
+[04/02/2021 23:16:59] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.009405   0.015805         0.009064          0.011316             0.010592            0.009772              0.016654             0.017100
+1     0.008357   0.012924         0.004418          0.004631             0.008471            0.008659              0.012939             0.012974
+2     0.004734   0.010875         0.001532          0.004169             0.004623            0.004781              0.010839             0.011095
+3     0.003438   0.013474         0.001280          0.004975             0.003336            0.003476              0.012967             0.014237
+4     0.004205   0.011318         0.004047          0.008936             0.003968            0.004803              0.009623             0.011831
+[04/02/2021 23:17:04] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.28092819551143927
+[04/02/2021 23:17:04] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:17:04] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:17:10] ml.clustering - DEBUG: elapsed time: 00:00:06.18
+[04/02/2021 23:17:10] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:17:27] util.analysis - DEBUG: elapsed time: 00:00:16.99
+[04/02/2021 23:17:27] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:17:31] util.analysis - DEBUG: elapsed time: 00:00:03.80
+[04/02/2021 23:17:31] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with full-agglomerative
+[04/02/2021 23:17:31] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:17:31] ml.clustering - INFO: ***************************** Clustering - Method full-agglomerative      ***************************
+[04/02/2021 23:17:31] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.766160  13.942893         0.001977          0.003753            42.765699           42.766027             13.943671            13.943277
+1     42.765415  13.940021         0.000267          0.000466            42.765468           42.765399             13.940040            13.940162
+2     42.763094  13.945194         0.001149          0.002330            42.762678           42.763177             13.945843            13.944970
+3     42.762343  13.945666         0.004668          0.007938            42.765324           42.763379             13.941544            13.944954
+4     42.765695  13.946386         0.004372          0.005769            42.764410           42.764295             13.944241            13.945988
+[04/02/2021 23:17:31] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.001276   0.004242         0.001404          0.003199             0.001802            0.001453              0.003793             0.004208
+1     0.000750   0.001373         0.000198          0.000472             0.000722            0.000747              0.001396             0.001480
+2     0.001361   0.003373         0.000949          0.001813             0.001008            0.001466              0.002535             0.003633
+3     0.001393   0.002723         0.001859          0.003601             0.001648            0.002558              0.001565             0.004147
+4     0.001853   0.002101         0.001105          0.001541             0.001054            0.002349              0.003234             0.002190
+[04/02/2021 23:17:31] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.40591356466697126
+[04/02/2021 23:17:31] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:17:31] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:17:37] ml.clustering - DEBUG: elapsed time: 00:00:05.30
+[04/02/2021 23:17:37] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:17:44] util.analysis - DEBUG: elapsed time: 00:00:07.39
+[04/02/2021 23:17:44] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:17:46] util.analysis - DEBUG: elapsed time: 00:00:01.85
+[04/02/2021 23:17:46] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with full-agglomerative
+[04/02/2021 23:17:46] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:17:46] ml.clustering - INFO: ***************************** Clustering - Method full-agglomerative      ***************************
+[04/02/2021 23:17:46] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.485084  11.795747         0.000057          0.000074            42.485082           42.485077             11.795714            11.795703
+1     42.485170  11.795689         0.000122          0.000083            42.485138           42.485095             11.795683            11.795656
+2     42.485107  11.795615         0.000075          0.000092            42.485103           42.485096             11.795647            11.795621
+3     42.485122  11.795669         0.027113          0.177049            42.486786           42.511366             11.785280            11.623853
+4     42.485039  11.795663         0.000073          0.000054            42.485067           42.485046             11.795666            11.795668
+[04/02/2021 23:17:46] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.000043   0.000040         0.000052          0.000065             0.000038            0.000053              0.000048             0.000070
+1     0.000048   0.000031         0.000070          0.000066             0.000071            0.000076              0.000032             0.000037
+2     0.000032   0.000038         0.000067          0.000081             0.000038            0.000053              0.000062             0.000028
+3     0.000046   0.000031         0.000018          0.000020             0.006438            0.004646              0.042296             0.030352
+4     0.000016   0.000019         0.000070          0.000058             0.000057            0.000029              0.000029             0.000027
+[04/02/2021 23:17:46] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.60461569992026
+[04/02/2021 23:17:46] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:17:46] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:17:50] ml.clustering - DEBUG: elapsed time: 00:00:04.27
+[04/02/2021 23:17:50] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:17:53] util.analysis - DEBUG: elapsed time: 00:00:02.44
+[04/02/2021 23:17:53] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:17:54] util.analysis - DEBUG: elapsed time: 00:00:00.85
+[04/02/2021 23:17:54] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-E data with ward-agglomerative
+[04/02/2021 23:17:54] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:17:54] ml.clustering - INFO: ***************************** Clustering - Method ward-agglomerative      ***************************
+[04/02/2021 23:17:54] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.241977  12.200137         0.003079          0.006661            44.241924           44.241907             12.199521            12.199570
+1     44.235125  12.189408         0.002264          0.004961            44.235182           44.235163             12.189123            12.190124
+2     44.247612  12.185103         0.005560          0.007699            44.246503           44.246960             12.186032            12.186823
+3     44.234901  12.188381         0.012182          0.014523            44.234068           44.235027             12.188906            12.189879
+4     44.241704  12.179386         0.002814          0.007501            44.241847           44.241684             12.179264            12.180685
+[04/02/2021 23:17:54] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.003465   0.006597         0.002744          0.007892             0.003516            0.003701              0.006677             0.008199
+1     0.005129   0.005833         0.002029          0.007336             0.005104            0.005241              0.005677             0.008846
+2     0.004532   0.006357         0.004218          0.006009             0.003279            0.004166              0.005253             0.005342
+3     0.009099   0.008731         0.006500          0.009898             0.009279            0.009700              0.008260             0.013457
+4     0.002959   0.011809         0.002259          0.006872             0.003145            0.002902              0.011888             0.013161
+[04/02/2021 23:17:59] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.24819990811820788
+[04/02/2021 23:17:59] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:17:59] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:18:05] ml.clustering - DEBUG: elapsed time: 00:00:06.19
+[04/02/2021 23:18:05] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:18:19] util.analysis - DEBUG: elapsed time: 00:00:14.35
+[04/02/2021 23:18:19] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:18:23] util.analysis - DEBUG: elapsed time: 00:00:03.51
+[04/02/2021 23:18:23] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of N-W data with ward-agglomerative
+[04/02/2021 23:18:23] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:18:23] ml.clustering - INFO: ***************************** Clustering - Method ward-agglomerative      ***************************
+[04/02/2021 23:18:23] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     43.843337   8.861706         0.004641          0.004653            43.843365           43.843231              8.861936             8.861348
+1     43.866426   8.886873         0.002777          0.005683            43.866371           43.866427              8.886511             8.886454
+2     43.872792   8.864399         0.002172          0.005030            43.872545           43.872683              8.865072             8.864768
+3     43.858621   8.864007         0.017296          0.015578            43.858441           43.858704              8.864587             8.863288
+4     43.868331   8.877480         0.009197          0.013803            43.866868           43.869241              8.878874             8.876793
+[04/02/2021 23:18:23] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.008940   0.013350         0.004539          0.004845             0.008951            0.009252              0.013295             0.013573
+1     0.003147   0.007490         0.002235          0.006744             0.003117            0.003275              0.006929             0.007932
+2     0.004894   0.011142         0.002003          0.006669             0.004790            0.005080              0.011143             0.011713
+3     0.008483   0.015507         0.010093          0.009060             0.010499            0.009557              0.016786             0.015238
+4     0.004711   0.008673         0.003592          0.010477             0.004739            0.005601              0.009694             0.010578
+[04/02/2021 23:18:28] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.3591723579459418
+[04/02/2021 23:18:28] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:18:28] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:18:34] ml.clustering - DEBUG: elapsed time: 00:00:06.56
+[04/02/2021 23:18:34] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:18:52] util.analysis - DEBUG: elapsed time: 00:00:17.29
+[04/02/2021 23:18:52] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:18:56] util.analysis - DEBUG: elapsed time: 00:00:04.17
+[04/02/2021 23:18:56] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-E data with ward-agglomerative
+[04/02/2021 23:18:56] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:18:56] ml.clustering - INFO: ***************************** Clustering - Method ward-agglomerative      ***************************
+[04/02/2021 23:18:56] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.765415  13.940021         0.000267          0.000466            42.765468           42.765399             13.940040            13.940162
+1     42.764227  13.943345         0.003484          0.006075            42.763835           42.764184             13.943388            13.943366
+2     42.762393  13.947027         0.000478          0.001369            42.762522           42.762407             13.946631            13.946842
+3     42.767895  13.949260         0.000173          0.000255            42.767899           42.767816             13.949264            13.949160
+4     42.765454  13.940395         0.002275          0.003896            42.765457           42.765548             13.940828            13.940456
+[04/02/2021 23:18:56] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.000750   0.001373         0.000198          0.000472             0.000722            0.000747              0.001396             0.001480
+1     0.001689   0.003098         0.001548          0.002962             0.001436            0.001863              0.002213             0.003340
+2     0.001132   0.002780         0.000521          0.001578             0.001199            0.001145              0.002837             0.002926
+3     0.000291   0.000554         0.000406          0.000720             0.000255            0.000434              0.000562             0.000562
+4     0.000891   0.001508         0.000428          0.001571             0.000924            0.000825              0.001050             0.002200
+[04/02/2021 23:18:57] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5067615793695492
+[04/02/2021 23:18:57] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:18:57] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:19:02] ml.clustering - DEBUG: elapsed time: 00:00:05.57
+[04/02/2021 23:19:02] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:19:10] util.analysis - DEBUG: elapsed time: 00:00:07.71
+[04/02/2021 23:19:10] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:19:12] util.analysis - DEBUG: elapsed time: 00:00:02.33
+[04/02/2021 23:19:12] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of S-W data with ward-agglomerative
+[04/02/2021 23:19:12] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:19:12] ml.clustering - INFO: ***************************** Clustering - Method ward-agglomerative      ***************************
+[04/02/2021 23:19:12] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     42.485163  11.795677         0.000122          0.000094            42.485136           42.485103             11.795683            11.795650
+1     42.485084  11.795747         0.000057          0.000074            42.485082           42.485077             11.795714            11.795703
+2     42.485122  11.795669         0.027113          0.177049            42.486786           42.511366             11.785280            11.623853
+3     42.485055  11.795624         0.000061          0.000071            42.485070           42.485058             11.795636            11.795637
+4     42.485040  11.795670         0.000072          0.000047            42.485069           42.485044             11.795671            11.795673
+[04/02/2021 23:19:12] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.000047   0.000039         0.000067          0.000070             0.000067            0.000073              0.000036             0.000037
+1     0.000043   0.000040         0.000052          0.000065             0.000038            0.000053              0.000048             0.000070
+2     0.000046   0.000031         0.000018          0.000020             0.006438            0.004646              0.042296             0.030352
+3     0.000032   0.000037         0.000053          0.000066             0.000044            0.000036              0.000043             0.000029
+4     0.000011   0.000006         0.000075          0.000056             0.000058            0.000025              0.000028             0.000026
+[04/02/2021 23:19:12] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5682919354402323
+[04/02/2021 23:19:12] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:19:12] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:19:17] ml.clustering - DEBUG: elapsed time: 00:00:04.46
+[04/02/2021 23:19:17] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:19:19] util.analysis - DEBUG: elapsed time: 00:00:02.51
+[04/02/2021 23:19:19] util.analysis - DEBUG: DataAnalysis show 3d line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:19:20] util.analysis - DEBUG: elapsed time: 00:00:00.84
+[04/02/2021 23:19:20] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of entire data with k-means
+[04/02/2021 23:19:20] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:19:20] ml.clustering - INFO: ***************************** Clustering - Method k-means                 ***************************
+[04/02/2021 23:19:20] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.236076  12.186606         0.014480          0.017301            44.235654           44.235939             12.187092            12.186686
+1     43.860615   8.872686         0.005047          0.006795            43.860651           43.860593              8.873006             8.872445
+2     44.239581  12.191484         0.001185          0.002941            44.239562           44.239600             12.191473            12.191446
+3     44.239691  12.191289         0.005961          0.008897            44.239632           44.239540             12.191414            12.191071
+4     42.747581  13.809823         0.001491          0.003550            42.747516           42.747716             13.809893            13.808905
+[04/02/2021 23:19:20] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.010856   0.015866         0.042204          0.034905             0.011106            0.020814              0.016747             0.025912
+1     0.012613   0.015886         0.006214          0.008130             0.012452            0.012911              0.015755             0.016233
+2     0.006229   0.012600         0.001087          0.003980             0.006234            0.006217              0.012570             0.012678
+3     0.006490   0.010477         0.001714          0.006091             0.006441            0.006683              0.009935             0.010975
+4     0.067219   0.518007         0.002670          0.014700             0.067234            0.066684              0.517768             0.521842
+[04/02/2021 23:19:25] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.6171238098570367
+[04/02/2021 23:19:25] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:19:26] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:19:41] util.analysis - DEBUG: elapsed time: 00:00:15.77
+[04/02/2021 23:19:42] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:19:58] util.analysis - DEBUG: elapsed time: 00:00:16.14
+[04/02/2021 23:19:58] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:20:14] util.analysis - DEBUG: elapsed time: 00:00:16.13
+[04/02/2021 23:20:14] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:20:22] util.analysis - DEBUG: elapsed time: 00:00:08.03
+[04/02/2021 23:20:22] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:20:24] util.analysis - DEBUG: elapsed time: 00:00:02.39
+[04/02/2021 23:20:24] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of entire data with mean-shift
+[04/02/2021 23:20:24] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:20:25] ml.clustering - INFO: ***************************** Clustering - Method mean-shift              ***************************
+[04/02/2021 23:20:25] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.239463  12.191234         0.003328          0.005273            44.239415           44.239408             12.191305            12.191153
+1     43.860621   8.872684         0.005008          0.006774            43.860670           43.860584              8.873004             8.872443
+2     42.749358  13.823912         0.001314          0.002355            42.749301           42.749349             13.823923            13.823941
+3     44.237993  12.183619         0.012933          0.032027            44.237688           44.238232             12.184898            12.183440
+4     43.437670   9.752907         0.040122          0.082055            43.436560           43.451994              9.755356             9.715615
+5     44.385139  12.017581         0.000000          0.000000            44.385139           44.385139             12.017581            12.017581
+6     44.223640  12.152798         0.026950          0.015765            44.222147           44.223855             12.151677            12.153341
+7     44.259683  10.386709         0.000000          0.000000            44.259683           44.259683             10.386709            10.386709
+8     44.237169  10.978649         0.048495          1.795093            44.253329           44.253337             10.380282            10.380292
+[04/02/2021 23:20:25] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.006550   0.011053         0.003463          0.005739             0.006563            0.006626              0.010873             0.011278
+1     0.012610   0.015890         0.006080          0.008097             0.012441            0.012909              0.015760             0.016233
+2     0.063933   0.491063         0.001620          0.002943             0.063917            0.063935              0.491064             0.491072
+3     0.009791   0.018415         0.005030          0.012765             0.009666            0.009981              0.015877             0.023031
+4     0.625081   1.327526         0.008580          0.062636             0.625159            0.620579              1.331491             1.260678
+5     0.000000   0.000000         0.000000          0.000000             0.000000            0.000000              0.000000             0.000000
+6     0.037604   0.323946         0.107807          0.079176             0.040096            0.057935              0.323764             0.327814
+7     0.005608   0.005585         0.000000          0.000000             0.005608            0.005608              0.005585             0.005585
+8     0.027996   1.036395         0.000000          0.000000             0.000000            0.000000              0.000000             0.000000
+[04/02/2021 23:20:30] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5154331813345079
+[04/02/2021 23:20:30] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:20:30] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:20:46] util.analysis - DEBUG: elapsed time: 00:00:15.26
+[04/02/2021 23:20:46] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:21:00] util.analysis - DEBUG: elapsed time: 00:00:13.90
+[04/02/2021 23:21:00] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:21:16] util.analysis - DEBUG: elapsed time: 00:00:16.61
+[04/02/2021 23:21:16] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:21:24] util.analysis - DEBUG: elapsed time: 00:00:07.94
+[04/02/2021 23:21:24] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:21:27] util.analysis - DEBUG: elapsed time: 00:00:02.33
+[04/02/2021 23:21:27] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of entire data with gaussian-mixture
+[04/02/2021 23:21:27] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:21:27] ml.clustering - INFO: ***************************** Clustering - Method gaussian-mixture        ***************************
+[04/02/2021 23:21:27] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.239544  12.191215         0.000672          0.001663            44.239530           44.239559             12.191205            12.191223
+1     43.828674   9.014363         0.004936          0.006700            43.828714           43.828654              9.014675             9.014103
+2     44.240187  12.192600         0.004251          0.005642            44.240085           44.240106             12.192544            12.192544
+3     44.235575  12.186919         0.012106          0.009965            44.235190           44.235175             12.186943            12.186858
+4     44.239389  12.187359         0.007163          0.022115            44.239504           44.239632             12.188294            12.186853
+[04/02/2021 23:21:27] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.006288   0.011769         0.000664          0.002338             0.006288            0.006285              0.011717             0.011833
+1     0.186584   0.829061         0.006138          0.008407             0.186592            0.186572              0.829013             0.829024
+2     0.004621   0.008315         0.001697          0.003041             0.004712            0.004717              0.008338             0.008383
+3     0.012253   0.015732         0.005598          0.005323             0.012394            0.012380              0.015720             0.015738
+4     0.011000   0.087443         0.042334          0.034308             0.011621            0.020749              0.087354             0.090009
+[04/02/2021 23:21:32] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5515630893797859
+[04/02/2021 23:21:32] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:21:32] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:21:47] util.analysis - DEBUG: elapsed time: 00:00:15.18
+[04/02/2021 23:21:48] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:22:03] util.analysis - DEBUG: elapsed time: 00:00:15.01
+[04/02/2021 23:22:03] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:22:19] util.analysis - DEBUG: elapsed time: 00:00:16.60
+[04/02/2021 23:22:19] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:22:26] util.analysis - DEBUG: elapsed time: 00:00:07.02
+[04/02/2021 23:22:26] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:22:28] util.analysis - DEBUG: elapsed time: 00:00:02.18
+[04/02/2021 23:22:28] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of entire data with full-agglomerative
+[04/02/2021 23:22:28] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:22:28] ml.clustering - INFO: ***************************** Clustering - Method full-agglomerative      ***************************
+[04/02/2021 23:22:28] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.240114  12.191911         0.002714          0.005649            44.240131           44.240141             12.191843            12.192019
+1     43.819285   9.082464         0.003605          0.006671            43.818930           43.819433              9.082228             9.082211
+2     44.241286  12.188626         0.009473          0.016767            44.239615           44.240458             12.188532            12.194343
+3     43.860460   8.875397         0.018599          0.019115            43.862944           43.859291              8.882745             8.869340
+4     44.232050  12.188350         0.018930          0.016920            44.228776           44.231936             12.185425            12.190625
+[04/02/2021 23:22:28] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.005415   0.009729         0.002180          0.005528             0.005413            0.005454              0.009900             0.010057
+1     0.217913   1.003011         0.003132          0.009156             0.217702            0.217932              1.003244             1.002903
+2     0.009745   0.011938         0.001652          0.012717             0.008236            0.008249              0.009308             0.016195
+3     0.010532   0.013945         0.005711          0.008669             0.008157            0.015194              0.012508             0.017227
+4     0.012918   0.010339         0.006353          0.011905             0.013011            0.013810              0.009244             0.014980
+[04/02/2021 23:22:33] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.5360756800402816
+[04/02/2021 23:22:33] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:22:33] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:22:39] ml.clustering - DEBUG: elapsed time: 00:00:06.00
+[04/02/2021 23:22:39] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:22:54] util.analysis - DEBUG: elapsed time: 00:00:14.09
+[04/02/2021 23:22:54] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:23:07] util.analysis - DEBUG: elapsed time: 00:00:13.78
+[04/02/2021 23:23:07] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:23:23] util.analysis - DEBUG: elapsed time: 00:00:15.27
+[04/02/2021 23:23:23] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:23:23] util.analysis - DEBUG: elapsed time: 00:00:00.45
+[04/02/2021 23:23:23] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:23:23] util.analysis - DEBUG: elapsed time: 00:00:00.22
+[04/02/2021 23:23:23] test.scooter_trajectories_test - DEBUG: Test ScooterTrajectories analysis clusterized of entire data with ward-agglomerative
+[04/02/2021 23:23:23] ml.clustering - DEBUG: Clustering ScooterTrajectories stats
+[04/02/2021 23:23:23] ml.clustering - INFO: ***************************** Clustering - Method ward-agglomerative      ***************************
+[04/02/2021 23:23:23] ml.clustering - INFO: [FEATURES MEAN]: 
+       latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                             
+0     44.238468  12.188266         0.011652          0.015422            44.236556           44.238201             12.187371            12.191807
+1     44.240320  12.191257         0.003614          0.007959            44.240441           44.240227             12.191174            12.191475
+2     43.804763   9.146311         0.002157          0.003627            43.804581           43.804812              9.146307             9.146226
+3     44.239795  12.193807         0.000501          0.001349            44.239785           44.239820             12.193774            12.193820
+4     43.864805   8.876152         0.010728          0.017118            43.864696           43.864883              8.877145             8.874105
+[04/02/2021 23:23:23] ml.clustering - INFO: [FEATURES STD]: 
+      latitude  longitude  spread_latitude  spread_longitude  edge_latitude_start  edge_latitude_stop  edge_longitude_start  edge_longitude_stop
+c_id                                                                                                                                            
+0     0.010894   0.011588         0.005851          0.011621             0.010592            0.010541              0.010283             0.015455
+1     0.005022   0.009463         0.001318          0.005341             0.005028            0.005083              0.009565             0.010011
+2     0.247558   1.140367         0.001801          0.003815             0.247359            0.247543              1.140587             1.140198
+3     0.005890   0.009109         0.000474          0.002369             0.005908            0.005855              0.009176             0.009100
+4     0.009484   0.016771         0.005375          0.012533             0.008538            0.011749              0.015646             0.018256
+[04/02/2021 23:23:29] ml.clustering - INFO: [SILHOUETTE SCORE]: 0.4954436737618722
+[04/02/2021 23:23:29] ml.clustering - INFO: *******************************************************************************************************
+[04/02/2021 23:23:29] ml.clustering - DEBUG: Clustering ScooterTrajectories plot dendrogram
+[04/02/2021 23:23:35] ml.clustering - DEBUG: elapsed time: 00:00:06.68
+[04/02/2021 23:23:35] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:23:52] util.analysis - DEBUG: elapsed time: 00:00:16.85
+[04/02/2021 23:23:52] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:24:08] util.analysis - DEBUG: elapsed time: 00:00:15.66
+[04/02/2021 23:24:08] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:24:25] util.analysis - DEBUG: elapsed time: 00:00:16.97
+[04/02/2021 23:24:25] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:24:25] util.analysis - DEBUG: elapsed time: 00:00:00.37
+[04/02/2021 23:24:25] util.analysis - DEBUG: DataAnalysis show line plot of ScooterTrajectories on ['longitude', 'latitude', 'cluster_id']
+[04/02/2021 23:24:25] util.analysis - DEBUG: elapsed time: 00:00:00.20
