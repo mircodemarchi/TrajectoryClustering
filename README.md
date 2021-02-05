@@ -131,9 +131,9 @@ The configuration file (ex. _defconfig.ini_) is divided in different sections, o
 
         Perform the following clustering algorithms on generated dataset positions: k-means, mean-shift, gaussian mixture, ward hierarchical and full hierarchical.
 
-    - `n-clusters`: int
+    - `n-clusters`: int optional
 
-        Number of clusters in input of clustering algorithms that need it.
+        Number of clusters in input of clustering algorithms that need it. If omitted, it runs some WCSS clustering tests for Elbow method.
 
     - `with-pca`: bool
 
