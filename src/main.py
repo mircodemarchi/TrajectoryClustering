@@ -80,7 +80,8 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
         with_pca=config.getboolean("with-pca"),
         with_standardization=config.getboolean("with-standardization"),
         with_normalization=config.getboolean("with-normalization"),
-        only_north=config.getboolean("only-north")
+        only_north=config.getboolean("only-north"),
+        exam=config.getboolean("exam")
     )
 
     if config.getboolean("load-original-data"):
@@ -112,6 +113,8 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
 
     if config.getboolean("perform-clustering") and st_test.is_clustering_processed():
         st_test.clusterized_data_analysis()
+        st_test.cluster_maps()
+        st_test.cluster_maps_3d()
 
     if config.getboolean("perform-map"):
         st_test.maps()

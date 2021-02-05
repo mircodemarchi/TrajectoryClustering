@@ -25,6 +25,7 @@ HEURISTIC_IMG_FN_PREFIX = "heuristic"
 FORCE_RENTAL_NUM_TO_ANALYZE = 100
 
 CLUSTERING_METHODS = ["k-means", "mean-shift", "gaussian-mixture", "full-agglomerative", "ward-agglomerative"]
+CLUSTERING_EXAM_METHODS = ["k-means", "mean-shift", "ward-agglomerative"]
 POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING = 30000
 
 
@@ -32,7 +33,7 @@ class ScooterTrajectoriesTest:
     def __init__(self, log_lvl=None, chunk_size=None, max_chunk_num=None, rental_num_to_analyze=None,
                  timedelta=None, spreaddelta=None, edgedelta=None, group_on_timedelta=True,
                  n_clusters=None, with_pca=False, with_standardization=False, with_normalization=False,
-                 only_north=False):
+                 only_north=False, exam=False):
         self.st = ScooterTrajectoriesDS(log_lvl=log_lvl)
         # Generation settings
         self.chunk_size = chunk_size
@@ -49,6 +50,8 @@ class ScooterTrajectoriesTest:
         self.with_standardization = with_standardization
         self.with_normalization = with_normalization
         self.only_north = only_north
+
+        self.exam = exam
 
         # Others
         self.data_prepared = None
@@ -232,12 +235,12 @@ class ScooterTrajectoriesTest:
 
         # Perform clustering tests
         kmeans = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
-        kmeans.test(range_clusters=range(1, 20), standardize=self.with_standardization,
+        kmeans.test("k-means", range_clusters=range(1, 20), standardize=self.with_standardization,
                     normalize=self.with_normalization,  pca=self.with_pca, components=STC.CLUSTERING_COMPONENTS)
         kmeans.show_wcss(save_file=SAVE_FILE, prefix=prefix + "all")
         for key in partitions:
             kmeans = Clustering(partitions[key], STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
-            kmeans.test(range_clusters=range(1, 30), standardize=self.with_standardization,
+            kmeans.test("k-means", range_clusters=range(1, 30), standardize=self.with_standardization,
                         normalize=self.with_normalization, pca=self.with_pca, components=STC.CLUSTERING_COMPONENTS)
             kmeans.show_wcss(save_file=SAVE_FILE, prefix=prefix + key)
 
@@ -251,15 +254,20 @@ class ScooterTrajectoriesTest:
             log.e("Test {} clustering: you have to process heuristic earlier".format(DATASET_NAME))
             return self
 
-        components = None  # STC.CLUSTERING_COMPONENTS or None or a number
+        if self.exam:
+            clustering_methods = CLUSTERING_EXAM_METHODS
+        else:
+            clustering_methods = CLUSTERING_METHODS
+
+        components = STC.CLUSTERING_COMPONENTS  # STC.CLUSTERING_COMPONENTS or None or a number
         dataset_for_clustering = self.__prepare()
         self.data_prepared = dataset_for_clustering
 
         # Perform clustering in relation to each partition
-        partitions = self.__partition(dataset_for_clustering, only_north=self.only_north)
+        partitions = self.__partition(dataset_for_clustering, only_north=True if self.exam else self.only_north)
         self.partitions = partitions
         self.partitions_clusters = dict()
-        for method in CLUSTERING_METHODS:
+        for method in clustering_methods:
             self.partitions_clusters[method] = dict()
             for key in partitions:
                 log.d("Test {} clustering of {} data with {}".format(DATASET_NAME, key, method))
@@ -271,21 +279,24 @@ class ScooterTrajectoriesTest:
                 c.exec(method=method, n_clusters=self.n_clusters,
                        standardize=self.with_standardization, normalize=self.with_normalization,
                        pca=self.with_pca, components=components)
-                self.partitions_clusters[method][key] = c.labels
+                self.partitions_clusters[method][key] = c
 
         self.all_clusters = dict()
+        if self.exam:
+            self.clustering_done = True
+            return self
         # Perform clustering in relation to the entire data
-        for method in CLUSTERING_METHODS:
+        for method in clustering_methods:
             log.d("Test {} clustering of entire data with {}".format(DATASET_NAME, method))
             if method.endswith("agglomerative") and POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING is not None:
                 c = Clustering(dataset_for_clustering.iloc[:POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING],
                                STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
             else:
                 c = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
-            c.exec(method="k-means", n_clusters=self.n_clusters,
+            c.exec(method=method, n_clusters=self.n_clusters,
                    standardize=self.with_standardization, normalize=self.with_normalization,
                    pca=self.with_pca, components=components)
-            self.all_clusters[method] = c.labels
+            self.all_clusters[method] = c
 
         self.clustering_done = True
 
@@ -357,25 +368,28 @@ class ScooterTrajectoriesTest:
             # Clustering analysis for each partition
             for key in partitions:
                 log.d("Test {} analysis clusterized of {} data with {}".format(DATASET_NAME, key, method))
+                self.partitions_clusters[method][key].stats()
                 if method.endswith("agglomerative") and POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING is not None:
                     p = partitions[key].iloc[:POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING].copy()
+                    self.partitions_clusters[method][key].show_dendrogram(prefix=prefix + key, save_file=SAVE_FILE)
                 else:
                     p = partitions[key].copy()
-                p[STC.CLUSTER_ID_CN] = self.partitions_clusters[method][key]
+                p[STC.CLUSTER_ID_CN] = self.partitions_clusters[method][key].labels
                 self.__line_joint_analysis(self.__filter(p), prefix=prefix + key,
                                            line_list=[STC.CLUSTER_ANALYSIS_TUPLE],
                                            line_3d_list=[STC.CLUSTER_ANALYSIS_TUPLE])
-
         dataset_for_clustering = self.data_prepared
         for method in self.all_clusters:
             log.d("Test {} analysis clusterized of entire data with {}".format(DATASET_NAME, method))
             prefix = "{}_{}_".format(CLUSTER_IMG_FN_PREFIX, method)
+            self.all_clusters[method].stats()
             # Clustering analysis for the entire dataset
             if method.endswith("agglomerative") and POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING is not None:
                 d = dataset_for_clustering.iloc[:POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING].copy()
+                self.all_clusters[method].show_dendrogram(prefix=prefix + "all", save_file=SAVE_FILE)
             else:
                 d = dataset_for_clustering.copy()
-            d[STC.CLUSTER_ID_CN] = self.all_clusters[method]
+            d[STC.CLUSTER_ID_CN] = self.all_clusters[method].labels
             self.__line_joint_analysis(self.__filter(d), line_list=[STC.CLUSTER_ANALYSIS_TUPLE], prefix=prefix + "all")
             self.__cardinal_analysis(d, line_list=[STC.CLUSTER_ANALYSIS_TUPLE], prefix=prefix + "all")
 
@@ -385,23 +399,61 @@ class ScooterTrajectoriesTest:
             log.e("Test {} maps: you have to process heuristic earlier".format(DATASET_NAME))
             return self
         dataset_to_analyze = self.__pos_filter(self.st.pos)
-        dataset_to_analyze = self.__filter(dataset_to_analyze)
+        dataset_to_analyze = self.__filter(dataset_to_analyze).copy()
+        dataset_to_analyze[STC.POS_GEN_LATITUDE_CN] += 1.2
+        dataset_to_analyze[STC.POS_GEN_LONGITUDE_CN] += -1.2
+
+        group_on_timedelta = [STC.POS_GEN_RENTAL_ID_CN, STC.POS_GEN_TIMEDELTA_ID_CN]
+        dataset_to_analyze[STC.POS_GEN_TIMEDELTA_ID_CN] = dataset_to_analyze.loc[:, group_on_timedelta].ne(
+            dataset_to_analyze.loc[:, group_on_timedelta].shift()).any(axis=1).cumsum()
+
         da_dataset = DataAnalysis(dataset_to_analyze, dataset_to_analyze.columns, dataset_name=DATASET_NAME,
                                   save_file=SAVE_FILE)
-        da_dataset.show_line_map(on=STC.POS_GEN_OVER_RENTAL_MAP_TUPLE,
-                                 hover_data=STC.POS_GEN_OVER_RENTAL_MAP_HOVER_DATA, groupby=self.groupby)
-        da_dataset.show_scatter_map(on=STC.POS_GEN_OVER_COORDDELTA_MAP_TUPLE,
-                                    hover_data=STC.POS_GEN_OVER_COORDDELTA_MAP_HOVER_DATA)
+        da_dataset.show_scatter_map(on=STC.POS_GEN_OVER_RENTAL_MAP_TUPLE,
+                                    hover_data=STC.POS_GEN_OVER_RENTAL_MAP_HOVER_DATA,
+                                    filename="rental_scatter_map.html")
+        if not self.exam:
+            da_dataset.show_scatter_map(on=STC.POS_GEN_OVER_COORDDELTA_MAP_TUPLE,
+                                        hover_data=STC.POS_GEN_OVER_COORDDELTA_MAP_HOVER_DATA,
+                                        filename="coord_scatter_map.html")
+            da_dataset.show_scatter_map(on=STC.POS_GEN_OVER_TIMEDELTA_MAP_TUPLE,
+                                        hover_data=STC.POS_GEN_OVER_TIMEDELTA_MAP_HOVER_DATA,
+                                        filename="timedelta_scatter_map.html")
 
-    def maps_3d(self):
-        dataset_to_analyze = self.__pos_filter(self.st.pos)
-        partitions = self.__partition(dataset_to_analyze, only_north=self.only_north)
-        for key in partitions:
-            partitions[key] = self.__filter(partitions[key])
-            da_dataset = DataAnalysis(partitions[key], partitions[key].columns, dataset_name=DATASET_NAME,
-                                      save_file=SAVE_FILE)
-            filename = "{}_3d_map.html".format(key)
-            da_dataset.show_3d_map(on=STC.POS_GEN_OVER_COORDDELTA_MAP_TUPLE, groupby=self.groupby, filename=filename)
+    def cluster_maps(self):
+        key = "N-E"
+        method = "k-means"
+        log.d("Test {} generate maps for clustering".format(DATASET_NAME))
+        if not self.is_clustering_processed():
+            log.e("Test {} maps for clustering: you have to process clustering earlier".format(DATASET_NAME))
+            return self
+        partitions = self.partitions
+        p = partitions[key].copy()
+        p[STC.CLUSTER_ID_CN] = self.partitions_clusters[method][key].labels
+        p = self.__filter(p)
+        p[STC.POS_GEN_LATITUDE_CN] += 1.2
+        p[STC.POS_GEN_LONGITUDE_CN] += -1.2
+        da_dataset = DataAnalysis(p, p.columns, dataset_name=DATASET_NAME, save_file=SAVE_FILE)
+        da_dataset.show_scatter_map(on=STC.POS_GEN_OVER_CLUSTER_MAP_TUPLE,
+                                    hover_data=STC.POS_GEN_OVER_CLUSTER_MAP_HOVER_DATA,
+                                    filename="cluster_scatter_map.html")
+
+    def cluster_maps_3d(self):
+        key = "N-E"
+        method = "k-means"
+        log.d("Test {} generate maps 3D for clustering".format(DATASET_NAME))
+        if not self.is_clustering_processed():
+            log.e("Test {} maps 3D for clustering: you have to process clustering earlier".format(DATASET_NAME))
+            return self
+        partitions = self.partitions
+        p = partitions[key]
+        p[STC.CLUSTER_ID_CN] = self.partitions_clusters[method][key].labels
+        p = self.__filter(p)
+        da_dataset = DataAnalysis(p, p.columns, dataset_name=DATASET_NAME, save_file=SAVE_FILE)
+        filename = "{}_{}_cluster_3d_map.html".format(key, method)
+        da_dataset.show_3d_map(on=STC.POS_GEN_OVER_CLUSTER_MAP_TUPLE,
+                               hover_data=STC.POS_GEN_OVER_CLUSTER_MAP_HOVER_DATA,
+                               groupby=self.groupby, filename=filename)
 
     def stats(self):
         log.d("Test {} print stats".format(DATASET_NAME))
