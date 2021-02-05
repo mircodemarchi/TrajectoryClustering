@@ -490,7 +490,7 @@ TSWLatexianTemp*
 # Custom
 .DS_Store
 
-image/*
+image/main.py
 image/*/*
 !image/README.md
 
