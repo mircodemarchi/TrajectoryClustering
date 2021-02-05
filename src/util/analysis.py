@@ -287,7 +287,7 @@ class DataAnalysis:
             return self
 
         x, y, z = on
-        fig = px.scatter_mapbox(self.x, lat=x, lon=y, color=z,
+        fig = px.scatter_mapbox(self.x, lat=x, lon=y, color=z, color_discrete_map=PALETTE,
                                 hover_name=None if hover_data is None else hover_data[0],
                                 hover_data=None if hover_data is None else hover_data[1:])
         fig.update_layout(
@@ -309,6 +309,11 @@ class DataAnalysis:
             return self
 
         y, x, z = on
+        if type(groupby) is list:
+            groupby = groupby + [z]
+        else:
+            groupby = [groupby, z]
+
         unique = self.x[z].unique()
         palette = pd.DataFrame(sns.color_palette(PALETTE, n_colors=len(unique)).as_hex(), index=unique, columns=["p"])
         fig = make_subplots()
