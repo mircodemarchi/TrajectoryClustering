@@ -1,6 +1,9 @@
-Motion trajectories are really difficult to analyse and handle because of the amount of data. There could be errors in position tracking and usually you don't have informations like the city from which the positions are taken, or any higher semantic level information that can help in trajectories grouping. Consequently trajectories are difficult to represent, filter and manage in relation with itself or other data. First of all, trajectories clustering is a challenge for its intrinsic difficulty in being treated and today is an ambitious topic in data science research. Moreover trajectory clustering can help for several applications:
+Motion trajectories are really difficult to analyse and handle because of the amount of data. There could be errors in position tracking, due to localization issues, and usually data are not organized as you expect. Consequently trajectories are difficult to represent, filter and manage in relation with themselves or other informations. First of all, trajectories clustering is a challenge for its intrinsic difficulty in being treated and today is an ambitious topic in data science research. Moreover, trajectory clustering can help for several applications:
 \begin{itemize}
 	\item Monitoring: understand main points of interest and common places visited by tourists;
-	\item Forecasting: prediction of possible destinations starting from a position; 
-	\item Viability: traffic monitoring and detection of possible point of traffic jam;
+	\item Forecasting: prediction of possible destinations starting from the current position and previous ones; 
+	\item Viability: traffic monitoring and kind of user's activity extracting semantic concepts from trajectories;
+	\item Smart city: data support to city plan and smart transportation management;
+	\item Security: trajectories which are significantly different from others in terms of some similarity metric may be viewed as outliers;
+	\item Video analysis: movement pattern analysis from video (after extracting trajectories from video data);
 \end{itemize}

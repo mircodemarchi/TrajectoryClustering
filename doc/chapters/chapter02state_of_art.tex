@@ -1,10 +1,10 @@
-In \cite{AIReview} book there are some techniques widely used for clustering of moving object. Some methodology are pretty new but there are also some historical algorithm that provides good results: 
+\textit{Yuan et al. (2012)} \cite{AIReview}, in their trajectory clustering review, show some techniques widely used for moving object clustering. The most advanced deep learning techniques use an architecture called \textit{Auto-Encoder}. Instead, in machine learning, there are some very recent algorithms, but all evolution and improvement of the traditional clustering techniques. On basis of full analysis on moving object clustering, the algorithms can be divided into 5 categories which are listed as follows:
 \begin{itemize}
-	\item K-Means: 
-	\item CURE:
-	\item Birch:
-	\item DBSCAN:
-	\item Optics:
-	\item Sting:
-	\item Cosweb
+	\item \textit{Spatial based clustering}: find out trajectories which are similar in geometrical properties. \textit{Palma et al. (2008)} \cite{Palma2008} detected pauses and moves in trajectories by using an improved version of \textit{DBSCAN} algorithm.
+	\item \textit{Time depended clustering}: time information can be very crucial for analysing moving object locations which are changing over time. \textit{Nanni and Pedreschi (2006)} \cite{Nanni2006} considers time gaps between trajectory positions and proposes \textit{T-OPTICS} as an adaption of \textit{OPTICS}.
+	\item \textit{Partition and group based clustering}: trajectory data are often very long and complex and find trajectory partition or local patterns approaches can be solutions with low memory usage and time cost. \textit{Lee et al. (2007)} \cite{Lee2007} were the firsts to implement a \textit{partition \& group} framework for trajectory clustering based on a formal theory.
+	\item \textit{Uncertain trajectory clustering}: model and reduce the uncertainty of trajectories location between discrete time updates and noise in position tracking. Nock and Nielsen 2006 \cite{Nock2006} implemented \textit{Fuzzy C-Means (FCM)} that is an efficient algorithm for clustering data with noise.
+	\item \textit{Semantic trajectory clustering}: depending on the capabilities of the device, the instant speed or stillness, acceleration, elevation, direction and rotation, etc., can’t be acquired directly. Several works start considering geographical informations as a background from which extracting higher semantic level informations. \textit{Palma et al. (2008)} \cite{Palma2008} introduced a new model for trajectory semantic: stops and moves, where stop is a part in trajectory where the object has stayed for a minimal amount of time (e.g. an airport, a touristic place).
 \end{itemize}
+
+In this report I will deal with techniques that involves the first 3 categories of current researches. I will present some partition and group heuristics, based on time gaps, and I will show how the traditional clustering algorithms can be used for trajectory clustering relying on positions spatial information.

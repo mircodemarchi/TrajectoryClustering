@@ -14,7 +14,7 @@
 }
 
 \usepackage{graphicx}
-\graphicspath{ {images/} }
+\graphicspath{ {../image/} }
 
 \usepackage{listings}
 
@@ -38,7 +38,7 @@
 
 % ABSTRACT
 \begin{abstract}
-	The aim of this review is to present the main unsupervised learning techniques used for scooter trajectories clustering. The dataset that I used contains a big amount of positions taken in rentals that run through some cities in Italy. The objective is to find recurrent places crossed by the trajectories. This review presents some analysis on the positions and the implementation of some heuristics that manage data in a systematic way: the \textit{spreaddelta heuristic}, the \textit{edgedelta heuristic} and the \textit{coorddelta heuristic}. Then I performed some machine learning clustering techniques on the dataset: \textit{mean shift}, \textit{full linkage}, \textit{ward hierarchical} and \textit{k-means}, adding the features extracted from the heuristics performed before. All the features are extracted with \textit{Principal Component Analysis (PCA)} with an improvement that select the component to focus on and the features has been integrated with the informations obtained from the heuristic procedures in order to optimize feature extraction. 
+	The aim of this report is to present the main unsupervised learning techniques used for scooter trajectories clustering. The dataset that I used contains a big amount of positions taken in rentals that run through some cities in Italy. The objective is to find recurrent places crossed by the trajectories. This report presents some analysis on the positions and an implementation of heuristics that manage data in a systematic way: \textit{timedelta heuristic}, \textit{spreaddelta heuristic}, \textit{edgedelta heuristic} and \textit{coorddelta heuristic}. Then I performed the most traditional machine learning clustering techniques on the generated dataset: \textit{K-Means}, \textit{Mean Shift}, \textit{Gaussian Mixture}, \textit{Full Hierarchical Agglomerative}, \textit{Ward Hierarchical Agglomerative}. All the features are extracted with \textit{Principal Component Analysis (PCA)} with an improvement that select the components to focus on and have been integrated with the informations obtained from the heuristic procedures in order to optimize feature extraction.
 \end{abstract}
 
 % INTRODUZIONE
@@ -102,7 +102,7 @@
 		id: Id\\
 		km: float64
 	};
-	\node (pos) [rectangle, draw=black, rounded corners, text justified, text width=8cm, rectangle split, rectangle split parts=2, right=of device, yshift=-1.5cm]
+	\node (pos) [rectangle, draw=black, rounded corners, text justified, text width=4cm, rectangle split, rectangle split parts=2, right=of device, yshift=-1.5cm]
 	{
 		\textbf{POS}
 		\nodepart{second}
@@ -148,7 +148,7 @@
 		stop-time: datetime64\\
 		km: float64
 	};
-	\node (pos) [rectangle, draw=black, rounded corners, text justified, text width=8cm, rectangle split, rectangle split parts=2, right=of rental]
+	\node (pos) [rectangle, draw=black, rounded corners, text justified, text width=9cm, rectangle split, rectangle split parts=2, right=of rental]
 	{
 		\textbf{POS}
 		\nodepart{second}\begin{multicols*}{2}
