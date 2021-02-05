@@ -39,6 +39,13 @@ class ScooterTrajectoriesDS:
 
         unzip(self.zip_filepath)
 
+    def __unzip_generated(self):
+        if not os.path.exists(os.path.join(DATA_FOLDER, C.GENERATED_DN + ".zip")):
+            log.f("Unzip path not exist")
+            return
+
+        unzip(os.path.join(DATA_FOLDER, C.GENERATED_DN + ".zip"))
+
     def __is_pos_timestamp_in_rental(self, pos, rental):
         pos_server_time_cn = C.POS_TIME_COLS[0]
         pos_device_time_cn = C.POS_TIME_COLS[1]
@@ -373,6 +380,10 @@ class ScooterTrajectoriesDS:
         log.d("Scooter Trajectories start unzip")
         self.__unzip()
 
+        if not os.path.exists(self.unzip_folder):
+            log.e("Data folder not exist")
+            return self
+
         log.d("Scooter Trajectories load device, rental, user data")
         device_df, rental_df, user_df, load_time = self.__load_support_data()
         log.d("elapsed time: {}".format(load_time))
@@ -389,6 +400,9 @@ class ScooterTrajectoriesDS:
         return self
 
     def load_generated(self):
+        log.d("Scooter Trajectories start unzip")
+        self.__unzip_generated()
+
         if not os.path.exists(os.path.join(DATA_FOLDER, C.GENERATED_DN)):
             log.e("Generated folder not exist")
             return self
