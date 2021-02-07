@@ -13,6 +13,8 @@ The following are the dataset studied in this project.
     - [onedrive/share/scooter_trajectories.zip](): starting original dataset. I don't recommend to perform your test on this, because it takes more or less 20 minutes to perform all merge and filter operations.
     - [onedrive/share/scooter_trajectories_generated.zip](): dataset already filtered and merged. It weighs less and the analysis and training can start immediately.
 
+    ![Scooter Trajecotries preview](./image/k-means-plot.png)
+
 
 ## Quick run
 
