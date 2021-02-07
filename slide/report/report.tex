@@ -44,7 +44,7 @@
 \section{Introduction}
 
 \begin{frame}{Motivation}
- Trajectories clustering is a problem really difficult to be treated but  can be useful for several applications:
+ Trajectory clustering is a problem really difficult to be treated but can be useful for several applications:
  \begin{itemize}
  	\item Monitoring
  	\item Forecasting
@@ -66,7 +66,7 @@ The current researches can be divided into 5 categories:
 \end{frame}
 
 \begin{frame}{Starting point}
-Dataset weighs: \textbf{2GB}.
+Dataset size: \textbf{2GB}.
 \begin{figure}[bt]
 	\centering
 	\includegraphics[width=\textwidth]{starting-point}
@@ -222,13 +222,13 @@ Dataset entities: position, rental, device and user. The dataset has been previo
 \end{frame}
 
 \begin{frame}{Heuristics: \textit{timedelta} and \textit{spreaddelta}}
-The following heuristics methodologies use a \texttt{delta} value that is values with the statistic's empirical rule.
+The following heuristics methodologies use a \texttt{delta} value that is valued with the statistic's empirical rule.
 \begin{itemize}
 	\item \textbf{timedelta heuristic}: a rental trajectory can be divided in a sequence of trajectories if the time gap between a position and previous one exceeds a \textit{timedelta} value.
 	\begin{align}
 	TIMEGAPS = \{p.time - p[-1].time \mid \forall p \in POS \}
 	\end{align}
-	\item \textbf{spreaddelta heuristic}: a rental trajectory is similar to another one if they spread a similar amount of area. 
+	\item \textbf{spreaddelta heuristic}: a rental trajectory is similar to another one if they spread a similar amount of area in relation with \textit{spreaddelta} value. 
 	\begin{align}
 	SPREADS = \{max(t) - min(t) \mid \forall t \in TRAJ \}
 	\end{align}
@@ -237,7 +237,7 @@ The following heuristics methodologies use a \texttt{delta} value that is values
 
 \begin{frame}{Heuristics: \textit{edgedelta} and \textit{coorddelta}}
 \begin{itemize}
-	\item \textbf{edgedelta heuristic}: acts as the \textit{spreaddelta heuristic}, but it considers the edges of a trajectory, or rather the first position and the last position of a trajectory. The main issue is the bimodal distribution of edges.
+	\item \textbf{edgedelta heuristic}: acts as the \textit{spreaddelta heuristic}, but it considers the edges of a trajectory, or rather the first position and the last position of a trajectory in relation with \textit{edgedelta} value. The main issue is the bimodal distribution of edges.
 	\begin{align}
 	EDGES = \{concat(p[0], p[-1]) \mid \forall t \in TRAJ \}
 	\end{align}
@@ -263,6 +263,11 @@ The component extracted by \textit{PCA} can be decided in 3 different ways:
 	\item By the cumulative variance with $80\%$ cover;
 	\item Concatenation of columns produced by \textit{PCA} for different subset of features;
 \end{itemize}
+\begin{align}
+\{ &\{ latitude\} , \{longitude\}, \{spread\-latitude, spread\-longitude\}, \notag\\
+&\{edge\-latitude\-start, edge\-latitude\-stop, \notag\\ 
+&\phantom{\{}edge\-longitude\-start, edge\-longitude\-stop\} \}\notag
+\end{align} 
 \end{frame}
 
 \begin{frame}{Clustering}
@@ -322,7 +327,7 @@ The component extracted by \textit{PCA} can be decided in 3 different ways:
 \end{frame}
 
 \begin{frame}{WCSS and Elbow method}
-\textit{Within Cluster Sum of Squares (WCSS)} graph for \textit{Elbow method} in range from 1 to 30 with K-Means
+\textit{Within Cluster Sum of Squares (WCSS)} graph for \textit{Elbow method} with number of clusters in range from 1 to 30 and \textit{K-Means} algorithm.
 \begin{figure}[bt]
 	\centering
 	\includegraphics[width=0.6\textwidth]{wcss}
@@ -399,7 +404,7 @@ Number of clusters estimated: \textbf{5}.
 \section{Conclusion}
 \begin{frame}{Final considerations}
 \begin{itemize}
-	\item \textit{K-Means} best result in terms of plot representation and \textit{Silhouette score};
+	\item \textit{K-Means} is the best result in terms of plot representation and \textit{Silhouette score};
 	\item Custom \textit{PCA} implementation results similar to traditional \textit{PCA} approach based on the $80\%$ of cumulative variance;
 	\item Time useful for partition and group, but not for bottom-up clustering techniques;
 	\item Clustering with \textit{PCA} shows better results in variance terms;
