@@ -1,0 +1,71 @@
+\documentclass[]{IEEEtran}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+\title{Scooter Trajectories Clustering\\
+	{\large University of Verona\\Computer Engineering for Robotics and Smart Industry\\Machine Learning and Deep Learning\\2020/2021\\}}
+\author{Mirco De Marchi - VR445319}
+
+%\usepackage{algorithm,algorithmic}
+
+\usepackage{hyperref}
+\hypersetup{
+    linktoc=all
+}
+
+\usepackage{graphicx}
+\graphicspath{ {../../image/} }
+
+\usepackage{listings}
+
+% Table environment
+\usepackage{tabularx}
+\renewcommand{\arraystretch}{1.2}
+\usepackage{float}
+\restylefloat{table}
+
+\usepackage{amsmath}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning,shapes,shadows,arrows}
+
+\usepackage{multicol}
+%\setlength{\multicolsep}{6.0pt plus 2.0pt minus 1.5pt}% 50% of original values
+\setlength\multicolsep{0pt}
+
+\begin{document}
+\maketitle
+
+% ABSTRACT
+\begin{abstract}
+	The aim of this report is to present the main unsupervised learning techniques used for scooter trajectories clustering. The dataset that I used contains a big amount of positions taken in rentals that run through some cities in Italy. The objective is to find recurrent places crossed by the trajectories. This report presents some analysis on the positions and an implementation of heuristics that manage data in a systematic way: \textit{timedelta heuristic}, \textit{spreaddelta heuristic}, \textit{edgedelta heuristic} and \textit{coorddelta heuristic}. Then I performed the most traditional machine learning clustering techniques on the generated dataset: \textit{K-Means}, \textit{Mean Shift}, \textit{Gaussian Mixture}, \textit{Full Hierarchical Agglomerative}, \textit{Ward Hierarchical Agglomerative}. All the features are extracted with \textit{Principal Component Analysis (PCA)} with an improvement that select the components to focus on and have been integrated with the informations obtained from the heuristic procedures in order to optimize feature extraction.
+\end{abstract}
+
+% INTRODUZIONE
+\section{Motivation}
+\input{chapters/chapter01motivation}
+
+% BACKGROUND
+\section{State of art}
+\input{chapters/chapter02state_of_art}
+
+% METODOLOGIA
+\section{Objectives}
+\input{chapters/chapter03objectives}
+
+% METHODOLOGY
+\section{Methodology}
+\input{chapters/chapter04methodology}
+
+% RESULTS
+\section{Results}
+\input{chapters/chapter05results}
+
+% CONCLUSION
+\section{Conclusion}
+\input{chapters/chapter06conclusion}
+
+\bibliographystyle{IEEEtran}
+\bibliography{biblio}
+
+\end{document}
