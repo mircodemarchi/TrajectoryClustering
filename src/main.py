@@ -81,6 +81,7 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
         with_standardization=config.getboolean("with-standardization"),
         with_normalization=config.getboolean("with-normalization"),
         only_north=config.getboolean("only-north"),
+        moving_behavior_extraction=config.getboolean("moving-behavior-extraction"),
         exam=config.getboolean("exam")
     )
 
@@ -101,6 +102,10 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
 
     if config.getboolean("perform-clustering"):
         st_test.clustering()
+
+    # DL
+    if config.getboolean("perform-dl-clustering"):
+        st_test.dl_clustering()
 
     # Analysis
     st_test.stats()

@@ -205,3 +205,19 @@ class ScooterTrajectoriesC:
 
     POS_GEN_OVER_CLUSTER_MAP_TUPLE: Final = (POS_GEN_LATITUDE_CN, POS_GEN_LONGITUDE_CN, CLUSTER_ID_CN)
     POS_GEN_OVER_CLUSTER_MAP_HOVER_DATA: Final = [CLUSTER_ID_CN, POS_GEN_SERVER_TIME_CN, POS_GEN_SPEED_CN]
+
+    # moving behavior feature extraction
+    SLIDING_WINDOW_WIDTH = 12
+    MOVING_ATTRIBUTES = [POS_GEN_SERVER_TIME_CN, POS_GEN_DEVICE_TIME_CN, POS_GEN_LATITUDE_CN, POS_GEN_LONGITUDE_CN,
+                         POS_GEN_SPEED_CN]
+    MOVING_BEHAVIOR_FEATURES_COLS = ["f_delta_latitude_mean", "f_delta_latitude_max", "f_delta_latitude_quantile75",
+                                     "f_delta_latitude_quantile50", "f_delta_latitude_quantile25",
+                                     "f_delta_latitude_min",
+                                     "f_delta_longitude_mean", "f_delta_longitude_max", "f_delta_longitude_quantile75",
+                                     "f_delta_longitude_quantile50", "f_delta_longitude_quantile25",
+                                     "f_delta_longitude_min",
+                                     "f_delta_s_mean", "f_delta_s_max", "f_delta_s_quantise75", "f_delta_s_quantise50",
+                                     "f_delta_s_quantise25", "f_delta_s_min",
+                                     "f_delta_r_mean", "f_delta_r_max", "f_delta_r_quantile75", "f_delta_r_quantile50",
+                                     "f_delta_r_quantile25", "f_delta_r_min",
+                                     ]

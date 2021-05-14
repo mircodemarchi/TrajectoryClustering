@@ -33,7 +33,7 @@ class ScooterTrajectoriesTest:
     def __init__(self, log_lvl=None, chunk_size=None, max_chunk_num=None, rental_num_to_analyze=None,
                  timedelta=None, spreaddelta=None, edgedelta=None, group_on_timedelta=True,
                  n_clusters=None, with_pca=False, with_standardization=False, with_normalization=False,
-                 only_north=False, exam=False):
+                 only_north=False, moving_behavior_extraction=False, exam=False):
         self.st = ScooterTrajectoriesDS(log_lvl=log_lvl)
         # Generation settings
         self.chunk_size = chunk_size
@@ -50,6 +50,8 @@ class ScooterTrajectoriesTest:
         self.with_standardization = with_standardization
         self.with_normalization = with_normalization
         self.only_north = only_north
+        # Deep Learning Clustering
+        self.moving_behavior_extraction = moving_behavior_extraction
 
         self.exam = exam
 
@@ -299,6 +301,10 @@ class ScooterTrajectoriesTest:
             self.all_clusters[method] = c
 
         self.clustering_done = True
+
+    def dl_clustering(self):
+        trajectories_behavior = self.st.moving_behavior_feature_extraction(groupby=self.groupby)
+        print(len(trajectories_behavior.index))
 
     def generated_data_analysis(self):
         log.d("Test {} generated data analysis".format(DATASET_NAME))

@@ -357,6 +357,64 @@ class ScooterTrajectoriesDS:
         end = time.time()
         return rental_pos_map_df, pos_df, rental_df, get_elapsed(start, end)
 
+    def __moving_attributes(self, trajectory: pd.DataFrame, sw_width=None, sw_offset=None):
+        traj_len = len(trajectory.index)
+        i = 0
+
+        trajectory_behavior = pd.DataFrame(columns=C.MOVING_BEHAVIOR_FEATURES_COLS)
+
+        while i < traj_len:
+            window = trajectory.iloc[i:i + sw_width][C.MOVING_ATTRIBUTES]
+
+            if len(window.index) > 1:
+                # Get moving attribute for this window.
+                window_curr = window.iloc[1:len(window.index)].reset_index(drop=True)
+                window_prev = window.iloc[0:len(window.index) - 1].reset_index(drop=True)
+                moving_attributes = window_curr.subtract(window_prev)
+
+                delta_t = moving_attributes[[C.POS_GEN_SERVER_TIME_CN, C.POS_GEN_DEVICE_TIME_CN]].mean(axis=1)
+                delta_l = moving_attributes[[C.POS_GEN_LATITUDE_CN, C.POS_GEN_LONGITUDE_CN]]
+                delta_s = moving_attributes[C.POS_GEN_SPEED_CN]
+                delta_r = np.arctan(moving_attributes[C.POS_GEN_LONGITUDE_CN]
+                                    / moving_attributes[C.POS_GEN_LATITUDE_CN])
+
+                f_delta_l = pd.concat([delta_l[C.POS_GEN_LATITUDE_CN] / (delta_t.astype(np.int64) // 10**6),
+                                       delta_l[C.POS_GEN_LONGITUDE_CN] / (delta_t.astype(np.int64) // 10**6)], axis=1)
+                f_delta_l = f_delta_l.rename(columns=dict(zip(f_delta_l.columns,
+                                                              [C.POS_GEN_LATITUDE_CN, C.POS_GEN_LONGITUDE_CN])))
+                f_delta_latitude = f_delta_l[C.POS_GEN_LATITUDE_CN]
+                f_delta_longitude = f_delta_l[C.POS_GEN_LONGITUDE_CN]
+                f_delta_s = delta_s
+                f_delta_r = delta_r
+
+                window_mbf = [
+                    # -- f_delta_latitude
+                    f_delta_latitude.mean(), f_delta_latitude.max(), f_delta_latitude.quantile(0.75),
+                    f_delta_latitude.quantile(0.50), f_delta_latitude.quantile(0.25), f_delta_latitude.min(),
+                    # -- f_delta_longitude
+                    f_delta_longitude.mean(), f_delta_longitude.max(), f_delta_longitude.quantile(0.75),
+                    f_delta_longitude.quantile(0.50), f_delta_longitude.quantile(0.25), f_delta_longitude.min(),
+                    # -- f_delta_s
+                    f_delta_s.mean(), f_delta_s.max(), f_delta_s.quantile(0.75), f_delta_s.quantile(0.50),
+                    f_delta_s.quantile(0.25), f_delta_s.min(),
+                    # -- f_delta_r
+                    f_delta_r.mean(), f_delta_r.max(), f_delta_r.quantile(0.75), f_delta_r.quantile(0.50),
+                    f_delta_r.quantile(0.25), f_delta_r.min(),
+                ]
+
+                df_window_mbf = pd.concat([pd.DataFrame([elem]) for elem in window_mbf], axis=1, ignore_index=True)
+                df_window_mbf = df_window_mbf.rename(columns=dict(zip(df_window_mbf.columns,
+                                                                      C.MOVING_BEHAVIOR_FEATURES_COLS)))
+
+                trajectory_behavior = pd.concat([trajectory_behavior, df_window_mbf], axis=0)
+
+            if i + sw_width < traj_len:
+                break
+            i += sw_offset
+
+        return trajectory_behavior
+
+
     def generate(self, chunknum=0, chunksize=50000):
         log.d("Scooter Trajectories start unzip")
         self.__unzip()
@@ -686,6 +744,14 @@ class ScooterTrajectoriesDS:
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
         return self
+
+    def moving_behavior_feature_extraction(self, groupby, sliding_window_width=None, sliding_window_offset=None):
+        sw_width = sliding_window_width if sliding_window_width else C.SLIDING_WINDOW_WIDTH
+        sw_offset = sliding_window_offset if sliding_window_offset else C.SLIDING_WINDOW_WIDTH / 2
+
+        # Group position in trajectories
+        pos_groups = self.pos.groupby(by=groupby)
+        return pos_groups.apply(lambda x: self.__moving_attributes(x, sw_width=sw_width, sw_offset=sw_offset))
 
     def heuristic_empty(self):
         """
