@@ -14,5 +14,6 @@ scikit-learn
 seaborn
 statsmodels
 tensorflow
+tensorflow-addons
 tornado
 tqdm

@@ -127,4 +127,6 @@ dependencies:
   - zstd=1.4.9=h582d3a0_0
   - pip:
     - pip-chill==1.0.1
+    - tensorflow-addons==0.13.0
+    - typeguard==2.12.0
 prefix: /Users/mircodemarchi/anaconda3/envs/mldl-project
