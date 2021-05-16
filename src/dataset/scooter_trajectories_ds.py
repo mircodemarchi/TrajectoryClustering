@@ -31,6 +31,7 @@ class ScooterTrajectoriesDS:
         self.dataset = pd.DataFrame(columns=C.DATASET_COLS)
         self.rental = pd.DataFrame(columns=C.RENTAL_COLS)
         self.pos = pd.DataFrame(columns=C.POS_GEN_COLS)
+        self.moving_behavior_features = pd.DataFrame()
 
     def __unzip(self):
         if not os.path.exists(self.zip_filepath):
@@ -357,8 +358,9 @@ class ScooterTrajectoriesDS:
         end = time.time()
         return rental_pos_map_df, pos_df, rental_df, get_elapsed(start, end)
 
-    def __moving_attributes(self, trajectory: pd.DataFrame, sw_width=None, sw_offset=None):
+    def __moving_attributes(self, trajectory: pd.DataFrame, sw_width, sw_offset):
         traj_len = len(trajectory.index)
+        sw_width, sw_offset = int(sw_width), int(sw_offset)
         i = 0
 
         trajectory_behavior = pd.DataFrame(columns=C.MOVING_BEHAVIOR_FEATURES_COLS)
@@ -378,12 +380,10 @@ class ScooterTrajectoriesDS:
                 delta_r = np.arctan(moving_attributes[C.POS_GEN_LONGITUDE_CN]
                                     / moving_attributes[C.POS_GEN_LATITUDE_CN])
 
-                f_delta_l = pd.concat([delta_l[C.POS_GEN_LATITUDE_CN] / (delta_t.astype(np.int64) // 10**6),
-                                       delta_l[C.POS_GEN_LONGITUDE_CN] / (delta_t.astype(np.int64) // 10**6)], axis=1)
-                f_delta_l = f_delta_l.rename(columns=dict(zip(f_delta_l.columns,
-                                                              [C.POS_GEN_LATITUDE_CN, C.POS_GEN_LONGITUDE_CN])))
-                f_delta_latitude = f_delta_l[C.POS_GEN_LATITUDE_CN]
-                f_delta_longitude = f_delta_l[C.POS_GEN_LONGITUDE_CN]
+                f_delta_l = pd.concat([delta_l[C.POS_GEN_LATITUDE_CN] / (delta_t.astype(np.int64)),
+                                       delta_l[C.POS_GEN_LONGITUDE_CN] / (delta_t.astype(np.int64))], axis=1)
+                f_delta_latitude = f_delta_l[f_delta_l.columns[0]]
+                f_delta_longitude = f_delta_l[f_delta_l.columns[1]]
                 f_delta_s = delta_s
                 f_delta_r = delta_r
 
@@ -408,12 +408,11 @@ class ScooterTrajectoriesDS:
 
                 trajectory_behavior = pd.concat([trajectory_behavior, df_window_mbf], axis=0)
 
-            if i + sw_width < traj_len:
+            if i + sw_width >= traj_len:
                 break
             i += sw_offset
 
-        return trajectory_behavior
-
+        return trajectory_behavior.reset_index(drop=True)
 
     def generate(self, chunknum=0, chunksize=50000):
         log.d("Scooter Trajectories start unzip")
@@ -500,6 +499,12 @@ class ScooterTrajectoriesDS:
         else:
             log.w("{} path not exist".format(rental_gen_fp))
 
+        moving_behavior_feature_gen_fp = os.path.join(DATA_FOLDER, C.GENERATED_DN, C.CSV_MOVING_BEHAVIOR_FEATURE)
+        if os.path.exists(moving_behavior_feature_gen_fp):
+            self.moving_behavior_features = pd.read_csv(moving_behavior_feature_gen_fp, memory_map=True)
+        else:
+            log.w("{} path not exist".format(moving_behavior_feature_gen_fp))
+
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
 
@@ -528,6 +533,10 @@ class ScooterTrajectoriesDS:
         dataset_gen_fp = os.path.join(DATA_FOLDER, C.GENERATED_DN, C.CSV_DATASET_GENERATED_FN)
         if not self.dataset.empty:
             self.dataset.to_csv(dataset_gen_fp, index=False)
+
+        moving_behavior_feature_gen_fp = os.path.join(DATA_FOLDER, C.GENERATED_DN, C.CSV_MOVING_BEHAVIOR_FEATURE)
+        if not self.moving_behavior_features.empty:
+            self.moving_behavior_features.to_csv(moving_behavior_feature_gen_fp, index=False)
 
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
@@ -746,12 +755,23 @@ class ScooterTrajectoriesDS:
         return self
 
     def moving_behavior_feature_extraction(self, groupby, sliding_window_width=None, sliding_window_offset=None):
+        log.d("Scooter Trajectories moving behavior feature extraction algorithm")
+        start = time.time()
+
         sw_width = sliding_window_width if sliding_window_width else C.SLIDING_WINDOW_WIDTH
         sw_offset = sliding_window_offset if sliding_window_offset else C.SLIDING_WINDOW_WIDTH / 2
+        sw_width, sw_offset = int(sw_width), int(sw_offset)
 
         # Group position in trajectories
         pos_groups = self.pos.groupby(by=groupby)
-        return pos_groups.apply(lambda x: self.__moving_attributes(x, sw_width=sw_width, sw_offset=sw_offset))
+        res = pos_groups.apply(lambda x: self.__moving_attributes(x, sw_width=sw_width, sw_offset=sw_offset))
+        res = res.reset_index(drop=False)
+        res = res.rename(columns={res.columns[2]: C.MOVING_WINDOW_ID})
+        self.moving_behavior_features = res
+
+        end = time.time()
+        log.d("elapsed time: {}".format(get_elapsed(start, end)))
+        return self
 
     def heuristic_empty(self):
         """

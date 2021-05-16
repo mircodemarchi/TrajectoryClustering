@@ -303,8 +303,8 @@ class ScooterTrajectoriesTest:
         self.clustering_done = True
 
     def dl_clustering(self):
-        trajectories_behavior = self.st.moving_behavior_feature_extraction(groupby=self.groupby)
-        print(len(trajectories_behavior.index))
+        if self.st.moving_behavior_features.empty:
+            self.st.moving_behavior_feature_extraction(groupby=self.groupby).to_csv()
 
     def generated_data_analysis(self):
         log.d("Test {} generated data analysis".format(DATASET_NAME))

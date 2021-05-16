@@ -13,6 +13,7 @@ class ScooterTrajectoriesC:
     CSV_RENTAL_GENERATED_FN: Final = "rental_gen.csv"
     CSV_MERGE_GENERATED_FN: Final = "merge_gen.csv"
     CSV_DATASET_GENERATED_FN: Final = "dataset_gen.csv"
+    CSV_MOVING_BEHAVIOR_FEATURE: Final = "moving_behavior_feature.csv"
 
     POS_RENTAL_CN: Final = "rental"
 
@@ -221,3 +222,4 @@ class ScooterTrajectoriesC:
                                      "f_delta_r_mean", "f_delta_r_max", "f_delta_r_quantile75", "f_delta_r_quantile50",
                                      "f_delta_r_quantile25", "f_delta_r_min",
                                      ]
+    MOVING_WINDOW_ID = "moving_window_id"
