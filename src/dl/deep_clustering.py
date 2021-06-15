@@ -7,8 +7,9 @@ from util.log import Log
 
 
 class LSTMEncoder(tf.keras.Model):
-    def __init__(self, enc_units, dense_units=None):
+    def __init__(self, enc_units, batch_sz=1, dense_units=None):
         super(LSTMEncoder, self).__init__()
+        self.batch_sz = batch_sz
         self.dense_units = dense_units
         self.enc_units = enc_units
         self.dense = tf.keras.layers.Dense(dense_units) if dense_units else None
@@ -23,13 +24,13 @@ class LSTMEncoder(tf.keras.Model):
         return output
 
     def initialize_hidden_state(self):
-        return tf.zeros((self.batch_sz, self.enc_units))
+        return [tf.zeros((self.batch_sz, self.enc_units)), tf.zeros((self.batch_sz, self.enc_units))]
 
     def get_state(self):
         return self.state
 
     def get_config(self):
-        return {"enc_units": self.enc_units, "dense_units": self.dense_units}
+        return {"enc_units": self.enc_units, "batch_sz": self.batch_sz, "dense_units": self.dense_units}
 
 
 class LSTMDecoder(tf.keras.Model):
@@ -37,11 +38,12 @@ class LSTMDecoder(tf.keras.Model):
         super(LSTMDecoder, self).__init__()
         self.dec_units = dec_units
         self.output_units = output_units
+
         self.lstm = tf.keras.layers.LSTM(self.dec_units, return_state=True, return_sequences=True)
         self.dense_output = tf.keras.layers.Dense(self.output_units) if output_units else None
 
     def call(self, x, hidden=None, training=None, mask=None):
-        output, _ = self.lstm(x, initial_state=hidden)
+        output, _, _ = self.lstm(x, initial_state=hidden)
         if self.dense_output:
             output = self.dense_output(output)
         return output
@@ -55,11 +57,14 @@ class LSTMAddonsDecoder(tf.keras.Model):
         super(LSTMAddonsDecoder, self).__init__()
         self.dec_units = dec_units
         self.output_units = output_units
-        self.dense_output = tf.keras.layers.Dense(self.output_units) if output_units else None
 
+        # Decoder
         self.sampler = tfa.seq2seq.TrainingSampler()
         self.decoder_cell = tf.keras.layers.LSTMCell(dec_units)
         self.decoder = tfa.seq2seq.BasicDecoder(self.decoder_cell, self.sampler, self.dense_output)
+
+        # Dense output
+        self.dense_output = tf.keras.layers.Dense(self.output_units) if output_units else None
 
     def call(self, x, hidden=None, training=None, mask=None):
         output, _, _ = self.decoder(x, initial_state=hidden)
@@ -76,26 +81,28 @@ class LSTMAutoregressiveDecoder(tf.keras.Model):
         self.output_steps = output_steps
         self.output_units = output_units
 
+        # Autoregressive module
         self.lstm_cell = tf.keras.layers.LSTMCell(dec_units)
         self.lstm = tf.keras.layers.RNN(self.lstm_cell, return_state=True)
 
+        # Dense output
         self.dense_output = tf.keras.layers.Dense(self.output_units) if output_units else None
 
     def warmup(self, inputs, state):
-        # inputs.shape => (batch, time, features)
+        # input.shape => (batch, features)
         # prediction.shape => (batch, lstm_units)
-        prediction, *state = self.lstm(inputs, initial_state=state)
+        prediction, state = self.lstm_cell(inputs, states=state)
 
-        # prediction.shape => (batch, features)
         if self.dense_output:
+            # prediction.shape => (batch, features)
             prediction = self.dense_output(prediction)
         return prediction, state
 
-    def call(self, x, hidden=None, training=None, mask=None):
+    def call(self, last_input, hidden=None, training=None, mask=None):
         # Use a TensorArray to capture dynamically unrolled outputs.
         predictions = []
         # Initialize the lstm state
-        x, state = self.warmup(x, hidden)
+        x, state = self.warmup(last_input, hidden)
         # Insert the first prediction
         predictions.append(x)
 
@@ -103,9 +110,10 @@ class LSTMAutoregressiveDecoder(tf.keras.Model):
         for n in range(1, self.output_steps):
             # Execute one lstm step.
             x, state = self.lstm_cell(x, states=state, training=training)
-            # Convert the lstm output to a prediction.
+
             if self.dense_output:
                 x = self.dense_output(x)
+
             # Add the prediction to the output
             predictions.append(x)
 
@@ -116,18 +124,51 @@ class LSTMAutoregressiveDecoder(tf.keras.Model):
         return predictions
 
     def get_config(self):
-        return {"dec_units": self.dec_units, "output_units": self.output_units}
+        return {"dec_units": self.dec_units, "output_steps": self.output_steps, "output_units": self.output_units}
 
 
 class AutoEncoder(tf.keras.Model):
-    def __init__(self, config, feature_dim, latent_dim=1):
+    """
+    config: "autoregressive", "addons", "simple"
+    """
+    def __init__(self, time_dim, feature_dim, config=None, latent_dim=1, hidden_dim=None):
         super(AutoEncoder, self).__init__()
-        self.config = config
+        self.time_dim = time_dim
         self.feature_dim = feature_dim
         self.latent_dim = latent_dim
+        self.hidden_dim = hidden_dim
+        self.config = config if config else "autoregressive"
+
+        self.encoder = LSTMEncoder(enc_units=latent_dim, dense_units=hidden_dim)
+        if self.config == "simple":
+            self.decoder = LSTMDecoder(dec_units=latent_dim if hidden_dim else feature_dim,
+                                       output_units=feature_dim if hidden_dim else None)
+        elif self.config == "addons":
+            self.decoder = LSTMAddonsDecoder(dec_units=latent_dim if hidden_dim else feature_dim,
+                                             output_units=feature_dim if hidden_dim else None)
+        else:
+            # config == "autoregressive"
+            self.decoder = LSTMAutoregressiveDecoder(dec_units=latent_dim if hidden_dim else feature_dim,
+                                                     output_steps=time_dim,
+                                                     output_units=feature_dim if hidden_dim else None)
 
     def call(self, x, hidden=None, training=None, mask=None):
-        pass
+        init_state = self.encoder.initialize_hidden_state()
+        encoded = self.encoder(x, hidden=init_state)
+        state = self.encoder.get_state()
+        if self.config == "autoregressive":
+            # Insert the last input as decoder input.
+            decoded = self.decoder(x[:, -1, :], hidden=state)
+        else:
+            decoded = self.decoder(encoded, hidden=state)
+        return decoded
+
+    def get_config(self):
+        return {"time_dim": self.time_dim, "feature_dim": self.feature_dim, "config": self.config,
+                "latent_dim": self.latent_dim, "hidden_dim": self.hidden_dim}
+
+    def get_latent_state(self):
+        return self.encoder.get_state()
 
 
 class DeepClustering:
