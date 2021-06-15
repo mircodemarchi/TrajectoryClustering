@@ -172,5 +172,35 @@ class AutoEncoder(tf.keras.Model):
 
 
 class DeepClustering:
-    def __init__(self, data: pd.DataFrame):
-        self.data = tf.data.Dataset.from_tensor_slices((data, data))
+    def __init__(self, data: pd.DataFrame, model: AutoEncoder, seq_len, epoch=10, batch_sz=1):
+        self.seq_len = seq_len
+        self.epoch = epoch
+        self.batch_sz = batch_sz
+        self.data = tf.keras.preprocessing.timeseries_dataset_from_array(
+            data=data.to_numpy(),
+            targets=None,
+            sequence_length=seq_len,
+            sequence_stride=1,
+            shuffle=True,
+            batch_size=batch_sz)
+        self.model = model
+
+    def train(self, patience=2):
+        early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
+                                                          patience=patience,
+                                                          mode='min')
+
+        self.model.compile(loss=tf.losses.MeanSquaredError(),
+                           optimizer=tf.optimizers.Adam(),
+                           metrics=[tf.metrics.MeanAbsoluteError()])
+
+        history = self.model.fit(self.data, self.data, epochs=self.epoch,
+                                 callbacks=[early_stopping])
+        return history
+
+    def get_train_stat(self):
+        train_loss, train_acc = self.model.evaluate(self.data, self.data)
+        return train_loss, train_acc
+
+    def get_latent_state(self):
+        return self.model.get_latent_state()
