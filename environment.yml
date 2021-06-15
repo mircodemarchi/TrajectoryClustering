@@ -64,7 +64,7 @@ dependencies:
   - matplotlib-base=3.4.2=py39hb07454d_0
   - multidict=5.1.0=py39hcbf5805_1
   - ncurses=6.2=h2e338ed_4
-  - numpy=1.20.2=py39h7eed0ac_0
+  - numpy=1.19.5=py39he588a01_1
   - oauthlib=3.0.1=py_0
   - olefile=0.46=pyh9f0ad1d_1
   - openjpeg=2.4.0=h6cbf5cd_0
