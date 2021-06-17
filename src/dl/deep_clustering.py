@@ -198,7 +198,7 @@ class DeepClustering:
                                  callbacks=[early_stopping])
         return history
 
-    def get_train_stat(self):
+    def get_train_state(self):
         train_loss, train_acc = self.model.evaluate(self.data, self.data)
         return train_loss, train_acc
 
