@@ -1,4 +1,5 @@
 import time
+import os
 import pandas as pd
 
 from dataset import ScooterTrajectoriesDS
@@ -8,7 +9,10 @@ from ml import Clustering
 
 from util.analysis import DataAnalysis
 from util.log import Log
-from util.util import get_elapsed
+from util.util import get_elapsed, DATA_FOLDER
+
+from dl import DeepClustering
+from dl import AutoEncoder
 
 log = Log(__name__, enable_console=True, enable_file=False)
 
@@ -33,7 +37,8 @@ class ScooterTrajectoriesTest:
     def __init__(self, log_lvl=None, chunk_size=None, max_chunk_num=None, rental_num_to_analyze=None,
                  timedelta=None, spreaddelta=None, edgedelta=None, group_on_timedelta=True,
                  n_clusters=None, with_pca=False, with_standardization=False, with_normalization=False,
-                 only_north=False, moving_behavior_extraction=False, exam=False):
+                 only_north=False, moving_behavior_extraction=False, epoch=None, latent_dim=None, dl_config=None,
+                 hidden_dim=None, exam=False):
         self.st = ScooterTrajectoriesDS(log_lvl=log_lvl)
         # Generation settings
         self.chunk_size = chunk_size
@@ -52,6 +57,10 @@ class ScooterTrajectoriesTest:
         self.only_north = only_north
         # Deep Learning Clustering
         self.moving_behavior_extraction = moving_behavior_extraction
+        self.epoch = epoch
+        self.latent_dim = latent_dim
+        self.dl_config = dl_config
+        self.hidden_dim = hidden_dim
 
         self.exam = exam
 
@@ -305,6 +314,28 @@ class ScooterTrajectoriesTest:
     def dl_clustering(self):
         if self.st.moving_behavior_features.empty:
             self.st.moving_behavior_feature_extraction(groupby=self.groupby).to_csv()
+
+        features_len = len(STC.MOVING_BEHAVIOR_FEATURES_COLS)
+
+        def train_moving_attributes(moving_attributes):
+            seq_len = max(int(len(moving_attributes.index) / 2), 1)
+            ae = AutoEncoder(seq_len, features_len, config=self.dl_config,
+                             latent_dim=self.latent_dim, hidden_dim=self.hidden_dim)
+            dc = DeepClustering(moving_attributes[STC.MOVING_BEHAVIOR_FEATURES_COLS], ae, seq_len, epoch=self.epoch,
+                                batch_sz=1)
+            dc.train()
+            return dc.get_latent_state()
+
+        autoencoder_features = self.st.moving_behavior_features.groupby(by=self.groupby).apply(train_moving_attributes)
+        # Save AutoEncoder features in CSV file
+        if not os.path.exists(os.path.join(DATA_FOLDER, STC.GENERATED_DN)):
+            os.makedirs(os.path.join(DATA_FOLDER, STC.GENERATED_DN))
+
+        # Save data in csv files
+        autoencoder_gen_fp = os.path.join(DATA_FOLDER, STC.GENERATED_DN, "autoencoder_feature.csv")
+        autoencoder_features.to_csv(autoencoder_gen_fp, index=False)
+
+
 
     def generated_data_analysis(self):
         log.d("Test {} generated data analysis".format(DATASET_NAME))

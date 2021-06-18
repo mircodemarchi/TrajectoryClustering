@@ -82,6 +82,10 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
         with_normalization=config.getboolean("with-normalization"),
         only_north=config.getboolean("only-north"),
         moving_behavior_extraction=config.getboolean("moving-behavior-extraction"),
+        epoch=config.getint("epoch"),
+        latent_dim=config.getint("latent-dim"),
+        dl_config=config["decoder-type"],
+        hidden_dim=None if config["hidden-dim"] is None else config.getint("hidden-dim"),
         exam=config.getboolean("exam")
     )
 
