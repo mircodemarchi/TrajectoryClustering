@@ -1,3 +1,5 @@
+from .deep_clustering import DeepClustering
+
 from .deep_clustering import AutoEncoder
 
 from .deep_clustering import LSTMEncoder

@@ -1,6 +1,7 @@
 import tensorflow as tf
 import tensorflow_addons as tfa
 import pandas as pd
+import numpy as np
 
 from util.util import get_elapsed
 from util.log import Log
@@ -141,16 +142,16 @@ class AutoEncoder(tf.keras.Model):
 
         self.encoder = LSTMEncoder(enc_units=latent_dim, dense_units=hidden_dim)
         if self.config == "simple":
-            self.decoder = LSTMDecoder(dec_units=latent_dim if hidden_dim else feature_dim,
-                                       output_units=feature_dim if hidden_dim else None)
+            self.decoder = LSTMDecoder(dec_units=latent_dim,
+                                       output_units=feature_dim)
         elif self.config == "addons":
-            self.decoder = LSTMAddonsDecoder(dec_units=latent_dim if hidden_dim else feature_dim,
-                                             output_units=feature_dim if hidden_dim else None)
+            self.decoder = LSTMAddonsDecoder(dec_units=latent_dim,
+                                             output_units=feature_dim)
         else:
             # config == "autoregressive"
-            self.decoder = LSTMAutoregressiveDecoder(dec_units=latent_dim if hidden_dim else feature_dim,
+            self.decoder = LSTMAutoregressiveDecoder(dec_units=latent_dim,
                                                      output_steps=time_dim,
-                                                     output_units=feature_dim if hidden_dim else None)
+                                                     output_units=feature_dim)
 
     def call(self, x, hidden=None, training=None, mask=None):
         init_state = self.encoder.initialize_hidden_state()
@@ -176,13 +177,19 @@ class DeepClustering:
         self.seq_len = seq_len
         self.epoch = epoch
         self.batch_sz = batch_sz
-        self.data = tf.keras.preprocessing.timeseries_dataset_from_array(
-            data=data.to_numpy(),
-            targets=None,
-            sequence_length=seq_len,
-            sequence_stride=1,
-            shuffle=True,
-            batch_size=batch_sz)
+        if len(data.index) > 1:
+            self.data = tf.keras.preprocessing.timeseries_dataset_from_array(
+                data=data.to_numpy(),
+                targets=None,
+                sequence_length=seq_len,
+                sequence_stride=1,
+                shuffle=True,
+                batch_size=batch_sz)
+            self.data.set_shape([batch_sz, seq_len, len(data.columns)])
+            self.data = self.data.map(lambda x: (x, x))
+        else:
+            data_np = np.expand_dims(data.to_numpy(), axis=0)
+            self.data = tf.data.Dataset.from_tensor_slices((data_np, data_np)).batch(batch_sz)
         self.model = model
 
     def train(self, patience=2):
@@ -194,13 +201,15 @@ class DeepClustering:
                            optimizer=tf.optimizers.Adam(),
                            metrics=[tf.metrics.MeanAbsoluteError()])
 
-        history = self.model.fit(self.data, self.data, epochs=self.epoch,
+        history = self.model.fit(self.data, epochs=self.epoch,
                                  callbacks=[early_stopping])
         return history
 
     def get_train_state(self):
-        train_loss, train_acc = self.model.evaluate(self.data, self.data)
+        train_loss, train_acc = self.model.evaluate(self.data)
         return train_loss, train_acc
 
     def get_latent_state(self):
-        return self.model.get_latent_state()
+        state = self.model.get_latent_state()
+        # Flat the state tuple of list.
+        return pd.Series([s for sub in state for s in sub[-1].numpy()])
