@@ -12,7 +12,7 @@ from util.log import Log
 from util.util import get_elapsed, DATA_FOLDER
 
 from dl import DeepClustering
-from dl import AutoEncoder
+from dl import RegressiveAutoEncoder, AddonsAutoEncoder, SimpleAutoEncoder
 
 log = Log(__name__, enable_console=True, enable_file=False)
 
@@ -113,7 +113,7 @@ class ScooterTrajectoriesTest:
         rental_to_analyze = dataset[STC.MERGE_RENTAL_ID_CN].unique()[:rental_num]
         return dataset.loc[dataset[STC.MERGE_RENTAL_ID_CN].isin(rental_to_analyze)]
 
-    def __prepare(self):
+    def __prepare(self, is_dl=False):
         log.d("Test {} prepare data for clustering".format(DATASET_NAME))
         start = time.time()
         merge_cols_pos_gen_map = dict(zip(STC.POS_GEN_COLS_MERGE_MAP.values(), STC.POS_GEN_COLS_MERGE_MAP.keys()))
@@ -130,9 +130,10 @@ class ScooterTrajectoriesTest:
             join = pd.concat([join, ordered_pos[STC.POS_GEN_HEURISTIC_COLS]], axis=1)
 
             # Cumsum the timedelta id
-            group_on_timedelta = [STC.POS_GEN_RENTAL_ID_CN, STC.POS_GEN_TIMEDELTA_ID_CN]
-            join[STC.POS_GEN_TIMEDELTA_ID_CN] = join.loc[:, group_on_timedelta].ne(
-                join.loc[:, group_on_timedelta].shift()).any(axis=1).cumsum()
+            if not is_dl:
+                group_on_timedelta = [STC.POS_GEN_RENTAL_ID_CN, STC.POS_GEN_TIMEDELTA_ID_CN]
+                join[STC.POS_GEN_TIMEDELTA_ID_CN] = join.loc[:, group_on_timedelta].ne(
+                    join.loc[:, group_on_timedelta].shift()).any(axis=1).cumsum()
 
         # Convert time columns in float
         join_time_cols = STC.MERGE_TIME_COLS
@@ -181,6 +182,13 @@ class ScooterTrajectoriesTest:
                                        line_table_list=line_table_list, line_3d_list=line_3d_list,
                                        prefix=prefix_with_cardinal)
         return self
+
+    def __train_moving_attributes(self, moving_attributes):
+        dc = DeepClustering(moving_attributes[STC.MOVING_BEHAVIOR_FEATURES_COLS], self.latent_dim,
+                            hidden_dim=self.hidden_dim, model=self.dl_config, epoch=self.epoch, batch_sz=1)
+        dc.train()
+        ret = pd.DataFrame([dc.get_latent_state()])
+        return ret
 
     def load_from_original(self):
         log.d("Test {} start load from original data".format(DATASET_NAME))
@@ -315,27 +323,57 @@ class ScooterTrajectoriesTest:
         if self.st.moving_behavior_features.empty:
             self.st.moving_behavior_feature_extraction(groupby=self.groupby).to_csv()
 
-        features_len = len(STC.MOVING_BEHAVIOR_FEATURES_COLS)
+        dataset_for_clustering = self.__prepare(is_dl=True)
 
-        def train_moving_attributes(moving_attributes):
-            seq_len = max(int(len(moving_attributes.index) / 2), 1)
-            ae = AutoEncoder(seq_len, features_len, config=self.dl_config,
-                             latent_dim=self.latent_dim, hidden_dim=self.hidden_dim)
-            dc = DeepClustering(moving_attributes[STC.MOVING_BEHAVIOR_FEATURES_COLS], ae, seq_len, epoch=self.epoch,
-                                batch_sz=1)
-            dc.train()
-            return dc.get_latent_state()
+        # self.st.moving_behavior_features = self.st.moving_behavior_features.iloc[0:20]
+        mbf_group = self.st.moving_behavior_features.groupby(by=self.groupby)
 
-        autoencoder_features = self.st.moving_behavior_features.groupby(by=self.groupby).apply(train_moving_attributes)
-        # Save AutoEncoder features in CSV file
-        if not os.path.exists(os.path.join(DATA_FOLDER, STC.GENERATED_DN)):
-            os.makedirs(os.path.join(DATA_FOLDER, STC.GENERATED_DN))
+        for self.dl_config in ["simple", "autoregressive", "addons"]:
+            autoencoder_gen_fp = os.path.join(DATA_FOLDER, self.dl_config + "_autoencoder_feature.csv")
+            autoencoder_features_cols = \
+                ["state_m" + str(i) for i in range(self.latent_dim)] + \
+                ["state_c" + str(i) for i in range(self.latent_dim)]
+            if not os.path.exists(autoencoder_gen_fp):
+                autoencoder_features = mbf_group.apply(self.__train_moving_attributes)
+                autoencoder_features = autoencoder_features.reset_index(drop=False)
+                autoencoder_features = autoencoder_features.drop(
+                    autoencoder_features.columns[len(self.groupby) if type(self.groupby) == list else 1], axis=1)
+                autoencoder_features = autoencoder_features.rename(
+                    columns=dict(zip(autoencoder_features.columns, self.groupby + autoencoder_features_cols)))
+                # Save data in csv files
+                autoencoder_features.to_csv(autoencoder_gen_fp, index=False)
+            else:
+                autoencoder_features = pd.read_csv(autoencoder_gen_fp, memory_map=True)
 
-        # Save data in csv files
-        autoencoder_gen_fp = os.path.join(DATA_FOLDER, STC.GENERATED_DN, "autoencoder_feature.csv")
-        autoencoder_features.to_csv(autoencoder_gen_fp, index=False)
+            # k-means clustering
+            c = Clustering(autoencoder_features, autoencoder_features_cols, dataset_name=DATASET_NAME)
+            c.exec(method="k-means", n_clusters=self.n_clusters,
+                   standardize=self.with_standardization, normalize=self.with_normalization,
+                   pca=self.with_pca)
+            autoencoder_features[STC.CLUSTER_ID_CN] = c.labels
 
+            # Prepare data
+            dataset_prepared = dataset_for_clustering.copy()
+            dataset_prepared = dataset_prepared.set_index(self.groupby)
+            # Fill with cluster id
+            autoencoder_features = autoencoder_features.set_index(self.groupby)
+            dataset_prepared[STC.CLUSTER_ID_CN] = autoencoder_features[STC.CLUSTER_ID_CN]
+            dataset_prepared = dataset_prepared.reset_index(drop=False)
+            dataset_prepared = dataset_prepared.dropna()
+            # Cumsum the timedelta id
+            group_on_timedelta = [STC.POS_GEN_RENTAL_ID_CN, STC.POS_GEN_TIMEDELTA_ID_CN]
+            dataset_prepared[STC.POS_GEN_TIMEDELTA_ID_CN] = dataset_prepared.loc[:, group_on_timedelta].ne(
+                dataset_prepared.loc[:, group_on_timedelta].shift()).any(axis=1).cumsum()
 
+            # Perform clustering in relation to each partition
+            partitions = self.__partition(dataset_prepared, only_north=True if self.exam else self.only_north)
+
+            # Analysis
+            prefix = "{}_{}_{}_".format("dl_clustering", "k-means", self.dl_config)
+            for key in partitions:
+                self.__line_joint_analysis(self.__filter(partitions[key]), prefix=prefix + key,
+                                           line_list=[STC.CLUSTER_ANALYSIS_TUPLE],
+                                           line_3d_list=[STC.CLUSTER_ANALYSIS_TUPLE])
 
     def generated_data_analysis(self):
         log.d("Test {} generated data analysis".format(DATASET_NAME))
