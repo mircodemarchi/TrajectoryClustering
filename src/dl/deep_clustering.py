@@ -6,104 +6,107 @@ import numpy as np
 from util.util import get_elapsed
 from util.log import Log
 
+log = Log(__name__, enable_console=True, enable_file=False)
 
-class LSTMEncoder(tf.keras.Model):
-    def __init__(self, enc_units, batch_sz=1, dense_units=None):
-        super(LSTMEncoder, self).__init__()
+
+class LSTMEncoder(tf.keras.layers.Layer):
+    def __init__(self, enc_units, batch_sz=1, dense_units=None, name="lstm_encoder", **kwargs):
+        super(LSTMEncoder, self).__init__(name=name, **kwargs)
         self.batch_sz = batch_sz
         self.dense_units = dense_units
         self.enc_units = enc_units
-        self.dense = tf.keras.layers.Dense(dense_units) if dense_units else None
+        self.dense = tf.keras.layers.Dense(dense_units, activation=tf.nn.relu) if dense_units else None
         self.lstm = tf.keras.layers.LSTM(self.enc_units, return_state=True, return_sequences=True)
-        self.state = None
 
-    def call(self, x, hidden=None, training=None, mask=None):
+    def call(self, x, hidden=None, training=None):
         if self.dense:
-            x = self.dense(x)
-        output, state_m, state_c = self.lstm(x, initial_state=hidden)
-        self.state = (state_m, state_c)
-        return output
+            x = self.dense(x, training=training)
+        output, state_m, state_c = self.lstm(x, initial_state=hidden, training=training)
+        return output, state_m, state_c
 
     def initialize_hidden_state(self):
         return [tf.zeros((self.batch_sz, self.enc_units)), tf.zeros((self.batch_sz, self.enc_units))]
 
-    def get_state(self):
-        return self.state
-
     def get_config(self):
-        return {"enc_units": self.enc_units, "batch_sz": self.batch_sz, "dense_units": self.dense_units}
+        config = super(LSTMEncoder, self).get_config()
+        config.update({"enc_units": self.enc_units, "batch_sz": self.batch_sz, "dense_units": self.dense_units})
+        return config
 
 
-class LSTMDecoder(tf.keras.Model):
-    def __init__(self, dec_units, output_units=None):
-        super(LSTMDecoder, self).__init__()
+class LSTMDecoder(tf.keras.layers.Layer):
+    def __init__(self, dec_units, output_units, name="lstm_decoder", **kwargs):
+        super(LSTMDecoder, self).__init__(name=name, **kwargs)
         self.dec_units = dec_units
         self.output_units = output_units
 
         self.lstm = tf.keras.layers.LSTM(self.dec_units, return_state=True, return_sequences=True)
-        self.dense_output = tf.keras.layers.Dense(self.output_units) if output_units else None
+        self.dense_output = tf.keras.layers.Dense(self.output_units, activation=tf.nn.relu) if output_units else None
 
-    def call(self, x, hidden=None, training=None, mask=None):
-        output, _, _ = self.lstm(x, initial_state=hidden)
+    def call(self, x, hidden=None, training=None):
+        output, _, _ = self.lstm(x, initial_state=hidden, training=training)
         if self.dense_output:
-            output = self.dense_output(output)
+            output = self.dense_output(output, training=training)
         return output
 
     def get_config(self):
-        return {"dec_units": self.dec_units, "output_units": self.output_units}
+        config = super(LSTMDecoder, self).get_config()
+        config.update({"dec_units": self.dec_units, "output_units": self.output_units})
+        return config
 
 
-class LSTMAddonsDecoder(tf.keras.Model):
-    def __init__(self, dec_units, output_units=None):
-        super(LSTMAddonsDecoder, self).__init__()
+class LSTMAddonsDecoder(tf.keras.layers.Layer):
+    def __init__(self, dec_units, output_units=None, name="lstm_addons_decoder", **kwargs):
+        super(LSTMAddonsDecoder, self).__init__(name=name, **kwargs)
         self.dec_units = dec_units
         self.output_units = output_units
+
+        # Dense output
+        self.dense_output = tf.keras.layers.Dense(self.output_units, activation=tf.nn.relu) if output_units else None
 
         # Decoder
         self.sampler = tfa.seq2seq.TrainingSampler()
         self.decoder_cell = tf.keras.layers.LSTMCell(dec_units)
         self.decoder = tfa.seq2seq.BasicDecoder(self.decoder_cell, self.sampler, self.dense_output)
 
-        # Dense output
-        self.dense_output = tf.keras.layers.Dense(self.output_units) if output_units else None
-
-    def call(self, x, hidden=None, training=None, mask=None):
-        output, _, _ = self.decoder(x, initial_state=hidden)
+    def call(self, x, hidden=None, training=None):
+        output, _, _ = self.decoder(x, initial_state=hidden, training=training)
         return output.rnn_output
 
     def get_config(self):
-        return {"dec_units": self.dec_units, "output_units": self.output_units}
+        config = super(LSTMAddonsDecoder, self).get_config()
+        config.update({"dec_units": self.dec_units, "output_units": self.output_units})
+        return config
 
 
-class LSTMAutoregressiveDecoder(tf.keras.Model):
-    def __init__(self, dec_units, output_steps, output_units=None):
-        super(LSTMAutoregressiveDecoder, self).__init__()
+class LSTMAutoregressiveDecoder(tf.keras.layers.Layer):
+    def __init__(self, dec_units, output_steps, output_units=None, name="lstm_autoregressive_decoder", **kwargs):
+        super(LSTMAutoregressiveDecoder, self).__init__(name=name, **kwargs)
         self.dec_units = dec_units
         self.output_steps = output_steps
         self.output_units = output_units
 
         # Autoregressive module
         self.lstm_cell = tf.keras.layers.LSTMCell(dec_units)
-        self.lstm = tf.keras.layers.RNN(self.lstm_cell, return_state=True)
+        # self.lstm = tf.keras.layers.RNN(self.lstm_cell, return_state=True)
 
         # Dense output
-        self.dense_output = tf.keras.layers.Dense(self.output_units) if output_units else None
+        self.dense_output = tf.keras.layers.Dense(self.output_units, activation=tf.nn.relu) if output_units else None
 
-    def warmup(self, inputs, state):
+    def warmup(self, inputs, state, training=None):
         # input.shape => (batch, features)
         # prediction.shape => (batch, lstm_units)
-        prediction, state = self.lstm_cell(inputs, states=state)
+        prediction, state = self.lstm_cell(inputs, states=state, training=training)
 
         if self.dense_output:
             # prediction.shape => (batch, features)
-            prediction = self.dense_output(prediction)
+            prediction = self.dense_output(prediction, training=training)
         return prediction, state
 
-    def call(self, last_input, hidden=None, training=None, mask=None):
+    def call(self, last_input, hidden=None, training=None):
         # Use a TensorArray to capture dynamically unrolled outputs.
         predictions = []
         # Initialize the lstm state
-        x, state = self.warmup(last_input, hidden)
+        x, state = self.warmup(last_input, hidden, training=training)
         # Insert the first prediction
         predictions.append(x)
 
@@ -113,7 +116,7 @@ class LSTMAutoregressiveDecoder(tf.keras.Model):
             x, state = self.lstm_cell(x, states=state, training=training)
 
             if self.dense_output:
-                x = self.dense_output(x)
+                x = self.dense_output(x, training=training)
 
             # Add the prediction to the output
             predictions.append(x)
@@ -125,91 +128,177 @@ class LSTMAutoregressiveDecoder(tf.keras.Model):
         return predictions
 
     def get_config(self):
-        return {"dec_units": self.dec_units, "output_steps": self.output_steps, "output_units": self.output_units}
+        config = super(LSTMAutoregressiveDecoder, self).get_config()
+        config.update({"dec_units": self.dec_units, "output_steps": self.output_steps,
+                       "output_units": self.output_units})
+        return config
 
 
 class AutoEncoder(tf.keras.Model):
     """
     config: "autoregressive", "addons", "simple"
     """
-    def __init__(self, time_dim, feature_dim, config=None, latent_dim=1, hidden_dim=None):
-        super(AutoEncoder, self).__init__()
+    def __init__(self, time_dim, feature_dim, latent_dim=1, hidden_dim=None, name="autoencoder", **kwargs):
+        super(AutoEncoder, self).__init__(name=name, **kwargs)
         self.time_dim = time_dim
         self.feature_dim = feature_dim
         self.latent_dim = latent_dim
         self.hidden_dim = hidden_dim
-        self.config = config if config else "autoregressive"
 
         self.encoder = LSTMEncoder(enc_units=latent_dim, dense_units=hidden_dim)
-        if self.config == "simple":
-            self.decoder = LSTMDecoder(dec_units=latent_dim,
-                                       output_units=feature_dim)
-        elif self.config == "addons":
-            self.decoder = LSTMAddonsDecoder(dec_units=latent_dim,
-                                             output_units=feature_dim)
-        else:
-            # config == "autoregressive"
-            self.decoder = LSTMAutoregressiveDecoder(dec_units=latent_dim,
-                                                     output_steps=time_dim,
-                                                     output_units=feature_dim)
+        self.state = None
 
-    def call(self, x, hidden=None, training=None, mask=None):
+    def call(self, x, hidden=None, training=None):
         init_state = self.encoder.initialize_hidden_state()
-        encoded = self.encoder(x, hidden=init_state)
-        state = self.encoder.get_state()
-        if self.config == "autoregressive":
-            # Insert the last input as decoder input.
-            decoded = self.decoder(x[:, -1, :], hidden=state)
-        else:
-            decoded = self.decoder(encoded, hidden=state)
+        encoded, state_m, state_c = self.encoder(x, hidden=init_state, training=training)
+        self.state = (state_m, state_c)
+        decoded = self.decoder(encoded, hidden=self.state, training=training)
         return decoded
 
     def get_config(self):
-        return {"time_dim": self.time_dim, "feature_dim": self.feature_dim, "config": self.config,
-                "latent_dim": self.latent_dim, "hidden_dim": self.hidden_dim}
+        config = super(AutoEncoder, self).get_config()
+        config.update({"time_dim": self.time_dim, "feature_dim": self.feature_dim, "config": self.config,
+                      "latent_dim": self.latent_dim, "hidden_dim": self.hidden_dim})
+        return config
 
-    def get_latent_state(self):
-        return self.encoder.get_state()
+    def train_step(self, data):
+        # Unpack the data.
+        x = data
+
+        with tf.GradientTape() as tape:
+            x_pred = self(x, training=True)  # Forward pass
+            # Compute the loss value
+            loss = self.compiled_loss(x, x_pred, regularization_losses=self.losses)
+
+        # Compute gradients
+        trainable_vars = self.trainable_weights
+        gradients = tape.gradient(loss, trainable_vars)
+        # Update weights
+        self.optimizer.apply_gradients(zip(gradients, trainable_vars))
+        # Update metrics (includes the metric that tracks the loss)
+        self.compiled_metrics.update_state(x, x_pred)
+        # Return a dict mapping metric names to current value
+        return {m.name: m.result() for m in self.metrics}
+
+
+class RegressiveAutoEncoder(AutoEncoder):
+    def __init__(self, time_dim, feature_dim, latent_dim=1, hidden_dim=None, name="regressive_autoencoder", **kwargs):
+        super(RegressiveAutoEncoder, self).__init__(time_dim, feature_dim, latent_dim, hidden_dim, name, **kwargs)
+        self.decoder = LSTMAutoregressiveDecoder(dec_units=self.latent_dim,
+                                                 output_steps=self.time_dim,
+                                                 output_units=self.feature_dim)
+
+    def call(self, x, hidden=None, training=None):
+        init_state = self.encoder.initialize_hidden_state()
+        encoded, state_m, state_c = self.encoder(x, hidden=init_state, training=training)
+        self.state = (state_m, state_c)
+        decoded = self.decoder(x[:, -1, :], hidden=self.state, training=training)
+        return decoded
+
+    def train_step(self, data):
+        return super(RegressiveAutoEncoder, self).train_step(data)
+
+
+class AddonsAutoEncoder(AutoEncoder):
+    def __init__(self, time_dim, feature_dim, latent_dim=1, hidden_dim=None, name="addons_autoencoder", **kwargs):
+        super(AddonsAutoEncoder, self).__init__(time_dim, feature_dim, latent_dim, hidden_dim, name, **kwargs)
+        self.decoder = LSTMAddonsDecoder(dec_units=self.latent_dim,
+                                         output_units=self.feature_dim)
+
+    def call(self, x, hidden=None, training=None):
+        return super(AddonsAutoEncoder, self).call(x, hidden, training)
+
+    def train_step(self, data):
+        return super(AddonsAutoEncoder, self).train_step(data)
+
+
+class SimpleAutoEncoder(AutoEncoder):
+    def __init__(self, time_dim, feature_dim, latent_dim=1, hidden_dim=None, name="addons_autoencoder", **kwargs):
+        super(SimpleAutoEncoder, self).__init__(time_dim, feature_dim, latent_dim, hidden_dim, name, **kwargs)
+        self.decoder = LSTMDecoder(dec_units=self.latent_dim,
+                                   output_units=self.feature_dim)
+
+    def call(self, x, hidden=None, training=None):
+        return super(SimpleAutoEncoder, self).call(x, hidden, training)
+
+    def train_step(self, data):
+        return super(SimpleAutoEncoder, self).train_step(data)
 
 
 class DeepClustering:
-    def __init__(self, data: pd.DataFrame, model: AutoEncoder, seq_len, epoch=10, batch_sz=1):
-        self.seq_len = seq_len
+    def __init__(self, data: pd.DataFrame, latent_dim, hidden_dim=None,
+                 model="autoregressive", epoch=10, batch_sz=1):
+        self.seq_len = max(int(len(data.index) / 2), 1)
+        self.latent_dim = latent_dim
+        self.hidden_dim = hidden_dim
+        self.model = model if model in ["autoregressive", "addons", "simple"] else "simple"
         self.epoch = epoch
         self.batch_sz = batch_sz
+        self.features_len = len(data.columns)
         if len(data.index) > 1:
             self.data = tf.keras.preprocessing.timeseries_dataset_from_array(
                 data=data.to_numpy(),
                 targets=None,
-                sequence_length=seq_len,
+                sequence_length=self.seq_len,
                 sequence_stride=1,
                 shuffle=True,
                 batch_size=batch_sz)
-            self.data.set_shape([batch_sz, seq_len, len(data.columns)])
-            self.data = self.data.map(lambda x: (x, x))
+            # self.data = self.data.map(lambda x: (x, x))
         else:
-            data_np = np.expand_dims(data.to_numpy(), axis=0)
-            self.data = tf.data.Dataset.from_tensor_slices((data_np, data_np)).batch(batch_sz)
-        self.model = model
+            data_np = np.expand_dims(data.values, axis=0)
+            self.data = tf.data.Dataset.from_tensor_slices(data_np).batch(batch_sz)
+        self.ae = None
 
     def train(self, patience=2):
-        early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss',
+        if self.model == "autoregressive":
+            self.ae = RegressiveAutoEncoder(self.seq_len, self.features_len, latent_dim=self.latent_dim,
+                                            hidden_dim=self.hidden_dim)
+        elif self.model == "simple":
+            self.ae = SimpleAutoEncoder(self.seq_len, self.features_len, latent_dim=self.latent_dim,
+                                        hidden_dim=self.hidden_dim)
+        elif self.model == "addons":
+            self.ae = AddonsAutoEncoder(self.seq_len, self.features_len, latent_dim=self.latent_dim,
+                                        hidden_dim=self.hidden_dim)
+        """
+        early_stopping = tf.keras.callbacks.EarlyStopping(monitor="loss",
                                                           patience=patience,
-                                                          mode='min')
-
-        self.model.compile(loss=tf.losses.MeanSquaredError(),
-                           optimizer=tf.optimizers.Adam(),
-                           metrics=[tf.metrics.MeanAbsoluteError()])
-
-        history = self.model.fit(self.data, epochs=self.epoch,
-                                 callbacks=[early_stopping])
+                                                          mode="min")
+        self.ae.compile(loss=tf.keras.losses.MeanSquaredError(),
+                           optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3))
+        history = self.ae.fit(self.data, epochs=self.epoch)
         return history
+        """
+        optimizer = tf.keras.optimizers.Adam()
+        mse_loss_fn = tf.keras.losses.MeanSquaredError()
+        loss_metric = tf.metrics.MeanAbsoluteError()
+
+        # Iterate over epochs.
+        for epoch in range(self.epoch):
+            log.i("Start of epoch %d" % (epoch,))
+
+            # Iterate over the batches of the dataset.
+            for step, x_batch_train in enumerate(self.data):
+                with tf.GradientTape() as tape:
+                    reconstructed = self.ae(x_batch_train)
+                    # Compute reconstruction loss
+                    loss = mse_loss_fn(x_batch_train, reconstructed)
+                    loss += sum(self.ae.losses)  # Add KLD regularization loss
+
+                    loss_metric(x_batch_train, reconstructed)
+
+                grads = tape.gradient(loss, self.ae.trainable_weights)
+                optimizer.apply_gradients(zip(grads, self.ae.trainable_weights))
+
+                # loss_metric(loss)
+
+                log.i("step %d: loss %.4f; mae = %.4f" % (step, loss, loss_metric.result()))
+        return
 
     def get_train_state(self):
-        train_loss, train_acc = self.model.evaluate(self.data)
+        train_loss, train_acc = self.ae.evaluate(self.data)
         return train_loss, train_acc
 
     def get_latent_state(self):
-        state = self.model.get_latent_state()
+        state = self.ae.state
         # Flat the state tuple of list.
         return pd.Series([s for sub in state for s in sub[-1].numpy()])
