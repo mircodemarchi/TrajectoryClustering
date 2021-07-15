@@ -822,5 +822,14 @@ class ScooterTrajectoriesDS:
         log.i("[MERGE DESCRIPTION]:\n{}\n{};".format(
             self.merge[self.merge.columns[:int(len(self.merge.columns) / 2)]].describe(datetime_is_numeric=True),
             self.merge[self.merge.columns[int(len(self.merge.columns) / 2):]].describe(datetime_is_numeric=True)))
+        log.i("[MOVING BEHAVIOR SHAPE]: {};".format(self.moving_behavior_features.shape))
+        log.i("[MOVING BEHAVIOR COLUMN NAMES]: {};".format(list(self.moving_behavior_features.columns)))
+        log.i("[MOVING BEHAVIOR FEATURES TYPES]:\n{};".format(self.moving_behavior_features.dtypes))
+        log.i("[MOVING BEHAVIOR NULL OCCURRENCES]:\n{};".format(self.moving_behavior_features.isnull().sum()))
+        log.i("[MOVING BEHAVIOR DESCRIPTION]:\n{}\n{};".format(
+            self.moving_behavior_features[self.moving_behavior_features.columns[
+                :int(len(self.moving_behavior_features.columns) / 2)]].describe(datetime_is_numeric=True),
+            self.moving_behavior_features[self.moving_behavior_features.columns[
+                int(len(self.moving_behavior_features.columns) / 2):]].describe(datetime_is_numeric=True)))
         log.i("*******************************************************************************************************")
         return self
