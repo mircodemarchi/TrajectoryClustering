@@ -190,9 +190,9 @@ class RegressiveAutoEncoder(AutoEncoder):
     def call(self, x, hidden=None, training=None):
         init_state = self.encoder.initialize_hidden_state()
         encoded, state_m, state_c = self.encoder(x, hidden=init_state, training=training)
-        init_state = (state_m, state_c)
-        decoded = self.decoder(x[:, -1, :], hidden=init_state, training=training)
-        return decoded, init_state
+        self.state = [state_m, state_c]
+        decoded = self.decoder(x[:, -1, :], hidden=self.state, training=training)
+        return decoded
 
     def train_step(self, data):
         return super(RegressiveAutoEncoder, self).train_step(data)
