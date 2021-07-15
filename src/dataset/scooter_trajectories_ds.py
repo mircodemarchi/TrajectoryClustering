@@ -377,8 +377,14 @@ class ScooterTrajectoriesDS:
                 delta_t = moving_attributes[[C.POS_GEN_SERVER_TIME_CN, C.POS_GEN_DEVICE_TIME_CN]].mean(axis=1)
                 delta_l = moving_attributes[[C.POS_GEN_LATITUDE_CN, C.POS_GEN_LONGITUDE_CN]]
                 delta_s = moving_attributes[C.POS_GEN_SPEED_CN]
-                delta_r = np.arctan(moving_attributes[C.POS_GEN_LONGITUDE_CN]
-                                    / moving_attributes[C.POS_GEN_LATITUDE_CN])
+
+                # Calculate ROT (rate of turn)
+                rot = np.arctan(moving_attributes[C.POS_GEN_LONGITUDE_CN] / moving_attributes[C.POS_GEN_LATITUDE_CN])
+                rot = rot.fillna(0)
+                rot = pd.concat([pd.Series(0), rot], axis=0, ignore_index=True)
+                rot_curr = rot.iloc[1:len(rot.index)].reset_index(drop=True)
+                rot_prev = rot.iloc[0:len(rot.index) - 1].reset_index(drop=True)
+                delta_r = rot_curr.subtract(rot_prev)
 
                 f_delta_l = pd.concat([delta_l[C.POS_GEN_LATITUDE_CN] / (delta_t.astype(np.int64)),
                                        delta_l[C.POS_GEN_LONGITUDE_CN] / (delta_t.astype(np.int64))], axis=1)
@@ -768,6 +774,7 @@ class ScooterTrajectoriesDS:
         res = res.reset_index(drop=False)
         res = res.rename(columns={res.columns[2]: C.MOVING_WINDOW_ID})
         self.moving_behavior_features = res
+        self.moving_behavior_features = self.moving_behavior_features.fillna(0)
 
         end = time.time()
         log.d("elapsed time: {}".format(get_elapsed(start, end)))
@@ -785,7 +792,8 @@ class ScooterTrajectoriesDS:
         return self.pos[C.POS_GEN_HEURISTIC_COLS].isnull().values.any()
 
     def empty(self):
-        return self.dataset.empty or self.pos.empty or self.rental.empty or self.merge.empty
+        return self.dataset.empty or self.pos.empty or self.rental.empty or self.merge.empty \
+               or self.moving_behavior_features.empty
 
     def print_stats(self):
         if self.dataset.empty or self.rental.empty or self.pos.empty:

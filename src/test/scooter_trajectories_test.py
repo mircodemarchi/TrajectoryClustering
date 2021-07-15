@@ -37,7 +37,7 @@ class ScooterTrajectoriesTest:
     def __init__(self, log_lvl=None, chunk_size=None, max_chunk_num=None, rental_num_to_analyze=None,
                  timedelta=None, spreaddelta=None, edgedelta=None, group_on_timedelta=True,
                  n_clusters=None, with_pca=False, with_standardization=False, with_normalization=False,
-                 only_north=False, moving_behavior_extraction=False, epoch=None, latent_dim=None, dl_config=None,
+                 only_north=False, epoch=None, latent_dim=None, dl_config=None,
                  hidden_dim=None, exam=False):
         self.st = ScooterTrajectoriesDS(log_lvl=log_lvl)
         # Generation settings
@@ -56,7 +56,6 @@ class ScooterTrajectoriesTest:
         self.with_normalization = with_normalization
         self.only_north = only_north
         # Deep Learning Clustering
-        self.moving_behavior_extraction = moving_behavior_extraction
         self.epoch = epoch
         self.latent_dim = latent_dim
         self.dl_config = dl_config
@@ -184,6 +183,7 @@ class ScooterTrajectoriesTest:
         return self
 
     def __train_moving_attributes(self, moving_attributes):
+        log.i("Train Moving Attributes - Trajectory {}".format(moving_attributes.iloc[0][self.groupby].to_dict()))
         dc = DeepClustering(moving_attributes[STC.MOVING_BEHAVIOR_FEATURES_COLS], self.latent_dim,
                             hidden_dim=self.hidden_dim, model=self.dl_config, epoch=self.epoch, batch_sz=1)
         dc.train()
@@ -319,13 +319,13 @@ class ScooterTrajectoriesTest:
 
         self.clustering_done = True
 
-    def dl_clustering(self):
-        if self.st.moving_behavior_features.empty:
-            self.st.moving_behavior_feature_extraction(groupby=self.groupby).to_csv()
+    def moving_behavior_feature_extraction(self):
+        self.st.moving_behavior_feature_extraction(groupby=self.groupby).to_csv()
 
+    def dl_clustering(self):
         dataset_for_clustering = self.__prepare(is_dl=True)
 
-        # self.st.moving_behavior_features = self.st.moving_behavior_features.iloc[0:20]
+        self.st.moving_behavior_features = self.st.moving_behavior_features.iloc[0:1000]
         mbf_group = self.st.moving_behavior_features.groupby(by=self.groupby)
 
         for self.dl_config in ["simple", "autoregressive", "addons"]:
@@ -348,8 +348,7 @@ class ScooterTrajectoriesTest:
             # k-means clustering
             c = Clustering(autoencoder_features, autoencoder_features_cols, dataset_name=DATASET_NAME)
             c.exec(method="k-means", n_clusters=self.n_clusters,
-                   standardize=self.with_standardization, normalize=self.with_normalization,
-                   pca=self.with_pca)
+                   standardize=self.with_standardization, normalize=self.with_normalization)
             autoencoder_features[STC.CLUSTER_ID_CN] = c.labels
 
             # Prepare data
