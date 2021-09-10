@@ -85,6 +85,7 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
         latent_dim=config.getint("latent-dim"),
         dl_config=config["decoder-type"],
         hidden_dim=None if config["hidden-dim"] is None else config.getint("hidden-dim"),
+        on_moving_behavior=config.getboolean("on-moving-behavior"),
         exam=config.getboolean("exam")
     )
 

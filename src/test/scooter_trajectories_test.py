@@ -32,13 +32,15 @@ CLUSTERING_METHODS = ["k-means", "mean-shift", "gaussian-mixture", "full-agglome
 CLUSTERING_EXAM_METHODS = ["k-means", "mean-shift", "ward-agglomerative"]
 POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING = 30000
 
+POS_NUM_FOR_DL_CLUSTERING = 100000
+
 
 class ScooterTrajectoriesTest:
     def __init__(self, log_lvl=None, chunk_size=None, max_chunk_num=None, rental_num_to_analyze=None,
                  timedelta=None, spreaddelta=None, edgedelta=None, group_on_timedelta=True,
                  n_clusters=None, with_pca=False, with_standardization=False, with_normalization=False,
                  only_north=False, epoch=None, latent_dim=None, dl_config=None,
-                 hidden_dim=None, exam=False):
+                 hidden_dim=None, on_moving_behavior=False, exam=False):
         self.st = ScooterTrajectoriesDS(log_lvl=log_lvl)
         # Generation settings
         self.chunk_size = chunk_size
@@ -59,7 +61,9 @@ class ScooterTrajectoriesTest:
         self.epoch = epoch
         self.latent_dim = latent_dim
         self.dl_config = dl_config
+        self.current_dl_config = None
         self.hidden_dim = hidden_dim
+        self.on_moving_behavior = on_moving_behavior
 
         self.exam = exam
 
@@ -183,9 +187,16 @@ class ScooterTrajectoriesTest:
         return self
 
     def __train_moving_attributes(self, moving_attributes):
-        log.i("Train Moving Attributes - Trajectory {}".format(moving_attributes.iloc[0][self.groupby].to_dict()))
-        dc = DeepClustering(moving_attributes[STC.MOVING_BEHAVIOR_FEATURES_COLS], self.latent_dim,
-                            hidden_dim=self.hidden_dim, model=self.dl_config, epoch=self.epoch, batch_sz=1)
+        log.i("Train Moving Attributes - Trajectory {}, LEN: {}".format(
+            moving_attributes.iloc[0][self.groupby].to_dict(),
+            len(moving_attributes.index)))
+        if self.on_moving_behavior:
+            cols = STC.MOVING_BEHAVIOR_FEATURES_COLS
+        else:
+            cols = STC.CLUSTERING_COLS
+
+        dc = DeepClustering(moving_attributes[cols], self.latent_dim,
+                            hidden_dim=self.hidden_dim, model=self.current_dl_config, epoch=self.epoch, batch_sz=1)
         dc.train()
         ret = pd.DataFrame([dc.get_latent_state()])
         return ret
@@ -325,16 +336,29 @@ class ScooterTrajectoriesTest:
     def dl_clustering(self):
         dataset_for_clustering = self.__prepare(is_dl=True)
 
-        self.st.moving_behavior_features = self.st.moving_behavior_features.iloc[0:1000]
-        mbf_group = self.st.moving_behavior_features.groupby(by=self.groupby)
+        if self.on_moving_behavior:
+            self.st.moving_behavior_features = self.st.moving_behavior_features.iloc[0:1000]
+            mbf_group = self.st.moving_behavior_features.groupby(by=self.groupby)
+            dataset = mbf_group
+            ds_name = "mbf"
+        else:
+            dataset_for_clustering = dataset_for_clustering.iloc[0:POS_NUM_FOR_DL_CLUSTERING]
+            dataset = dataset_for_clustering.groupby(by=self.groupby)
+            ds_name = "pos"
 
-        for self.dl_config in ["simple", "autoregressive", "addons"]:
-            autoencoder_gen_fp = os.path.join(DATA_FOLDER, self.dl_config + "_autoencoder_feature.csv")
+        if self.dl_config:
+            dl_configs_to_test = [self.dl_config]
+        else:
+            dl_configs_to_test = ["simple", "autoregressive", "addons"]
+
+        for dl_config in dl_configs_to_test:
+            self.current_dl_config = dl_config
+            autoencoder_gen_fp = os.path.join(DATA_FOLDER, dl_config + "_autoencoder_" + ds_name + "_feature.csv")
             autoencoder_features_cols = \
                 ["state_m" + str(i) for i in range(self.latent_dim)] + \
                 ["state_c" + str(i) for i in range(self.latent_dim)]
             if not os.path.exists(autoencoder_gen_fp):
-                autoencoder_features = mbf_group.apply(self.__train_moving_attributes)
+                autoencoder_features = dataset.apply(self.__train_moving_attributes)
                 autoencoder_features = autoencoder_features.reset_index(drop=False)
                 autoencoder_features = autoencoder_features.drop(
                     autoencoder_features.columns[len(self.groupby) if type(self.groupby) == list else 1], axis=1)
@@ -368,7 +392,7 @@ class ScooterTrajectoriesTest:
             partitions = self.__partition(dataset_prepared, only_north=True if self.exam else self.only_north)
 
             # Analysis
-            prefix = "{}_{}_{}_".format("dl_clustering", "k-means", self.dl_config)
+            prefix = "{}_{}_{}_".format("dl_clustering", "k-means", dl_config)
             for key in partitions:
                 self.__line_joint_analysis(self.__filter(partitions[key]), prefix=prefix + key,
                                            line_list=[STC.CLUSTER_ANALYSIS_TUPLE],
