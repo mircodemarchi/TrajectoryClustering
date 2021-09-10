@@ -226,7 +226,7 @@ class SimpleAutoEncoder(AutoEncoder):
 
 class DeepClustering:
     def __init__(self, data: pd.DataFrame, latent_dim, hidden_dim=None,
-                 model="autoregressive", epoch=10, batch_sz=1):
+                 model="autoregressive", epoch=10, batch_sz=1, scale=True):
         # Tensorflow config
         tf.config.run_functions_eagerly(True)
         tf.data.experimental.enable_debug_mode()
@@ -241,6 +241,9 @@ class DeepClustering:
         self.features_len = len(data.columns)
 
         # Data
+        if scale:
+            data = (data - data.min()) / (data.max() - data.min())
+
         if len(data.index) > 1:
             self.data = tf.keras.preprocessing.timeseries_dataset_from_array(
                 data=data.to_numpy(),
