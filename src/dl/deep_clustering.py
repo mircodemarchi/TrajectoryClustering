@@ -1,5 +1,6 @@
 import tensorflow as tf
 import tensorflow_addons as tfa
+from sklearn.preprocessing import MinMaxScaler
 import pandas as pd
 import numpy as np
 
@@ -241,12 +242,14 @@ class DeepClustering:
         self.features_len = len(data.columns)
 
         # Data
+        data = data.to_numpy()
         if scale:
-            data = (data - data.min()) / (data.max() - data.min())
+            mmscaler = MinMaxScaler()
+            data = mmscaler.fit_transform(data)
 
-        if len(data.index) > 1:
+        if data.shape[0] > 1:
             self.data = tf.keras.preprocessing.timeseries_dataset_from_array(
-                data=data.to_numpy(),
+                data=data,
                 targets=None,
                 sequence_length=self.seq_len,
                 sequence_stride=1,
@@ -254,8 +257,8 @@ class DeepClustering:
                 batch_size=batch_sz)
             # self.data = self.data.map(lambda x: (x, x))
         else:
-            data_np = np.expand_dims(data.values, axis=0)
-            self.data = tf.data.Dataset.from_tensor_slices(data_np).batch(batch_sz)
+            data = np.expand_dims(data, axis=0)
+            self.data = tf.data.Dataset.from_tensor_slices(data).batch(batch_sz)
         self.ae = None
 
     def train(self, patience=2):
