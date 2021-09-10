@@ -12,7 +12,6 @@ from util.log import Log
 from util.util import get_elapsed, DATA_FOLDER
 
 from dl import DeepClustering
-from dl import RegressiveAutoEncoder, AddonsAutoEncoder, SimpleAutoEncoder
 
 log = Log(__name__, enable_console=True, enable_file=False)
 
@@ -39,7 +38,7 @@ class ScooterTrajectoriesTest:
     def __init__(self, log_lvl=None, chunk_size=None, max_chunk_num=None, rental_num_to_analyze=None,
                  timedelta=None, spreaddelta=None, edgedelta=None, group_on_timedelta=True,
                  n_clusters=None, with_pca=False, with_standardization=False, with_normalization=False,
-                 only_north=False, epoch=None, latent_dim=None, dl_config=None,
+                 with_unit_norm=False, only_north=False, epoch=None, latent_dim=None, dl_config=None,
                  hidden_dim=None, on_moving_behavior=False, exam=False):
         self.st = ScooterTrajectoriesDS(log_lvl=log_lvl)
         # Generation settings
@@ -56,6 +55,7 @@ class ScooterTrajectoriesTest:
         self.with_pca = with_pca
         self.with_standardization = with_standardization
         self.with_normalization = with_normalization
+        self.with_unit_norm = with_unit_norm
         self.only_north = only_north
         # Deep Learning Clustering
         self.epoch = epoch
@@ -266,12 +266,14 @@ class ScooterTrajectoriesTest:
         # Perform clustering tests
         kmeans = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
         kmeans.test("k-means", range_clusters=range(1, 20), standardize=self.with_standardization,
-                    normalize=self.with_normalization,  pca=self.with_pca, components=STC.CLUSTERING_COMPONENTS)
+                    unit_norm=self.with_unit_norm, normalize=self.with_normalization,
+                    pca=self.with_pca, components=STC.CLUSTERING_COMPONENTS)
         kmeans.show_wcss(save_file=SAVE_FILE, prefix=prefix + "all")
         for key in partitions:
             kmeans = Clustering(partitions[key], STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
             kmeans.test("k-means", range_clusters=range(1, 30), standardize=self.with_standardization,
-                        normalize=self.with_normalization, pca=self.with_pca, components=STC.CLUSTERING_COMPONENTS)
+                        normalize=self.with_normalization, unit_norm=self.with_unit_norm,
+                        pca=self.with_pca, components=STC.CLUSTERING_COMPONENTS)
             kmeans.show_wcss(save_file=SAVE_FILE, prefix=prefix + key)
 
     def clustering(self):
@@ -308,6 +310,7 @@ class ScooterTrajectoriesTest:
                     c = Clustering(partitions[key], STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
                 c.exec(method=method, n_clusters=self.n_clusters,
                        standardize=self.with_standardization, normalize=self.with_normalization,
+                       unit_norm=self.with_unit_norm,
                        pca=self.with_pca, components=components)
                 self.partitions_clusters[method][key] = c
 
@@ -325,7 +328,7 @@ class ScooterTrajectoriesTest:
                 c = Clustering(dataset_for_clustering, STC.CLUSTERING_COLS, dataset_name=DATASET_NAME)
             c.exec(method=method, n_clusters=self.n_clusters,
                    standardize=self.with_standardization, normalize=self.with_normalization,
-                   pca=self.with_pca, components=components)
+                   unit_norm=self.with_unit_norm, pca=self.with_pca, components=components)
             self.all_clusters[method] = c
 
         self.clustering_done = True
@@ -372,7 +375,8 @@ class ScooterTrajectoriesTest:
             # k-means clustering
             c = Clustering(autoencoder_features, autoencoder_features_cols, dataset_name=DATASET_NAME)
             c.exec(method="k-means", n_clusters=self.n_clusters,
-                   standardize=self.with_standardization, normalize=self.with_normalization)
+                   standardize=self.with_standardization, normalize=self.with_normalization,
+                   unit_norm=self.with_unit_norm)
             autoencoder_features[STC.CLUSTER_ID_CN] = c.labels
 
             # Prepare data

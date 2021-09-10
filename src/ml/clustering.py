@@ -39,7 +39,7 @@ class Clustering:
         if not os.path.exists(self.image_folder) and self.save_file:
             os.makedirs(self.image_folder)
 
-    def __preprocessing(self, x, standardize=False, normalize=False, pca=False, components=None):
+    def __preprocessing(self, x, standardize=False, normalize=False, unit_norm=False, pca=False, components=None):
         start = time.time()
         columns = x.columns
         x = x.to_numpy()
@@ -51,8 +51,9 @@ class Clustering:
             mmscaler = MinMaxScaler()
             x = mmscaler.fit_transform(x)
 
-        normalizer = Normalizer()
-        x = normalizer.fit_transform(x)
+        if unit_norm:
+            normalizer = Normalizer()
+            x = normalizer.fit_transform(x)
 
         if pca:
             if type(components) is list:
@@ -128,9 +129,9 @@ class Clustering:
         variance_cumulated = pca_model.explained_variance_ratio_.cumsum()
         return variance_cumulated
 
-    def exec(self, method, n_clusters, standardize=False, normalize=False, pca=False, components=None):
+    def exec(self, method, n_clusters, standardize=False, normalize=False, unit_norm=False, pca=False, components=None):
         log.d("Clustering {} preprocessing".format(self.dataset_name))
-        x, elapsed = self.__preprocessing(self.x, standardize=standardize, normalize=normalize,
+        x, elapsed = self.__preprocessing(self.x, standardize=standardize, normalize=normalize, unit_norm=unit_norm,
                                           pca=pca, components=components)
         self.x_preprocessed = pd.DataFrame(x)
         log.d("elapsed time: {}".format(elapsed))
@@ -146,9 +147,10 @@ class Clustering:
         self.model = model
         return self
 
-    def test(self, method, range_clusters=range(1, 50), standardize=False, normalize=False, pca=False, components=None):
+    def test(self, method, range_clusters=range(1, 50), standardize=False, normalize=False, unit_norm=False,
+             pca=False, components=None):
         log.d("Clustering {} preprocessing".format(self.dataset_name))
-        x, elapsed = self.__preprocessing(self.x, standardize=standardize, normalize=normalize,
+        x, elapsed = self.__preprocessing(self.x, standardize=standardize, normalize=normalize, unit_norm=unit_norm,
                                           pca=pca, components=components)
         log.d("elapsed time: {}".format(elapsed))
         log.d("components: {}".format(x.shape[1]))
