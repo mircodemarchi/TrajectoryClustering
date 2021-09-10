@@ -80,6 +80,7 @@ def scooter_trajectories_test(config: configparser.SectionProxy, log_lvl):
         with_pca=config.getboolean("with-pca"),
         with_standardization=config.getboolean("with-standardization"),
         with_normalization=config.getboolean("with-normalization"),
+        with_unit_norm=config.getboolean("with-unit-norm"),
         only_north=config.getboolean("only-north"),
         epoch=config.getint("epoch"),
         latent_dim=config.getint("latent-dim"),
