@@ -6,7 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from scipy.cluster.hierarchy import dendrogram
-from sklearn.preprocessing import StandardScaler, Normalizer
+from sklearn.preprocessing import StandardScaler, Normalizer, MinMaxScaler
 from sklearn.cluster import KMeans, MeanShift, estimate_bandwidth, AgglomerativeClustering
 from sklearn.mixture import GaussianMixture
 from sklearn.decomposition import PCA
@@ -48,8 +48,11 @@ class Clustering:
             x = scaler.fit_transform(x)
 
         if normalize:
-            normalizer = Normalizer()
-            x = normalizer.fit_transform(x)
+            mmscaler = MinMaxScaler()
+            x = mmscaler.fit_transform(x)
+
+        normalizer = Normalizer()
+        x = normalizer.fit_transform(x)
 
         if pca:
             if type(components) is list:
