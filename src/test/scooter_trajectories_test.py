@@ -31,7 +31,7 @@ CLUSTERING_METHODS = ["k-means", "mean-shift", "gaussian-mixture", "full-agglome
 CLUSTERING_EXAM_METHODS = ["k-means", "mean-shift", "ward-agglomerative"]
 POS_NUM_FOR_AGGLOMERATIVE_CLUSTERING = 30000
 
-POS_NUM_FOR_DL_CLUSTERING = 100000
+POS_NUM_FOR_DL_CLUSTERING = 5000
 
 
 class ScooterTrajectoriesTest:
@@ -188,12 +188,13 @@ class ScooterTrajectoriesTest:
 
     def __train_moving_attributes(self, moving_attributes):
         log.i("Train Moving Attributes - Trajectory {}, LEN: {}".format(
-            moving_attributes.iloc[0][self.groupby].to_dict(),
+            moving_attributes.iloc[0][self.groupby].to_dict()
+            if type(self.groupby) is list else moving_attributes.iloc[0][self.groupby],
             len(moving_attributes.index)))
         if self.on_moving_behavior:
             cols = STC.MOVING_BEHAVIOR_FEATURES_COLS
         else:
-            cols = STC.CLUSTERING_COLS
+            cols = [STC.MERGE_POS_LATITUDE_CN, STC.MERGE_POS_LONGITUDE_CN]
 
         dc = DeepClustering(moving_attributes[cols], self.latent_dim,
                             hidden_dim=self.hidden_dim, model=self.current_dl_config, epoch=self.epoch, batch_sz=1)
@@ -355,6 +356,7 @@ class ScooterTrajectoriesTest:
             dl_configs_to_test = ["simple", "autoregressive", "addons"]
 
         for dl_config in dl_configs_to_test:
+            log.i("DeepClustering - {} Autoencoder".format(dl_config))
             self.current_dl_config = dl_config
             autoencoder_gen_fp = os.path.join(DATA_FOLDER, dl_config + "_autoencoder_" + ds_name + "_feature.csv")
             autoencoder_features_cols = \
@@ -365,8 +367,10 @@ class ScooterTrajectoriesTest:
                 autoencoder_features = autoencoder_features.reset_index(drop=False)
                 autoencoder_features = autoencoder_features.drop(
                     autoencoder_features.columns[len(self.groupby) if type(self.groupby) == list else 1], axis=1)
+                new_autoencoder_cols = (self.groupby
+                                        if type(self.groupby) is list else [self.groupby]) + autoencoder_features_cols
                 autoencoder_features = autoencoder_features.rename(
-                    columns=dict(zip(autoencoder_features.columns, self.groupby + autoencoder_features_cols)))
+                    columns=dict(zip(autoencoder_features.columns, new_autoencoder_cols)))
                 # Save data in csv files
                 autoencoder_features.to_csv(autoencoder_gen_fp, index=False)
             else:
@@ -375,8 +379,8 @@ class ScooterTrajectoriesTest:
             # k-means clustering
             c = Clustering(autoencoder_features, autoencoder_features_cols, dataset_name=DATASET_NAME)
             c.exec(method="k-means", n_clusters=self.n_clusters,
-                   standardize=self.with_standardization, normalize=self.with_normalization,
-                   unit_norm=self.with_unit_norm)
+                   standardize=False, normalize=self.with_normalization,
+                   unit_norm=False)
             autoencoder_features[STC.CLUSTER_ID_CN] = c.labels
 
             # Prepare data
@@ -568,10 +572,14 @@ class ScooterTrajectoriesTest:
         for key in partitions:
             log.i("[PARTITION {} SHAPE]: {};".format(key, partitions[key].shape))
             log.i("[PARTITION {} DESCRIPTION]: \n{}\n{};".format(key,
-                  partitions[key][partitions[key].columns[
-                                :int(len(partitions[key].columns) / 2)]].describe(datetime_is_numeric=True),
-                  partitions[key][partitions[key].columns[
-                                int(len(partitions[key].columns) / 2):]].describe(datetime_is_numeric=True)))
+                                                                 partitions[key][partitions[key].columns[
+                                                                                 :int(len(partitions[
+                                                                                              key].columns) / 2)]].describe(
+                                                                     datetime_is_numeric=True),
+                                                                 partitions[key][partitions[key].columns[
+                                                                                 int(len(partitions[
+                                                                                             key].columns) / 2):]].describe(
+                                                                     datetime_is_numeric=True)))
         log.i("[FILTER POS SHAPE]: {}".format(len(self.__filter(self.__pos_filter(self.st.pos)).index)))
         log.i("[FILTER RENTAL SHAPE]: {}".format(self.rental_num_to_analyze if self.rental_num_to_analyze is not None
                                                  else len(self.__rental_filter(self.st.rental).index)))
