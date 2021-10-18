@@ -1,0 +1,24 @@
+The best result are the one performed by \textit{K-Means}: the feature are extracted with \textit{Standardization}, \textit{Normalization} and \textit{PCA}, the number of cluster given as input is estimated through the \textit{Elbow method} from \textit{WCSS} graph, and the results are given in terms of plot representation and \textit{Silhouette score}. 
+
+Moreover, feature extraction without time features produces better clustering result. Time is a feature dimension that brings cluster algorithms to a worse prediction, because the same trajectory could be travelled in different time and instead I want to find the common trajectory independently by time. On the other hand, time is very useful to find subgroups of the same trajectory, as performed by \textit{timedelta heuristic}.
+
+Furthermore, I tried to compare \textit{K-Means} clustering with and without PCA. The figure \ref{fig:kmeans-without-pca} shows \textit{K-Means} clustering algorithm performed without PCA on latitude and longitude features only. This comparison shows how PCA improve the variance on clustering prediction, and the presence of heuristic features maintains the rental division, on which the heuristic algorithms has been executed.  
+
+\begin{figure}[bt]
+	\centering
+	\includegraphics[width=\columnwidth]{kmeans-without-pca}
+	\caption{K-Means without PCA with only latitude and longitude features}
+	\label{fig:kmeans-without-pca}
+\end{figure}
+
+Unfortunately, the autoencoder model doesn't perform very well. This result is probably due to the fact that in this dataset every single trajectory is made up of a few positions, therefore, since the model must be trained on every single trajectory independently, the autoencoder is unable to obtain an accurate representation of the trajectory. In fact, in general this deep clustering technique has been tested in big dataset of air flights or of specific road areas such as road junctions. 
+
+In order to improve the implementation of the autoencoder models for deep clustering, I suggest the following:
+\begin{itemize}
+	\item Test the autoencoder models on well known datasets;
+	\item Test the autoencoder models with more epoch;
+	\item Design more complex autoencoder models (with convolutional layer);
+	\item Trying to augment the number of positions in a trajectory with some techniques, for example adding positions on the line between two positions already existing or following a particular curve given by the inclination the trajectory is taking;
+	\item Improve the edge and coord heuristic applying Mean Shift, in order to avoid the bimodal distribution problem;
+	\item Improve the autoencoder training with specific loss functions focused on clustering; 
+\end{itemize}

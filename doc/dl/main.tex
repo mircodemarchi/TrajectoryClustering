@@ -10,7 +10,7 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    linktoc=all
+	linktoc=all
 }
 
 \usepackage{graphicx}
@@ -38,8 +38,14 @@
 
 % ABSTRACT
 \begin{abstract}
-	The aim of this report is to present the main unsupervised learning techniques used for scooter trajectories clustering. The dataset that I used contains a big amount of positions taken in rentals that run through some cities in Italy. The objective is to find recurrent places crossed by the trajectories. This report presents some analysis on the positions and an implementation of heuristics that manage data in a systematic way: \textit{timedelta heuristic}, \textit{spreaddelta heuristic}, \textit{edgedelta heuristic} and \textit{coorddelta heuristic}. Then I performed the most traditional machine learning clustering techniques on the generated dataset: \textit{K-Means}, \textit{Mean Shift}, \textit{Gaussian Mixture}, \textit{Full Hierarchical Agglomerative}, \textit{Ward Hierarchical Agglomerative}. All the features are extracted with \textit{Principal Component Analysis (PCA)} with an improvement that select the components to focus on and have been integrated with the informations obtained from the heuristic procedures in order to optimize feature extraction.
+	The aim of this report is to present the main unsupervised learning techniques used for scooter trajectories clustering. The dataset that I used contains a big amount of positions taken in rentals that run through some cities in Italy. The objective is to find recurrent places crossed by the trajectories. This report presents some analysis on the positions and an implementation of heuristics that manage data in a systematic way: \textit{timedelta heuristic}, \textit{spreaddelta heuristic}, \textit{edgedelta heuristic}. I performed the most traditional machine learning clustering techniques on the generated dataset: \textit{K-Means}, \textit{Mean Shift}, \textit{Gaussian Mixture}, \textit{Full Hierarchical Agglomerative}, \textit{Ward Hierarchical Agglomerative}. Then I applied a Deep Clustering technique that revisits the trajectory clustering problem by learning quality low-dimensional representations of the trajectories. I designed three different Auto-Encoder Deep Neural Network architectures, that learn the trajectory features in a latent space used then for a traditional clustering algorithm. The features are extracted with \textit{Principal Component Analysis (PCA)} and \textit{Moving Behavior Feature Extraction}, a sliding window algorithm that extracts a set of moving behavior features to capture space- and time- invariant characteristics of the trajectories.
 \end{abstract}
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=\columnwidth]{verona}
+	\label{fig:verona}
+\end{figure}
 
 % INTRODUZIONE
 \section{Motivation}
@@ -65,7 +71,81 @@
 \section{Conclusion}
 \input{chapters/chapter06conclusion}
 
+%\begin{figure*}[bt]
+%	\centering
+%	\includegraphics[width=\textwidth]{efsmM}
+%	\caption{EFSM Moltiplicatore Floating-Point}
+%	\label{fig:efsmM}
+%\end{figure*}
+
 \bibliographystyle{IEEEtran}
 \bibliography{biblio}
 
+\begin{figure*}
+	\centering
+	\caption{Generated dataset ER model}
+	\label{generated-dataset-diagram}
+	\begin{tikzpicture}[node distance=2cm, scale=0.9, transform shape]
+		\node (rental) [rectangle, draw=black, rounded corners, text justified, text width=4cm, rectangle split, rectangle split parts=2]
+		{
+			\textbf{RENTAL}
+			\nodepart{second}
+			id: Id\\
+			\underline{device-id}: Id\\
+			\underline{user-id}: Id\\
+			start-latitude: float64\\
+			start-longitude: float64\\
+			stop-latitude: float64\\
+			stop-longitude: float64\\
+			start-time: datetime64\\
+			stop-time: datetime64\\
+			km: float64
+		};
+		\node (pos) [rectangle, draw=black, rounded corners, text justified, text width=9cm, rectangle split, rectangle split parts=2, right=of rental]
+		{
+			\textbf{POS}
+			\nodepart{second}\begin{multicols*}{2}
+				id: Id\\
+				\underline{rental-id}: Id\\
+				timedelta-id: Id\\
+				spreaddelta-id: Id\\
+				edgedelta-id: Id\\
+				coorddelta-id: Id\\
+				latitude: float64\\
+				longitude: float64\\
+				spread-latitude: float64\\
+				spread-longitude: float64\\
+				\vfill
+				\columnbreak
+				edge-latitude-start: float64\\
+				edge-latitude-stop: float64\\
+				edge-longitude-start: float64\\
+				edge-longitude-stop: float64\\
+				speed: float64\\
+				server-time: datetime64\\
+				device-time: datetime64\\
+				time-gap: float64\\
+			\end{multicols*}
+		};
+		\node (device) [rectangle, draw=black, rounded corners, text justified, text width=3cm, rectangle split, rectangle split parts=2, left=of rental, yshift=1.5cm]
+		{
+			\textbf{DEVICE}
+			\nodepart{second}
+			id: Id\\
+			km: float64
+		};
+		\node (user) [rectangle, draw=black, rounded corners, text justified, text width=3cm, rectangle split, rectangle split parts=2, left=of rental, yshift=-1.5cm]
+		{
+			\textbf{USER}
+			\nodepart{second}
+			id: Id\\
+			km: float64
+		};
+		
+		\draw ([yshift=1.5cm]rental.west) -- node[above]{1..1}  (device.east);
+		\draw ([yshift=-1.5cm]rental.west) -- node[above]{ 1..*} (user.east);
+		\draw (rental.east) -- node[above]{1..*} (pos.west);
+	\end{tikzpicture}
+\end{figure*}
+	
 \end{document}
