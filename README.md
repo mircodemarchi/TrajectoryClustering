@@ -7,7 +7,7 @@
 Download the dataset _zip_ file that you would like to test and put it in _data_ folder.
 The following are the dataset studied in this project. 
 
-- MotionSense: [onedrive/share/motion-sense.zip](https://univr-my.sharepoint.com/:u:/g/personal/mirco_demarchi_studenti_univr_it/Eab8vld0YLxNovlWBNrYiccBENiPIe53dVD_eJIYXqUc1g?e=o9IRFp)
+- MotionSense: [onedrive/share/motion-sense.zip](https://univr-my.sharepoint.com/:f:/g/personal/mirco_demarchi_studenti_univr_it/EmrqN3xmDvpPhRJYkfnzKisBo6QmwF6T-aETpU88e4ozpw?e=pHP7PQ)
 
 - ScooterTrajectories: I'm sorry, this dataset is private, I hope you understand.
     - [onedrive/share/scooter_trajectories.zip](): starting original dataset. I don't recommend to perform your test on this, because it takes more or less 20 minutes to perform all merge and filter operations.
